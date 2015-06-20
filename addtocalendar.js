@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('jshor.angular-addtocalendar', [])
 	.controller('AddtocalendarCtrl', function($scope) {
 		var cal = ics();
