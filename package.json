@@ -16,7 +16,7 @@
     "markdown",
     "directive"
   ],
-  "author": "Josh Shor",
+  "author": "Josh Shor <jpshor@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jshor/angular-addtocalendar/issues"

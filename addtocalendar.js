@@ -1,7 +1,7 @@
 angular.module('jshor.angular-addtocalendar', [])
 	.controller('AddtocalendarCtrl', function($scope) {
 		var cal = ics();
-
+		$scope.description = $scope.description || '';
 		$scope.getIcsCalendarUrl = function() {
 			cal.addEvent($scope.title, $scope.description, $scope.location, $scope.startDate, $scope.endDate);
 			return cal.download();
@@ -57,7 +57,7 @@ angular.module('jshor.angular-addtocalendar', [])
     	controller: 'AddtocalendarCtrl',
       template: '\
 				<div class="dropdown">\
-				  <button ng-class="className" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">\
+				  <button ng-class="className || \'btn btn-sm btn-default dropdown-toggle\'" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">\
 				    Add to Calendar\
 				    <span class="caret"></span>\
 				  </button>\
