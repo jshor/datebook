@@ -1,10 +1,9 @@
 {
   "name": "angular-addtocalendar",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "authors": [
     "Josh Shor <jpshor@gmail.com>"
   ],
-  "version": "0.1.0",
   "description": "AngularJS directive for adding events to calendar apps",
   "main": "addtocalendar.js",
   "keywords": [
