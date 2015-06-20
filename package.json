@@ -1,0 +1,31 @@
+{
+  "name": "angular-addtocalendar",
+  "version": "0.1.0",
+  "description": "AngularJS directive for adding events to calendar apps",
+  "main": "addtocalendar.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jshor/angular-addtocalendar"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "markdown",
+    "directive"
+  ],
+  "author": "Josh Shor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jshor/angular-addtocalendar/issues"
+  },
+  "homepage": "https://github.com/jshor/angular-addtocalendar",
+  "devDependencies": {
+    "karma": "^0.12.9",
+    "karma-jasmine": "^0.1.5",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-chrome-launcher": "^0.1.3"
+  }
+}
