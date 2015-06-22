@@ -1,0 +1,29 @@
+{
+  "name": "angular-addtocalendar",
+  "version": "0.0.3",
+  "authors": [
+    "Josh Shor <jpshor@gmail.com>"
+  ],
+  "description": "AngularJS directive for adding events to calendar apps",
+  "main": "addtocalendar.js",
+  "keywords": [
+    "icalendar",
+    "google calendar",
+    "ics",
+    "outlook",
+    "calendar",
+    "event"
+  ],
+  "dependencies": {
+    "angular": "^1.0.8",
+    "ics.js": "~0.1.3"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/jshor/angular-addtocalendar",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "demo"
+  ]
+}
