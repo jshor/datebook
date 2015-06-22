@@ -1,5 +1,5 @@
 # angular-addtocalendar [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![Dependency Status](https://david-dm.org/jshor/angular-addtocalendar.svg?branch=master)](https://david-dm.org/jshor/angular-addtocalendar)
-v.0.0.2
+v0.0.3
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar. It makes use of [ics.js](https://github.com/nwcell/ics.js) by Travis Krause.
 
@@ -38,3 +38,7 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/).
 ## Bugs
 
 Please report all bugs [here](https://github.com/jshor/angular-addtocalendar/issues).
+
+## Changelog
+
+Available [here](https://github.com/jshor/angular-addtocalendar/blob/master/CHANGELOG.md).
