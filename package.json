@@ -11,10 +11,12 @@
     "url": "git://github.com/jshor/angular-addtocalendar"
   },
   "keywords": [
-    "angular",
-    "angularjs",
-    "markdown",
-    "directive"
+    "icalendar",
+    "google calendar",
+    "ics",
+    "outlook",
+    "calendar",
+    "event"
   ],
   "author": "Josh Shor <jpshor@gmail.com>",
   "license": "MIT",
