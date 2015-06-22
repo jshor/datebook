@@ -70,11 +70,10 @@ angular.module('jshor.angular-addtocalendar', [])
       },
     	controller: 'AddtocalendarCtrl',
       template: '\
-				<div class="dropdown">\
-				  <button ng-class="className || \'btn btn-sm btn-default dropdown-toggle\'" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">\
-				    Add to Calendar\
-				    <span class="caret"></span>\
-				  </button>\
+				<div class="btn-group" dropdown on-toggle="toggled(open)">\
+					<span ng-class="className || \'btn btn-sm btn-default dropdown-toggle\'" dropdown-toggle>\
+					Add to Calendar <span class="caret"></span>\
+					</span>\
 				  <ul class="dropdown-menu">\
 				    <li><a href="#" ng-click="getIcsCalendarUrl()">iCalendar</a></li>\
 				    <li><a href="{{calendarUrl.google}}" target="_blank">Google Calendar</a></li>\
