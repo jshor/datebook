@@ -1,24 +1,10 @@
-'use strict';
-
 angular.module('jshor.angular-addtocalendar', [])
 	.controller('AddtocalendarCtrl', function($scope) {
 		var cal = ics();
-
-		var utcToDate = function(date) {
-			var dateObj = new Date();
-			dateObj.setFullYear(date.substring(0, 4));
-			dateObj.setDate(date.substring(6, 8));
-			dateObj.setMonth(parseInt(date.substring(4, 6))-1);
-			dateObj.setUTCHours(date.substring(9, 11));
-			dateObj.setUTCMinutes(date.substring(11, 13));
-			dateObj.setUTCSeconds(date.substring(13, 15));
-			return dateObj.toString();
-		};
-
 		$scope.description = $scope.description || '';
 		$scope.getIcsCalendarUrl = function() {
-			cal.addEvent($scope.title, $scope.description, $scope.location, utcToDate($scope.startDate), utcToDate($scope.endDate));
-			return cal.download();
+			cal.addEvent($scope.title, $scope.description, $scope.location, new Date($scope.startDate), new Date($scope.endDate));
+			return cal.download(encodeURI($scope.title.replace(/ /g, '_')));
 		};
 
 		var getYahooCalendarUrl = function() {
