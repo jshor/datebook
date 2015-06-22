@@ -13,3 +13,7 @@ Initial version
 
 - Adds changelog
 - Fixes dates for .ics downloads
+
+## v0.0.4
+
+- Adds support for angular-bootstrap
