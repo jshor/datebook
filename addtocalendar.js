@@ -62,17 +62,18 @@ angular.module('jshor.angular-addtocalendar', [])
       restrict: 'E',
       scope: {
         startDate 	: '@',
-        endDate 		: '@',
-        title 			: '@',
-        description : '@',
-        location 		: '@',
-        className 	: '@'
+        endDate 	: '@',
+        title 		: '@',
+        description 	: '@',
+        location 	: '@',
+        className 	: '@',
+        btnText 	: '@'
       },
     	controller: 'AddtocalendarCtrl',
       template: '\
 				<div class="btn-group" dropdown on-toggle="toggled(open)">\
 					<span ng-class="className || \'btn btn-sm btn-default dropdown-toggle\'" dropdown-toggle>\
-					Add to Calendar <span class="caret"></span>\
+					{{btnText || \'Add to calendar\'}} <span class="caret"></span>\
 					</span>\
 				  <ul class="dropdown-menu">\
 				    <li><a href="#" ng-click="getIcsCalendarUrl()">iCalendar</a></li>\
