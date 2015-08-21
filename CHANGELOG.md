@@ -17,3 +17,7 @@ Initial version
 ## v0.0.4
 
 - Adds support for angular-bootstrap
+
+## v0.0.5
+
+- Adds attribute for button text
