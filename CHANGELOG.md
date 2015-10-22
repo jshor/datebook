@@ -21,3 +21,8 @@ Initial version
 ## v0.0.5
 
 - Adds attribute for button text
+
+## v0.0.6
+
+- fixes repetition in .ics file after subsequent downloads
+- fixes NaN dates issue
