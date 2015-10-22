@@ -11,7 +11,7 @@ Enjoy!
 
 ## Demo
 
-For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/).
+For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/demo/).
 
 ## Example
 
