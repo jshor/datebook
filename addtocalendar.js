@@ -2,26 +2,30 @@
 
 angular.module('jshor.angular-addtocalendar', [])
 	.controller('AddtocalendarCtrl', function($scope) {
-		var cal = ics();
-
 		var utcToDate = function(date) {
 			var dateObj = new Date();
-			dateObj.setFullYear(date.substring(0, 4));
-			dateObj.setDate(date.substring(6, 8));
-			dateObj.setMonth(parseInt(date.substring(4, 6))-1);
-			dateObj.setUTCHours(date.substring(9, 11));
-			dateObj.setUTCMinutes(date.substring(11, 13));
-			dateObj.setUTCSeconds(date.substring(13, 15));
+
+			dateObj.setFullYear(parseInt(date.substring(0, 4)));
+			dateObj.setDate(parseInt(date.substring(6, 8)));
+			dateObj.setMonth(parseInt(parseInt(date.substring(4, 6))-1));
+			dateObj.setUTCHours(parseInt(date.substring(9, 11)));
+			dateObj.setUTCMinutes(parseInt(date.substring(11, 13)));
+			dateObj.setUTCSeconds(parseInt(date.substring(13, 15)));
+			
 			return dateObj.toString();
 		};
 
 		$scope.description = $scope.description || '';
+
 		$scope.getIcsCalendarUrl = function() {
-			cal.addEvent($scope.title, $scope.description, $scope.location, utcToDate($scope.startDate), utcToDate($scope.endDate));
+			var cal = ics();
+			cal.addEvent($scope.title, $scope.description, $scope.location, 
+				utcToDate($scope.startDate), utcToDate($scope.endDate));
+
 			return cal.download();
 		};
 
-		var getYahooCalendarUrl = function() {
+		function getYahooCalendarUrl() {
 			var yahooCalendarUrl = 'http://calendar.yahoo.com/?v=60&view=d&type=20';
 			yahooCalendarUrl += '&title=' + encodeURI($scope.title);
 			yahooCalendarUrl += '&st=' + encodeURI($scope.startDate) + '&et=' + encodeURI($scope.endDate);
@@ -31,7 +35,7 @@ angular.module('jshor.angular-addtocalendar', [])
 			return yahooCalendarUrl;
 		};
 
-		var getGoogleCalendarUrl = function() {
+		function getGoogleCalendarUrl() {
 			var googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
 			googleCalendarUrl += '&text=' + encodeURI($scope.title);
 			googleCalendarUrl += '&dates=' + encodeURI($scope.startDate) + '/' + encodeURI($scope.endDate);
@@ -41,7 +45,7 @@ angular.module('jshor.angular-addtocalendar', [])
 			return googleCalendarUrl;
 		};
 
-		var getMicrosoftCalendarUrl = function() {
+		function getMicrosoftCalendarUrl() {
 			var microsoftCalendarUrl = 'http://calendar.live.com/calendar/calendar.aspx?rru=addevent';
 			microsoftCalendarUrl += '&summary=' + encodeURI($scope.title);
 			microsoftCalendarUrl += '&dtstart=' + encodeURI($scope.startDate) + '&dtend=' + encodeURI($scope.endDate);
@@ -61,13 +65,13 @@ angular.module('jshor.angular-addtocalendar', [])
     return {
       restrict: 'E',
       scope: {
-        startDate 	: '@',
-        endDate 	: '@',
-        title 		: '@',
-        description 	: '@',
-        location 	: '@',
-        className 	: '@',
-        btnText 	: '@'
+        startDate: '@',
+        endDate: '@',
+        title: '@',
+        description: '@',
+        location: '@',
+        className: '@',
+        btnText: '@'
       },
     	controller: 'AddtocalendarCtrl',
       template: '\
