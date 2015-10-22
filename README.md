@@ -1,5 +1,5 @@
 # angular-addtocalendar [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![Dependency Status](https://david-dm.org/jshor/angular-addtocalendar.svg?branch=master)](https://david-dm.org/jshor/angular-addtocalendar)
-v0.0.5
+v0.0.6
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar. It makes use of [ics.js](https://github.com/nwcell/ics.js) by Travis Krause.
 
@@ -11,7 +11,7 @@ Enjoy!
 
 ## Demo
 
-For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/).
+For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/demo/).
 
 ## Example
 
@@ -22,8 +22,8 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/).
  		location="Battery Park City, New York, NY"
  		class-name="btn btn-sm btn-default dropdown-toggle"
  		description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world."
- 		btn-text="Add to calendar"
- 	></addtocalendar>
+ 		btn-text="Add to calendar">
+ 	</addtocalendar>
 
 ## Attributes
 
@@ -35,7 +35,7 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/).
 | `start-date`  	| The timestamp of when the event begins.                                                                      	| Date string in format `YYYYMMDDToHHMMSS`                                     	| 20150704T190000                                                                                            	| Yes          	|
 | `end-date`    	| The timestamp of when the event ends.                                                                        	| Date string in format `YYYYMMDDToHHMMSS`                                     	| 20150704T210000                                                                                            	| Yes          	|
 | `class-name`  	| The bootstrap class for the dropdown button ([more info](http://getbootstrap.com/components/#btn-dropdowns)) 	| Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle` 	| btn btn-sm btn-default dropdown-toggle                                                                     	| No           	|
-| `btn-text`  	| Text for the button to display								 	| Plain text. Default `Add to calendar`					| Add to your calendar now!                                                                    		| No           	|
+| `btn-text`  	| Text for the button to display								 	| Plain text. Default `Add to calendar`					| Add to  calendar                                                                    		| No           	|
 
 ## Bugs
 
