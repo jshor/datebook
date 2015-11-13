@@ -1,5 +1,5 @@
 # angular-addtocalendar [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![Dependency Status](https://david-dm.org/jshor/angular-addtocalendar.svg?branch=master)](https://david-dm.org/jshor/angular-addtocalendar)
-v0.0.6
+v0.1.0
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar. It makes use of [ics.js](https://github.com/nwcell/ics.js) by Travis Krause.
 
@@ -36,6 +36,19 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dem
 | `end-date`    	| The timestamp of when the event ends.                                                                        	| Date string in format `YYYYMMDDToHHMMSS`                                     	| 20150704T210000                                                                                            	| Yes          	|
 | `class-name`  	| The bootstrap class for the dropdown button ([more info](http://getbootstrap.com/components/#btn-dropdowns)) 	| Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle` 	| btn btn-sm btn-default dropdown-toggle                                                                     	| No           	|
 | `btn-text`  	| Text for the button to display								 	| Plain text. Default `Add to calendar`					| Add to  calendar                                                                    		| No           	|
+
+## Supported Browsers
+
+| Browser Support | Dependencies |
+| --------------- | ------------ |
+| Firefox 20+     | [FileSaver.js](https://github.com/eligrey/FileSaver.js) |
+| Firefox ≤ 19    | [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Blob.js](https://github.com/eligrey/Blob.js) |
+| Chrome          | [FileSaver.js](https://github.com/eligrey/FileSaver.js) |
+| Chrome for Android v28+ | [FileSaver.js](https://github.com/eligrey/FileSaver.js) |
+| IE 10+          | [FileSaver.js](https://github.com/eligrey/FileSaver.js)         |
+| Opera Next      | [FileSaver.js](https://github.com/eligrey/FileSaver.js) |
+| Opera < 15      | [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Blob.js](https://github.com/eligrey/Blob.js) |
+| Safari ≤ 6      | [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Blob.js](https://github.com/eligrey/Blob.js) |
 
 ## Bugs
 
