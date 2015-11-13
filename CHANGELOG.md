@@ -21,3 +21,16 @@ Initial version
 ## v0.0.5
 
 - Adds attribute for button text
+<<<<<<< HEAD
+=======
+
+## v0.0.6
+
+- fixes repetition in .ics file after subsequent downloads
+- fixes NaN dates issue
+
+## v0.0.7
+
+- updates official doc on browser support
+- adds tests
+>>>>>>> a9812aa... adds initial tests, karma, gulp
