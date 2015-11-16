@@ -41,8 +41,8 @@ describe('AddtocalendarCtrl', function() {
       	view: 'd',
       	type: 20,
       	title: '(.*)',
-      	st: dateRegex,
-      	et: dateRegex,
+      	st: CalendarRegex.dateRegex,
+      	et: CalendarRegex.dateRegex,
       	desc: '(.*)',
       	in_loc: '(.*)'
       });
@@ -67,7 +67,7 @@ describe('AddtocalendarCtrl', function() {
       var regex = CalendarRegex.getUrlRegex('www.google.com/calendar/render', {
         action: 'TEMPLATE',
         text: '(.*)',
-        dates: dateRegex + '\\/' + dateRegex,
+        dates: CalendarRegex.dateRegex + '\\/' + CalendarRegex.dateRegex,
         details: '(.*)',
         location: '(.*)'
       });
