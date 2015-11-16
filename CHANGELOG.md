@@ -35,4 +35,8 @@ Initial version
 
 ## v1.0.0
 
-- adds test suite for addtocalendar
+- adds test suite to addtocalendar functions, ensures stability
+
+## v1.0.1
+
+- light refactoring
