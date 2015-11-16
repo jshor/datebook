@@ -36,7 +36,7 @@ describe('AddtocalendarCtrl', function() {
 
       $controller('AddtocalendarCtrl', { $scope: $scope });
 
-      var regex = getUrlRegex('calendar.yahoo.com/', {
+      var regex = CalendarRegex.getUrlRegex('calendar.yahoo.com/', {
       	v: 60,
       	view: 'd',
       	type: 20,
