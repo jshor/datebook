@@ -26,3 +26,9 @@ Initial version
 
 - fixes repetition in .ics file after subsequent downloads
 - fixes NaN dates issue
+
+## v0.0.7
+
+- replaces ics.js with internal rendering of ics.js file
+- removes all dependencies of ics.js from bower
+- sets filename of .ics file to safe version of event title
