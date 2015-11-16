@@ -79,7 +79,7 @@ angular
 		};
 
 		/**
-		 * Generates a url to add event to Microsoft Calendar.
+		 * Generates a url to add event to Windows Live Calendar.
 		 * 
 		 * @return {String} microsoft cal url
 		 */

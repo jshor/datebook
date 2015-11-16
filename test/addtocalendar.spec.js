@@ -80,6 +80,32 @@ describe('AddtocalendarCtrl', function() {
   });
 
   /**
+   * Windows Live Calendar
+   */
+  describe('$scope.calendarUrl.microsoft', function() {
+
+    it('should return the url to add event to a windows live calendar', function() {
+      var $scope = getSampleEvent();
+
+      $controller('AddtocalendarCtrl', { $scope: $scope });
+
+      var regex = CalendarRegex.getUrlRegex('calendar.live.com/calendar/calendar.aspx', {
+        rru: 'addevent',
+        summary: '(.*)',
+        dtstart: CalendarRegex.dateRegex,
+        dtend: CalendarRegex.dateRegex,
+        description: '(.*)',
+        location: '(.*)'
+      });
+
+      var isValidMicrosoftCalendar = regex.test($scope.calendarUrl.microsoft);
+
+      expect(isValidMicrosoftCalendar).toEqual(true);
+    });
+
+  });
+
+  /**
    * iCalendar
    */
   describe('$scope.calendarUrl.icalendar', function() {
