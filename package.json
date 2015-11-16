@@ -4,7 +4,7 @@
   "description": "AngularJS directive for adding events to calendar apps",
   "main": "addtocalendar.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --browsers Chrome --single-run"
+    "test": "./node_modules/karma/bin/karma start --browsers Chrome,Firefox --single-run"
   },
   "repository": {
     "type": "git",
