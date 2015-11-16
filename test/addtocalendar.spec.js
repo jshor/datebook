@@ -11,26 +11,6 @@ describe('AddtocalendarCtrl', function() {
   }));
 
   /**
-   * Returns a regular expression for a calendar service url.
-   * 
-   * @param  {String} baseUrl   the host name of the calendar service
-   * @param  {Object} urlParams query string parameters to send
-   * @return {RegExp}           regular expression of cal. service url
-   */
-  function getUrlRegex(baseUrl, urlParams) {
-  	var regex = 'http(s?)\\:\\/\\/' + baseUrl.replace(/\./g, '\\.') + '\\/\\?';
-  	var params = [];
-
-		for(var key in urlParams) { 
-			params.push(key + '\=' + urlParams[key]);
-		}
-
-		regex += params.join('\\&');
-
-		return new RegExp(regex, 'g');
-  }
-
-  /**
    * Returns a sample event to test with.
    * 
    * @return {Object} params of event, mimicking directive scope params
@@ -44,6 +24,39 @@ describe('AddtocalendarCtrl', function() {
       description: 'Some interesting description here.',
       location: '1 Futurama Pl, New New York'
     };
+
+  }
+
+  /**
+   * Escapes a string so it is treated literally in regex.
+   * @param  {String} s  string to escape
+   * @return {String}    escape string
+   */
+  function escapeRegex(s) {
+
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+  }
+
+  /**
+   * Returns a regular expression for a calendar service url.
+   * 
+   * @param  {String} baseUrl   the host name of the calendar service
+   * @param  {Object} urlParams query string parameters to send
+   * @return {RegExp}           regular expression of cal. service url
+   */
+  function getUrlRegex(baseUrl, urlParams) {
+
+  	var regex = 'http(s?)\\:\\/\\/' + escapeRegex(baseUrl) + '\\?';
+  	var params = [];
+
+		for(var key in urlParams) { 
+			params.push(key + '\=' + urlParams[key]);
+		}
+
+		regex += params.join('\\&');
+
+		return new RegExp(regex, 'g');
 
   }
 
@@ -67,8 +80,6 @@ describe('AddtocalendarCtrl', function() {
     ].join('\n'));
 
     regex += '(.*)' + encodeURIComponent('\n');
-
-    console.log('SMALL PIECE OF REGEX: ', regex);
 
     // date information
     regex += [
@@ -104,7 +115,7 @@ describe('AddtocalendarCtrl', function() {
 
       $controller('AddtocalendarCtrl', { $scope: $scope });
 
-      var regex = getUrlRegex('calendar.yahoo.com', {
+      var regex = getUrlRegex('calendar.yahoo.com/', {
       	v: 60,
       	view: 'd',
       	type: 20,
@@ -119,6 +130,31 @@ describe('AddtocalendarCtrl', function() {
 
       expect(isValidYahooCalendar).toEqual(true);
   	});
+
+  });
+
+  /**
+   * Google Calendar
+   */
+  describe('$scope.calendarUrl.google', function() {
+
+    it('should return the url to add event to a google calendar', function() {
+      var $scope = getSampleEvent();
+
+      $controller('AddtocalendarCtrl', { $scope: $scope });
+
+      var regex = getUrlRegex('www.google.com/calendar/render', {
+        action: 'TEMPLATE',
+        text: '(.*)',
+        dates: dateRegex + '\\/' + dateRegex,
+        details: '(.*)',
+        location: '(.*)'
+      });
+
+      var isValidGoogleCalendar = regex.test($scope.calendarUrl.google);
+
+      expect(isValidGoogleCalendar).toEqual(true);
+    });
 
   });
 
