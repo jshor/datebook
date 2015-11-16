@@ -23,9 +23,10 @@ angular
 		 * @return {String}  url to download .ics file.
 		 */
 		function getIcsCalendar() {
+			
 			var elements = [
 				'BEGIN:VCALENDAR',
-				'VERSION:2.0',
+				'VERSION:2',
 				'BEGIN:VEVENT',
 				'CLASS:PUBLIC',
 				'DESCRIPTION:' + $scope.description,
@@ -49,6 +50,7 @@ angular
 		 * @return {String} yahoo cal url
 		 */
 		function getYahooCalendarUrl() {
+
 			var yahooCalendarUrl = 'http://calendar.yahoo.com/?v=60&view=d&type=20';
 			yahooCalendarUrl += '&title=' + encodeURI($scope.title);
 			yahooCalendarUrl += '&st=' + encodeURI($scope.startDate) + '&et=' + encodeURI($scope.endDate);
@@ -56,6 +58,7 @@ angular
 			yahooCalendarUrl += '&in_loc=' + encodeURI($scope.location);
 
 			return yahooCalendarUrl;
+
 		};
 
 		/**
@@ -64,6 +67,7 @@ angular
 		 * @return {String} google cal url
 		 */
 		function getGoogleCalendarUrl() {
+
 			var googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
 			googleCalendarUrl += '&text=' + encodeURI($scope.title);
 			googleCalendarUrl += '&dates=' + encodeURI($scope.startDate) + '/' + encodeURI($scope.endDate);
@@ -71,6 +75,7 @@ angular
 			googleCalendarUrl += '&location=' + encodeURI($scope.location);
 
 			return googleCalendarUrl;
+
 		};
 
 		/**
@@ -79,6 +84,7 @@ angular
 		 * @return {String} microsoft cal url
 		 */
 		function getMicrosoftCalendarUrl() {
+
 			var microsoftCalendarUrl = 'http://calendar.live.com/calendar/calendar.aspx?rru=addevent';
 			microsoftCalendarUrl += '&summary=' + encodeURI($scope.title);
 			microsoftCalendarUrl += '&dtstart=' + encodeURI($scope.startDate) + '&dtend=' + encodeURI($scope.endDate);
@@ -86,6 +92,7 @@ angular
 			microsoftCalendarUrl += '&location=' + encodeURI($scope.location);
 
 			return microsoftCalendarUrl;
+
 		};
 
 		$scope.calendarUrl = {
@@ -94,8 +101,10 @@ angular
 			yahoo 		: getYahooCalendarUrl(),
 			icalendar : getIcsCalendar()
 		};
+
 	})
 	.directive('addtocalendar', function() {
+
     return {
       restrict: 'E',
       scope: {
@@ -124,4 +133,5 @@ angular
 	      </ul>\
       </div>'
 		};
+
 	});
