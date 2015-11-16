@@ -1,5 +1,9 @@
 // Karma configuration
+<<<<<<< HEAD
 // Generated on Fri Nov 13 2015 10:21:53 GMT-0500 (EST)
+=======
+// Generated on Mon Nov 16 2015 11:46:42 GMT-0500 (EST)
+>>>>>>> 9ddc745... adds karma conf
 
 module.exports = function(config) {
   config.set({
@@ -12,6 +16,7 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
+<<<<<<< HEAD
     plugins : [
       'karma-browserify',
       'karma-jasmine',
@@ -24,6 +29,13 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'addtocalendar.js',
       'spec/*.js'
+=======
+
+    // list of files / patterns to load in the browser
+    files: [
+      'test/**/*.spec.js',
+      'test/**/*.spec.js'
+>>>>>>> 9ddc745... adds karma conf
     ],
 
 
@@ -63,7 +75,11 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+<<<<<<< HEAD
     browsers: ['PhantomJS'],
+=======
+    browsers: ['Chrome'],
+>>>>>>> 9ddc745... adds karma conf
 
 
     // Continuous Integration mode
