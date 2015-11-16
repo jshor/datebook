@@ -21,6 +21,7 @@ Enjoy!
 
     bower install angular-addtocalendar
 
+You can also [download it directly](https://github.com/jshor/angular-addtocalendar/archive/v0.0.7.tar.gz).
 ## Demo
 
 For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/).
