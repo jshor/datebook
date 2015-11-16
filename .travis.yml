@@ -4,3 +4,4 @@ node_js:
 script:
   - npm install -g bower
   - bower install
+  - npm test
