@@ -31,6 +31,12 @@ Initial version
 
 ## v0.0.7
 
+<<<<<<< HEAD
 - updates official doc on browser support
 - adds tests
 >>>>>>> a9812aa... adds initial tests, karma, gulp
+=======
+- replaces ics.js with internal rendering of ics.js file
+- removes all dependencies of ics.js from bower
+- sets filename of .ics file to safe version of event title
+>>>>>>> 1baca68... v0.0.7
