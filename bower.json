@@ -24,6 +24,8 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "demo"
+    "demo",
+    "test",
+    "lib"
   ]
 }
