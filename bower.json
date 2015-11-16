@@ -1,6 +1,6 @@
 {
   "name": "angular-addtocalendar",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "authors": [
     "Josh Shor <jpshor@gmail.com>"
   ],
@@ -16,8 +16,7 @@
   ],
   "dependencies": {
     "angular": ">=1.3.0",
-    "angular-bootstrap": "~0.13.0",
-    "ics.js": "~0.1.3"
+    "angular-bootstrap": "~0.13.0"
   },
   "license": "MIT",
   "homepage": "https://github.com/jshor/angular-addtocalendar",
