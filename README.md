@@ -1,5 +1,5 @@
 # angular-addtocalendar [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![Dependency Status](https://david-dm.org/jshor/angular-addtocalendar.svg?branch=master)](https://david-dm.org/jshor/angular-addtocalendar)
-v0.0.7
+v1.0.0
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar.
 
@@ -9,22 +9,22 @@ Enjoy!
 
     bower install angular-addtocalendar
 
-You can also [download it directly](https://github.com/jshor/angular-addtocalendar/archive/v0.0.7.tar.gz).
+You can also [download it directly](https://github.com/jshor/angular-addtocalendar/archive/v1.0.0.tar.gz).
 ## Demo
 
 For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/demo/).
 
 ## Example
 
-	<addtocalendar
- 		start-date="20150704T190000"
- 		end-date="20150704T210000"
- 		title="Fourth of July Fireworks"
- 		location="Battery Park City, New York, NY"
- 		class-name="btn btn-sm btn-default dropdown-toggle"
- 		description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world."
- 		btn-text="Add to calendar">
- 	</addtocalendar>
+<addtocalendar
+	start-date="20150704T190000"
+	end-date="20150704T210000"
+	title="Fourth of July Fireworks"
+	location="Battery Park City, New York, NY"
+	class-name="btn btn-sm btn-default dropdown-toggle"
+	description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world."
+	btn-text="Add to calendar">
+</addtocalendar>
 
 ## Attributes
 

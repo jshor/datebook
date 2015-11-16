@@ -32,3 +32,7 @@ Initial version
 - replaces ics.js with internal rendering of ics.js file
 - removes all dependencies of ics.js from bower
 - sets filename of .ics file to safe version of event title
+
+## v1.0.0
+
+- adds test suite for addtocalendar
