@@ -2,12 +2,22 @@
 // Generated on Mon Nov 16 2015 11:46:42 GMT-0500 (EST)
 
 module.exports = function(config) {
-  config.set({
+
+  var configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
 
+    // custom launchers (mainly for Travis)
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
+
+  
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
@@ -69,5 +79,16 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity
-  })
+  };
+
+
+  if (process.env.TRAVIS) {
+    // if testing env is Travis, use special Travis testing browsers
+    configuration.browsers = [
+      'Chrome_travis_ci'
+    ];
+  }
+
+  config.set(configuration);
+
 }
