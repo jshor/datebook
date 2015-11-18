@@ -7,6 +7,7 @@ before_install:
 node_js:
   - 0.10
 script:
+  - npm install -g phantomjs
   - npm install -g bower
   - bower install
   - npm test
