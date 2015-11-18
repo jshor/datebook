@@ -1,4 +1,5 @@
 language: node_js
+sudo: required
 before_install:
   - "export PHANTOMJS_EXECUTABLE='phantomjs --local-to-remote-url-access=yes --ignore-ssl-errors=yes'"
   - "export DISPLAY=:99.0"
