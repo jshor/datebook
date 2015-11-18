@@ -4,6 +4,9 @@ before_install:
   - tar -xf phantomjs-1.7.0-linux-i686.tar.bz2                                                                                                                                                                                                
   - sudo rm -rf /usr/local/phantomjs                                                                                                                                                                                                          
   - sudo mv phantomjs-1.7.0-linux-i686 /usr/local/phantomjs
+  - "export PHANTOMJS_EXECUTABLE='phantomjs --local-to-remote-url-access=yes --ignore-ssl-errors=yes'"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 node_js:
   - 0.10
 script:
