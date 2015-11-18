@@ -95,7 +95,6 @@ module.exports = function(config) {
     configuration.browsers = [
       'chromeTravisCi',
       'firefoxTravisCi'
-      // 'phantomjs'
     ];
   }
 
