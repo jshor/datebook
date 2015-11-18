@@ -1,3 +1,9 @@
+/**
+ * angular-addtocalendar
+ * An AngularJS directive for adding an event to calendar apps. 
+ * 
+ * Karma/Jasmine test suite.
+ */
 'use strict';
 
 describe('AddtocalendarCtrl', function() {

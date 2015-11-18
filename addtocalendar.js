@@ -1,3 +1,9 @@
+/**
+ * angular-addtocalendar
+ * An AngularJS directive for adding an event to calendar apps. 
+ * 
+ * Controller and directive.
+ */
 'use strict';
 
 angular
@@ -106,6 +112,7 @@ angular
 	.directive('addtocalendar', function() {
 
     return {
+
       restrict: 'E',
       scope: {
         startDate: '@',
