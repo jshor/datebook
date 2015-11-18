@@ -2,6 +2,7 @@
   "name": "angular-addtocalendar",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "0.1.0",
 =======
   "version": "0.0.7",
@@ -9,6 +10,9 @@
 =======
   "version": "1.0.0",
 >>>>>>> a378064... v1.0.0
+=======
+  "version": "1.0.2",
+>>>>>>> b1ba20d... adds docs, uglify
   "description": "AngularJS directive for adding events to calendar apps",
   "main": "addtocalendar.js",
   "scripts": {
@@ -62,7 +66,12 @@
     "karma-chrome-launcher": "^0.1.12",
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.1.6",
+<<<<<<< HEAD
     "karma-phantomjs-launcher": "^0.2.1"
 >>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
+=======
+    "karma-phantomjs-launcher": "^0.2.1",
+    "uglify-js": "^2.6.1"
+>>>>>>> b1ba20d... adds docs, uglify
   }
 }
