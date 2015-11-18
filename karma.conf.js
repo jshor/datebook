@@ -9,10 +9,14 @@ module.exports = function(config) {
     basePath: '',
 
 
-    // custom launchers (mainly for Travis)
+    // custom browsers launchers (mainly for Travis)
     customLaunchers: {
-      Chrome_travis_ci: {
+      chromeTravisCi: {
         base: 'Chrome',
+        flags: ['--no-sandbox']
+      },
+      firefoxTravisCi: {
+        base: 'Firefox',
         flags: ['--no-sandbox']
       }
     },
@@ -85,7 +89,8 @@ module.exports = function(config) {
   if (process.env.TRAVIS) {
     // if testing env is Travis, use special Travis testing browsers
     configuration.browsers = [
-      'Chrome_travis_ci'
+      'chromeTravisCi',
+      'firefoxTravisCi'
       // 'phantomjs'
     ];
   }

@@ -26,7 +26,8 @@
   "homepage": "https://github.com/jshor/angular-addtocalendar",
   "devDependencies": {
     "karma": "^0.12.9",
-    "karma-jasmine": "^0.1.6",
-    "karma-chrome-launcher": "^0.1.4"
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.1.6"
   }
 }
