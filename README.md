@@ -22,15 +22,15 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dem
 
 ## Example
 
-<addtocalendar
-	start-date="20150704T190000"
-	end-date="20150704T210000"
-	title="Fourth of July Fireworks"
-	location="Battery Park City, New York, NY"
-	class-name="btn btn-sm btn-default dropdown-toggle"
-	description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world."
-	btn-text="Add to calendar">
-</addtocalendar>
+	<addtocalendar
+		start-date="20150704T190000"
+		end-date="20150704T210000"
+		title="Fourth of July Fireworks"
+		location="Battery Park City, New York, NY"
+		class-name="btn btn-sm btn-default dropdown-toggle"
+		description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world."
+		btn-text="Add to calendar">
+	</addtocalendar>
 
 ## Attributes
 
