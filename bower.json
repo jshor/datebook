@@ -5,7 +5,7 @@
     "Josh Shor <jpshor@gmail.com>"
   ],
   "description": "AngularJS directive for adding events to calendar apps",
-  "main": "addtocalendar.js",
+  "main": "addtocalendar.min.js",
   "keywords": [
     "icalendar",
     "google calendar",
@@ -26,7 +26,8 @@
     "bower_components",
     "demo",
     "test",
-    "lib"
+    "lib",
+    "addtocalendar.js"
   ],
   "devDependencies": {
     "angular-mocks": "~1.4.7"

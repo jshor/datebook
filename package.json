@@ -2,7 +2,7 @@
   "name": "angular-addtocalendar",
   "version": "1.0.2",
   "description": "AngularJS directive for adding events to calendar apps",
-  "main": "addtocalendar.js",
+  "main": "addtocalendar.min.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js --single-run"
   },
