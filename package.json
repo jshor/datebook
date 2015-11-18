@@ -12,7 +12,11 @@
   "description": "AngularJS directive for adding events to calendar apps",
   "main": "addtocalendar.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "./node_modules/karma/bin/karma start --browsers Chrome --single-run"
+=======
+    "test": "./node_modules/karma/bin/karma start karma.conf.js --single-run"
+>>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
   },
   "repository": {
     "type": "git",
@@ -34,6 +38,7 @@
   "homepage": "https://github.com/jshor/angular-addtocalendar",
   "devDependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "angular-mocks": "^1.4.7",
     "gulp": "^3.9.0",
     "gulp-jasmine": "^2.2.1",
@@ -52,5 +57,12 @@
     "karma-firefox-launcher": "^0.1.3",
     "karma-jasmine": "^0.1.6"
 >>>>>>> 9ddc745... adds karma conf
+=======
+    "karma": "^0.12.9",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.1.6",
+    "karma-phantomjs-launcher": "^0.2.1"
+>>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
   }
 }

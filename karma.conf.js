@@ -12,6 +12,22 @@ module.exports = function(config) {
     basePath: '',
 
 
+<<<<<<< HEAD
+=======
+    // custom browsers launchers (mainly for Travis)
+    customLaunchers: {
+      chromeTravisCi: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      },
+      firefoxTravisCi: {
+        base: 'Firefox',
+        flags: ['--no-sandbox']
+      }
+    },
+
+  
+>>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
@@ -76,10 +92,18 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
 <<<<<<< HEAD
+<<<<<<< HEAD
     browsers: ['PhantomJS'],
 =======
     browsers: ['Chrome'],
 >>>>>>> 9ddc745... adds karma conf
+=======
+    browsers: [
+      'Chrome',
+      'Firefox',
+      'PhantomJS'
+    ],
+>>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
 
 
     // Continuous Integration mode
@@ -89,5 +113,21 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity
+<<<<<<< HEAD
   })
+=======
+  };
+
+
+  if (process.env.TRAVIS) {
+    // if testing env is Travis, use special Travis testing browsers
+    configuration.browsers = [
+      'chromeTravisCi',
+      'firefoxTravisCi'
+    ];
+  }
+
+  config.set(configuration);
+
+>>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
 }
