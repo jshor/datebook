@@ -27,5 +27,8 @@
     "demo",
     "test",
     "lib"
-  ]
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.4.7"
+  }
 }
