@@ -50,4 +50,13 @@ Initial version
 ## v1.0.1
 
 - light refactoring
+<<<<<<< HEAD
 >>>>>>> d57055b... v1.0.1
+=======
+
+## v1.0.2
+
+- adds config for build to pass on travis
+- adds uglified js file
+- sets minified js file as main component in bower
+>>>>>>> de39e5c... v1.0.2
