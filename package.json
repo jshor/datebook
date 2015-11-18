@@ -14,7 +14,7 @@
   "version": "1.0.2",
 >>>>>>> b1ba20d... adds docs, uglify
   "description": "AngularJS directive for adding events to calendar apps",
-  "main": "addtocalendar.js",
+  "main": "addtocalendar.min.js",
   "scripts": {
 <<<<<<< HEAD
     "test": "./node_modules/karma/bin/karma start --browsers Chrome --single-run"
