@@ -16,6 +16,9 @@ angular
 	])
 	.controller('AddtocalendarCtrl', function($scope) {
 
+		/* render safe filename for iCal (only \w chars) based on event title */
+		$scope.icsFileName = $scope.title.replace(/[^\w ]+/g, '') + '.ics';
+
 		$scope.description = $scope.description || '';
 
 		/**
@@ -42,10 +45,7 @@ angular
 				'END:VCALENDAR'
 			];
 
-			// safe filename for iCal (only \w chars) based on event title
-			var fileName = $scope.title.replace(/[^\w ]+/g, '') + '.ics';
-
-			download(encodeURIComponent(elements.join('\n')), fileName, 'application/octet-stream');
+			return encodeURIComponent(elements.join('\n'));
 
 		}
 
@@ -104,7 +104,7 @@ angular
 			microsoft : getMicrosoftCalendarUrl(),
 			google 		: getGoogleCalendarUrl(),
 			yahoo 		: getYahooCalendarUrl(),
-			icalendar : getIcsCalendar
+			icalendar : getIcsCalendar()
 		};
 
 	})
@@ -131,9 +131,9 @@ angular
 	      	{{btnText || \'Add to calendar\'}} <span class="caret"></span>\
 	      </span>\
 	      <ul class="dropdown-menu">\
-		      <li><a ng-click="calendarUrl.icalendar()">iCalendar</a></li>\
+		      <li><a onclick="download({{calendarUrl.getIcsCalendar}}, {{icsFileName}}, \'application/octet-stream\')">iCalendar</a></li>\
 		      <li><a href="{{calendarUrl.google}}" target="_blank">Google Calendar</a></li>\
-		      <li><a ng-click="calendarUrl.icalendar()">Outlook</a></li>\
+		      <li><a onclick="download({{calendarUrl.getIcsCalendar}}, {{icsFileName}}, \'application/octet-stream\')">Outlook</a></li>\
 		      <li><a href="{{calendarUrl.yahoo}}" target="_blank">Yahoo! Calendar</a></li>\
 		      <li><a href="{{calendarUrl.microsoft}}" target="_blank">Microsoft Calendar</a></li>\
 	      </ul>\
