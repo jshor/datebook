@@ -16,15 +16,12 @@ angular
 	])
 	.controller('AddtocalendarCtrl', function($scope) {
 
-		/* forces an event description (empty string if none specified) */
 		$scope.description = $scope.description || '';
 
-		/* Generates a safe filename for iCal (only \w chars) based on event title */
-		$scope.filenameSafe = $scope.title.replace(/[^\w]+/g, '') + '.ics';
-
 		/**
-		 * Renders a .ics file and prepends url scheme, filetype and utf-8 encoding.
-		 * This url will cause browsers to download the file with the name `filenameSafe`.ics
+		 * Renders a .ics file and downloads it to the client browser.
+		 * The name of the file will be the event title with alphanumeric chars
+		 * having the extension `.ics`.
 		 * 
 		 * @return {String}  url to download .ics file.
 		 */
@@ -45,9 +42,11 @@ angular
 				'END:VCALENDAR'
 			];
 
-			var prefix = 'data:application/octet-stream;charset=utf-8,';
+			// safe filename for iCal (only \w chars) based on event title
+			var fileName = $scope.title.replace(/[^\w ]+/g, '') + '.ics';
 
-			return prefix + encodeURIComponent(elements.join('\n'));
+			return download(encodeURIComponent(elements.join('\n')), fileName, 'application/octet-stream');
+
 		}
 
 		/**
