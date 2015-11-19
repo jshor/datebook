@@ -122,9 +122,9 @@ angular
 	      	{{btnText || \'Add to calendar\'}} <span class="caret"></span>\
 	      </span>\
 	      <ul class="dropdown-menu">\
-		      <li><a href="{{calendarUrl.icalendar}}" download="{{filenameSafe}}">iCalendar</a></li>\
+		      <li><a ng-click="icalendar()">iCalendar</a></li>\
 		      <li><a href="{{calendarUrl.google}}" target="_blank">Google Calendar</a></li>\
-		      <li><a href="{{calendarUrl.icalendar}}" download="{{filenameSafe}}">Outlook</a></li>\
+		      <li><a ng-click="icalendar()">Outlook</a></li>\
 		      <li><a href="{{calendarUrl.yahoo}}" target="_blank">Yahoo! Calendar</a></li>\
 		      <li><a href="{{calendarUrl.microsoft}}" target="_blank">Microsoft Calendar</a></li>\
 	      </ul>\
