@@ -1,6 +1,6 @@
 # angular-addtocalendar  [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar)  [![devDependency Status](https://david-dm.org/dalelotts/angular-bootstrap-datetimepicker/dev-status.png)](https://david-dm.org/jshor/angular-addtocalendar#info=devDependencies)
 
-v1.0.2
+v1.1.0
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar.
 
@@ -39,6 +39,20 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dem
 | `end-date`    	| The timestamp of when the event ends.                                                                        	| Date string in format `YYYYMMDDToHHMMSS`                                     	| 20150704T210000                                                                                            	| Yes          	|
 | `class-name`  	| The bootstrap class for the dropdown button ([more info](http://getbootstrap.com/components/#btn-dropdowns)) 	| Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle` 	| btn btn-sm btn-default dropdown-toggle                                                                     	| No           	|
 | `btn-text`  	| Text for the button to display								 	| Plain text. Default `Add to calendar`					| Add to  calendar                                                                    		| No           	|
+
+## Browser Support
+
+All browsers support adding to Yahoo!, Microsoft, and Google calendars. Below is the current support for downloading .ics files for Outlook and iCalendar.
+
+| Browser           | .ics Support |
+|-------------------|--------------|
+| Internet Explorer | 9.0+         |
+| Edge              | Yes          |
+| Safari            | No           |
+| Firefox           | 20.0+        |
+| Opera             | 15.0+        |
+| Chrome            | 14.0+        |
+| Android           | 4.4+         |
 
 ## Bugs
 
