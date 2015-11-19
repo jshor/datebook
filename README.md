@@ -24,8 +24,12 @@ v1.0.1
 =======
 # angular-addtocalendar  [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar)  [![devDependency Status](https://david-dm.org/dalelotts/angular-bootstrap-datetimepicker/dev-status.png)](https://david-dm.org/jshor/angular-addtocalendar#info=devDependencies)
 
+<<<<<<< HEAD
 v1.0.2
 >>>>>>> b1ba20d... adds docs, uglify
+=======
+v1.1.0
+>>>>>>> a4742a3... v1.1.0
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar. It makes use of [ics.js](https://github.com/nwcell/ics.js) by Travis Krause.
 
@@ -81,6 +85,20 @@ coming soon
 | Opera Next      | [FileSaver.js](https://github.com/eligrey/FileSaver.js) |
 | Opera < 15      | [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Blob.js](https://github.com/eligrey/Blob.js) |
 | Safari ≤ 6      | [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Blob.js](https://github.com/eligrey/Blob.js) |
+
+## Browser Support
+
+All browsers support adding to Yahoo!, Microsoft, and Google calendars. Below is the current support for downloading .ics files for Outlook and iCalendar.
+
+| Browser           | .ics Support |
+|-------------------|--------------|
+| Internet Explorer | 9.0+         |
+| Edge              | Yes          |
+| Safari            | No           |
+| Firefox           | 20.0+        |
+| Opera             | 15.0+        |
+| Chrome            | 14.0+        |
+| Android           | 4.4+         |
 
 ## Bugs
 

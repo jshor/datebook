@@ -59,4 +59,11 @@ Initial version
 - adds config for build to pass on travis
 - adds uglified js file
 - sets minified js file as main component in bower
+<<<<<<< HEAD
 >>>>>>> de39e5c... v1.0.2
+=======
+
+## v1.1.0
+
+- replaces data/url support for .ics files with downloadjs
+>>>>>>> a4742a3... v1.1.0

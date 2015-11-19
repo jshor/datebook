@@ -1,6 +1,6 @@
 {
   "name": "angular-addtocalendar",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "authors": [
     "Josh Shor <jpshor@gmail.com>"
   ],
@@ -30,8 +30,14 @@
     "demo",
     "test",
     "lib",
+<<<<<<< HEAD
     "addtocalendar.js"
 >>>>>>> acae485... ignores main addtocalendar.js in favor of minified version
+=======
+    "addtocalendar.js",
+    "npm-debug.log",
+    "karma.conf.js"
+>>>>>>> a4742a3... v1.1.0
   ],
   "devDependencies": {
     "angular-mocks": "~1.4.7"
