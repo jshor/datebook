@@ -66,4 +66,12 @@ Initial version
 ## v1.1.0
 
 - replaces data/url support for .ics files with downloadjs
+<<<<<<< HEAD
 >>>>>>> a4742a3... v1.1.0
+=======
+
+## v1.1.1
+
+- fixes vendor uglifier issue/`$scope` injection
+- updates karma and karma launchers
+>>>>>>> 5190e67... v1.1.1

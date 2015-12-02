@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "0.1.0",
 =======
   "version": "0.0.7",
@@ -17,6 +18,9 @@
 =======
   "version": "1.1.0",
 >>>>>>> a4742a3... v1.1.0
+=======
+  "version": "1.1.1",
+>>>>>>> 5190e67... v1.1.1
   "description": "AngularJS directive for adding events to calendar apps",
   "main": "addtocalendar.min.js",
   "scripts": {
