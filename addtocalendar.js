@@ -1,5 +1,5 @@
 /**
- * angular-addtocalendar
+ * angular-addtocalendar v1.1.2
  * An AngularJS directive for adding an event to calendar apps. 
  * 
  * Controller and directive.
