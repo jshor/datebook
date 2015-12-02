@@ -47,6 +47,7 @@
   "devDependencies": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "angular-mocks": "^1.4.7",
     "gulp": "^3.9.0",
     "gulp-jasmine": "^2.2.1",
@@ -68,6 +69,10 @@
 =======
     "karma": "^0.12.9",
     "karma-chrome-launcher": "^0.1.12",
+=======
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.2",
+>>>>>>> 8403e51... updates node devDependencies
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.1.6",
 <<<<<<< HEAD
