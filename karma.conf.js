@@ -93,7 +93,6 @@ module.exports = function(config) {
   if (process.env.TRAVIS) {
     // if testing env is Travis, use special Travis testing browsers
     configuration.browsers = [
-      'chromeTravisCi',
       'firefoxTravisCi'
     ];
   }
