@@ -55,3 +55,8 @@ Initial version
 
 - fixes vendor uglifier issue/`$scope` injection
 - updates karma and karma launchers
+
+## v1.1.2
+
+- remove karma-chrome from travis ci
+- publishes to npm
