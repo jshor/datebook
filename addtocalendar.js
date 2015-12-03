@@ -111,10 +111,11 @@ angular
 			 * Renders a .ics file and downloads it to the client browser.
 			 * The name of the file will be the event title with alphanumeric chars
 			 * having the extension `.ics`.
-			 * 
-			 * @return {String}  url to download .ics file.
+			 *
+			 * @param  {Boolean} encodeUri  encode the 
+			 * @return {String}  ics calendar data
 			 */
-			function getIcsCalendar() {
+			function getIcsCalendar(encodeUri) {
 				
 				var elements = [
 					'BEGIN:VCALENDAR',
@@ -131,7 +132,7 @@ angular
 					'END:VCALENDAR'
 				];
 
-				return encodeURIComponent(elements.join('\n'));
+				return elements.join('\n');
 
 			}
 
