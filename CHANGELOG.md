@@ -60,3 +60,7 @@ Initial version
 
 - remove karma-chrome from travis ci
 - publishes to npm
+
+## v1.1.3
+
+- fixes uri encoded .ics file issue
