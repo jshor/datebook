@@ -275,10 +275,10 @@ angular
       function getYahooCalendarUrl() {
 
         var yahooCalendarUrl = 'http://calendar.yahoo.com/?v=60&view=d&type=20';
-        yahooCalendarUrl += '&title=' + encodeURI($scope.title);
-        yahooCalendarUrl += '&st=' + encodeURI($scope.startDate) + '&et=' + encodeURI($scope.endDate);
-        yahooCalendarUrl += '&desc=' + encodeURI($scope.description);
-        yahooCalendarUrl += '&in_loc=' + encodeURI($scope.location);
+        yahooCalendarUrl += '&title=' + encodeURIComponent($scope.title);
+        yahooCalendarUrl += '&st=' + encodeURIComponent($scope.startDate) + '&et=' + encodeURIComponent($scope.endDate);
+        yahooCalendarUrl += '&desc=' + encodeURIComponent($scope.description);
+        yahooCalendarUrl += '&in_loc=' + encodeURIComponent($scope.location);
 
         return yahooCalendarUrl;
 
@@ -292,10 +292,10 @@ angular
       function getGoogleCalendarUrl() {
 
         var googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
-        googleCalendarUrl += '&text=' + encodeURI($scope.title);
-        googleCalendarUrl += '&dates=' + encodeURI($scope.startDate) + '/' + encodeURI($scope.endDate);
-        googleCalendarUrl += '&details=' + encodeURI($scope.description);
-        googleCalendarUrl += '&location=' + encodeURI($scope.location);
+        googleCalendarUrl += '&text=' + encodeURIComponent($scope.title);
+        googleCalendarUrl += '&dates=' + encodeURIComponent($scope.startDate) + '/' + encodeURIComponent($scope.endDate);
+        googleCalendarUrl += '&details=' + encodeURIComponent($scope.description);
+        googleCalendarUrl += '&location=' + encodeURIComponent($scope.location);
 
         return googleCalendarUrl;
 
@@ -309,10 +309,10 @@ angular
       function getMicrosoftCalendarUrl() {
 
         var microsoftCalendarUrl = 'http://calendar.live.com/calendar/calendar.aspx?rru=addevent';
-        microsoftCalendarUrl += '&summary=' + encodeURI($scope.title);
-        microsoftCalendarUrl += '&dtstart=' + encodeURI($scope.startDate) + '&dtend=' + encodeURI($scope.endDate);
-        microsoftCalendarUrl += '&description=' + encodeURI($scope.description);
-        microsoftCalendarUrl += '&location=' + encodeURI($scope.location);
+        microsoftCalendarUrl += '&summary=' + encodeURIComponent($scope.title);
+        microsoftCalendarUrl += '&dtstart=' + encodeURIComponent($scope.startDate) + '&dtend=' + encodeURIComponent($scope.endDate);
+        microsoftCalendarUrl += '&description=' + encodeURIComponent($scope.description);
+        microsoftCalendarUrl += '&location=' + encodeURIComponent($scope.location);
 
         return microsoftCalendarUrl;
 
