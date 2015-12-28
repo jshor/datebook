@@ -64,3 +64,8 @@ Initial version
 ## v1.1.3
 
 - fixes uri encoded .ics file issue
+
+## v1.1.4
+
+- removes `;VALUE=DATE` and `;LANGUAGE=en-us` flags from icalendar
+- refactoring
