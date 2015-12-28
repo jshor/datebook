@@ -82,4 +82,16 @@ Initial version
 
 - remove karma-chrome from travis ci
 - publishes to npm
+<<<<<<< HEAD
 >>>>>>> 06f57f1... v1.1.2
+=======
+
+## v1.1.3
+
+- fixes uri encoded .ics file issue
+
+## v1.1.4
+
+- removes `;VALUE=DATE` and `;LANGUAGE=en-us` flags from icalendar
+- refactoring
+>>>>>>> 1c390d3... v1.1.4

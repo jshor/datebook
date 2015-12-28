@@ -1,10 +1,14 @@
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * angular-addtocalendar
  * An AngularJS directive for adding an event to calendar apps. 
  * 
 =======
  * angular-addtocalendar v1.1.2
+=======
+ * angular-addtocalendar v1.1.3
+>>>>>>> 1c390d3... v1.1.4
  * An AngularJS directive for adding an event to calendar apps.
  *
 >>>>>>> fcd0303... Cleaned up whitespace
