@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # angular-addtocalendar [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar)
 =======
 # angular-addtocalendar [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![Dependency Status](https://david-dm.org/jshor/angular-addtocalendar.svg?branch=master)](https://david-dm.org/jshor/angular-addtocalendar)
@@ -23,6 +24,9 @@ v1.0.1
 >>>>>>> d57055b... v1.0.1
 =======
 # angular-addtocalendar  [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar)  [![devDependency Status](https://david-dm.org/dalelotts/angular-bootstrap-datetimepicker/dev-status.png)](https://david-dm.org/jshor/angular-addtocalendar#info=devDependencies)
+=======
+# angular-addtocalendar  [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![devDependency Status](https://david-dm.org/jshor/angular-addtocalendar/dev-status.svg)](https://david-dm.org/jshor/angular-addtocalendar#info=devDependencies) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+>>>>>>> 3509df0... fixes devDep badge
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -52,12 +56,13 @@ You can also [download it directly](https://github.com/jshor/angular-addtocalend
 =======
 npm:
 
-	npm install angular-addtocalendar
+  npm install angular-addtocalendar
 
 You can also [download it directly](https://github.com/jshor/angular-addtocalendar/archive/v1.1.4.tar.gz).
 
 Inject the dependency `jshor.angular-addtocalendar` into your app:
 
+<<<<<<< HEAD
 		angular
 			.module('myApp', [
 				'jshor.angular-addtocalendar', 
@@ -65,6 +70,14 @@ Inject the dependency `jshor.angular-addtocalendar` into your app:
 				...
 			]);
 >>>>>>> 1c390d3... v1.1.4
+=======
+    angular
+      .module('myApp', [
+        'jshor.angular-addtocalendar', 
+        'ui.bootstrap',
+        ...
+      ]);
+>>>>>>> 3509df0... fixes devDep badge
 
 ## Demo
 
@@ -72,6 +85,7 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/).
 
 ## Example
 
+<<<<<<< HEAD
 	<addtocalendar
  		start-date="20150704T190000"
  		end-date="20150704T210000"
@@ -110,6 +124,29 @@ coming soon
 | Opera Next      | [FileSaver.js](https://github.com/eligrey/FileSaver.js) |
 | Opera < 15      | [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Blob.js](https://github.com/eligrey/Blob.js) |
 | Safari ≤ 6      | [FileSaver.js](https://github.com/eligrey/FileSaver.js), [Blob.js](https://github.com/eligrey/Blob.js) |
+=======
+  <addtocalendar
+    start-date="20150704T190000"
+    end-date="20150704T210000"
+    title="Fourth of July Fireworks"
+    location="Battery Park City, New York, NY"
+    class-name="btn btn-sm btn-default dropdown-toggle"
+    description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world."
+    btn-text="Add to calendar">
+  </addtocalendar>
+
+## Attributes
+
+| **Attribute**   | **Description**                                                                                               | **Format**                                                                    | **Example**                                                                                                 | **Required**  |
+|---------------  |-------------------------------------------------------------------------------------------------------------- |------------------------------------------------------------------------------ |------------------------------------------------------------------------------------------------------------ |-------------- |
+| `title`         | Name of the event.                                                                                            | Plain text                                                                    | Fourth of July Fireworks                                                                                    | Yes           |
+| `description`   | Description of the event.                                                                                     | Plain text. Default nil.                                                      | Celebrate the independence of the United States with fireworks in one of the greatest cities in the world.  | No            |
+| `location`      | Location of the event.                                                                                        | Plain text                                                                    | Battery Park City, New York, NY                                                                             | Yes           |
+| `start-date`    | The timestamp of when the event begins.                                                                       | Date string in format `YYYYMMDDToHHMMSS`                                      | 20150704T190000                                                                                             | Yes           |
+| `end-date`      | The timestamp of when the event ends.                                                                         | Date string in format `YYYYMMDDToHHMMSS`                                      | 20150704T210000                                                                                             | Yes           |
+| `class-name`    | The bootstrap class for the dropdown button ([more info](http://getbootstrap.com/components/#btn-dropdowns))  | Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle`  | btn btn-sm btn-default dropdown-toggle                                                                      | No            |
+| `btn-text`    | Text for the button to display                  | Plain text. Default `Add to calendar`         | Add to  calendar                                                                        | No            |
+>>>>>>> 3509df0... fixes devDep badge
 
 ## Browser Support
 
