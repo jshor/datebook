@@ -82,12 +82,17 @@
     "karma-chrome-launcher": "^0.2.2",
 >>>>>>> 8403e51... updates node devDependencies
     "karma-firefox-launcher": "^0.1.7",
+<<<<<<< HEAD
     "karma-jasmine": "^0.1.6",
 <<<<<<< HEAD
     "karma-phantomjs-launcher": "^0.2.1"
 >>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
 =======
     "karma-phantomjs-launcher": "^0.2.1",
+=======
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^1.0.0",
+>>>>>>> 242652a... updates karma, jasmine, phantomjs
     "uglify-js": "^2.6.1"
 >>>>>>> b1ba20d... adds docs, uglify
   }
