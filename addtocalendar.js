@@ -222,8 +222,8 @@ angular
 	.directive('addtocalendar', function() {
 =======
   ])
-  .controller('AddtocalendarCtrl', ['$scope',
-    function ($scope) {
+  .controller('AddtocalendarCtrl', ['$scope', '$attrs',
+    function ($scope, $attrs) {
 
 
       $scope.description = $scope.description || '';
@@ -305,6 +305,44 @@ angular
 
       };
 
+	function buildUrl() {
+		$scope.calendarUrl = {
+			microsoft: getMicrosoftCalendarUrl(),
+			google: getGoogleCalendarUrl(),
+			yahoo: getYahooCalendarUrl(),
+			icalendar: getIcsCalendar(),
+			dlIcal: dlIcal
+		};
+	}
+
+	  $attrs.$observe('startDate', function() {
+			buildUrl();
+		});
+
+	  $attrs.$observe('endDate', function() {
+			buildUrl();
+		});
+
+	  $attrs.$observe('title', function() {
+			buildUrl();
+		});
+
+	  $attrs.$observe('description', function() {
+			buildUrl();
+		});
+
+	  $attrs.$observe('location', function() {
+			buildUrl();
+		});
+
+	  $attrs.$observe('className', function() {
+			buildUrl();
+		});
+
+	  $attrs.$observe('btnText', function() {
+			buildUrl();
+		});
+	  
       /**
        * Generates a url to add event to Windows Live Calendar.
        *
@@ -331,14 +369,7 @@ angular
 
       }
 
-      $scope.calendarUrl = {
-        microsoft: getMicrosoftCalendarUrl(),
-        google: getGoogleCalendarUrl(),
-        yahoo: getYahooCalendarUrl(),
-        icalendar: getIcsCalendar(),
-        dlIcal: dlIcal
-      };
-
+	  buildUrl();
     }
 
   ])
