@@ -41,6 +41,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+<<<<<<< HEAD
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'addtocalendar.js',
@@ -50,6 +51,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test/**/*.spec.js',
+=======
+      'node_modules/angular/angular.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'addtocalendar.min.js',
+>>>>>>> bd688da... refactors ics creation, cleans up tests
       'test/**/*.spec.js'
 >>>>>>> 9ddc745... adds karma conf
     ],

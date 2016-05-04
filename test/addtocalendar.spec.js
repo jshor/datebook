@@ -17,13 +17,7 @@ describe('AddtocalendarCtrl', function() {
     $controller = _$controller_;
   }));
 
-  /**
-   * Returns a sample event to test with.
-   * 
-   * @return {Object} params of event, mimicking directive scope params
-   */
-  function getSampleEvent() {
-
+  var getSampleEvent = function() {
     return {
       startDate: '20150704T190000',
       endDate: '20150704T210000',
@@ -31,7 +25,6 @@ describe('AddtocalendarCtrl', function() {
       description: 'Some interesting description here.',
       location: '1 Futurama Pl, New New York'
     };
-
   }
 
   /**
@@ -40,9 +33,12 @@ describe('AddtocalendarCtrl', function() {
   describe('$scope.calendarUrl.yahoo', function() {
 
   	it('should return the url to add event to a yahoo calendar', function() {
-  		var $scope = getSampleEvent();
+      var $scope = getSampleEvent();
 
-      $controller('AddtocalendarCtrl', { $scope: $scope });
+      $controller('AddtocalendarCtrl', {
+        $scope: $scope,
+        $attrs: {}
+      });
 
       var regex = CalendarRegex.getUrlRegex('calendar.yahoo.com/', {
       	v: 60,
@@ -66,11 +62,13 @@ describe('AddtocalendarCtrl', function() {
    * Google Calendar
    */
   describe('$scope.calendarUrl.google', function() {
-
+    var $scope = getSampleEvent();
+      
     it('should return the url to add event to a google calendar', function() {
-      var $scope = getSampleEvent();
-
-      $controller('AddtocalendarCtrl', { $scope: $scope });
+      $controller('AddtocalendarCtrl', {
+        $scope: $scope,
+        $attrs: {}
+      });
 
       var regex = CalendarRegex.getUrlRegex('www.google.com/calendar/render', {
         action: 'TEMPLATE',
@@ -91,11 +89,13 @@ describe('AddtocalendarCtrl', function() {
    * Windows Live Calendar
    */
   describe('$scope.calendarUrl.microsoft', function() {
+    var $scope = getSampleEvent();
 
     it('should return the url to add event to a windows live calendar', function() {
-      var $scope = getSampleEvent();
-
-      $controller('AddtocalendarCtrl', { $scope: $scope });
+      $controller('AddtocalendarCtrl', {
+        $scope: $scope,
+        $attrs: {}
+      });
 
       var regex = CalendarRegex.getUrlRegex('calendar.live.com/calendar/calendar.aspx', {
         rru: 'addevent',
@@ -117,11 +117,13 @@ describe('AddtocalendarCtrl', function() {
    * iCalendar
    */
   describe('$scope.calendarUrl.icalendar', function() {
-
+    var $scope = getSampleEvent();
+    
     it('should return the url and data of an icalendar file', function() {
-      var $scope = getSampleEvent();
-
-      $controller('AddtocalendarCtrl', { $scope: $scope });
+      $controller('AddtocalendarCtrl', {
+        $scope: $scope,
+        $attrs: {}
+      });
 
       var regex = CalendarRegex.getIcsCalendarRegex();
 

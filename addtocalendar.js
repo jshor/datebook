@@ -1,6 +1,7 @@
 /**
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * angular-addtocalendar
  * An AngularJS directive for adding an event to calendar apps. 
  * 
@@ -9,6 +10,9 @@
 =======
  * angular-addtocalendar v1.1.3
 >>>>>>> 1c390d3... v1.1.4
+=======
+ * angular-addtocalendar v1.1.5
+>>>>>>> bd688da... refactors ics creation, cleans up tests
  * An AngularJS directive for adding an event to calendar apps.
  *
 >>>>>>> fcd0303... Cleaned up whitespace
@@ -225,34 +229,14 @@ angular
   .controller('AddtocalendarCtrl', ['$scope', '$attrs',
     function ($scope, $attrs) {
 
-
       $scope.description = $scope.description || '';
 
       /**
-       * Renders a .ics file and downloads it to the client browser.
-       * The name of the file will be the event title with alphanumeric chars
-       * having the extension `.ics`.
-       *
-       * @param  {Boolean} encodeUri  encode the
+       * Returns file contents for a .ics file.
        * @return {String}  ics calendar data
        */
-      function getIcsCalendar(encodeUri) {
-
-        function formatIcsText(s, maxLength) {
-          if (!s || !s.length) return s;
-          return wrap(s.replace(/\n/g, '\\n'), maxLength);
-        }
-
-        function wrap(s, maxLength) {
-          if (!maxLength) maxLength = 75;
-          if (!s || s.length <= maxLength) {
-            return s;
-          } else {
-            return s.substring(0, maxLength).replace(/\n/g, '\\n') + "\r\n " + wrap(s.substring(maxLength), 75);
-          }
-        }
-
-        var elements = [
+      function getIcsCalendar() {
+        return [
           'BEGIN:VCALENDAR',
           'VERSION:2.0',
           'BEGIN:VEVENT',
@@ -265,19 +249,10 @@ angular
           'TRANSP:TRANSPARENT',
           'END:VEVENT',
           'END:VCALENDAR'
-        ];
-
-        return elements.join('\n');
-
+        ].join('\n');
       }
-
-      /**
-       * Generates a url to add event to Yahoo! Calendar.
-       *
-       * @return {String} yahoo cal url
-       */
+      
       function getYahooCalendarUrl() {
-
         var yahooCalendarUrl = 'http://calendar.yahoo.com/?v=60&view=d&type=20';
         yahooCalendarUrl += '&title=' + encodeURIComponent($scope.title);
         yahooCalendarUrl += '&st=' + encodeURIComponent($scope.startDate) + '&et=' + encodeURIComponent($scope.endDate);
@@ -285,16 +260,9 @@ angular
         yahooCalendarUrl += '&in_loc=' + encodeURIComponent($scope.location);
 
         return yahooCalendarUrl;
+      }
 
-      };
-
-      /**
-       * Generates a url to add event to Google Calendar.
-       *
-       * @return {String} google cal url
-       */
       function getGoogleCalendarUrl() {
-
         var googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
         googleCalendarUrl += '&text=' + encodeURIComponent($scope.title);
         googleCalendarUrl += '&dates=' + encodeURIComponent($scope.startDate) + '/' + encodeURIComponent($scope.endDate);
@@ -302,54 +270,9 @@ angular
         googleCalendarUrl += '&location=' + encodeURIComponent($scope.location);
 
         return googleCalendarUrl;
+      }
 
-      };
-
-	function buildUrl() {
-		$scope.calendarUrl = {
-			microsoft: getMicrosoftCalendarUrl(),
-			google: getGoogleCalendarUrl(),
-			yahoo: getYahooCalendarUrl(),
-			icalendar: getIcsCalendar(),
-			dlIcal: dlIcal
-		};
-	}
-
-	  $attrs.$observe('startDate', function() {
-			buildUrl();
-		});
-
-	  $attrs.$observe('endDate', function() {
-			buildUrl();
-		});
-
-	  $attrs.$observe('title', function() {
-			buildUrl();
-		});
-
-	  $attrs.$observe('description', function() {
-			buildUrl();
-		});
-
-	  $attrs.$observe('location', function() {
-			buildUrl();
-		});
-
-	  $attrs.$observe('className', function() {
-			buildUrl();
-		});
-
-	  $attrs.$observe('btnText', function() {
-			buildUrl();
-		});
-	  
-      /**
-       * Generates a url to add event to Windows Live Calendar.
-       *
-       * @return {String} microsoft cal url
-       */
       function getMicrosoftCalendarUrl() {
-
         var microsoftCalendarUrl = 'http://calendar.live.com/calendar/calendar.aspx?rru=addevent';
         microsoftCalendarUrl += '&summary=' + encodeURIComponent($scope.title);
         microsoftCalendarUrl += '&dtstart=' + encodeURIComponent($scope.startDate) + '&dtend=' + encodeURIComponent($scope.endDate);
@@ -357,21 +280,37 @@ angular
         microsoftCalendarUrl += '&location=' + encodeURIComponent($scope.location);
 
         return microsoftCalendarUrl;
-
-      };
-
-      function dlIcal() {
-
-        // render safe filename for iCal (only \w chars) based on event title
-        var fileName = $scope.title.replace(/[^\w ]+/g, '') + '.ics';
-
-        download(getIcsCalendar(), fileName, 'application/octet-stream');
-
       }
 
-	  buildUrl();
-    }
+      function buildUrl() {
+        $scope.calendarUrl = {
+          microsoft: getMicrosoftCalendarUrl(),
+          google: getGoogleCalendarUrl(),
+          yahoo: getYahooCalendarUrl(),
+          icalendar: getIcsCalendar(),
+          dlIcal: dlIcal
+        };
+      }
 
+      /**
+       * Downloads a .ics file for the given parameters.
+       * The name of the file will be the event title with alphanumeric chars
+       * having the extension `.ics`.
+       */
+      function dlIcal() {
+        var fileName = $scope.title.replace(/[^\w ]+/g, '') + '.ics';
+        download(getIcsCalendar(), fileName, 'application/octet-stream');
+      }
+
+      // observe user-specified attributes
+      forEachAttr($attrs, function(key) {
+        $attrs.$observe(key, function() {
+          buildUrl();
+        });
+      });
+
+	    buildUrl();
+    }
   ])
   .directive('addtocalendar', function () {
 
