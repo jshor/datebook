@@ -86,10 +86,21 @@
 =======
 =======
     "angular-mocks": "^1.5.3",
+<<<<<<< HEAD
 >>>>>>> bd688da... refactors ics creation, cleans up tests
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.2",
 >>>>>>> 8403e51... updates node devDependencies
+=======
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-coverage": "^1.0.0",
+    "karma-coveralls": "^1.1.2",
+    "karma-chrome-launcher": "^0.2.2",
+>>>>>>> 3793ba7... adds coverage info to gitignore
     "karma-firefox-launcher": "^0.1.7",
 <<<<<<< HEAD
     "karma-jasmine": "^0.1.6",

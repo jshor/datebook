@@ -10,4 +10,11 @@ node_js:
 script:
   - npm install -g bower
   - bower install
+<<<<<<< HEAD
   - npm test
+=======
+  - npm test
+
+after_success: 
+- cat ./coverage/**/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+>>>>>>> 3793ba7... adds coverage info to gitignore
