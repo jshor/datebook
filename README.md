@@ -1,4 +1,4 @@
-# angular-addtocalendar  [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.png?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![devDependency Status](https://david-dm.org/jshor/angular-addtocalendar/dev-status.svg)](https://david-dm.org/jshor/angular-addtocalendar#info=devDependencies) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+# angular-addtocalendar
 
 ### v1.1.5
 
