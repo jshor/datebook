@@ -1,43 +1,11 @@
 {
   "name": "angular-addtocalendar",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "version": "0.1.0",
-=======
-  "version": "0.0.7",
->>>>>>> 1baca68... v0.0.7
-=======
-  "version": "1.0.0",
->>>>>>> a378064... v1.0.0
-=======
-  "version": "1.0.2",
->>>>>>> b1ba20d... adds docs, uglify
-=======
-  "version": "1.1.0",
->>>>>>> a4742a3... v1.1.0
-=======
-  "version": "1.1.1",
->>>>>>> 5190e67... v1.1.1
-=======
-  "version": "1.1.4",
->>>>>>> 1c390d3... v1.1.4
+  "version": "1.1.5",
   "description": "AngularJS directive for adding events to calendar apps",
   "main": "addtocalendar.min.js",
   "scripts": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "test": "./node_modules/karma/bin/karma start --browsers Chrome --single-run"
-=======
-    "test": "./node_modules/karma/bin/karma start karma.conf.js --single-run"
->>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
-=======
     "test": "./node_modules/karma/bin/karma start karma.conf.js --single-run",
-    "build": "./node_modules/uglify-js/bin/uglifyjs lib/*.js addtocalendar.js -o addtocalendar.min.js"
->>>>>>> bd688da... refactors ics creation, cleans up tests
+    "build": "rm -rf ./coverage/ && ./node_modules/uglify-js/bin/uglifyjs lib/*.js addtocalendar.js -o addtocalendar.min.js"
   },
   "repository": {
     "type": "git",
@@ -58,40 +26,7 @@
   },
   "homepage": "https://github.com/jshor/angular-addtocalendar",
   "devDependencies": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "angular-mocks": "^1.4.7",
-    "gulp": "^3.9.0",
-    "gulp-jasmine": "^2.2.1",
-    "gulp-karma": "0.0.5",
-    "karma": "^0.12.37",
-    "karma-browserify": "^4.4.0",
-    "karma-chrome-launcher": "^0.1.12",
-    "karma-firefox-launcher": "^0.1.3",
-    "karma-jasmine": "^0.1.6",
-    "karma-phantomjs-launcher": "^0.2.1",
-    "karma-spec-reporter": "0.0.22",
-    "phantomjs": "^1.9.18"
-=======
-    "karma": "^0.12.9",
-    "karma-chrome-launcher": "^0.1.3",
-    "karma-firefox-launcher": "^0.1.3",
-    "karma-jasmine": "^0.1.6"
->>>>>>> 9ddc745... adds karma conf
-=======
-    "karma": "^0.12.9",
-    "karma-chrome-launcher": "^0.1.12",
-=======
-=======
     "angular-mocks": "^1.5.3",
-<<<<<<< HEAD
->>>>>>> bd688da... refactors ics creation, cleans up tests
-    "karma": "^0.13.15",
-    "karma-chrome-launcher": "^0.2.2",
->>>>>>> 8403e51... updates node devDependencies
-=======
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
@@ -100,26 +35,12 @@
     "karma-coverage": "^1.0.0",
     "karma-coveralls": "^1.1.2",
     "karma-chrome-launcher": "^0.2.2",
->>>>>>> 3793ba7... adds coverage info to gitignore
     "karma-firefox-launcher": "^0.1.7",
-<<<<<<< HEAD
-    "karma-jasmine": "^0.1.6",
-<<<<<<< HEAD
-    "karma-phantomjs-launcher": "^0.2.1"
->>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
-=======
-    "karma-phantomjs-launcher": "^0.2.1",
-=======
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^1.0.0",
->>>>>>> 242652a... updates karma, jasmine, phantomjs
     "uglify-js": "^2.6.1"
-<<<<<<< HEAD
->>>>>>> b1ba20d... adds docs, uglify
-=======
   },
   "dependencies": {
     "angular": "^1.5.3"
->>>>>>> bd688da... refactors ics creation, cleans up tests
   }
 }

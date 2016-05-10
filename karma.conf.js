@@ -1,19 +1,14 @@
 // Karma configuration
-<<<<<<< HEAD
-// Generated on Fri Nov 13 2015 10:21:53 GMT-0500 (EST)
-=======
 // Generated on Mon Nov 16 2015 11:46:42 GMT-0500 (EST)
->>>>>>> 9ddc745... adds karma conf
 
 module.exports = function(config) {
-  config.set({
+
+  var configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
 
-<<<<<<< HEAD
-=======
     // custom browsers launchers (mainly for Travis)
     customLaunchers: {
       chromeTravisCi: {
@@ -27,55 +22,31 @@ module.exports = function(config) {
     },
 
   
->>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
-<<<<<<< HEAD
-    plugins : [
-      'karma-browserify',
-      'karma-jasmine',
-      'karma-phantomjs-launcher'
-    ],
 
     // list of files / patterns to load in the browser
     files: [
-<<<<<<< HEAD
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'addtocalendar.js',
-      'spec/*.js'
-=======
-
-    // list of files / patterns to load in the browser
-    files: [
-      'test/**/*.spec.js',
-=======
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'addtocalendar.min.js',
->>>>>>> bd688da... refactors ics creation, cleans up tests
-      'test/**/*.spec.js'
->>>>>>> 9ddc745... adds karma conf
+      'test/*.spec.js'
     ],
 
-
-    // list of files to exclude
-    exclude: [
-    ],
+    reporters: ['progress', 'coverage', 'coveralls'],
 
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'lib/*.js': ['coverage'],
+      'addtocalendar.js': ['coverage']
     },
 
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    coverageReporter: {
+      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
+      dir: 'coverage/'
+    },
 
 
     // web server port
@@ -97,19 +68,11 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-<<<<<<< HEAD
-<<<<<<< HEAD
-    browsers: ['PhantomJS'],
-=======
-    browsers: ['Chrome'],
->>>>>>> 9ddc745... adds karma conf
-=======
     browsers: [
       'Chrome',
       'Firefox',
       'PhantomJS'
     ],
->>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
 
 
     // Continuous Integration mode
@@ -119,20 +82,17 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultanous
     concurrency: Infinity
-<<<<<<< HEAD
-  })
-=======
   };
 
 
   if (process.env.TRAVIS) {
     // if testing env is Travis, use special Travis testing browsers
     configuration.browsers = [
-      'firefoxTravisCi'
+      'firefoxTravisCi',
+      'chromeTravisCi'
     ];
   }
 
   config.set(configuration);
 
->>>>>>> ae4bf9b... updates testing method in karma conf, use chrome/firefox/phantomjs travis launchers"
 }

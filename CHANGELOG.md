@@ -21,8 +21,6 @@ Initial version
 ## v0.0.5
 
 - Adds attribute for button text
-<<<<<<< HEAD
-=======
 
 ## v0.0.6
 
@@ -31,17 +29,9 @@ Initial version
 
 ## v0.0.7
 
-<<<<<<< HEAD
-- updates official doc on browser support
-- adds tests
->>>>>>> a9812aa... adds initial tests, karma, gulp
-=======
 - replaces ics.js with internal rendering of ics.js file
 - removes all dependencies of ics.js from bower
 - sets filename of .ics file to safe version of event title
-<<<<<<< HEAD
->>>>>>> 1baca68... v0.0.7
-=======
 
 ## v1.0.0
 
@@ -50,41 +40,26 @@ Initial version
 ## v1.0.1
 
 - light refactoring
-<<<<<<< HEAD
->>>>>>> d57055b... v1.0.1
-=======
 
 ## v1.0.2
 
 - adds config for build to pass on travis
 - adds uglified js file
 - sets minified js file as main component in bower
-<<<<<<< HEAD
->>>>>>> de39e5c... v1.0.2
-=======
 
 ## v1.1.0
 
 - replaces data/url support for .ics files with downloadjs
-<<<<<<< HEAD
->>>>>>> a4742a3... v1.1.0
-=======
 
 ## v1.1.1
 
 - fixes vendor uglifier issue/`$scope` injection
 - updates karma and karma launchers
-<<<<<<< HEAD
->>>>>>> 5190e67... v1.1.1
-=======
 
 ## v1.1.2
 
 - remove karma-chrome from travis ci
 - publishes to npm
-<<<<<<< HEAD
->>>>>>> 06f57f1... v1.1.2
-=======
 
 ## v1.1.3
 
@@ -94,4 +69,9 @@ Initial version
 
 - removes `;VALUE=DATE` and `;LANGUAGE=en-us` flags from icalendar
 - refactoring
->>>>>>> 1c390d3... v1.1.4
+
+## v1.1.5
+
+- update attributes when changed outside of directive scope
+- refactors main method
+- fixes chrome launcher on travis ci

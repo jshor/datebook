@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /**
  * angular-addtocalendar
  * An AngularJS directive for adding an event to calendar apps. 
@@ -135,4 +133,3 @@ describe('AddtocalendarCtrl', function() {
   });
 
 });
->>>>>>> b1ba20d... adds docs, uglify
