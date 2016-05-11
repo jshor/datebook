@@ -31,7 +31,8 @@ module.exports = function(config) {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'addtocalendar.min.js',
+      'lib/*.js',
+      'addtocalendar.js',
       'test/*.spec.js'
     ],
 
@@ -40,7 +41,7 @@ module.exports = function(config) {
 
     preprocessors: {
       'lib/*.js': ['coverage'],
-      'addtocalendar.js': ['coverage']
+      'addtocalendar.js': ['coverage'],
     },
 
     coverageReporter: {
