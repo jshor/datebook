@@ -8,7 +8,6 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-
     // custom browsers launchers (mainly for Travis)
     customLaunchers: {
       chromeTravisCi: {
@@ -21,11 +20,7 @@ module.exports = function(config) {
       }
     },
 
-  
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
-
 
     // list of files / patterns to load in the browser
     files: [
@@ -33,6 +28,8 @@ module.exports = function(config) {
       'node_modules/angular-mocks/angular-mocks.js',
       'lib/*.js',
       'addtocalendar.js',
+      'test/fixtures/*.js',
+      'test/lib/*.js',
       'test/*.spec.js'
     ],
 
@@ -87,7 +84,7 @@ module.exports = function(config) {
 
 
   if (process.env.TRAVIS) {
-    // if testing env is Travis, use special Travis testing browsers
+    // if testing env is Travis, use special Travis-specific browsers
     configuration.browsers = [
       'firefoxTravisCi',
       'chromeTravisCi'
@@ -95,5 +92,4 @@ module.exports = function(config) {
   }
 
   config.set(configuration);
-
 }
