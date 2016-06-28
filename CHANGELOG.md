@@ -75,3 +75,8 @@ Initial version
 - update attributes when changed outside of directive scope
 - refactors main method
 - fixes chrome launcher on travis ci
+
+## v1.1.6
+
+- provides option to use ui-bootstrap version of dropdown
+- enhances test coverage and adds directive test suite
