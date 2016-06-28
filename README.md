@@ -22,8 +22,6 @@ npm:
 npm install angular-addtocalendar
 ```
 
-You can also [download it directly](https://github.com/jshor/angular-addtocalendar/archive/v1.1.5.tar.gz).
-
 Inject the dependency `jshor.angular-addtocalendar` into your app:
 
 ```
