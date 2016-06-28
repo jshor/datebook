@@ -2,7 +2,7 @@
  * angular-addtocalendar
  * An AngularJS directive for adding an event to calendar apps. 
  * 
- * Karma/Jasmine test suite.
+ * Controller test suite.
  */
 'use strict';
 
@@ -15,23 +15,13 @@ describe('AddtocalendarCtrl', function() {
     $controller = _$controller_;
   }));
 
-  var getSampleEvent = function() {
-    return {
-      startDate: '20150704T190000',
-      endDate: '20150704T210000',
-      title: 'A sample event!',
-      description: 'Some interesting description here.',
-      location: '1 Futurama Pl, New New York'
-    };
-  }
-
   /**
    * Yahoo! Calendar
    */
   describe('$scope.calendarUrl.yahoo', function() {
 
   	it('should return the url to add event to a yahoo calendar', function() {
-      var $scope = getSampleEvent();
+      var $scope = sampleEventFixture;
 
       $controller('AddtocalendarCtrl', {
         $scope: $scope,
@@ -60,7 +50,7 @@ describe('AddtocalendarCtrl', function() {
    * Google Calendar
    */
   describe('$scope.calendarUrl.google', function() {
-    var $scope = getSampleEvent();
+    var $scope = sampleEventFixture;
       
     it('should return the url to add event to a google calendar', function() {
       $controller('AddtocalendarCtrl', {
@@ -87,7 +77,7 @@ describe('AddtocalendarCtrl', function() {
    * Windows Live Calendar
    */
   describe('$scope.calendarUrl.microsoft', function() {
-    var $scope = getSampleEvent();
+    var $scope = sampleEventFixture;
 
     it('should return the url to add event to a windows live calendar', function() {
       $controller('AddtocalendarCtrl', {
@@ -115,7 +105,7 @@ describe('AddtocalendarCtrl', function() {
    * iCalendar
    */
   describe('$scope.calendarUrl.icalendar', function() {
-    var $scope = getSampleEvent();
+    var $scope = sampleEventFixture;
     
     it('should return the url and data of an icalendar file', function() {
       $controller('AddtocalendarCtrl', {

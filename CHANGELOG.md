@@ -1,45 +1,38 @@
 # Changelog
 
-## v0.0.1
+## v1.1.6
 
-Initial version
+- provides option to use ui-bootstrap version of dropdown
+- enhances test coverage and adds directive test suite
 
-## v0.0.2
+## v1.1.5
 
-- Fixes bower.json to include dependencies
-- Fixes dev-dependencies
+- update attributes when changed outside of directive scope
+- refactors main method
+- fixes chrome launcher on travis ci
 
-## v0.0.3
+## v1.1.4
 
-- Adds changelog
-- Fixes dates for .ics downloads
+- removes `;VALUE=DATE` and `;LANGUAGE=en-us` flags from icalendar
+- refactoring
 
-## v0.0.4
+## v1.1.3
 
-- Adds support for angular-bootstrap
+- fixes uri encoded .ics file issue
 
-## v0.0.5
+## v1.1.2
 
-- Adds attribute for button text
+- remove karma-chrome from travis ci
+- publishes to npm
 
-## v0.0.6
+## v1.1.1
 
-- fixes repetition in .ics file after subsequent downloads
-- fixes NaN dates issue
+- fixes vendor uglifier issue/`$scope` injection
+- updates karma and karma launchers
 
-## v0.0.7
+## v1.1.0
 
-- replaces ics.js with internal rendering of ics.js file
-- removes all dependencies of ics.js from bower
-- sets filename of .ics file to safe version of event title
-
-## v1.0.0
-
-- adds test suite to addtocalendar functions, ensures stability
-
-## v1.0.1
-
-- light refactoring
+- replaces data/url support for .ics files with downloadjs
 
 ## v1.0.2
 
@@ -47,31 +40,43 @@ Initial version
 - adds uglified js file
 - sets minified js file as main component in bower
 
-## v1.1.0
+## v1.0.1
 
-- replaces data/url support for .ics files with downloadjs
+- light refactoring
 
-## v1.1.1
+## v0.0.7
 
-- fixes vendor uglifier issue/`$scope` injection
-- updates karma and karma launchers
+- replaces ics.js with internal rendering of ics.js file
+- removes all dependencies of ics.js from bower
+- sets filename of .ics file to safe version of event title
 
-## v1.1.2
+## v0.0.6
 
-- remove karma-chrome from travis ci
-- publishes to npm
+- fixes repetition in .ics file after subsequent downloads
+- fixes NaN dates issue
 
-## v1.1.3
+## v0.0.5
 
-- fixes uri encoded .ics file issue
+- Adds attribute for button text
 
-## v1.1.4
+## v0.0.4
 
-- removes `;VALUE=DATE` and `;LANGUAGE=en-us` flags from icalendar
-- refactoring
+- Adds support for angular-bootstrap
 
-## v1.1.5
+## v0.0.3
 
-- update attributes when changed outside of directive scope
-- refactors main method
-- fixes chrome launcher on travis ci
+- Adds changelog
+- Fixes dates for .ics downloads
+
+## v0.0.2
+
+- Fixes bower.json to include dependencies
+- Fixes dev-dependencies
+
+## v0.0.1
+
+Initial version
+
+## v1.0.0
+
+- adds test suite to addtocalendar functions, ensures stability

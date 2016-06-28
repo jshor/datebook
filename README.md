@@ -1,6 +1,6 @@
 # angular-addtocalendar
 
-### v1.1.5
+### v1.1.6
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar.
 
@@ -64,6 +64,7 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dem
 | `end-date`      | The timestamp of when the event ends.                                                                         | Date string in format `YYYYMMDDToHHMMSS`                                      | 20150704T210000                                                                                             | Yes           |
 | `class-name`    | The bootstrap class for the dropdown button ([more info](http://getbootstrap.com/components/#btn-dropdowns))  | Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle`  | btn btn-sm btn-default dropdown-toggle                                                                      | No            |
 | `btn-text`    | Text for the button to display                  | Plain text. Default `Add to calendar`         | Add to  calendar                                                                        | No            |
+| `uib-dropdown`    | Whether to use ui-bootstrap dropdown             | `null` Default `Add to calendar`         | `null`                                                                        | No            |
 
 ## Browser Support
 
