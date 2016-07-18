@@ -26,6 +26,7 @@ module.exports = function(config) {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
+      'node_modules/angular-file-saver/dist/angular-file-saver.bundle.js',
       'lib/*.js',
       'addtocalendar/*.js',
       'test/fixtures/*.js',

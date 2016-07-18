@@ -7,8 +7,8 @@
 'use strict';
 
 addtocalendar
-  .controller('AddtocalendarCtrl', ['$scope', '$attrs',
-    function ($scope, $attrs) {
+  .controller('AddtocalendarCtrl', ['$scope', '$attrs', 'FileSaver', 'Blob',
+    function ($scope, $attrs, FileSaver, Blob) {
 
       $scope.description = $scope.description || '';
 
@@ -63,14 +63,20 @@ addtocalendar
         return microsoftCalendarUrl;
       }
 
+      function canDownloadIcal() {
+        return !!new Blob;
+      }
+
       function buildUrl() {
         $scope.calendarUrl = {
           microsoft: getMicrosoftCalendarUrl(),
           google: getGoogleCalendarUrl(),
           yahoo: getYahooCalendarUrl(),
-          icalendar: getIcsCalendar(),
-          dlIcal: dlIcal
+          icalendar: getIcsCalendar()
         };
+        if(canDownloadIcal()) {
+          $scope.calendarUrl.dlIcal = dlIcal;
+        }
       }
 
       /**
@@ -79,8 +85,11 @@ addtocalendar
        * having the extension `.ics`.
        */
       function dlIcal() {
-        var fileName = $scope.title.replace(/[^\w ]+/g, '') + '.ics';
-        download(getIcsCalendar(), fileName, 'application/octet-stream');
+        var fileName = $scope.title.replace(/[^\w ]+/g, '');
+        var blob = new Blob([getIcsCalendar()], {
+          type: 'application/octet-stream'
+        });
+        FileSaver.saveAs(blob, fileName + '.ics');
       }
 
       // observe user-specified attributes

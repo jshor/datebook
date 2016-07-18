@@ -6,4 +6,5 @@
  */
 'use strict';
 
-var addtocalendar = angular.module('jshor.angular-addtocalendar', []);
+var addtocalendar = angular
+  .module('jshor.angular-addtocalendar', ['ngFileSaver']);
