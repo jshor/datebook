@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "angular": "^1.5.3",
-    "angular-file-saver": "^1.1.2"
+    "angular-file-saver": "^1.1.2",
+    "moment": "^2.14.1"
   }
 }
