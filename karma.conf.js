@@ -29,6 +29,7 @@ module.exports = function(config) {
       'node_modules/angular-file-saver/dist/angular-file-saver.bundle.js',
       'node_modules/moment/moment.js',
       'lib/*.js',
+      'lib/**/*.js',
       'addtocalendar/*.js',
       'test/fixtures/*.js',
       'test/lib/*.js',

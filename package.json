@@ -5,7 +5,7 @@
   "main": "addtocalendar.min.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js --single-run",
-    "build": "rm -rf ./coverage/ && ./node_modules/uglify-js/bin/uglifyjs lib/*.js addtocalendar/*.js -o addtocalendar.min.js"
+    "build": "rm -rf ./coverage/ && ./node_modules/uglify-js/bin/uglifyjs lib/*.js lib/**/*.js addtocalendar/*.js -o addtocalendar.min.js"
   },
   "repository": {
     "type": "git",
