@@ -32,10 +32,10 @@ describe('AddtocalendarCtrl', function() {
       	v: 60,
       	view: 'd',
       	type: 20,
-      	title: '(.*)',
-      	st: CalendarRegex.dateRegex,
-      	et: CalendarRegex.dateRegex,
-      	desc: '(.*)',
+      	TITLE: '(.*)',
+      	ST: CalendarRegex.dateRegex,
+      	DUR: CalendarRegex.militaryHoursRegex,
+      	DESC: '(.*)',
       	in_loc: '(.*)'
       });
 

@@ -44,6 +44,10 @@
 
 - light refactoring
 
+## v1.0.0
+
+- adds test suite to addtocalendar functions, ensures stability
+
 ## v0.0.7
 
 - replaces ics.js with internal rendering of ics.js file
@@ -76,7 +80,3 @@
 ## v0.0.1
 
 Initial version
-
-## v1.0.0
-
-- adds test suite to addtocalendar functions, ensures stability
