@@ -20,7 +20,7 @@ module.exports = function(config) {
       }
     },
 
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'sinon'],
 
     // list of files / patterns to load in the browser
     files: [

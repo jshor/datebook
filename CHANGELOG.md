@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.2.0
+
+- fixes Yahoo! calendar end time issue
+- adds support for `timezone` specification
+- enables format of timestamp inputs (including source timezone)
+- removes download.js and uses FileSaver.js to support iOS/safari
+- npm-ignores junk
+
 ## v1.1.6
 
 - provides option to use ui-bootstrap version of dropdown
