@@ -14,6 +14,9 @@ var CalendarRegex;
   /* universal timestamp format */
   var dateRegex = '[0-9]{8}T[0-9]{6}';
 
+  /* military hours format */
+  var militaryHoursRegex = '(0[0-9]|1([0-2]))([0-9]{2})';
+
   /**
    * Escapes a string so it is treated literally in regex.
    * 
@@ -76,6 +79,7 @@ var CalendarRegex;
 
   CalendarRegex = {
     dateRegex: dateRegex,
+    militaryHoursRegex: militaryHoursRegex,
     getUrlRegex: getUrlRegex,
     getIcsCalendarRegex: getIcsCalendarRegex
   }

@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.2.0
+
+- fixes Yahoo! calendar end time issue
+- adds support for `timezone` specification
+- enables format of timestamp inputs (including source timezone)
+- removes download.js and uses FileSaver.js to support iOS/safari
+- npm-ignores junk
+
 ## v1.1.6
 
 - provides option to use ui-bootstrap version of dropdown
@@ -44,6 +52,10 @@
 
 - light refactoring
 
+## v1.0.0
+
+- adds test suite to addtocalendar functions, ensures stability
+
 ## v0.0.7
 
 - replaces ics.js with internal rendering of ics.js file
@@ -76,7 +88,3 @@
 ## v0.0.1
 
 Initial version
-
-## v1.0.0
-
-- adds test suite to addtocalendar functions, ensures stability

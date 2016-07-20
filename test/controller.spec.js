@@ -10,9 +10,11 @@ describe('AddtocalendarCtrl', function() {
   beforeEach(module('jshor.angular-addtocalendar'));
 
   var $controller;
+  var FileSaver;
 
-  beforeEach(inject(function(_$controller_) {
+  beforeEach(inject(function(_$controller_, _FileSaver_) {
     $controller = _$controller_;
+    FileSaver = _FileSaver_;
   }));
 
   /**
@@ -32,10 +34,10 @@ describe('AddtocalendarCtrl', function() {
       	v: 60,
       	view: 'd',
       	type: 20,
-      	title: '(.*)',
-      	st: CalendarRegex.dateRegex,
-      	et: CalendarRegex.dateRegex,
-      	desc: '(.*)',
+      	TITLE: '(.*)',
+      	ST: CalendarRegex.dateRegex,
+      	DUR: CalendarRegex.militaryHoursRegex,
+      	DESC: '(.*)',
       	in_loc: '(.*)'
       });
 
@@ -102,7 +104,7 @@ describe('AddtocalendarCtrl', function() {
   });
 
   /**
-   * iCalendar
+   * iCalendar/Outlook
    */
   describe('$scope.calendarUrl.icalendar', function() {
     var $scope = sampleEventFixture;
@@ -115,11 +117,14 @@ describe('AddtocalendarCtrl', function() {
 
       var regex = CalendarRegex.getIcsCalendarRegex();
 
+      sinon.stub(FileSaver, 'saveAs');
+
+      $scope.calendarUrl.dlIcal();
+      sinon.spy();
       var isValidICalendar = regex.test($scope.calendarUrl.icalendar);
 
       expect(isValidICalendar).toEqual(true);
     });
 
   });
-
 });
