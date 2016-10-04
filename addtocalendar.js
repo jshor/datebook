@@ -197,7 +197,6 @@ addtocalendar
       }
 
       forEachAttr($attrs, function(key) {
-        console.log(key);
         $attrs.$observe(key, init);
       });
       init();
