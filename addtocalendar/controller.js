@@ -56,7 +56,6 @@ addtocalendar
         setTimesFromFormat();
       }
 
-      $attrs.btnText = ($attrs.btnText == undefined) ? 'Add to calendar' : $attrs.btnText;
       forEachAttr($attrs, function(key) {
         $attrs.$observe(key, init);
       });
