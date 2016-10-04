@@ -15,7 +15,7 @@ addtocalendar
         <span\
           ng-class="className || \'btn btn-sm btn-default ' + prefix + '-toggle\'"\
           ' + prefix + '-toggle>\
-          {{btnText || \'Add to calendar\'}} <span class="caret"></span>\
+          {{btnText}} <span class="caret"></span>\
         </span>\
         <ul class="dropdown-menu">\
           <li><a ng-click="calendarUrl.dlIcal()" ng-if="calendarUrl.dlIcal">iCalendar</a></li>\
