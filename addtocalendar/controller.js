@@ -33,13 +33,14 @@ addtocalendar
       }
 
       function buildUrl() {
-        var urlData = angular.extend(getSanitizedData(), dates);
+        var urlData = angular.extend(getSanitizedData(), dates),
+            icsData = angular.extend({}, $scope, dates);
 
         $scope.calendarUrl = {
           microsoft: getMicrosoftCalendarUrl(urlData),
           google: getGoogleCalendarUrl(urlData),
           yahoo: getYahooCalendarUrl(urlData),
-          icalendar: getIcsCalendar($scope),
+          icalendar: getIcsCalendar(icsData),
           dlIcal: dlIcal
         };
       }
@@ -52,8 +53,8 @@ addtocalendar
       }
 
       function init() {
-        buildUrl();
         setTimesFromFormat();
+        buildUrl();
       }
 
       forEachAttr($attrs, function(key) {
