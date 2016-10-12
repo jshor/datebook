@@ -1,6 +1,6 @@
 # angular-addtocalendar
 
-### v1.2.0
+### v1.2.1
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar.
 

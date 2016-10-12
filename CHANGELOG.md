@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.2.1
+
+- fixes vendor calendar URL generation issue
+- fixes start/end date generation and format string
+- adds option to disable caret
+- adds option to specify hover text
+- allows blank btnText
+
 ## v1.2.0
 
 - fixes Yahoo! calendar end time issue
