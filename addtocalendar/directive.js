@@ -47,7 +47,8 @@ addtocalendar
         className: '@',
         btnText: '@',
         caret: '@',
-        hoverText: '@'
+        hoverText: '@',
+        format: '@'
       },
       controller: 'AddtocalendarCtrl',
       template: resolveTemplate
