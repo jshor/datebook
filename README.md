@@ -1,6 +1,6 @@
 # angular-addtocalendar
 
-### v1.2.1
+### v1.2.2
 
 An AngularJS directive for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar.
 
@@ -78,7 +78,7 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dem
 | `timezone`           | Any valid [momentjs UTC offset](http://momentjs.com/docs/#/parsing/utc/)                                      | Moment                                                                        | America/New_York                                                                                            | No            |
 | `class-name`         | The desired class for the dropdown. See [styling]().                                                          | Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle`  | btn btn-sm btn-default dropdown-toggle                                                                      | No            |
 | `btn-text`           | Text for the button to display                                                                                | Plain text. Default `Add to calendar`                                         | Add to  calendar                                                                                            | No            |
-| `uib-dropdown`       | Whether to use ui-bootstrap dropdown                                                                          | `null` Default `Add to calendar`                                              | `null`                                                                                                      | No            |
+| `uib-dropdown`       | Only use this if you're using a version of ui-bootstrap `<= 1.12.0`                                           |                                                                               | `null`                                                                                                      | No            |
 | `caret`              | Whether to use the caret.                                                                                     | String interpreted as boolean Default: `true`                                 | false                                                                                                       | No            |
 | `hover-text`         | Text to use as the title of the element.                                                                      | String Default: value of title attribute                                      | Add to calendar                                                                                             | No            |
 

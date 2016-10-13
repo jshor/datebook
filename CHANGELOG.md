@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.2
+
+- updates docs
+
 ## v1.2.1
 
 - fixes vendor calendar URL generation issue
