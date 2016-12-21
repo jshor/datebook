@@ -20,11 +20,11 @@ addtocalendar
           <span ng-if="caret != \'false\'" class="caret"></span>\
         </span>\
         <ul class="dropdown-menu">\
-          <li><a ng-click="calendarUrl.dlIcal()" ng-if="calendarUrl.dlIcal">iCalendar</a></li>\
-          <li><a href="{{calendarUrl.google}}" target="_blank">Google Calendar</a></li>\
-          <li><a ng-click="calendarUrl.dlIcal()" ng-if="calendarUrl.dlIcal">Outlook</a></li>\
-          <li><a href="{{calendarUrl.yahoo}}" target="_blank">Yahoo! Calendar</a></li>\
-          <li><a href="{{calendarUrl.microsoft}}" target="_blank">Microsoft Calendar</a></li>\
+          <li class="dropdown-item"><a ng-click="calendarUrl.dlIcal()" ng-if="calendarUrl.dlIcal">iCalendar</a></li>\
+          <li class="dropdown-item"><a href="{{calendarUrl.google}}" target="_blank">Google Calendar</a></li>\
+          <li class="dropdown-item"><a ng-click="calendarUrl.dlIcal()" ng-if="calendarUrl.dlIcal">Outlook</a></li>\
+          <li class="dropdown-item"><a href="{{calendarUrl.yahoo}}" target="_blank">Yahoo! Calendar</a></li>\
+          <li class="dropdown-item"><a href="{{calendarUrl.microsoft}}" target="_blank">Microsoft Calendar</a></li>\
         </ul>\
       </div>';
     }
