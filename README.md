@@ -100,7 +100,7 @@ All browsers support adding to Yahoo!, Microsoft, and Google calendars. Below is
 | Chrome            | 14.0+        |
 | Android           | 4.4+         |
 
-* iCalendar (ironically) and Outlook do not work due to well-known file saving bug in Safari.
+* iCalendar (ironically) and Outlook do not work due to a well-known file saving bug in Safari.
 
 ## Bugs
 
