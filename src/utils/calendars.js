@@ -48,7 +48,10 @@ export default class Calendars {
       'SUMMARY:' + Utils.formatIcsText(data.title, 66),
       'TRANSP:TRANSPARENT',
       'END:VEVENT',
-      'END:VCALENDAR'
+      'END:VCALENDAR',
+      'UID:' + Utils.getUid(),
+      'DTSTAMP:' + Utils.getTimeCreated(),
+      'PRODID:angular-addtocalendar'
     ].join('\n');
   }
 }

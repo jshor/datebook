@@ -55,17 +55,20 @@ const getIcsCalendarRegex = () => {
     'SUMMARY:(.*)',
     'TRANSP:TRANSPARENT',
     'END:VEVENT',
-    'END:VCALENDAR'
+    'END:VCALENDAR',
+    'UID:[A-Za-z0-9]+',
+    'DTSTAMP:' + dateRegex,
+    'PRODID:angular-addtocalendar'
   ].join('\n');
 
   return new RegExp(regex, 'g');
 }
 
 const CalendarRegex = {
-  dateRegex: dateRegex,
-  militaryHoursRegex: militaryHoursRegex,
-  getUrlRegex: getUrlRegex,
-  getIcsCalendarRegex: getIcsCalendarRegex
+  dateRegex,
+  militaryHoursRegex,
+  getUrlRegex,
+  getIcsCalendarRegex
 }
 
 export default CalendarRegex;

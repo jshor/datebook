@@ -11,7 +11,10 @@ export default class AddtocalendarCtrl {
     this.FileSaver = FileSaver;
     this.dates = {};
     this.init.call(this);
+    this.watchAttrs.call(this, $attrs);
+  }
 
+  watchAttrs($attrs) {
     Object
       .keys($attrs)
       .forEach(key => {
@@ -20,12 +23,9 @@ export default class AddtocalendarCtrl {
   }
 
   setTimesFromFormat() {
-    let format   = this.format,
-        timezone = this.timezone;
-
     ['startDate', 'endDate']
       .forEach(t => {
-        this.dates[t] = Utils.formatTime(this[t], format, timezone);
+        this.dates[t] = Utils.toUniversalTime(this[t], this.timezone);
       });
   }
 
@@ -62,9 +62,7 @@ export default class AddtocalendarCtrl {
   }
 
   toggleMenu(isOpen) {
-    if(!this.useBootstrap) {
-      this.isOpen = isOpen;
-    }
+    this.isOpen = isOpen;
   }
 
   init() {

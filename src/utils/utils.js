@@ -1,18 +1,18 @@
 import moment from 'moment';
 
 export default class Utils {
+
   /**
    * Return 12-hour format to 24-hour.
-   * TODO: use momentjs for this?
    * 
    * @param  {Number} hours
    * @return {String}
    */
   static getMilitaryHours(hours) {
-    if(hours < 10) {
-      hours = '0' + hours;
+    if(hours % 1 === 0.5) {
+      return Math.floor(hours) + '30';
     }
-    return hours + '00';
+    return Math.round(hours) + '00';
   }
 
   /**
@@ -58,39 +58,19 @@ export default class Utils {
   }
 
   /**
-   * Loop through attributes, excluding ones starting with `$`, and call cb() on entry.
+   * Format time as a universal timestamp format w.r.t. the given timezone.
    * 
-   * @param  {Object}   attrs
-   * @param  {Function} cb
-   */
-  static forEachAttr(attrs, cb) {
-    // for(key in attrs) {
-    //   if(attrs.hasOwnProperty(key) && key.indexOf('$') === -1) {
-    //     cb(key, attrs[key]);
-    //   }
-    // }
-  }
-
-  /**
-   * Format time in given format.
-   * 
-   * @param  {String} timestamp
-   * @param  {String} inputFormat
+   * @param  {String} timestamp valid RFC-2822 string timestamp
+   * @param  {String} timezone  tz offset (in minutes) (optional)
    * @return {String}
    */
-  static formatTime(timestamp, inputFormat) {
-    var formats = ['YYYYMMDD', 'HHmmss'];
+  static toUniversalTime(timestamp, timezone) {
+    let dt = moment(timestamp);
 
-    var date = (function() {
-      if(inputFormat) {
-        return new moment(timestamp, inputFormat);
-      }
-      return new moment(timestamp);
-    })();
-
-    return formats.map(function(format) {
-      return date.format(format);
-    }).join('T');
+    if(timezone) {
+      dt.utcOffset(timezone);
+    }
+    return dt.format('YYYYMMDDTHHmmss');
   }
 
   /**
@@ -113,6 +93,27 @@ export default class Utils {
    * @return {String}
    */
   static getIcsFileName(title) {
+    if(!title) {
+      return 'event.ics';
+    }
     return title.replace(/[^\w ]+/g, '') + '.ics';
+  }
+
+  /**
+   * Returns a random base 36 hash for iCal UID.
+   * 
+   * @return {String}
+   */
+  static getUid() {
+    return Math.random().toString(36).substr(2);
+  }
+
+  /**
+   * Returns a universal timestamp of current time.
+   * 
+   * @return {String}
+   */
+  static getTimeCreated() {
+    return new moment().format('YYYYMMDDTHHmmss');
   }
 }

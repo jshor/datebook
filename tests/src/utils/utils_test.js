@@ -2,74 +2,97 @@ import Utils from '../../../src/utils/utils';
 import CalendarRegex from '../../helpers/regex';
 import { longText, shortText } from './fixtures/text.fixture';
 
+let expect = chai.expect;
+
 describe('Utility functions', function() {
-
-  describe('forEachAttr', function() {
-
-    it('should loop through all non-angular attrs and exec function', function() {
-
-      var sample = {
-        '$scope': {},
-        'foo': 'bar'
-      };
-
-      Utils.forEachAttr(sample, key => {
-        expect(key.indexOf('$')).toEqual(-1);
-        expect(key).toEqual('foo');
-        expect(sample[key]).toEqual('bar');
-      });
-
-    });
-  });
 
   describe('formatIcsText', () => {
 
     it('should return a blank string if string is undefined', () => {
       let result = Utils.formatIcsText(undefined, 5);
 
-      expect(typeof result).toBe('string');
-      expect(result).toEqual('');
+      expect(result).to.be.a.string;
+      expect(result).to.be.empty;
     });
 
     it('should return a blank string if string is null', () => {
       let result = Utils.formatIcsText(null, 5);
 
-      expect(typeof result).toBe('string');
-      expect(result).toEqual('');
+      expect(result).to.be.a.string;
+      expect(result).to.be.empty;
     });
 
     it('should truncate remaining text if string longer than 75 chars', () => {
       let result = Utils.formatIcsText(longText, 75);
 
-      expect(typeof result).toBe('string');
-      expect(result.length).toBeLessThanOrEqual(75);
+      expect(result).to.be.a.string;
+      expect(result).not.to.have.length.above(75);
     });
 
     it('should not return the same string if invalid chars exist', () => {
       let result = Utils.formatIcsText(shortText, 75);
 
-      expect(typeof result).toBe('string');
-      expect(result.length).not.toEqual(shortText.length);
-      expect(result).not.toEqual(shortText);
+      expect(result).to.be.a.string;
+      expect(result).not.to.equal(shortText.length);
+      expect(result).not.to.equal(shortText);
     });
     
   });
 
-  describe('formatTime', function() {
+  // describe('toUniversalTime', () => {
 
-    // var sampleTimestamp = '07/04/2017 08:00:00';
+  //   it('should return', () => {
 
-    // it('should return a universal timestamp format', () => {
-    //   let dateTime = 'mm/dd/yyyy hh:mm:ss';
-    //   let dateRegex = CalendarRegex.dateRegex;
-    //   let dateTime = Utils.formatTime(format);
-    //   let isValid = new RegExp(dateRegex, 'g').test(sampleTimestamp);
+  //   });
 
-    //   expect(result).to.be.a.string;
-    //   expect(result).to.not.be.null;
-    //   expect(isValid).toEqual(true);
-    // });
+  // });
 
+  // describe('getIcsBlob', () => {
+
+  // });
+
+  describe('getIcsFileName', () => {
+
+    it('should return a default name if title not defined', () => {
+      let result = Utils.getIcsFileName();
+
+      expect(result).to.be.a.string;
+      expect(result).to.not.be.empty;
+      expect(result).to.equal('event.ics');
+    });
+
+    it('should strip non-alphanumeric chars and end with .ics', () => {
+      let result = Utils.getIcsFileName('some##*$# invalid filename');
+
+      expect(result).to.be.a.string;
+      expect(result).to.not.be.empty;
+      expect(result).to.match(/^[\w ]+\.ics$/);
+      expect(result).to.contain('some invalid filename');
+    });
+
+  });
+
+  describe('getUid', () => {
+
+    it('should return a string of only numbers and letters', () => {
+      let result = Utils.getUid();
+
+      expect(result).to.be.a.string;
+      expect(result).to.match(/^[A-z0-9]+$/);
+    });
+
+  });
+
+  describe('getTimeCreated', () => {
+
+    it('should call momentjs with YYYYMMDDTHHmmss format', () => {
+      let format = sinon.spy(),
+          moment = () => { format };
+
+      controller.getTimeCreated();
+
+      expect(format).to.be.called;
+    });
   });
 
 });

@@ -4,12 +4,8 @@
  * 
  * Controller test suite.
  */
-
-import 'angular';
-import 'angular-mocks/angular-mocks';
 import eventFixtures from './fixtures/events.fixture';
 import angularAtc from '../../../src/component/app';
-
 import CalendarRegex from '../../helpers/regex';
 
 describe('AddtocalendarCtrl', function() {
@@ -23,97 +19,137 @@ describe('AddtocalendarCtrl', function() {
   beforeEach(() => {
     angular.mock.module(angularAtc);
 
-    angular.mock.inject(($controller) => {
-      controller = $controller('AddtocalendarCtrl', {$attrs});
+    angular.mock.inject(($controller, _FileSaver_) => {
+      FileSaver = _FileSaver_;
+      controller = $controller('AddtocalendarCtrl', { $attrs, FileSaver });
     });
   });
 
-  /**
-   * Yahoo! Calendar
-   */
-  describe('$scope.calendarUrl.yahoo ', function() {
+  it('the component should be ok', () => {
+    expect(controller).to.be.ok;
+  });
 
-    it('should return the url to add event to a yahoo calendar', function() {
+  describe('constructor', () => {
 
-      let regex = CalendarRegex.getUrlRegex('calendar.yahoo.com/', {
-        v: 60,
-        view: 'd',
-        type: 20,
-        TITLE: '(.*)',
-        ST: CalendarRegex.dateRegex,
-        DUR: CalendarRegex.militaryHoursRegex,
-        DESC: '(.*)',
-        in_loc: '(.*)'
+    it('should call the initializer', () => {
+      let initSpy = sinon.spy();
+
+      controller.init = initSpy;
+      controller.constructor($attrs, FileSaver);
+
+      expect(initSpy).to.have.been.calledOnce;
+    });
+
+    it('should call the $attrs watcher with $attrs', () => {
+      let watchAttrsSpy = sinon.spy();
+
+      controller.watchAttrs = watchAttrsSpy;
+      controller.constructor($attrs, FileSaver);
+
+      expect(watchAttrsSpy).to.have.been.calledWith($attrs);
+    });
+
+  });
+
+  describe('watchAttrs', () => {
+
+    it('should set the initializer function as the callback for $observe', () => {
+      let observeSpy = sinon.spy();
+
+      $attrs.$observe = observeSpy;
+      controller.constructor($attrs, FileSaver);
+
+      expect(observeSpy).to.have.been.called;
+    });
+
+  });
+
+  describe('setTimesFromFormat', () => {
+
+    beforeEach(() => {
+      controller.setTimesFromFormat();
+    });
+
+    it('should populate the startDate and endDate props', () => {
+      expect(controller.dates['startDate']).to.be.defined;
+      expect(controller.dates['startDate']).to.be.a.string;
+      expect(controller.dates['startDate']).to.not.be.empty;
+      expect(controller.dates['endDate']).to.be.defined;
+      expect(controller.dates['endDate']).to.be.a.string;
+      expect(controller.dates['endDate']).to.not.be.empty;
+    });
+
+    it('should set the startDate and endDate to valid dates', () => {
+      let regex = new RegExp(CalendarRegex.dateRegex);
+
+      expect(controller.dates['startDate']).to.match(regex);
+      expect(controller.dates['endDate']).to.match(regex);
+    });
+
+  });
+
+  describe('getSanitizedData', () => {
+
+    it('should return a non-empty object', () => {
+      let result = controller.getSanitizedData();
+
+      expect(result).to.be.an.object;
+      expect(result).to.not.be.empty;
+    });
+
+  });
+
+  describe('buildUrl', () => {
+
+    beforeEach(() => {
+      controller.buildUrl();
+    });
+
+    it('should populate the calendarUrl object', () => {
+      expect(controller.calendarUrl).to.be.defined;
+      expect(controller.calendarUrl).to.be.an.object;
+      expect(controller.calendarUrl).to.not.be.empty;
+    });
+
+    it('should populate calendarUrl.icalendar with valid icalendar data', () => {
+      let regex = new RegExp(CalendarRegex.getIcsCalendarRegex()),
+          ical = controller.calendarUrl.icalendar;
+
+      expect(ical).to.be.defined;
+      expect(ical).to.be.a.string;
+      expect(ical).to.not.be.empty;
+      expect(ical).to.match(regex);
+    });
+
+    it('should populate calendarUrl with the required service calendar props', () => {
+      let requiredProps = [
+        'google',
+        'yahoo',
+        'microsoft'
+      ],
+      calendar = controller.calendarUrl;
+
+      requiredProps.forEach(prop => {
+        expect(calendar).to.have.property(prop);
+        expect(calendar[prop]).to.be.defined;
+        expect(calendar[prop]).to.be.a.string;
+        expect(calendar[prop]).to.not.be.empty;
       });
-
-      let isValidYahooCalendar = regex.test(controller.calendarUrl.yahoo);
-
-      expect(isValidYahooCalendar).toEqual(true);
     });
 
   });
 
-  /**
-   * Google Calendar
-   */
-  describe('$scope.calendarUrl.google ' + scope, function() {
+  describe('dlIcal', () => {
 
-    it('should return a valid url to add event to a google calendar', function() {
+    it('should call the saveAs FileSaver saveAs method only once', () => {
+      let saveAsSpy = sinon.spy();
 
-      var regex = CalendarRegex.getUrlRegex('www.google.com/calendar/render', {
-        action: 'TEMPLATE',
-        text: '(.*)',
-        dates: CalendarRegex.dateRegex + '\\/' + CalendarRegex.dateRegex,
-        details: '(.*)',
-        location: '(.*)'
+      controller.constructor($attrs, {
+        saveAs: saveAsSpy
       });
+      controller.dlIcal();
 
-      var isValidGoogleCalendar = regex.test($controller.calendarUrl.google);
-
-      expect(isValidGoogleCalendar).toEqual(true);
-    });
-
-  });
-
-  /**
-   * Windows Live Calendar
-   */
-  describe('$scope.calendarUrl.microsoft ' + scope, function() {
-
-    it('should return the url to add event to a windows live calendar', function() {
-
-      var regex = CalendarRegex.getUrlRegex('calendar.live.com/calendar/calendar.aspx', {
-        rru: 'addevent',
-        summary: '(.*)',
-        dtstart: CalendarRegex.dateRegex,
-        dtend: CalendarRegex.dateRegex,
-        description: '(.*)',
-        location: '(.*)'
-      });
-
-      var isValidMicrosoftCalendar = regex.test($controller.calendarUrl.microsoft);
-
-      expect(isValidMicrosoftCalendar).toEqual(true);
-    });
-
-  });
-
-  /**
-   * iCalendar/Outlook
-   */
-  describe('$scope.calendarUrl.icalendar ' + scope, function() {
-
-    it('should return the url and data of an icalendar file', function() {
-
-      var regex = CalendarRegex.getIcsCalendarRegex();
-
-      // sinon.stub(FileSaver, 'saveAs');
-
-      $controller.calendarUrl.dlIcal();
-      // sinon.spy();
-      var isValidICalendar = regex.test($controller.calendarUrl.icalendar);
-
-      expect(isValidICalendar).toEqual(true);
+      expect(saveAsSpy).to.be.calledOnce;
     });
 
   });

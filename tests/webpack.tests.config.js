@@ -3,7 +3,10 @@
 
 import 'angular';
 import 'angular-mocks/angular-mocks';
+import 'chai';
 
-const context = require.context('./src', true, /\.js$/);
+window.expect = chai.expect;
+
+const context = require.context('./src', true, /_test\.js$/);
 
 context.keys().forEach(context);
