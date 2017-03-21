@@ -62,7 +62,9 @@ export default class AddtocalendarCtrl {
   }
 
   toggleMenu(isOpen) {
-    this.isOpen = isOpen;
+    if(!this.useBootstrap) {
+      this.isOpen = isOpen;
+    }
   }
 
   init() {

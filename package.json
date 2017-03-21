@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/jshor/angular-addtocalendar",
   "devDependencies": {
-    "angular": "^1.5.0",
     "@iamadamjowett/angular-click-outside": "^2.10.1",
+    "angular": "^1.5.0",
     "angular-file-saver": "^1.1.3",
     "angular-mocks": "^1.5.0",
     "autoprefixer": "^6.0.3",
@@ -29,8 +29,8 @@
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "copy-webpack-plugin": "4.0.1",
-    "css-loader": "0.26.1",
     "coveralls": "^2.11.9",
+    "css-loader": "0.26.1",
     "extract-text-webpack-plugin": "2.0.0-beta.5",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.7.1",
@@ -46,13 +46,15 @@
     "karma-webpack": "2.0.1",
     "moment": "^2.18.0",
     "node-libs-browser": "2.0.0",
+    "node-sass": "^4.5.1",
     "null-loader": "^0.1.1",
     "phantomjs-prebuilt": "^2.1.4",
     "postcss-loader": "1.2.2",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.1",
+    "sass-loader": "^6.0.3",
     "style-loader": "^0.13.0",
-    "webpack": "2.2.0",
+    "webpack": "^2.2.0",
     "webpack-dev-server": "2.2.0"
   }
 }

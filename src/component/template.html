@@ -1,5 +1,5 @@
 <div
-  class="atc-btn-group"
+  class="{{ addtocalendar.useBootstrap ? '' : 'atc-' }}btn-group {{ addtocalendar.className }}"
   ng-class="{
     active: addtocalendar.isOpen
   }"
@@ -12,7 +12,7 @@
     ng-click="addtocalendar.toggleMenu(true)"
     data-toggle="dropdown">
     {{ addtocalendar.btnText || 'Add to calendar' }}
-    <span class="caret"></span>
+    <span class="caret" ng-if="addtocalendar.useCaret"></span>
   </span>
 
   <ul

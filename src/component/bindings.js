@@ -4,9 +4,10 @@ export default {
   title: '@',
   description: '@',
   location: '@',
-  className: '@',
   btnText: '@',
-  caret: '@',
   hoverText: '@',
-  format: '@'
+  format: '@',
+  className: '@',
+  useCaret: '@',
+  useBootstrap: '@'
 }
