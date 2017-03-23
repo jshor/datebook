@@ -39,18 +39,6 @@ describe('Utility functions', function() {
     
   });
 
-  // describe('toUniversalTime', () => {
-
-  //   it('should return', () => {
-
-  //   });
-
-  // });
-
-  // describe('getIcsBlob', () => {
-
-  // });
-
   describe('getIcsFileName', () => {
 
     it('should return a default name if title not defined', () => {
@@ -86,12 +74,11 @@ describe('Utility functions', function() {
   describe('getTimeCreated', () => {
 
     it('should call momentjs with YYYYMMDDTHHmmss format', () => {
-      let format = sinon.spy(),
-          moment = () => { format };
 
-      controller.getTimeCreated();
+      let result = Utils.getTimeCreated();
 
-      expect(format).to.be.called;
+      expect(result).to.be.a.string;
+      expect(result).to.match(new RegExp(CalendarRegex.dateRegex));
     });
   });
 

@@ -74,45 +74,16 @@ describe('Calendars', () => {
 
   describe('getIcsCalendar', () => {
 
-  //   let sandbox;
+    it('should return the raw data of the rendered icalendar file', () => {
+      const regex = new RegExp(CalendarRegex.getIcsCalendarRegex());
 
-  //   beforeEach(() => {
-  //     sandbox = sinon.sandbox.create();
-  //   });
+      let result = Calendars.getIcsCalendar(event);
 
-  //   afterEach(() => {
-  //     sandbox.restore();
-  //   });
-
-  //   it('should return the url and data of an icalendar file', function() {
-
-  //     var regex = CalendarRegex.getIcsCalendarRegex();
-
-  //     // sandbox.stub(FileSaver, 'saveAs');
-
-  //     controller.calendarUrl.dlIcal();
-  //     // sinon.spy();
-  //     var isValidICalendar = regex.test(controller.calendarUrl.icalendar);
-
-  //     // expect(isValidICalendar).toEqual(true);
-  //   });
-
-
-    // it('should have ics data matching that of the standard regex pattern', () => {
-
-    // });
-
-    // it('should call the formatIcsText functions for location and summary params', () => {
-
-    // });
-
-    // it('should call the random UID generator for the UID param', () => {
-
-    // });
-
-    // it('should call the current universal timestamp function', () => {
-
-    // });
+      expect(result).to.be.defined;
+      expect(result).to.be.a.string;
+      expect(result).to.not.be.empty;
+      expect(result).to.match(regex);
+    });
 
   });
 
