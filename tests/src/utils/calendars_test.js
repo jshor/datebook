@@ -1,6 +1,6 @@
 import Calendars from '../../../src/utils/calendars';
 import CalendarRegex from '../../helpers/regex';
-import event from './fixtures/event.fixture';
+import event from '../../fixtures/event.fixture';
 
 
 describe('Calendars', () => {

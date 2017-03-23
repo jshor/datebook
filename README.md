@@ -30,7 +30,7 @@ Enjoy!
     require('angular-addtocalendar');
     ```
 
-    with es6:
+    Alternatively:
 
     ```javascript
     import 'angular-addtocalendar';
@@ -46,7 +46,8 @@ Enjoy!
       ]);
     ```
 
-    Note: If you're using a version earlier than 1.3.0, the module name is `angular-atc`.
+    Note: If you're using a version earlier than 1.3.0, the module name is `jshor.angular-addtocalendar`.
+
 ## Demo
 
 For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dist/).
@@ -60,8 +61,7 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dis
     title="Fourth of July Fireworks"
     location="Battery Park City, New York, NY"
     class-name="btn btn-sm btn-default dropdown-toggle"
-    description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world."
-    btn-text="Add to calendar">
+    description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world.">
 </addtocalendar>
 ```
 
@@ -79,7 +79,6 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dis
 | `class-name`         | The desired class for the dropdown. See [Custom Styling](#custom).                                            | Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle`  | btn btn-sm btn-default dropdown-toggle                                                                      | No            |
 | `btn-text`           | Text for the button to display                                                                                | Plain text. Default `Add to calendar`                                         | Add to  calendar                                                                                            | No            |
 | `use-bootstrap`      | Whether to use Bootstrap styling.                                                                             | Boolean. Default: `false`                                                     | `null`                                                                                                      | No            |
-| `use-caret`          | Whether to use the caret.                                                                                     | String interpreted as boolean Default: `true`                                 | false                                                                                                       | No            |
 | `hover-text`         | Text to use as the title of the element.                                                                      | String Default: value of title attribute                                      | Add to calendar                                                                                             | No            |
 
 ## <a name="custom"></a>Custom Styling
@@ -95,7 +94,7 @@ If you already have Bootstrap set up in your project, just pass in `use-bootstra
 If you're using Sass, you can import the default Sass stylesheet like so:
 
 ```scss
-@import '~/angular-addtocalendar/styles.scss'
+@import '~/angular-addtocalendar/addtocalendar.scss';
 ```
 
 Or if you want to reference the compiled stylesheet directly:
@@ -120,13 +119,13 @@ All browsers support adding to Yahoo!, Microsoft, and Google calendars. Below is
 |-------------------|--------------|
 | Internet Explorer | 9.0+         |
 | Edge              | Yes          |
-| Safari            | No support*  |
+| Safari            | ≤ 6          |
 | Firefox           | 20.0+        |
 | Opera             | 15.0+        |
 | Chrome            | 14.0+        |
 | Android           | 4.4+         |
 
-* iCalendar (ironically) and Outlook do not work due to a well-known file saving bug in Safari.
+* iCalendar (ironically) and Outlook do not work due to a well-known file saving bug in Safari versions > 6.
 
 ## Bugs
 

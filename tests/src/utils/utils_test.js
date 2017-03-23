@@ -1,6 +1,6 @@
 import Utils from '../../../src/utils/utils';
 import CalendarRegex from '../../helpers/regex';
-import { longText, shortText } from './fixtures/text.fixture';
+import { longText, shortText } from '../../fixtures/text.fixture';
 
 let expect = chai.expect;
 

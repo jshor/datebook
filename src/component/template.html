@@ -8,16 +8,21 @@
   
   <span
     type="button"
-    class="btn btn-default dropdown-toggle"
+    ng-class="{
+      'btn btn-default dropdown-toggle': addtocalendar.useBootstrap
+    }"
     ng-click="addtocalendar.toggleMenu(true)"
     data-toggle="dropdown">
     {{ addtocalendar.btnText || 'Add to calendar' }}
-    <span class="caret" ng-if="addtocalendar.useCaret"></span>
+    <span class="caret" ng-hide="addtocalendar.hideCaret"></span>
   </span>
 
   <ul
-    class="dropdown-menu"
-    ng-show="addtocalendar.isOpen">
+    ng-show="addtocalendar.isOpen"
+    ng-class="{
+      'dropdown-menu': addtocalendar.useBootstrap,
+      'atc-dropdown': !addtocalendar.useBootstrap
+    }">
     <li>
       <a
         ng-click="addtocalendar.calendarUrl.dlIcal()"

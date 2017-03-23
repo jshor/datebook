@@ -30,7 +30,7 @@ module.exports = function makeWebpackConfig() {
    * Karma will set this when it's a test build
    */
   config.entry = isTest ? void 0 : {
-    app: './src/component/app.js'
+    addtocalendar: './src/component/index.js'
   };
 
   /**
@@ -49,27 +49,12 @@ module.exports = function makeWebpackConfig() {
 
     // Filename for entry points
     // Only adds hash in build mode
-    filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
+    filename: '[name].js',
 
     // Filename for non-entry points
     // Only adds hash in build mode
-    chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js'
+    chunkFilename: '[name].js'
   };
-
-  /**
-   * Devtool
-   * Reference: http://webpack.github.io/docs/configuration.html#devtool
-   * Type of sourcemap to use per build type
-   */
-  if (isTest) {
-    config.devtool = 'inline-source-map';
-  }
-  else if (isProd) {
-    config.devtool = 'source-map';
-  }
-  else {
-    config.devtool = 'eval-source-map';
-  }
 
   /**
    * Loaders
@@ -89,41 +74,18 @@ module.exports = function makeWebpackConfig() {
       loader: 'babel-loader',
       exclude: /node_modules/
     }, {
-      // CSS LOADER
-      // Reference: https://github.com/webpack/css-loader
-      // Allow loading css through js
-      //
-      // Reference: https://github.com/postcss/postcss-loader
-      // Postprocess your css with PostCSS plugins
-      test: /\.css$/,
-      // Reference: https://github.com/webpack/extract-text-webpack-plugin
-      // Extract css files in production builds
-      //
-      // Reference: https://github.com/webpack/style-loader
-      // Use style-loader in development.
+      test: /\.scss$/,
 
       loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({
-        fallbackLoader: 'style-loader',
-        loader: [
-          {loader: 'css-loader', query: {sourceMap: true}},
-          {loader: 'postcss-loader'}
-        ],
+        fallback: 'style-loader',
+        use: [
+          'css-loader',
+          'sass-loader'
+        ]
       })
     }, {
-      // HTML LOADER
-      // Reference: https://github.com/webpack/raw-loader
-      // Allow loading html through js
       test: /\.html$/,
       loader: 'raw-loader'
-    }, {
-      test: /\.scss$/,
-      use: [{
-        loader: 'style-loader' // creates style nodes from JS strings
-      }, {
-        loader: 'css-loader' // translates CSS into CommonJS
-      }, {
-        loader: 'sass-loader' // compiles Sass to CSS
-      }]
     }]
   };
 
@@ -145,14 +107,6 @@ module.exports = function makeWebpackConfig() {
       }
     })
   }
-
-  /**
-   * PostCSS
-   * Reference: https://github.com/postcss/autoprefixer-core
-   * Add vendor prefixes to your css
-   */
-   // NOTE: This is now handled in the `postcss.config.js`
-   //       webpack2 has some issues, making the config file necessary
 
   /**
    * Plugins
@@ -180,10 +134,11 @@ module.exports = function makeWebpackConfig() {
         inject: 'body'
       }),
 
-      // Reference: https://github.com/webpack/extract-text-webpack-plugin
-      // Extract css files
-      // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin({filename: 'css/[name].css', disable: !isProd, allChunks: true})
+      new ExtractTextPlugin({
+        filename: '[name].css',
+        disable: !isProd,
+        allChunks: true
+      })
     )
   }
 
@@ -192,20 +147,13 @@ module.exports = function makeWebpackConfig() {
     config.plugins.push(
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
       // Only emit files when there are no errors
-      new webpack.NoErrorsPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
 
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-      // Dedupe modules in the output
-      new webpack.optimize.DedupePlugin(),
-
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-      // Minify all javascript, switch loaders to minimizing mode
       new webpack.optimize.UglifyJsPlugin(),
-
-      // Copy assets from the public folder
-      // Reference: https://github.com/kevlened/copy-webpack-plugin
+      // copy sass file to dist
       new CopyWebpackPlugin([{
-        from: __dirname + '/src/public'
+        from: __dirname + '/src/component/styles.scss',
+        to: __dirname + '/dist/addtocalendar.scss'
       }])
     )
   }

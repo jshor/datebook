@@ -1,11 +1,5 @@
-/**
- * angular-addtocalendar
- * An AngularJS directive for adding an event to calendar apps. 
- * 
- * Controller test suite.
- */
-import eventFixtures from './fixtures/events.fixture';
-import angularAtc from '../../../src/component/app';
+import eventFixtures from '../../fixtures/events.fixture';
+import angularAtc from '../../../src/component';
 import CalendarRegex from '../../helpers/regex';
 
 describe('AddtocalendarCtrl', function() {
