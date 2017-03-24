@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.2
+
+- fix ignore files issue
+
 ## v1.3.1
 
 - npm/bower ignores extraneous files
