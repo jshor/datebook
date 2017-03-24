@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.1
+
+- npm/bower ignores extraneous files
+
 ## v1.3.0
 
 - removes Bootstrap as a dependency
