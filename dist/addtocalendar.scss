@@ -1,0 +1,79 @@
+$bg-color: #fff;
+$fg-color: #000;
+$bg-color-hover: #e8e8e8;
+$border-color: #c0c0c0;
+$border-radius: 3px;
+$height: 2.25em;
+$padding: 0.75em; // left/right padding
+$font-size: 14px;
+
+.atc-btn-group {
+  background-color: $bg-color;
+  color: $fg-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  height: $height;
+  line-height: $height;
+  font-size: $font-size;
+  display: inline-block;
+  position: relative;
+  font-family: Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bg-color-hover;
+  }
+
+  &.active {
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    background-color: $bg-color-hover;
+  }
+
+  .atc-dropdown {
+    position: absolute;
+    list-style: none;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    top: $height;
+    border-radius: $border-radius;
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    width: 12em;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.16), 0 3px 5px rgba(0,0,0,0.23);
+
+    > li {
+      box-sizing: border-box;
+      border-radius: $border-radius;
+      padding: 0 $padding;
+  
+      > a {
+        color: #000;
+        text-decoration: none;
+      }
+  
+      &:hover {
+        background-color: $bg-color-hover;
+      }
+    }
+  }
+
+  > span {
+    vertical-align: middle;
+    padding: $padding;
+  }
+
+  .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+  }
+}

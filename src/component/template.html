@@ -1,0 +1,62 @@
+<div
+  class="{{ addtocalendar.useBootstrap ? '' : 'atc-' }}btn-group {{ addtocalendar.className }}"
+  ng-class="{
+    active: addtocalendar.isOpen
+  }"
+  title="{{ addtocalendar.hoverText || addtocalendar.title }}"
+  click-outside="addtocalendar.toggleMenu(false)">
+  
+  <span
+    type="button"
+    ng-class="{
+      'btn btn-default dropdown-toggle': addtocalendar.useBootstrap
+    }"
+    ng-click="addtocalendar.toggleMenu(true)"
+    data-toggle="dropdown">
+    {{ addtocalendar.btnText || 'Add to calendar' }}
+    <span class="caret" ng-hide="addtocalendar.hideCaret"></span>
+  </span>
+
+  <ul
+    ng-show="addtocalendar.isOpen"
+    ng-class="{
+      'dropdown-menu': addtocalendar.useBootstrap,
+      'atc-dropdown': !addtocalendar.useBootstrap
+    }">
+    <li>
+      <a
+        ng-click="addtocalendar.calendarUrl.dlIcal()"
+        ng-if="addtocalendar.calendarUrl.dlIcal">
+        iCalendar
+      </a>
+    </li>
+    <li>
+      <a
+        href="{{addtocalendar.calendarUrl.google}}"
+        target="_blank">
+        Google Calendar
+      </a>
+    </li>
+    <li>
+      <a
+        ng-click="addtocalendar.calendarUrl.dlIcal()"
+        ng-if="addtocalendar.calendarUrl.dlIcal">
+        Outlook
+      </a>
+    </li>
+    <li>
+      <a
+        href="{{addtocalendar.calendarUrl.yahoo}}"
+        target="_blank">
+        Yahoo! Calendar
+      </a>
+    </li>
+    <li>
+      <a
+        href="{{addtocalendar.calendarUrl.microsoft}}"
+        target="_blank">
+        Microsoft Calendar
+      </a>
+    </li>
+  </ul>
+</div>

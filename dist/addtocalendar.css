@@ -1,0 +1,53 @@
+.atc-btn-group {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
+  height: 2.25em;
+  line-height: 2.25em;
+  font-size: 14px;
+  display: inline-block;
+  position: relative;
+  font-family: Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  cursor: pointer; }
+  .atc-btn-group:hover {
+    background-color: #e8e8e8; }
+  .atc-btn-group.active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    background-color: #e8e8e8; }
+  .atc-btn-group .atc-dropdown {
+    position: absolute;
+    list-style: none;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    top: 2.25em;
+    border-radius: 3px;
+    background-color: #fff;
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+    width: 12em;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.16), 0 3px 5px rgba(0, 0, 0, 0.23); }
+    .atc-btn-group .atc-dropdown > li {
+      box-sizing: border-box;
+      border-radius: 3px;
+      padding: 0 0.75em; }
+      .atc-btn-group .atc-dropdown > li > a {
+        color: #000;
+        text-decoration: none; }
+      .atc-btn-group .atc-dropdown > li:hover {
+        background-color: #e8e8e8; }
+  .atc-btn-group > span {
+    vertical-align: middle;
+    padding: 0.75em; }
+  .atc-btn-group .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent; }

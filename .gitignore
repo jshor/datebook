@@ -1,4 +1,4 @@
-bower_components/
-coverage/
-node_modules/
+node_modules
+coverage
 .idea
+npm-debug.log
