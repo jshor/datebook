@@ -5,7 +5,13 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var VendorChunkPlugin = require('webpack-vendor-chunk-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+
+/**
+ * Get dependencies list from package.json
+ */
+var vendorDeps = require('./package.json').dependencies;
 
 /**
  * Env
@@ -30,7 +36,8 @@ module.exports = function makeWebpackConfig() {
    * Karma will set this when it's a test build
    */
   config.entry = isTest ? void 0 : {
-    addtocalendar: './src/component/index.js'
+    addtocalendar: './src/component/index.js',
+    vendor: Object.keys(vendorDeps)
   };
 
   /**
@@ -97,10 +104,7 @@ module.exports = function makeWebpackConfig() {
     config.module.rules.push({
       enforce: 'pre',
       test: /\.js$/,
-      exclude: [
-        /node_modules/,
-        /\.spec\.js$/
-      ],
+      exclude: [/node_modules/],
       loader: 'istanbul-instrumenter-loader',
       query: {
         esModules: true
@@ -108,21 +112,7 @@ module.exports = function makeWebpackConfig() {
     })
   }
 
-  /**
-   * Plugins
-   * Reference: http://webpack.github.io/docs/configuration.html#plugins
-   * List: http://webpack.github.io/docs/list-of-plugins.html
-   */
-  config.plugins = [
-    new webpack.LoaderOptionsPlugin({
-      test: /\.scss$/i,
-      options: {
-        postcss: {
-          plugins: [autoprefixer]
-        }
-      }
-    })
-  ];
+  config.plugins = [];
 
   // Skip rendering index.html in test mode
   if (!isTest) {
@@ -154,7 +144,9 @@ module.exports = function makeWebpackConfig() {
       new CopyWebpackPlugin([{
         from: __dirname + '/src/component/styles.scss',
         to: __dirname + '/dist/addtocalendar.scss'
-      }])
+      }]),
+      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+      new VendorChunkPlugin('vendor')
     )
   }
 
