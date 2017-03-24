@@ -1,0 +1,9 @@
+.*
+karma.conf.js
+webpack.conf.js
+coverage
+node_modules
+src
+tests
+dist/vendor.js
+dist/index.html

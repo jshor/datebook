@@ -145,7 +145,7 @@ module.exports = function makeWebpackConfig() {
         from: __dirname + '/src/component/styles.scss',
         to: __dirname + '/dist/addtocalendar.scss'
       }]),
-      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+      new webpack.optimize.CommonsChunkPlugin('vendor'),
       new VendorChunkPlugin('vendor')
     )
   }

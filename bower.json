@@ -5,11 +5,6 @@
     "Josh Shor <jpshor@gmail.com>"
   ],
   "description": "AngularJS directive for adding events to calendar apps",
-  "files": [
-    "dist/addtocalendar.css",
-    "dist/addtocalendar.js",
-    "src/component/styles.scss"
-  ],
   "main": "addtocalendar.js",
   "keywords": [
     "icalendar",

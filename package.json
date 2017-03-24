@@ -9,11 +9,6 @@
     "test-watch": "karma start --auto-watch --no-single-run",
     "start": "npm run server"
   },
-  "files": [
-    "dist/addtocalendar.css",
-    "dist/addtocalendar.js",
-    "src/component/styles.scss"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/jshor/angular-addtocalendar"
