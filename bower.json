@@ -30,7 +30,6 @@
     "demo",
     "test",
     "lib",
-    "addtocalendar.js",
     "npm-debug.log",
     "karma.conf.js"
   ],
