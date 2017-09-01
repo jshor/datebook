@@ -1,4 +1,5 @@
-import angular from 'angular';
+import 'angular-file-saver';
+import '@iamadamjowett/angular-click-outside';
 
 import controller from './controller';
 import bindings from './bindings';

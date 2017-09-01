@@ -1,5 +1,4 @@
 import Utils from './utils';
-import moment from 'moment';
 
 export default class Calendars {
 
