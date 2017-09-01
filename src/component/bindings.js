@@ -6,7 +6,6 @@ export default {
   location: '@',
   btnText: '@',
   hoverText: '@',
-  format: '@',
   className: '@',
   useCaret: '@',
   useBootstrap: '@'

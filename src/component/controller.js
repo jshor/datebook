@@ -1,6 +1,3 @@
-import 'angular-file-saver';
-import '@iamadamjowett/angular-click-outside';
-
 import Utils from '../utils/utils';
 import Calendars from '../utils/calendars';
 import bindings from './bindings';
