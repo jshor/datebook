@@ -112,11 +112,6 @@ module.exports = function makeWebpackConfig() {
     // Reference: https://github.com/ampedandwired/html-webpack-plugin
     // Render index.html
     config.plugins.push(
-      new HtmlWebpackPlugin({
-        template: './src/public/index.html',
-        inject: 'body'
-      }),
-
       new ExtractTextPlugin({
         filename: '[name].css',
         disable: !isProd,
@@ -137,6 +132,9 @@ module.exports = function makeWebpackConfig() {
       new CopyWebpackPlugin([{
         from: __dirname + '/src/component/styles.scss',
         to: __dirname + '/dist/addtocalendar.scss'
+      }, {
+        from: __dirname + '/src/public/index.html',
+        to: __dirname + '/dist/index.html'
       }])
     )
   }

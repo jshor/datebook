@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.4
+
+- removes documentation on deprecated format and timezone attributes
+
 ## v1.3.3
 
 - fixes bower install issue
