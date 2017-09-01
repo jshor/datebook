@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.3
+
+- fixes bower install issue
+- fixes broken demo issue
+- fixes chunk splitting + webpackJsonp undefined issue
+
 ## v1.3.2
 
 - fix ignore files issue

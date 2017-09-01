@@ -5,13 +5,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var VendorChunkPlugin = require('webpack-vendor-chunk-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-
-/**
- * Get dependencies list from package.json
- */
-var vendorDeps = require('./package.json').dependencies;
 
 /**
  * Env
@@ -36,8 +30,7 @@ module.exports = function makeWebpackConfig() {
    * Karma will set this when it's a test build
    */
   config.entry = isTest ? void 0 : {
-    addtocalendar: './src/component/index.js',
-    vendor: Object.keys(vendorDeps)
+    addtocalendar: './src/component/index.js'
   };
 
   /**
@@ -144,9 +137,7 @@ module.exports = function makeWebpackConfig() {
       new CopyWebpackPlugin([{
         from: __dirname + '/src/component/styles.scss',
         to: __dirname + '/dist/addtocalendar.scss'
-      }]),
-      new webpack.optimize.CommonsChunkPlugin('vendor'),
-      new VendorChunkPlugin('vendor')
+      }])
     )
   }
 

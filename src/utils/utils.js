@@ -10,9 +10,9 @@ export default class Utils {
    */
   static getMilitaryHours(hours) {
     if(hours % 1 === 0.5) {
-      return Math.floor(hours) + '30';
+      return `${Math.floor(hours)}30`;
     }
-    return Math.round(hours) + '00';
+    return `${Math.round(hours)}00`;
   }
 
   /**
@@ -96,7 +96,7 @@ export default class Utils {
     if(!title) {
       return 'event.ics';
     }
-    return title.replace(/[^\w ]+/g, '') + '.ics';
+    return `${title.replace(/[^\w ]+/g, '')}.ics`;
   }
 
   /**

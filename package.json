@@ -1,6 +1,6 @@
 {
   "name": "angular-addtocalendar",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "AngularJS directive for adding events to calendar apps",
   "scripts": {
     "build": "rimraf coverage && rimraf dist && webpack --bail --progress --profile",
@@ -29,9 +29,7 @@
   },
   "homepage": "https://github.com/jshor/angular-addtocalendar",
   "dependencies": {
-    "@iamadamjowett/angular-click-outside": "^2.10.1",
     "angular": "^1.5.0",
-    "angular-file-saver": "^1.1.3",
     "moment": "^2.18.0"
   },
   "devDependencies": {
