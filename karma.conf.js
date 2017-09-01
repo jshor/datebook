@@ -12,6 +12,7 @@ module.exports = function karmaConfig (config) {
     ],
 
     files: [
+      'node_modules/angular/angular.min.js',
       'tests/webpack.tests.config.js'
     ],
 
