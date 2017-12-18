@@ -62,7 +62,8 @@ export default class Calendars {
       'END:VCALENDAR',
       'UID:' + Utils.getUid(),
       'DTSTAMP:' + Utils.getTimeCreated(),
-      'PRODID:angular-addtocalendar'
+      'PRODID:angular-addtocalendar',
+      'RRULE:' + Utils.getRecurrence(rrule)
     ].join('\n');
   }
 }
