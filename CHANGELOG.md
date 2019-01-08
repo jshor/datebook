@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.5
+
+- removes bower support
+
 ## v1.3.4
 
 - removes documentation on deprecated format and timezone attributes

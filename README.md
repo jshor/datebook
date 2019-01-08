@@ -10,10 +10,6 @@ An Angular.js component for adding an event to calendar apps. It supports .ics f
 
 1. Add source
 
-    bower:
-    ```
-    bower install angular-addtocalendar --save
-    ```
     npm:
 
     ```
