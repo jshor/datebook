@@ -59,6 +59,10 @@ export default class AddtocalendarCtrl {
   }
 
   toggleMenu(isOpen) {
+    if(isOpen == null) {
+      this.isOpen=!this.isOpen;
+      return;
+    }
     this.isOpen = isOpen;
   }
 
