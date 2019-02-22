@@ -116,4 +116,22 @@ export default class Utils {
   static getTimeCreated() {
     return new moment().format('YYYYMMDDTHHmmss');
   }
+
+  /**
+   * Returns a recurrence rule string as defined in the ical RRULE specification
+   * https://www.kanzaki.com/docs/ical/rrule.html
+   *
+   * TODO expand this to support more recurrence types
+   * @return {String}
+   */
+  static getRecurrence(rrule){
+    var recurr = [];
+    for(var v in rrule){
+      if( rrule[v] !== undefined ){
+        recurr.push(v+"="+rrule[v]);
+      }
+    }
+    return recurr.join(";");
+  }
+
 }

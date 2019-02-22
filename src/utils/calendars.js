@@ -35,6 +35,18 @@ export default class Calendars {
   }
 
   static getIcsCalendar(data) {
+
+    //TODO expand these rules as per those defined in the specification https://www.kanzaki.com/docs/ical/rrule.html
+    var rrule = {
+      "FREQ" : data.recurrenceFrequency, //the recurrence frequency, e.g. WEEKLY, MONTHLY, DAILY (FREQ=WEEKLY)
+      "INTERVAL" : data.recurrenceInterval, //frequency unit of time between recurrence instances
+      "COUNT" : data.recurrenceCount, // e.g. 8 (COUNT=8)
+      "WKST" : "SU", // defaulting start of week to Sunday (WKST=SU)
+      "UNTIL" : data.recurrenceEnd, //end date for the recurrence, e.g. 19971224T000000Z (UNTIL=19971224T000000Z)
+      "BYDAY" : data.recurrenceWeekdays, //for weekly recurrence, the days to recur, e.g. TU,TH (BYDAY=TU,TH),
+      "BYMONTHDAY" : data.recurrenceMonthdays //for monthly recurrence, the days of the month on which the event should fall (BYMONTHDAY=13)
+    }
+
     return [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -50,7 +62,8 @@ export default class Calendars {
       'END:VCALENDAR',
       'UID:' + Utils.getUid(),
       'DTSTAMP:' + Utils.getTimeCreated(),
-      'PRODID:angular-addtocalendar'
+      'PRODID:angular-addtocalendar',
+      'RRULE:' + Utils.getRecurrence(rrule)
     ].join('\n');
   }
 }

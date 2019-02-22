@@ -8,5 +8,12 @@ export default {
   hoverText: '@',
   className: '@',
   useCaret: '@',
-  useBootstrap: '@'
+  useBootstrap: '@',
+  recurrenceFrequency: '@',
+  recurrenceFrequency: '@',
+  recurrenceInterval: '@',
+  recurrenceCount: '@',
+  recurrenceEnd: '@',
+  recurrenceWeekdays: '@',
+  recurrenceMonthdays: '@'
 }
