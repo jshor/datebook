@@ -7,7 +7,8 @@
     "server": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
-    "start": "npm run server"
+    "start": "npm run server",
+    "jest": "jest"
   },
   "repository": {
     "type": "git",
@@ -35,11 +36,12 @@
     "moment": "^2.18.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "angular-mocks": "^1.5.0",
     "autoprefixer": "^6.0.3",
-    "babel-core": "^6.2.1",
-    "babel-loader": "^6.2.0",
-    "babel-preset-es2015": "^6.1.18",
+    "babel-jest": "^24.4.0",
+    "babel-loader": "^8.0.5",
     "chai": "^3.5.0",
     "copy-webpack-plugin": "4.0.1",
     "coveralls": "^2.12.0",
@@ -49,6 +51,7 @@
     "html-webpack-plugin": "^2.7.1",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.3.4",
+    "jest": "^24.1.0",
     "karma": "^1.1.0",
     "karma-chai": "^0.1.0",
     "karma-coverage": "^1.0.0",

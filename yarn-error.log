@@ -1,0 +1,117 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js test
+
+PATH: 
+  C:\Program Files (x86)\Cmder\bin;C:\Program Files (x86)\Cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Program Files (x86)\Cmder\vendor\conemu-maximus5;C:\Program Files (x86)\Cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files (x86)\Python36-32\Scripts\;C:\Program Files (x86)\Python36-32\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Josh\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\MiKTeX 2.9\miktex\bin\x64\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Users\Josh\AppData\Local\Microsoft\WindowsApps;C:\Users\Josh\AppData\Local\Yarn\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\Josh\AppData\Roaming\npm;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Program Files (x86)\Cmder\
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.12.0
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "angular-addtocalendar",
+    "version": "1.3.4",
+    "description": "AngularJS directive for adding events to calendar apps",
+    "scripts": {
+      "build": "rimraf coverage && rimraf dist && webpack --bail --progress --profile",
+      "server": "webpack-dev-server --history-api-fallback --inline --progress",
+      "test": "karma start",
+      "test-watch": "karma start --auto-watch --no-single-run",
+      "start": "npm run server",
+      "jest": "jest"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/jshor/angular-addtocalendar"
+    },
+    "keywords": [
+      "icalendar",
+      "google calendar",
+      "ics",
+      "yahoo calendar",
+      "outlook",
+      "calendar",
+      "event"
+    ],
+    "author": "Josh Shor <jpshor@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/jshor/angular-addtocalendar/issues"
+    },
+    "homepage": "https://github.com/jshor/angular-addtocalendar",
+    "dependencies": {
+      "@iamadamjowett/angular-click-outside": "^2.10.1",
+      "angular": "^1.5.0",
+      "angular-file-saver": "^1.1.3",
+      "moment": "^2.18.0"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.3.4",
+      "@babel/preset-env": "^7.3.4",
+      "angular-mocks": "^1.5.0",
+      "autoprefixer": "^6.0.3",
+      "babel-jest": "^24.4.0",
+      "babel-loader": "^8.0.5",
+      "chai": "^3.5.0",
+      "copy-webpack-plugin": "4.0.1",
+      "coveralls": "^2.12.0",
+      "css-loader": "^0.27.3",
+      "extract-text-webpack-plugin": "^2.1.0",
+      "file-loader": "^0.10.1",
+      "html-webpack-plugin": "^2.7.1",
+      "istanbul-instrumenter-loader": "^2.0.0",
+      "jasmine-core": "^2.3.4",
+      "jest": "^24.1.0",
+      "karma": "^1.1.0",
+      "karma-chai": "^0.1.0",
+      "karma-coverage": "^1.0.0",
+      "karma-coveralls": "^1.1.2",
+      "karma-jasmine": "^1.0.2",
+      "karma-phantomjs-launcher": "^1.0.0",
+      "karma-sinon-chai": "^1.2.4",
+      "karma-sourcemap-loader": "^0.3.7",
+      "karma-spec-reporter": "0.0.30",
+      "karma-webpack": "^2.0.3",
+      "node-libs-browser": "2.0.0",
+      "node-sass": "^4.5.1",
+      "null-loader": "^0.1.1",
+      "phantomjs-prebuilt": "^2.1.4",
+      "raw-loader": "^0.5.1",
+      "rimraf": "^2.5.1",
+      "sass-loader": "^6.0.3",
+      "sinon": "^2.1.0",
+      "sinon-chai": "^2.9.0",
+      "style-loader": "^0.13.0",
+      "webpack": "^2.3.1",
+      "webpack-dev-server": "^2.4.2",
+      "webpack-vendor-chunk-plugin": "^1.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 1
+  Command: C:\WINDOWS\system32\cmd.exe
+  Arguments: /d /s /c karma start
+  Directory: C:\Users\Josh\Documents\angular-addtocalendar
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
+      at emitTwo (events.js:126:13)
+      at ChildProcess.emit (events.js:214:7)
+      at maybeClose (internal/child_process.js:915:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)

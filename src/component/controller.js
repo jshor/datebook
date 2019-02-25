@@ -1,74 +1,53 @@
-import Utils from '../utils/utils';
 import Calendars from '../utils/calendars';
 import bindings from './bindings';
 
 export default class AddtocalendarCtrl {
 
-  constructor($attrs, FileSaver) {
-    this.FileSaver = FileSaver;
-    this.dates = {};
-    this.init.call(this);
+  constructor ($attrs) {
+    this.buildUrl.call(this);
     this.watchAttrs.call(this, $attrs);
   }
 
-  watchAttrs($attrs) {
+  watchAttrs ($attrs) {
     Object
       .keys($attrs)
       .forEach(key => {
-        $attrs.$observe(key, this.init.bind(this));
+        $attrs.$observe(key, this.buildUrl.bind(this));
       });
   }
 
-  setTimesFromFormat() {
-    ['startDate', 'endDate']
-      .forEach(t => {
-        this.dates[t] = Utils.toUniversalTime(this[t], this.timezone);
-      });
+  getData () {
+    return {
+      start: this.startDate,
+      end: this.endDate,
+      title: this.title,
+      description: this.description,
+      location: this.location,
+      recurrence: this.recurrence
+    };
   }
 
-  getSanitizedData() {
-    let urlData = {};
-
-    Object
-      .keys(bindings)
-      .forEach(key => {
-        urlData[key] = encodeURIComponent(this[key] || '');
-      });
-    return urlData;
-  }
-
-  buildUrl() {
-    let urlData = angular.extend(this.getSanitizedData.call(this), this.dates),
-        icsData = angular.extend({}, this, this.dates);
-
+  buildUrl () {
+    const data = this.getData()
+    
     this.calendarUrl = {
-      microsoft: Calendars.getMicrosoftCalendarUrl(urlData),
-      google:    Calendars.getGoogleCalendarUrl(urlData),
-      yahoo:     Calendars.getYahooCalendarUrl(urlData),
-      icalendar: Calendars.getIcsCalendar(icsData),
+      microsoft: Calendars.getMicrosoftCalendarUrl(data),
+      google:    Calendars.getGoogleCalendarUrl(data),
+      yahoo:     Calendars.getYahooCalendarUrl(data),
       dlIcal:    this.dlIcal.bind(this)
     };
   }
 
-  dlIcal() {
-    let fileName = Utils.getIcsFileName(this.title),
-        icsData = this.calendarUrl.icalendar,
-        icsBlob = Utils.getIcsBlob(icsData);
-
-    this.FileSaver.saveAs(icsBlob, fileName);
+  dlIcal () {
+    Calendars.downloadIcs(this.getData());
   }
 
-  toggleMenu(isOpen) {
-    if(isOpen == null) {
-      this.isOpen=!this.isOpen;
+  toggleMenu (isOpen) {
+    if (isOpen === null) {
+      this.isOpen = !this.isOpen;
       return;
     }
     this.isOpen = isOpen;
-  }
-
-  init() {
-    this.setTimesFromFormat.call(this);
-    this.buildUrl.call(this);
   }
 }
 
