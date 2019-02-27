@@ -23,7 +23,15 @@ export default class AddtocalendarCtrl {
       title: this.title,
       description: this.description,
       location: this.location,
-      recurrence: this.recurrence
+      recurrence: {
+        frequency: this.recurrenceFrequency,
+        interval: this.recurrenceInterval,
+        count: this.recurrenceCount,
+        end: this.recurrenceEnd,
+        weekdays: this.recurrenceWeekdays,
+        monthdays: this.recurrenceMonthdays,
+        weekStart: this.recurrenceWeekstart
+      }
     };
   }
 

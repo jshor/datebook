@@ -9,5 +9,11 @@ export default {
   className: '@',
   useCaret: '@',
   useBootstrap: '@',
-  recurrence: '<'
+  recurrenceFrequency: '@',
+  recurrenceInterval: '@',
+  recurrenceCount: '@',
+  recurrenceEnd: '@',
+  recurrenceWeekstart: '@',
+  recurrenceWeekdays: '@',
+  recurrenceMonthdays: '@'
 }
