@@ -37,17 +37,13 @@ export default class AddtocalendarCtrl {
 
   buildUrl () {
     const data = this.getData()
-    
+
     this.calendarUrl = {
       microsoft: Calendars.getMicrosoftCalendarUrl(data),
       google:    Calendars.getGoogleCalendarUrl(data),
       yahoo:     Calendars.getYahooCalendarUrl(data),
-      dlIcal:    this.dlIcal.bind(this)
+      dlIcal:    Calendars.downloadIcs(data)
     };
-  }
-
-  dlIcal () {
-    Calendars.downloadIcs(this.getData());
   }
 
   toggleMenu (isOpen) {
@@ -59,4 +55,4 @@ export default class AddtocalendarCtrl {
   }
 }
 
-AddtocalendarCtrl.$inject = ['$attrs', 'FileSaver'];
+AddtocalendarCtrl.$inject = ['$attrs'];
