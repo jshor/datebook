@@ -17,13 +17,9 @@ export default class AddtocalendarCtrl {
   }
 
   getData () {
-    return {
-      start: this.startDate,
-      end: this.endDate,
-      title: this.title,
-      description: this.description,
-      location: this.location,
-      recurrence: {
+    let recurrence;
+    if (this.recurrenceFrequency) {
+      recurrence = {
         frequency: this.recurrenceFrequency,
         interval: this.recurrenceInterval,
         count: this.recurrenceCount,
@@ -32,6 +28,14 @@ export default class AddtocalendarCtrl {
         monthdays: this.recurrenceMonthdays,
         weekStart: this.recurrenceWeekstart
       }
+    }
+    return {
+      start: this.startDate,
+      end: this.endDate,
+      title: this.title,
+      description: this.description,
+      location: this.location,
+      recurrence
     };
   }
 
@@ -42,7 +46,7 @@ export default class AddtocalendarCtrl {
       microsoft: Calendars.getMicrosoftCalendarUrl(data),
       google:    Calendars.getGoogleCalendarUrl(data),
       yahoo:     Calendars.getYahooCalendarUrl(data),
-      dlIcal:    Calendars.downloadIcs(data)
+      dlIcal:    () => Calendars.downloadIcs(data)
     };
   }
 
