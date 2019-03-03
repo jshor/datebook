@@ -3,6 +3,30 @@ import { FORMAT } from '../../constants'
 import CalendarBase from '../CalendarBase'
 
 describe('Calendar Base', () => {
+  describe('constructor()', () => {
+    const testOpts = {}
+    let setTextSpy, setTimestampsSpy
+
+    beforeEach(() => {
+      setTextSpy = jest.spyOn(CalendarBase.prototype, 'setText')
+      setTimestampsSpy = jest.spyOn(CalendarBase.prototype, 'setTimestamps')
+    })
+
+    afterEach(() => {
+      setTextSpy.mockClear()
+      setTimestampsSpy.mockClear()
+    })
+
+    it('should call setText and setTimestamps with passed in options', () => {
+      const testObj = new CalendarBase(testOpts)
+
+      expect(testObj.setText).toHaveBeenCalledTimes(1)
+      expect(testObj.setTimestamps).toHaveBeenCalledTimes(1)
+      expect(testObj.setText).toHaveBeenCalledWith(testOpts)
+      expect(testObj.setTimestamps).toHaveBeenCalledWith(testOpts)
+    })
+  })
+
   it('should be ok', () => {
     expect((new CalendarBase({}))).toBeTruthy()
   })
