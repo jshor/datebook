@@ -3,7 +3,7 @@ import { FORMAT } from '../constants'
 
 /**
  * Computes the duration between two dates.
- * 
+ *
  * @param {String} startDate
  * @param {String} endDate
  * @returns {String}
@@ -12,7 +12,7 @@ export const getHoursDuration = (startDate, endDate) => {
   const start = moment(startDate)
   const end = moment(endDate)
   const diff = end.diff(start)
-  
+
   return moment
     .utc(diff)
     .format('HHmm')
@@ -31,7 +31,7 @@ export const formatTime = (time, format = `${FORMAT.DATE}T${FORMAT.TIME}`) => {
 
 /**
  * Returns the current timestamp.
- * 
+ *
  * @returns {String}
  */
 export const getTimeCreated = () => {
