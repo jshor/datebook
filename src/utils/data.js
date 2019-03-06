@@ -1,17 +1,37 @@
+const identity = str => str
+
+/**
+ * Creates a param string from a flat key-value pair.
+ *
+ * @param {Object} params
+ * @param {String} [delimiter=';']
+ * @param {Function} [transformFn=identity]
+ * @returns {String}
+ */
+export const toParamString = (params, delimiter = ';', transformFn = identity) => {
+  const paramString = []
+
+  for (let key in params) {
+    if (params.hasOwnProperty(key) && params[key] !== undefined) {
+      paramString.push(`${key}=${transformFn(params[key])}`)
+    }
+  }
+
+  return paramString.join(delimiter)
+}
+
 /**
  * Creates a query string from a flat key-value pair.
  *
  * @param {Object} params
  * @returns {String}
  */
-export const toQueryString = (params) => {
-  const queryString = []
-  
-  for (let key in params) {
-    if (params.hasOwnProperty(key) && params[key] !== undefined) {
-      queryString.push(`${key}=${encodeURIComponent(params[key])}`)
-    }
-  }
-  
-  return queryString.join('&')
-}
+export const toQueryString = params => toParamString(params, '&', encodeURIComponent)
+
+/**
+ * Creates a ICS param string from a flat key-value pair.
+ *
+ * @param {Object} params
+ * @returns {String}
+ */
+export const toIcsParamString = params => toParamString(params, ';')

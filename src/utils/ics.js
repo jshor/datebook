@@ -1,3 +1,4 @@
+import { toIcsParamString } from './data'
 import { formatTime } from './time'
 
 /**
@@ -32,7 +33,7 @@ export const getBlob = (icsData) => {
 
 /**
  * Transforms given string to be valid file name.
- * 
+ *
  * @param {String} title
  * @returns {String}
  */
@@ -45,7 +46,7 @@ export const getFileName = (title) => {
 
 /**
  * Returns a random base 36 hash for iCal UID.
- * 
+ *
  * @returns {String}
  */
 export const getUid = () => {
@@ -54,11 +55,11 @@ export const getUid = () => {
 
 /**
  * Converts the given recurrence options to RFC????
- * 
- * @param {*} recurrence 
+ *
+ * @param {*} recurrence
  */
 export const getRrule = (recurrence) => {
-  return joinParams({
+  return toIcsParamString({
     'FREQ': recurrence.frequency,
     'INTERVAL': recurrence.interval,
     'COUNT': recurrence.count,
@@ -70,39 +71,21 @@ export const getRrule = (recurrence) => {
 }
 
 /**
- * Creates a key-value pair for a given iCalendar dictionary.
- * 
- * @param {Object} params 
- * @returns {String}
- */
-export const joinParams = (params) => {
-  const data = []
-  
-  for (let key in params) {
-    if (params.hasOwnProperty(key) && params[key] !== undefined) {
-      data.push(`${key}=${params[key]}`)
-    }
-  }
-  
-  return data.join(';')
-}
-
-/**
  * Downloads the given ics. Meant to be used only for Safari.
- * 
+ *
  * @param {String} data - ics data
  * @param {String} fileName - file name to save, ending in .ics
  */
 export const safariFileSave = (data, fileName) => {
   const anchor = document.createElement('a');
   const encodedData = encodeURIComponent(data)
-  
+
   anchor.setAttribute('href', `data:text/calendar;charset=utf-8,${encodedData}`)
   anchor.setAttribute('download', fileName)
 
   if (document.createEvent) {
     const event = document.createEvent('MouseEvents')
-    
+
     event.initEvent('click', true, true)
     anchor.dispatchEvent(event)
   } else {
@@ -112,7 +95,7 @@ export const safariFileSave = (data, fileName) => {
 
 /**
  * Downloads the given ics as an iCalendar file.
- * 
+ *
  * @param {String} title - title of the event
  * @param {String} data - ics data
  */
@@ -122,7 +105,7 @@ export const download = (title, data) => {
     .userAgent
     .toLowerCase()
     .indexOf('safari')
-  
+
   if (isSafari) {
     safariFileSave(data, fileName)
   } else {
