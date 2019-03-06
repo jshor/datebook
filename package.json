@@ -52,6 +52,7 @@
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.3.4",
     "jest": "^24.1.0",
+    "jest-mock-random": "^1.0.2",
     "karma": "^1.1.0",
     "karma-chai": "^0.1.0",
     "karma-coverage": "^1.0.0",
