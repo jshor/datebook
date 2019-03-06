@@ -31,8 +31,26 @@ describe('IcsUtil', () => {
 
   describe('getBlob()', () => {
   })
+
   describe('getFileName()', () => {
+    it('should return event.ics if no title', () => {
+      expect(getFileName()).toBe('event.ics')
+      expect(getFileName(false)).toBe('event.ics')
+      expect(getFileName(null)).toBe('event.ics')
+      expect(getFileName(undefined)).toBe('event.ics')
+      expect(getFileName('')).toBe('event.ics')
+      expect(getFileName(0)).toBe('event.ics')
+    })
+
+    it('should remove all non-alphanumeric except underscore', () => {
+      const testTitle = 'abcdef_ABCDEF1234567890-.,/[]\)(!@*#$^%^'
+      const expectedFileName = 'abcdef_ABCDEF1234567890.ics'
+      const filename = getFileName(testTitle)
+
+      expect(filename).toBe(expectedFileName)
+    })
   })
+
   describe('getUid()', () => {
   })
   describe('getRrule()', () => {
