@@ -1,3 +1,4 @@
+import { mockRandomForEach } from 'jest-mock-random'
 import { formatText, getBlob, getFileName, getUid, getRrule, safariFileSave, download } from '../ics'
 import { formatTime } from '../time'
 
@@ -52,7 +53,13 @@ describe('IcsUtil', () => {
   })
 
   describe('getUid()', () => {
+    mockRandomForEach(0.1234567890123456)
+    it('should return a base-32 random UID', () => {
+      const expectedUid = '4fzzzxkxflf'
+      expect(getUid()).toBe(expectedUid)
+    })
   })
+
   describe('getRrule()', () => {
   })
   describe('safariFileSave()', () => {
