@@ -1,6 +1,7 @@
 import { mockRandomForEach } from 'jest-mock-random'
 import { formatText, getBlob, getFileName, getUid, getRrule, safariFileSave, download } from '../ics'
 import { formatTime } from '../time'
+import FileSaver from 'file-saver';
 
 const originalBlob = global.Blob
 const mockBlob = () => {
@@ -95,5 +96,11 @@ describe('IcsUtil', () => {
   describe('safariFileSave()', () => {
   })
   describe('download()', () => {
+    beforeEach(() => {
+      jest.mock('file-saver', ()=>({
+        saveAs: jest.fn()
+      }))
+    })
+
   })
 })
