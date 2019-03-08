@@ -2,6 +2,16 @@ import { mockRandomForEach } from 'jest-mock-random'
 import { formatText, getBlob, getFileName, getUid, getRrule, safariFileSave, download } from '../ics'
 import { formatTime } from '../time'
 
+const originalBlob = global.Blob
+const mockBlob = () => {
+  global.Blob = function fakeBlob(content, options) {
+    this.content = content
+    this.options = options
+  }
+}
+const unmockBlob = () => {
+  global.Blob = originalBlob
+}
 describe('IcsUtil', () => {
   describe('formatText()', () => {
     const str = 'foo\nbar\n\nbaz'
@@ -31,6 +41,26 @@ describe('IcsUtil', () => {
   })
 
   describe('getBlob()', () => {
+    beforeAll(mockBlob)
+    afterAll(unmockBlob)
+
+    it('should create a new Blob object with the passed in data', () => {
+      const icsData = 'foobar'
+
+      const blob = getBlob(icsData)
+
+      expect(blob.content).toEqual([icsData])
+    })
+
+    it('should set the MIME type as octet-stream', () => {
+      const icsData = 'foobar'
+
+      const blob = getBlob(icsData)
+
+      expect(blob.options).toEqual({
+        type: 'application/octet-stream'
+      })
+    })
   })
 
   describe('getFileName()', () => {
