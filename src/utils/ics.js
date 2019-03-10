@@ -1,5 +1,6 @@
 import { toIcsParamString } from './data'
 import { formatTime } from './time'
+import safariFileSave from './safariFileSave'
 
 /**
  * Removes line breaks and ensures that the string is no
@@ -71,29 +72,6 @@ export const getRrule = (recurrence) => {
 }
 
 /**
- * Downloads the given ics. Meant to be used only for Safari.
- *
- * @param {String} data - ics data
- * @param {String} fileName - file name to save, ending in .ics
- */
-export const safariFileSave = (data, fileName) => {
-  const anchor = document.createElement('a');
-  const encodedData = encodeURIComponent(data)
-
-  anchor.setAttribute('href', `data:text/calendar;charset=utf-8,${encodedData}`)
-  anchor.setAttribute('download', fileName)
-
-  if (document.createEvent) {
-    const event = document.createEvent('MouseEvents')
-
-    event.initEvent('click', true, true)
-    anchor.dispatchEvent(event)
-  } else {
-    anchor.click()
-  }
-}
-
-/**
  * Downloads the given ics as an iCalendar file.
  *
  * @param {String} title - title of the event
@@ -107,8 +85,8 @@ export const download = (title, data) => {
     .indexOf('safari')
 
   if (isSafari) {
-    safariFileSave(data, fileName)
-  } else {
     FileSaver.saveAs(getBlob(data), fileName)
+  } else {
+    safariFileSave(data, fileName)
   }
 }

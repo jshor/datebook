@@ -1,8 +1,18 @@
 import { mockRandomForEach } from 'jest-mock-random'
 import { RECURRENCE } from '../../constants'
-import { formatText, getBlob, getFileName, getUid, getRrule, safariFileSave, download } from '../ics'
+import {
+  formatText,
+  getBlob,
+  getFileName,
+  getUid,
+  getRrule,
+  download,
+} from '../ics'
 import { formatTime } from '../time'
 import FileSaver from 'file-saver';
+import safariFileSave from '../safariFileSave'
+
+jest.mock('../safariFileSave')
 
 const { FREQUENCY: { DAILY } } = RECURRENCE
 
@@ -124,6 +134,27 @@ describe('IcsUtil', () => {
         saveAs: jest.fn()
       }))
     })
-
+    describe('on Safari', () => {
+      beforeEach(() => {
+        global.navigator = {
+          userAgent: 'safari',
+        }
+      })
+      it('should invoke safariFileSave', () => {
+        const data = 'foobar'
+        const title = 'july 4<>'
+        const filename = 'july 4.ics'
+        download(title, data)
+        expect(safariFileSave).toHaveBeenCalledTimes(1)
+        expect(safariFileSave).toHaveBeenCalledWith(data, filename)
+      })
+    })
+    describe('on any other browser', () => {
+      beforeEach(() => {
+        global.navigator = {
+          userAgent: 'chrome',
+        }
+      })
+    })
   })
 })
