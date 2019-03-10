@@ -1,7 +1,10 @@
 import { mockRandomForEach } from 'jest-mock-random'
+import { RECURRENCE } from '../../constants'
 import { formatText, getBlob, getFileName, getUid, getRrule, safariFileSave, download } from '../ics'
 import { formatTime } from '../time'
 import FileSaver from 'file-saver';
+
+const { FREQUENCY: { DAILY } } = RECURRENCE
 
 const originalBlob = global.Blob
 const mockBlob = () => {
@@ -92,6 +95,26 @@ describe('IcsUtil', () => {
   })
 
   describe('getRrule()', () => {
+    it('should transform the object into an ICS param string', () => {
+      const recurrence = {
+        frequency: DAILY,
+        interval: 1,
+        count: 5,
+        weekStart: 'MO',
+        end: '20190502',
+        weekdays: 'MO',
+        monthdays: '5',
+      }
+      const expectedRrule = `FREQ=${
+        DAILY
+        };INTERVAL=1;COUNT=5;WKST=MO;UNTIL=${
+          formatTime(recurrence.end)
+        };BYDAY=MO;BYMONTHDAY=5`;
+
+      const actualRrule = getRrule(recurrence)
+
+      expect(actualRrule).toBe(expectedRrule)
+    })
   })
   describe('safariFileSave()', () => {
   })
