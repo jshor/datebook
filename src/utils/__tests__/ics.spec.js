@@ -12,6 +12,7 @@ import { formatTime } from '../time'
 import FileSaver from 'file-saver';
 import safariFileSave from '../safariFileSave'
 
+jest.mock('file-saver')
 jest.mock('../safariFileSave')
 
 const { FREQUENCY: { DAILY } } = RECURRENCE
@@ -126,34 +127,50 @@ describe('IcsUtil', () => {
       expect(actualRrule).toBe(expectedRrule)
     })
   })
-  describe('safariFileSave()', () => {
-  })
   describe('download()', () => {
-    beforeEach(() => {
-      jest.mock('file-saver', ()=>({
-        saveAs: jest.fn()
-      }))
+    const originalUserAgent = global.navigator.userAgent
+    afterEach(() => {
+      Object.defineProperty(global.navigator, 'userAgent', {
+        value: originalUserAgent,
+        writable: true,
+      })
+      safariFileSave.mockClear()
+      FileSaver.saveAs.mockClear()
     })
     describe('on Safari', () => {
       beforeEach(() => {
-        global.navigator = {
-          userAgent: 'safari',
-        }
+        Object.defineProperty(global.navigator, 'userAgent', {
+          value: 'safari',
+          writable: true,
+        })
       })
       it('should invoke safariFileSave', () => {
         const data = 'foobar'
         const title = 'july 4<>'
         const filename = 'july 4.ics'
         download(title, data)
+        expect(FileSaver.saveAs).not.toHaveBeenCalled()
         expect(safariFileSave).toHaveBeenCalledTimes(1)
         expect(safariFileSave).toHaveBeenCalledWith(data, filename)
       })
     })
     describe('on any other browser', () => {
       beforeEach(() => {
-        global.navigator = {
-          userAgent: 'chrome',
-        }
+        Object.defineProperty(global.navigator, 'userAgent', {
+          value: 'chrome',
+          writable: true,
+        })
+      })
+      it('should save the data as a file', () => {
+        const data = 'foobar'
+        const blob = getBlob(data)
+        const title = 'july 4<>'
+        const filename = 'july 4.ics'
+        download(title, data)
+
+        expect(safariFileSave).not.toHaveBeenCalled()
+        expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
+        expect(FileSaver.saveAs).toHaveBeenCalledWith(blob, filename)
       })
     })
   })
