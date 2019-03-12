@@ -26,6 +26,10 @@ describe('GoogleCalendar', () => {
     testObj = undefined
   })
 
+  it('should be a subclass of CalendarBase', () => {
+    expect(new GoogleCalendar({})).toBeInstanceOf(CalendarBase)
+  })
+
   describe('render()', () => {
     let result;
 
