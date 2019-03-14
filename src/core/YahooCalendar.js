@@ -12,38 +12,38 @@ export default class YahooCalendar extends CalendarBase {
   constructor (options) {
     super(options)
   }
-  
+
   /**
    * Converts the capitalized two-letter day abbreviation to ProperCase.
-   * 
+   *
    * @param {String} day
    * @returns {String}
    */
   formatDay (day) {
     const first = day.charAt(0)
-    const last = day.charAt(1).toLowerCaseCase()
+    const last = day.charAt(1).toLowerCase()
 
     return `${first}${last}`
   }
-  
+
   /**
    * Converts the RFC???? FREQ param to to Yahoo! frequency format.
-   * 
+   *
    * @param {Object} recurrence
-   * @param {String} [recurrence.frequency] - 
-   * @param {String} [recurrence.weekdays] - 
+   * @param {String} [recurrence.frequency] -
+   * @param {String} [recurrence.weekdays] -
    * @returns {String}
    */
   getFrequency ({ frequency, weekdays }) {
     const { FREQUENCY } = RECURRENCE
-    
+
     if (weekdays) {
       return weekdays
         .split(',')
         .map(this.formatDay)
         .join('')
     }
-    
+
     switch (frequency) {
       case FREQUENCY.DAILY:
         return 'Dy'
@@ -53,31 +53,31 @@ export default class YahooCalendar extends CalendarBase {
         return 'Yr'
       default:
         return 'Wk'
-    } 
+    }
   }
-  
+
   /**
    * Converts the RFC???? to Yahoo! recurrence format.
-   * 
+   *
    * @param {Object} recurrence
-   * @param {String} [recurrence.frequency] - 
-   * @param {String} [recurrence.weekdays] - 
+   * @param {String} [recurrence.frequency] -
+   * @param {String} [recurrence.weekdays] -
    * @returns {String}
    */
   getRecurrence (recurrence) {
     const frequency = this.getFrequency(recurrence)
     let { interval } = recurrence
-    
+
     if (interval.toString().length === 1) {
       interval = `0${interval}`
     }
-    
+
     return `${interval}${frequency}`
   }
-  
+
   /**
    * Generates the Yahoo! Calendar data.
-   * 
+   *
    * @returns {String}
    */
   render () {
@@ -88,11 +88,11 @@ export default class YahooCalendar extends CalendarBase {
       desc: this.description,
       in_loc: this.location
     }
-    
+
     if (this.allday) {
       params.dur = 'allday'
     }
-    
+
     if (this.recurrence) {
       params.RPAT = this.getRecurrence(this.recurrence)
       params.REND = formatTime(this.recurrence.end)
@@ -100,10 +100,10 @@ export default class YahooCalendar extends CalendarBase {
     } else {
       params.et = this.end
     }
-    
+
     const baseUrl = URL.YAHOO
     const queryString = toQueryString(params)
-    
+
     return `${baseUrl}?${queryString}`
   }
 }
