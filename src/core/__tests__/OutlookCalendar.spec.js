@@ -51,6 +51,7 @@ describe('Outlook Calendar', () => {
       const paramsObj = queryStringToObj(queryString)
 
       expect(paramsObj).toMatchObject(expectedParams)
+      expect(expectedParams).toMatchObject(paramsObj)
     })
   })
 })
