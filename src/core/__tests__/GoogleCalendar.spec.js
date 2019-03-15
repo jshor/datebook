@@ -1,12 +1,15 @@
 import CalendarBase from '../CalendarBase'
 import GoogleCalendar from '../GoogleCalendar'
 
-import { FORMAT, URL } from '../../constants'
+import { FORMAT, RECURRENCE, URL } from '../../constants'
 import { formatTime } from '../../utils/time'
-import { getRrule } from '../../utils/ics'
+import * as Ics from '../../utils/ics'
+// import { getRrule } from '../../utils/ics'
+jest.mock('../../utils/ics')
 
 import queryStringToObj from '../../../test_helpers/queryStringToObj'
 
+const { FREQUENCY: { DAILY } } = RECURRENCE
 describe('GoogleCalendar', () => {
   const baseOpts = {
     title: 'Test Event',
@@ -24,6 +27,7 @@ describe('GoogleCalendar', () => {
   let testObj
   afterEach(() => {
     testObj = undefined
+    jest.resetAllMocks()
   })
 
   it('should be a subclass of CalendarBase', () => {
@@ -86,6 +90,29 @@ describe('GoogleCalendar', () => {
         let paramsObj = queryStringToObj(queryString)
 
         expect(paramsObj).not.toHaveProperty('recur')
+      })
+    })
+    describe('with recurrence', () => {
+      beforeEach(() => {
+        Ics.getRrule.mockReturnValue('FREQ=DAILY;INTERVAL=1;COUNT=5')
+      })
+
+      it('should use the result of getRrule', () => {
+        testObj = new GoogleCalendar({
+          ...baseOpts,
+          recurrence: {
+            frequency: DAILY,
+            interval: 1,
+            count: 5,
+          },
+        })
+        result = testObj.render()
+        let queryString = result.split('?')[1]
+        let paramsObj = queryStringToObj(queryString)
+        let { recur } = paramsObj
+        expect(Ics.getRrule).toHaveBeenCalledTimes(1)
+        expect(Ics.getRrule).toHaveBeenCalledWith(testObj.recurrence)
+        expect(recur).toBe('RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5')
       })
     })
   })
