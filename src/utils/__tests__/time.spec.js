@@ -3,6 +3,9 @@ import { FORMAT } from '../../constants'
 import { formatTime, getHoursDuration, getTimeCreated } from '../time'
 
 describe('time util', () => {
+  beforeEach(() => {
+    moment.tz.setDefault("America/New_York")
+  })
   describe('formatTime()', () => {
     it('should format the time with the passed-in format', () => {
       const time = '2019-03-23 17:00-0500'
