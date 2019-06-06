@@ -16,7 +16,7 @@ describe('time util', () => {
     })
     it('should default to date time format', () => {
       const time = '2019-03-23 17:00-0500'
-      const expectedOutput = '20190323T170000'
+      const expectedOutput = moment(time).format(`${FORMAT.DATE}T${FORMAT.TIME}`)
       const actualOutput = formatTime(time)
 
       expect(actualOutput).toBe(expectedOutput)
