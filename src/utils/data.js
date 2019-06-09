@@ -4,8 +4,9 @@ const identity = str => str
  * Creates a param string from a flat key-value pair.
  *
  * @param {Object} params
- * @param {String} [delimiter=';']
- * @param {Function} [transformFn=identity]
+ * @param {String} [delimiter = ';']
+ * @param {Function} [transformFn = identity] - transformation function to be
+ * applied to each param. If omitted, no transform occurs
  * @returns {String}
  */
 export const toParamString = (params, delimiter = ';', transformFn = identity) => {
@@ -29,7 +30,7 @@ export const toParamString = (params, delimiter = ';', transformFn = identity) =
 export const toQueryString = params => toParamString(params, '&', encodeURIComponent)
 
 /**
- * Creates a ICS param string from a flat key-value pair.
+ * Creates an ICS param string from a flat key-value pair.
  *
  * @param {Object} params
  * @returns {String}
