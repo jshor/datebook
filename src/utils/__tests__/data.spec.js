@@ -2,14 +2,15 @@ import { toIcsParamString, toParamString, toQueryString } from '../data';
 
 describe('DataUtil', () => {
   let params;
+
   beforeEach(() => {
     params = {
       text: 'Birthday',
       dates: '20170508/20170509'
     }
   })
-  describe('toIcsParamString()', () => {
 
+  describe('toIcsParamString()', () => {
     it('should create a semicolon-delimited string of params', () => {
       const icsParamString = toIcsParamString(params)
       const icsParams = icsParamString
@@ -33,8 +34,8 @@ describe('DataUtil', () => {
 
       expect(icsParamKeys).not.toContain('foo')
     })
-
   })
+
   describe('toParamString()', () => {
     describe('without optional params', () => {
       it('should create a semicolon-delimited string of params', () => {
@@ -61,6 +62,7 @@ describe('DataUtil', () => {
         expect(parsedParamKeys).not.toContain('foo')
       })
     })
+
     describe('with defined delimiter', () => {
       const delimiter = '&&'
 
@@ -78,6 +80,7 @@ describe('DataUtil', () => {
 
         expect(parsedParams).toEqual(params)
       })
+
       describe('with defined transformFn', () => {
         const sillyTransform = str => str.split('').join('AAA')
         const sillyUntransform = str => str.split('AAA').join('')
@@ -98,8 +101,8 @@ describe('DataUtil', () => {
         })
       })
     })
-
   })
+
   describe('toQueryString()', () => {
 
     it('should create a query string representation of the passed in object', () => {

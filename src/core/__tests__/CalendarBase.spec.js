@@ -27,10 +27,6 @@ describe('Calendar Base', () => {
     })
   })
 
-  it('should be ok', () => {
-    expect((new CalendarBase({}))).toBeTruthy()
-  })
-
   describe('setText()', () => {
     let calendarObj
 
@@ -106,7 +102,6 @@ describe('Calendar Base', () => {
     })
 
     describe('when options has no end', () => {
-
       it('should set allday to true', () => {
         calendarObj.setTimestamps({
           start: '20150704T190000',
@@ -150,7 +145,6 @@ describe('Calendar Base', () => {
     })
 
     describe('when options has an end', () => {
-
       it('should set allday to false', () => {
         calendarObj.setTimestamps({
           start: '20150704T190000',

@@ -3,12 +3,12 @@ import GoogleCalendar from '../GoogleCalendar'
 import { FORMAT, RECURRENCE, URL } from '../../constants'
 import { formatTime } from '../../utils/time'
 import * as Ics from '../../utils/ics'
+import queryStringToObj from '../../../test_helpers/queryStringToObj'
 
 jest.mock('../../utils/ics')
 
-import queryStringToObj from '../../../test_helpers/queryStringToObj'
-
 const { FREQUENCY: { DAILY } } = RECURRENCE
+
 describe('GoogleCalendar', () => {
   const baseOpts = {
     title: 'Test Event',
@@ -22,8 +22,8 @@ describe('GoogleCalendar', () => {
     location: 'Rockefeller Center',
     action: 'TEMPLATE'
   }
-
   let testObj
+
   afterEach(() => {
     testObj = undefined
     jest.resetAllMocks()
@@ -60,7 +60,6 @@ describe('GoogleCalendar', () => {
     })
 
     describe('an all-day event', () => {
-
       it('should have start and end date formatted without time-of-day', () => {
         testObj = new GoogleCalendar(baseOpts)
 
@@ -76,11 +75,9 @@ describe('GoogleCalendar', () => {
 
         expect(paramsObj.dates).toBe(expectedDates)
       })
-
     })
 
     describe('without recurrence', () => {
-
       it('should not include recur param', () => {
         testObj = new GoogleCalendar(baseOpts)
 
@@ -91,6 +88,7 @@ describe('GoogleCalendar', () => {
         expect(paramsObj).not.toHaveProperty('recur')
       })
     })
+
     describe('with recurrence', () => {
       beforeEach(() => {
         Ics.getRrule.mockReturnValue('FREQ=DAILY;INTERVAL=1;COUNT=5')

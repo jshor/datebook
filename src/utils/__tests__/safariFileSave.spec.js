@@ -21,15 +21,18 @@ const documentMock = {
 
 const fileName = 'event.ics'
 const data = 'FOO=BAR;UNTIL=2019-05-23T18:00:00'
+
 describe('safariFileSave()', () => {
   let fakeDocument
   const originalDocument = global.document
+
   beforeEach(() => {
     Object.defineProperty(global, 'document', {
       writable: true,
       value: {...documentMock}
     })
   })
+
   afterEach(() => {
     documentMock.createElement.mockClear()
     documentMock.createEvent.mockClear()
@@ -67,11 +70,10 @@ describe('safariFileSave()', () => {
       expect(anchor.click).not.toHaveBeenCalled()
     })
   })
+
   describe('if document.createEvent is not defined', () => {
-    beforeEach(() => {
-      global.document.createEvent = false
-    })
     it('should download the file using anchor.click', () => {
+      global.document.createEvent = false
       safariFileSave(data, fileName)
       const anchor = document.createElement.mock.results[0].value
 

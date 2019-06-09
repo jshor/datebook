@@ -8,9 +8,11 @@ describe('Outlook Calendar', () => {
   it('should be a subclass of CalendarBase', () => {
     expect(new OutlookCalendar({})).toBeInstanceOf(CalendarBase)
   })
+
   describe('render()', () => {
     const dateTimeFormat = `${FORMAT.DATE}T${FORMAT.TIME}`
     let testOpts = {}
+
     beforeEach(() => {
       testOpts.title = 'Music Concert'
       testOpts.location = 'New York'
@@ -18,6 +20,7 @@ describe('Outlook Calendar', () => {
       testOpts.start = '20150704T190000';
       testOpts.end = '20150704T220000';
     })
+
     afterEach(() => {
       testOpts = {}
     })

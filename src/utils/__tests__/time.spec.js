@@ -14,6 +14,7 @@ describe('time util', () => {
       expect(actualDateOutput).toBe(expectedDateOutput)
       expect(actualTimeOutput).toBe(expectedTimeOutput)
     })
+
     it('should default to date time format', () => {
       const time = '2019-03-23 17:00-0500'
       const expectedOutput = moment(time).format(`${FORMAT.DATE}T${FORMAT.TIME}`)
@@ -22,6 +23,7 @@ describe('time util', () => {
       expect(actualOutput).toBe(expectedOutput)
     })
   })
+
   describe('getHoursDuration()', () => {
     it('should get the duration between two datetimes', () => {
       const start = '2019-03-23 17:00-0500'
@@ -32,6 +34,7 @@ describe('time util', () => {
       expect(actualDiff).toBe(expectedDiff)
     })
   })
+
   describe('getTimeCreated()', () => {
     beforeEach(() => {
       jest.useFakeTimers()

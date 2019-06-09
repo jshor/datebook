@@ -30,6 +30,7 @@ const unmockBlob = () => {
 describe('IcsUtil', () => {
   describe('formatText()', () => {
     const str = 'foo\nbar\n\nbaz'
+
     it('should return an empty string if it is falsey', () => {
       expect(formatText()).toBe('')
       expect(formatText(false)).toBe('')
@@ -38,16 +39,19 @@ describe('IcsUtil', () => {
       expect(formatText('')).toBe('')
       expect(formatText(0)).toBe('')
     })
+
     it('should backslash escape newlines', () => {
       const formatted = formatText(str)
 
       expect(formatted).toBe('foo\\nbar\\n\\nbaz')
     })
+
     it('should return the full string if maxLength is undefined', () => {
       const formatted = formatText(str)
 
       expect(formatted).toBe('foo\\nbar\\n\\nbaz')
     })
+
     it('should truncate the string after backslash escaping newlines', () => {
       const formatted = formatText(str, 10)
 
@@ -57,6 +61,7 @@ describe('IcsUtil', () => {
 
   describe('getBlob()', () => {
     beforeAll(mockBlob)
+
     afterAll(unmockBlob)
 
     it('should create a new Blob object with the passed in data', () => {
@@ -99,6 +104,7 @@ describe('IcsUtil', () => {
 
   describe('getUid()', () => {
     mockRandomForEach(0.1234567890123456)
+
     it('should return a base-32 random UID', () => {
       const expectedUid = '4fzzzxkxflf'
       expect(getUid()).toBe(expectedUid)
@@ -127,8 +133,10 @@ describe('IcsUtil', () => {
       expect(actualRrule).toBe(expectedRrule)
     })
   })
+
   describe('download()', () => {
     const originalUserAgent = global.navigator.userAgent
+
     afterEach(() => {
       Object.defineProperty(global.navigator, 'userAgent', {
         value: originalUserAgent,
@@ -137,6 +145,7 @@ describe('IcsUtil', () => {
       safariFileSave.mockClear()
       FileSaver.saveAs.mockClear()
     })
+
     describe('on Safari', () => {
       beforeEach(() => {
         Object.defineProperty(global.navigator, 'userAgent', {
@@ -144,6 +153,7 @@ describe('IcsUtil', () => {
           writable: true,
         })
       })
+
       it('should invoke safariFileSave', () => {
         const data = 'foobar'
         const title = 'july 4<>'
@@ -154,6 +164,7 @@ describe('IcsUtil', () => {
         expect(safariFileSave).toHaveBeenCalledWith(data, filename)
       })
     })
+
     describe('on any other browser', () => {
       beforeEach(() => {
         Object.defineProperty(global.navigator, 'userAgent', {
@@ -161,6 +172,7 @@ describe('IcsUtil', () => {
           writable: true,
         })
       })
+
       it('should save the data as a file', () => {
         const data = 'foobar'
         const blob = getBlob(data)

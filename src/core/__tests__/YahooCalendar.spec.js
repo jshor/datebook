@@ -16,15 +16,18 @@ const yahooFreqMap = {
 
 const dateFormat = FORMAT.DATE
 const dtFormat = `${dateFormat}T${FORMAT.TIME}`
+
 describe('YahooCalendar', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
+
   it('should be a subclass of CalendarBase', () => {
     const result = new YahooCalendar({})
 
     expect(result).toBeInstanceOf(CalendarBase)
   })
+
   describe('formatDay()', () => {
     it('should change the day to titlecase', () => {
       const obj = new YahooCalendar({})
@@ -35,11 +38,13 @@ describe('YahooCalendar', () => {
       expect(result).toBe('su')
     })
   })
+
   describe('getFrequency()', () => {
     describe('if weekdays', () => {
       const weekdayRecurrence = {
         weekdays: 'SUNDAY,TUESDAY,WEDNESDAY'
       }
+
       it('should format weekdays only', () => {
         const obj = new YahooCalendar({})
 
@@ -48,6 +53,7 @@ describe('YahooCalendar', () => {
         expect(result).toBe('SuTuWe')
       })
     })
+
     describe('if no weekdays', () => {
       it('should transform frequencies', () => {
         const obj = new YahooCalendar({})
@@ -61,6 +67,7 @@ describe('YahooCalendar', () => {
       })
     })
   })
+
   describe('getRecurrence()', () => {
     it('should call getFrequency with the recurrence', () => {
       jest.spyOn(YahooCalendar.prototype, 'getFrequency').mockReturnValueOnce('mockRrule')
@@ -74,6 +81,7 @@ describe('YahooCalendar', () => {
       expect(obj.getFrequency).toHaveBeenCalledTimes(1)
       expect(obj.getFrequency).toHaveBeenCalledWith(recurrence)
     })
+
     it('should prepend single digit interval with 0', () => {
       const obj = new YahooCalendar({})
       const recurrence = {
@@ -84,6 +92,7 @@ describe('YahooCalendar', () => {
       const result = obj.getRecurrence(recurrence)
       expect(result).toBe(`0${recurrence.interval}Dy`)
     })
+
     it('should return yahoo calendar rpat rule', () => {
       const obj = new YahooCalendar({})
       const recurrence = {
@@ -95,6 +104,7 @@ describe('YahooCalendar', () => {
       expect(result).toBe(`${recurrence.interval}Dy`)
     })
   })
+
   describe('render()', () => {
     it('should use the correct baseUrl', () => {
       const obj = new YahooCalendar({})
@@ -103,6 +113,7 @@ describe('YahooCalendar', () => {
 
       expect(baseUrl).toBe(URL.YAHOO)
     })
+
     describe('is all day event', () => {
       const testOpts = {
         title: 'Fun Party',
@@ -110,6 +121,7 @@ describe('YahooCalendar', () => {
         location: 'New York',
         start: '20190704T190000',
       }
+
       describe('no recurrence', () => {
         it('should format the query string', () => {
           const obj = new YahooCalendar(testOpts)
@@ -130,6 +142,7 @@ describe('YahooCalendar', () => {
           expect(expectedObj).toMatchObject(params)
         })
       })
+
       describe('recurrence', () => {
         it('should format the query string', () => {
           const obj = new YahooCalendar({
@@ -159,6 +172,7 @@ describe('YahooCalendar', () => {
         })
       })
     })
+
     describe('is not all day event', () => {
       const testOpts = {
         title: 'Fun Party',
@@ -167,6 +181,7 @@ describe('YahooCalendar', () => {
         start: '20190704T190000',
         end: '20190704T210000',
       }
+
       describe('no recurrence', () => {
         it('should format the query string', () => {
           const obj = new YahooCalendar(testOpts)
@@ -186,6 +201,7 @@ describe('YahooCalendar', () => {
           expect(expectedObj).toMatchObject(params)
         })
       })
+
       describe('recurrence', () => {
         it('should format the query string', () => {
           const obj = new YahooCalendar({

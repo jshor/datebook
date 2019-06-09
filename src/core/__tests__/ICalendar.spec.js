@@ -12,23 +12,28 @@ describe('ICalendar', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
+
   it('should be a subclass of CalendarBase', () => {
     const result = new ICalendar({})
     expect(result).toBeInstanceOf(CalendarBase)
   })
+
   describe('download()', () => {
-    const obj = new ICalendar({
-      title: 'fake title',
+    it('should call render and the download util', () => {
+      const obj = new ICalendar({
+        title: 'fake title',
+      })
+      jest.spyOn(obj, 'render').mockReturnValue('renderedstring')
+      obj.download()
+
+      expect(obj.render).toHaveBeenCalledTimes(1)
+
+      const rendered = obj.render.mock.results[0].value
+      expect(download).toHaveBeenCalledTimes(1)
+      expect(download).toHaveBeenCalledWith(obj.title, rendered)
     })
-    jest.spyOn(obj, 'render').mockReturnValue('renderedstring')
-    obj.download()
-
-    expect(obj.render).toHaveBeenCalledTimes(1)
-
-    const rendered = obj.render.mock.results[0].value
-    expect(download).toHaveBeenCalledTimes(1)
-    expect(download).toHaveBeenCalledWith(obj.title, rendered)
   })
+
   describe('render()', () => {
     const originalWindow = global.window
     const testOpts = {
@@ -40,6 +45,7 @@ describe('ICalendar', () => {
       recurrence: {},
     }
     const dtFormat = `${FORMAT.DATE}T${FORMAT.TIME}`
+
     beforeEach(() => {
       formatText.mockImplementation((...args) => args.join(' formatted '))
       getUid.mockReturnValue(24)
@@ -54,12 +60,14 @@ describe('ICalendar', () => {
         writable: true,
       })
     })
+
     afterEach(() => {
       Object.defineProperty(global, 'window', {
         value: originalWindow,
         writable: true,
       })
     })
+
     it('should format and truncate the description, location, and text, to 62, 64, and 66 characters respectively', () => {
       const obj = new ICalendar(testOpts)
 
@@ -72,6 +80,7 @@ describe('ICalendar', () => {
         [testOpts.title, 66],
       ])
     })
+
     it('should call getUid', () => {
       const obj = new ICalendar(testOpts)
 
@@ -79,6 +88,7 @@ describe('ICalendar', () => {
 
       expect(getUid).toHaveBeenCalledTimes(1)
     })
+
     it('should call getTimeCreated', () => {
       const obj = new ICalendar(testOpts)
 
@@ -86,6 +96,7 @@ describe('ICalendar', () => {
 
       expect(getTimeCreated).toHaveBeenCalledTimes(1)
     })
+
     it('should render an ICS Param string', () => {
       const obj = new ICalendar(testOpts)
 
