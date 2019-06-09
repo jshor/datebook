@@ -17,9 +17,3 @@ export const URL = {
   GOOGLE: 'https://calendar.google.com/calendar/render',
   OUTLOOK: 'https://outlook.live.com/owa/'
 }
-
-export default {
-  RECURRENCE,
-  FORMAT,
-  URL
-}
