@@ -1,75 +1,62 @@
-import Utils from '../utils/utils';
 import Calendars from '../utils/calendars';
 import bindings from './bindings';
 
 export default class AddtocalendarCtrl {
 
-  constructor($attrs, FileSaver) {
-    this.FileSaver = FileSaver;
-    this.dates = {};
-    this.init.call(this);
+  constructor ($attrs) {
+    this.buildUrl.call(this);
     this.watchAttrs.call(this, $attrs);
   }
 
-  watchAttrs($attrs) {
+  watchAttrs ($attrs) {
     Object
       .keys($attrs)
       .forEach(key => {
-        $attrs.$observe(key, this.init.bind(this));
+        $attrs.$observe(key, this.buildUrl.bind(this));
       });
   }
 
-  setTimesFromFormat() {
-    ['startDate', 'endDate']
-      .forEach(t => {
-        this.dates[t] = Utils.toUniversalTime(this[t], this.timezone);
-      });
-  }
-
-  getSanitizedData() {
-    let urlData = {};
-
-    Object
-      .keys(bindings)
-      .forEach(key => {
-        urlData[key] = encodeURIComponent(this[key] || '');
-      });
-    return urlData;
-  }
-
-  buildUrl() {
-    let urlData = angular.extend(this.getSanitizedData.call(this), this.dates),
-        icsData = angular.extend({}, this, this.dates);
-
-    this.calendarUrl = {
-      microsoft: Calendars.getMicrosoftCalendarUrl(urlData),
-      google:    Calendars.getGoogleCalendarUrl(urlData),
-      yahoo:     Calendars.getYahooCalendarUrl(urlData),
-      icalendar: Calendars.getIcsCalendar(icsData),
-      dlIcal:    this.dlIcal.bind(this)
+  getData () {
+    let recurrence;
+    if (this.recurrenceFrequency) {
+      recurrence = {
+        frequency: this.recurrenceFrequency,
+        interval: this.recurrenceInterval,
+        count: this.recurrenceCount,
+        end: this.recurrenceEnd,
+        weekdays: this.recurrenceWeekdays,
+        monthdays: this.recurrenceMonthdays,
+        weekStart: this.recurrenceWeekstart
+      }
+    }
+    return {
+      start: this.startDate,
+      end: this.endDate,
+      title: this.title,
+      description: this.description,
+      location: this.location,
+      recurrence
     };
   }
 
-  dlIcal() {
-    let fileName = Utils.getIcsFileName(this.title),
-        icsData = this.calendarUrl.icalendar,
-        icsBlob = Utils.getIcsBlob(icsData);
+  buildUrl () {
+    const data = this.getData()
 
-    this.FileSaver.saveAs(icsBlob, fileName);
+    this.calendarUrl = {
+      microsoft: Calendars.getMicrosoftCalendarUrl(data),
+      google:    Calendars.getGoogleCalendarUrl(data),
+      yahoo:     Calendars.getYahooCalendarUrl(data),
+      dlIcal:    () => Calendars.downloadIcs(data)
+    };
   }
 
-  toggleMenu(isOpen) {
-    if(isOpen == null) {
-      this.isOpen=!this.isOpen;
+  toggleMenu (isOpen) {
+    if (isOpen === null) {
+      this.isOpen = !this.isOpen;
       return;
     }
     this.isOpen = isOpen;
   }
-
-  init() {
-    this.setTimesFromFormat.call(this);
-    this.buildUrl.call(this);
-  }
 }
 
-AddtocalendarCtrl.$inject = ['$attrs', 'FileSaver'];
+AddtocalendarCtrl.$inject = ['$attrs'];
