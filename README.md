@@ -1,8 +1,8 @@
 # angular-addtocalendar
 
-### v1.3.4
+### v1.3.5
 
-An Angular.js component for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Microsoft Calendar.
+An Angular.js component for adding an event to calendar apps. It supports .ics files for iCalendar and Outlook and also supports Google Calendar, Yahoo! Calendar and Outlook Online.
 
 [![Coverage Status](https://coveralls.io/repos/github/jshor/angular-addtocalendar/badge.svg?branch=master)](https://coveralls.io/github/jshor/angular-addtocalendar?branch=master) [![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.svg?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![npm version](https://badge.fury.io/js/angular-addtocalendar.svg)](https://badge.fury.io/js/angular-addtocalendar) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![dependency Status](https://david-dm.org/jshor/angular-addtocalendar/status.png)](https://david-dm.org/jshor/angular-addtocalendar#info=dependencies)
 
@@ -51,29 +51,36 @@ For a demo, please [click here](http://jshor.github.io/angular-addtocalendar/dis
 ## Example
 
 ```
-<addtocalendar
-    start-date="20150704T190000"
-    end-date="20150704T210000"
-    title="Fourth of July Fireworks"
-    location="Battery Park City, New York, NY"
-    class-name="btn btn-sm btn-default dropdown-toggle"
-    description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world.">
-</addtocalendar>
+  <addtocalendar
+    start-date="20190704T190000"
+    end-date="20190704T210000"
+    title="Happy Hour"
+    location="The Bar, New York, NY"
+    description="Let's blow off some steam from our weekly deployments to enjoy a tall cold one!"
+    recurrence-frequency="WEEKLY"
+    recurrence-interval="2"
+    recurrence-until="20190904T210000">
+  </addtocalendar>
 ```
 
 ## Attributes
 
-| **Attribute**        | **Description**                                                                                               | **Format**                                                                    | **Example**                                                                                                 | **Required**  |
-|----------------------|-------------------------------------------------------------------------------------------------------------- |------------------------------------------------------------------------------ |------------------------------------------------------------------------------------------------------------ |-------------- |
-| `title`              | Name of the event.                                                                                            | String                                                                        | Fourth of July Fireworks                                                                                    | Yes           |
-| `description`        | Description of the event.                                                                                     | String, defaults to empty                                                     | Celebrate the independence of the United States with fireworks in one of the greatest cities in the world.  | No            |
-| `location`           | Location of the event.                                                                                        | Plain text                                                                    | Battery Park City, New York, NY                                                                             | Yes           |
-| `start-date`         | The timestamp of when the event begins.                                                                       | Any valid RFC2822 or ISO format date string.                                  | July 4 2017 7:00 PM UTC+500                                                                                 | Yes           |
-| `end-date`           | The timestamp of when the event ends.                                                                         | Any valid RFC2822 or ISO format date string.                                  | July 4 2017 10:00 PM UTC+500                                                                                | Yes           |
-| `class-name`         | The desired class for the dropdown. See [Custom Styling](#custom).                                            | Bootstrap class/plain text. Default `btn btn-sm btn-default dropdown-toggle`  | btn btn-sm btn-default dropdown-toggle                                                                      | No            |
-| `btn-text`           | Text for the button to display                                                                                | Plain text. Default `Add to calendar`                                         | Add to  calendar                                                                                            | No            |
-| `use-bootstrap`      | Whether to use Bootstrap styling.                                                                             | Boolean. Default: `false`                                                     | `null`                                                                                                      | No            |
-| `hover-text`         | Text to use as the title of the element.                                                                      | String Default: value of title attribute                                      | Add to calendar                                                                                             | No            |
+| Attribute            | Description                                                                                        | Type                | Required? | Example              |
+|----------------------|----------------------------------------------------------------------------------------------------|---------------------|-----------|----------------------|
+| title                | Title of the event                                                                                 | `String`            | Yes       | `Happy Hour`         |
+| description          | Summary of the event                                                                               | `String`            | Yes       | `Come enjoy drinks!` |
+| location             | Event location                                                                                     | `String`            | Yes       | `The Bar, NYC`       |
+| start-date           | Date that the event starts on                                                                      | `String` date`      | Yes       | `20180704T190000`    |
+| end-date             | Date that the event ends on. Omit for an all-day event                                             | `String` date`      | No        | `20180704T210000`    |
+| recurrence-frequency | Event frequency; `DAILY`, `WEEKLY`, `MONTHLY`, `YEARLY`                                            | `Enum`              | No        | `DAILY`              |
+| recurrence-interval  | Time between recurrences                                                                           | `Integer`           | No        | `2`                  |
+| recurrence-count     | Number of times the event should repeat                                                            | `Integer`           | No        | `4`                  |
+| recurrence-end       | Date when the last recurrence should occur                                                         | `String` date       | Yes*      | `20190904T210000`    |
+| recurrence-weekstart | Day that the week starts on (default: `SU`); `SU` `MO`, `TU`, `WE`, `TH`, `FR`, `SA`               | `Enum`              | No        | `SU`                 |
+| recurrence-weekdays  | Comma-separated days of the week that the event occurs on; `SU` `MO`, `TU`, `WE`, `TH`, `FR`, `SA` | `Enum`              | No        | `TU,TH,SA`           |
+| recurrence-monthdays | Comma-separated list of monthdays                                                                  | `String` of numbers | No        | `2,4,6,8`            |
+| btn-text             | Text to be displayed on the button                                                                 | `String`            | No        | `Add to calendar`    |
+| use-bootstrap        | Use [Bootstrap](https://getbootstrap.com/) classes                                                 | `Boolean`           | No        | `true`               |
 
 ## <a name="custom"></a>Custom Styling
 
@@ -104,22 +111,6 @@ Assuming you're using Sass, import the stylesheet as noted above. Otherwise, cop
 #### Namespacing
 
 The css namespace (parent class) for this module is `atc-btn-group` (assuming `use-bootstrap` is false).
-
-## Browser Support
-
-All browsers support adding to Yahoo!, Microsoft, and Google calendars. Below is the current support for downloading .ics files for Outlook and iCalendar.
-
-| Browser           | .ics Support |
-|-------------------|--------------|
-| Internet Explorer | 9.0+         |
-| Edge              | Yes          |
-| Safari            | ≤ 6          |
-| Firefox           | 20.0+        |
-| Opera             | 15.0+        |
-| Chrome            | 14.0+        |
-| Android           | 4.4+         |
-
-* iCalendar (ironically) and Outlook do not work due to a [well-known file saving bug](https://github.com/eligrey/FileSaver.js/issues/129) affecting Safari versions > 6.
 
 ## Bugs
 

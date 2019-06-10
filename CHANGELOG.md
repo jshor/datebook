@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.3.5
+
+- adds full recurrence support
+- adds vanilla js/core calendar library
+- upgrades FileSaver to address Safari support issues
+- fixes Yahoo end time issues and addresses Outlook calendar upgrade
+- corrects peer dependency issues
+
+
 ## v1.3.4
 
 - removes documentation on deprecated format and timezone attributes

@@ -76,7 +76,7 @@ module.exports = function makeWebpackConfig() {
     }, {
       test: /\.scss$/,
 
-      loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({
+      loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
           'css-loader',
@@ -88,22 +88,6 @@ module.exports = function makeWebpackConfig() {
       loader: 'raw-loader'
     }]
   };
-
-  // ISTANBUL LOADER
-  // https://github.com/deepsweet/istanbul-instrumenter-loader
-  // Instrument JS files with istanbul-lib-instrument for subsequent code coverage reporting
-  // Skips node_modules and files that end with .spec.js
-  if (isTest) {
-    config.module.rules.push({
-      enforce: 'pre',
-      test: /\.js$/,
-      exclude: [/node_modules/],
-      loader: 'istanbul-instrumenter-loader',
-      query: {
-        esModules: true
-      }
-    })
-  }
 
   config.plugins = [];
 

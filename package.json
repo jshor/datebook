@@ -1,6 +1,6 @@
 {
   "name": "angular-addtocalendar",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "AngularJS directive for adding events to calendar apps",
   "scripts": {
     "build": "rimraf coverage && rimraf dist && webpack --bail --progress --profile",
