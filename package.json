@@ -1,14 +1,16 @@
 {
-  "name": "angular-addtocalendar",
-  "version": "1.3.5",
-  "description": "AngularJS directive for adding events to calendar apps",
+  "name": "datebook",
+  "version": "2.0.0",
+  "description": "Generates URLs and downloads ICS files for adding events to popular calendar apps.",
   "scripts": {
     "build": "parcel build ./src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "release": "standard-version -n"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jshor/angular-addtocalendar"
+    "url": "https://github.com/jshor/datebook"
   },
   "keywords": [
     "icalendar",
@@ -22,38 +24,34 @@
   "author": "Josh Shor <jpshor@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jshor/angular-addtocalendar/issues"
+    "url": "https://github.com/jshor/datebook/issues"
   },
-  "homepage": "https://github.com/jshor/angular-addtocalendar",
+  "homepage": "https://github.com/jshor/datebook",
   "dependencies": {
-    "@iamadamjowett/angular-click-outside": "^2.10.1",
-    "angular": "^1.5.0",
     "file-saver": "^2.0.2",
-    "moment": "^2.18.0",
-    "parcel-bundler": "^1.12.3"
+    "moment": "^2.18.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
     "autoprefixer": "^6.0.3",
     "babel-jest": "^24.4.0",
     "babel-loader": "^8.0.5",
-    "copy-webpack-plugin": "4.0.1",
     "coveralls": "^2.12.0",
-    "css-loader": "^0.27.3",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "file-loader": "^0.10.1",
-    "html-webpack-plugin": "^2.7.1",
+    "husky": "^2.4.0",
     "jest": "^24.1.0",
     "jest-mock-random": "^1.0.2",
-    "node-sass": "^4.5.1",
-    "null-loader": "^0.1.1",
-    "raw-loader": "^0.5.1",
-    "rimraf": "^2.5.1",
-    "sass-loader": "^6.0.3",
-    "style-loader": "^0.13.0",
-    "webpack": "^2.3.1",
-    "webpack-dev-server": "^2.4.2",
-    "webpack-vendor-chunk-plugin": "^1.0.0"
+    "parcel-bundler": "^1.12.3",
+    "standard-version": "^6.0.1"
+  },
+  "gitHooks": {
+    "pre-push": "yarn test"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
