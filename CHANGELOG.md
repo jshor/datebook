@@ -8,7 +8,6 @@
 - fixes Yahoo end time issues and addresses Outlook calendar upgrade
 - corrects peer dependency issues
 
-
 ## v1.3.4
 
 - removes documentation on deprecated format and timezone attributes

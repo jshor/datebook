@@ -1,5 +1,4 @@
 .babelrc
-.bowerignore
 .gitignore
 .npmignore
 .travis.yml
