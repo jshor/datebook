@@ -1,11 +1,45 @@
-# Datebook
+<p align="center">
+  <a href="#">
+    <img src="https://raw.githubusercontent.com/jshor/datebook/master/docs/assets/logo.png" width="450" height="100" />
+  </a>
+</p>
 
-A library for adding events to calendar apps. It supports .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Online.
+<p align="center">A library for adding events to calendar apps. It supports .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Online.</p>
 
-[![Coverage Status](https://coveralls.io/repos/github/jshor/angular-addtocalendar/badge.svg?branch=master)](https://coveralls.io/github/jshor/angular-addtocalendar?branch=master)
-[![Build Status](https://travis-ci.org/jshor/angular-addtocalendar.svg?branch=master)](https://travis-ci.org/jshor/angular-addtocalendar) [![npm version](https://badge.fury.io/js/angular-addtocalendar.svg)](https://badge.fury.io/js/angular-addtocalendar)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
-[![dependency Status](https://david-dm.org/jshor/angular-addtocalendar/status.png)](https://david-dm.org/jshor/angular-addtocalendar#info=dependencies)
+<br>
+
+<p align="center">
+  <a href="https://codecov.io/gh/jshor/datebook">
+    <img src="https://img.shields.io/codecov/c/github/jshor/datebook.svg?style=flat-square"
+         alt="Code coverage">
+  </a>
+
+  <a href="hhttps://travis-ci.org/jshor/datebook">
+    <img src="https://img.shields.io/travis/jshor/datebook.svg?style=flat-square"
+         alt="Build status">
+  </a>
+
+  <a href="https://david-dm.org/jshor/datebook#info=devDependencies">
+    <img src="https://img.shields.io/david/jshor/datebook.svg?style=flat-square"
+         alt="devDependencies Status">
+  </a>
+
+  <a href="https://david-dm.org/jshor/datebook#info=dependencies">
+    <img src="https://img.shields.io/david/jshor/datebook.svg?style=flat-square"
+         alt="Dependency Status">
+  </a>
+
+  <a href="LICENSE.md">
+    <img src="http://img.shields.io/:license-MIT-blue.svg?style=flat-square"
+         alt="License | MIT">
+  </a>
+
+  <a href="https://npmjs.com/packages/datebook">
+    <img src="http://img.shields.io/npm/v/datebook.svg?style=flat-square" />
+  </a>
+</p>
+
+<br>
 
 ## Documentation
 
