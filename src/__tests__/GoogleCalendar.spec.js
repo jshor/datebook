@@ -5,7 +5,7 @@ import { formatTime } from '../utils/time'
 import * as Ics from '../utils/ics'
 import queryStringToObj from '../../test_helpers/queryStringToObj'
 
-jest.mock('../../utils/ics')
+jest.mock('../utils/ics')
 
 const { FREQUENCY: { DAILY } } = RECURRENCE
 

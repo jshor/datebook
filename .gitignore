@@ -1,6 +1,8 @@
 node_modules
 coverage
 .idea
+.cache
+dist
 npm-debug.log
 yarn-error.log
 *.sw*
