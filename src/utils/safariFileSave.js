@@ -5,7 +5,7 @@
  * @param {String} fileName - file name to save, ending in .ics
  */
 const safariFileSave = (data, fileName) => {
-  const anchor = document.createElement('a');
+  const anchor = document.createElement('a')
   const encodedData = encodeURIComponent(data)
 
   anchor.setAttribute('href', `data:text/calendar;charset=utf-8,${encodedData}`)

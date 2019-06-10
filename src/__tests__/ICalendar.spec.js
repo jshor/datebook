@@ -1,12 +1,12 @@
 import moment from 'moment'
-import { FORMAT } from '../../constants'
-import { formatText, getUid, getRrule, download } from '../../utils/ics'
-import { getTimeCreated } from '../../utils/time'
+import { FORMAT } from '../constants'
+import { formatText, getUid, getRrule, download } from '../utils/ics'
+import { getTimeCreated } from '../utils/time'
 import CalendarBase from '../CalendarBase'
 import ICalendar from '../ICalendar'
 
-jest.mock('../../utils/ics')
-jest.mock('../../utils/time')
+jest.mock('../utils/ics')
+jest.mock('../utils/time')
 
 describe('ICalendar', () => {
   afterEach(() => {

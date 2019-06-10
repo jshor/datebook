@@ -1,9 +1,9 @@
 import CalendarBase from '../CalendarBase'
 import GoogleCalendar from '../GoogleCalendar'
-import { FORMAT, RECURRENCE, URL } from '../../constants'
-import { formatTime } from '../../utils/time'
-import * as Ics from '../../utils/ics'
-import queryStringToObj from '../../../test_helpers/queryStringToObj'
+import { FORMAT, RECURRENCE, URL } from '../constants'
+import { formatTime } from '../utils/time'
+import * as Ics from '../utils/ics'
+import queryStringToObj from '../../test_helpers/queryStringToObj'
 
 jest.mock('../../utils/ics')
 

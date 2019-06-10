@@ -1,10 +1,10 @@
 import moment from 'moment'
-import { FORMAT, RECURRENCE, URL } from '../../constants'
-import { formatTime, getHoursDuration } from '../../utils/time'
-import { toQueryString } from '../../utils/data'
+import { FORMAT, RECURRENCE, URL } from '../constants'
+import { formatTime, getHoursDuration } from '../utils/time'
+import { toQueryString } from '../utils/data'
 import CalendarBase from '../CalendarBase'
 import YahooCalendar from '../YahooCalendar'
-import queryStringToObj from '../../../test_helpers/queryStringToObj'
+import queryStringToObj from '../../test_helpers/queryStringToObj'
 
 const { FREQUENCY: { DAILY, WEEKLY, MONTHLY, YEARLY } } = RECURRENCE
 const yahooFreqMap = {

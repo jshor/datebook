@@ -1,8 +1,8 @@
 import moment from 'moment'
-import { FORMAT, URL } from '../../constants'
+import { FORMAT, URL } from '../constants'
 import CalendarBase from '../CalendarBase'
 import OutlookCalendar from '../OutlookCalendar'
-import queryStringToObj from '../../../test_helpers/queryStringToObj'
+import queryStringToObj from '../../test_helpers/queryStringToObj'
 
 describe('Outlook Calendar', () => {
   it('should be a subclass of CalendarBase', () => {
