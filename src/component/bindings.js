@@ -10,10 +10,10 @@ export default {
   useCaret: '@',
   useBootstrap: '@',
   recurrenceFrequency: '@',
-  recurrenceFrequency: '@',
   recurrenceInterval: '@',
   recurrenceCount: '@',
   recurrenceEnd: '@',
+  recurrenceWeekstart: '@',
   recurrenceWeekdays: '@',
   recurrenceMonthdays: '@'
 }
