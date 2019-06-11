@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/__tests__/ICalendar.spec.js | datebook</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Generates URLs and downloads ICS files for adding events to popular calendar apps."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="datebook"><meta property="twitter:description" content="Generates URLs and downloads ICS files for adding events to popular calendar apps."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/jshor/datebook"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/CalendarBase.js~CalendarBase.html">CalendarBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/GoogleCalendar.js~GoogleCalendar.html">GoogleCalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ICalendar.js~ICalendar.html">ICalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/OutlookCalendar.js~OutlookCalendar.html">OutlookCalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/YahooCalendar.js~YahooCalendar.html">YahooCalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FORMAT">FORMAT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RECURRENCE">RECURRENCE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-URL">URL</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/calendars.js~Calendars.html">Calendars</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toIcsParamString">toIcsParamString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toParamString">toParamString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toQueryString">toQueryString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-download">download</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-formatText">formatText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getBlob">getBlob</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getFileName">getFileName</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRrule">getRrule</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUid">getUid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-safariFileSave">safariFileSave</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-formatTime">formatTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHoursDuration">getHoursDuration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getTimeCreated">getTimeCreated</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/__tests__/ICalendar.spec.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import moment from &apos;moment&apos;
+import { FORMAT } from &apos;../constants&apos;
+import { formatText, getUid, getRrule, download } from &apos;../utils/ics&apos;
+import { getTimeCreated } from &apos;../utils/time&apos;
+import CalendarBase from &apos;../CalendarBase&apos;
+import ICalendar from &apos;../ICalendar&apos;
+
+jest.mock(&apos;../utils/ics&apos;)
+jest.mock(&apos;../utils/time&apos;)
+
+describe(&apos;ICalendar&apos;, () =&gt; {
+  afterEach(() =&gt; {
+    jest.clearAllMocks()
+  })
+
+  it(&apos;should be a subclass of CalendarBase&apos;, () =&gt; {
+    const result = new ICalendar({})
+    expect(result).toBeInstanceOf(CalendarBase)
+  })
+
+  describe(&apos;download()&apos;, () =&gt; {
+    it(&apos;should call render and the download util&apos;, () =&gt; {
+      const obj = new ICalendar({
+        title: &apos;fake title&apos;,
+      })
+      jest.spyOn(obj, &apos;render&apos;).mockReturnValue(&apos;renderedstring&apos;)
+      obj.download()
+
+      expect(obj.render).toHaveBeenCalledTimes(1)
+
+      const rendered = obj.render.mock.results[0].value
+      expect(download).toHaveBeenCalledTimes(1)
+      expect(download).toHaveBeenCalledWith(obj.title, rendered)
+    })
+  })
+
+  describe(&apos;render()&apos;, () =&gt; {
+    const originalWindow = global.window
+    const testOpts = {
+      title: &apos;Fun Party&apos;,
+      description: &apos;BYOB&apos;,
+      location: &apos;New York&apos;,
+      start: &apos;20190704T190000&apos;,
+      end: &apos;20190704T210000&apos;,
+      recurrence: {},
+    }
+    const dtFormat = `${FORMAT.DATE}T${FORMAT.TIME}`
+
+    beforeEach(() =&gt; {
+      formatText.mockImplementation((...args) =&gt; args.join(&apos; formatted &apos;))
+      getUid.mockReturnValue(24)
+      getTimeCreated.mockReturnValue(&apos;20190502&apos;)
+      getRrule.mockReturnValue(&apos;mockedRrule&apos;)
+      Object.defineProperty(global, &apos;window&apos;, {
+        value: {
+          location: {
+            host: &apos;foobar&apos;,
+          },
+        },
+        writable: true,
+      })
+    })
+
+    afterEach(() =&gt; {
+      Object.defineProperty(global, &apos;window&apos;, {
+        value: originalWindow,
+        writable: true,
+      })
+    })
+
+    it(&apos;should format and truncate the description, location, and text, to 62, 64, and 66 characters respectively&apos;, () =&gt; {
+      const obj = new ICalendar(testOpts)
+
+      obj.render()
+
+      expect(formatText).toHaveBeenCalledTimes(3)
+      expect(formatText.mock.calls).toEqual([
+        [testOpts.description, 62],
+        [testOpts.location, 64],
+        [testOpts.title, 66],
+      ])
+    })
+
+    it(&apos;should call getUid&apos;, () =&gt; {
+      const obj = new ICalendar(testOpts)
+
+      obj.render()
+
+      expect(getUid).toHaveBeenCalledTimes(1)
+    })
+
+    it(&apos;should call getTimeCreated&apos;, () =&gt; {
+      const obj = new ICalendar(testOpts)
+
+      obj.render()
+
+      expect(getTimeCreated).toHaveBeenCalledTimes(1)
+    })
+
+    it(&apos;should render an ICS Param string&apos;, () =&gt; {
+      const obj = new ICalendar(testOpts)
+
+      const rendered = obj.render()
+
+      const expected = [
+        &apos;BEGIN:VCALENDAR&apos;,
+        &apos;VERSION:2.0&apos;,
+        &apos;BEGIN:VEVENT&apos;,
+        &apos;CLASS:PUBLIC&apos;,
+        `DESCRIPTION:${testOpts.description} formatted 62`,
+        `DTSTART:${moment(testOpts.start).format(dtFormat)}`,
+        `DTEND:${moment(testOpts.end).format(dtFormat)}`,
+        `LOCATION:${testOpts.location} formatted 64`,
+        `SUMMARY:${testOpts.title} formatted 66`,
+        &apos;TRANSP:TRANSPARENT&apos;,
+        &apos;RRULE:mockedRrule&apos;,
+        &apos;END:VEVENT&apos;,
+        &apos;END:VCALENDAR&apos;,
+        &apos;UID:24&apos;,
+        &apos;DTSTAMP:20190502&apos;,
+        &apos;PRODID:foobar&apos;,
+      ].join(&apos;\n&apos;)
+      expect(rendered).toBe(expected)
+    })
+  })
+})
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

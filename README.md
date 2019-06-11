@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="#">
-    <img src="https://raw.githubusercontent.com/jshor/datebook/master/docs/assets/logo.png" width="450" height="100" />
+  <a href="https://jshor.github.io/datebook/">
+    <img src="https://raw.githubusercontent.com/jshor/datebook/master/manual/assets/logo.png" width="450" height="100" />
   </a>
 </p>
 
@@ -43,13 +43,17 @@
 
 ## Documentation
 
-See the [full documentation here]()
+See the [full documentation here](https://jshor.github.io/datebook/)
 
 ## Quick start
+
+### Installation
 
 ```sh
 yarn add datebook
 ```
+
+### Example usage
 
 ```js
 import { ICalendar } from 'datebook'
@@ -71,11 +75,11 @@ icalendar.download()
 
 ## Available classes
 
-* [`YahooCalendar`]()
-* [`GoogleCalendar`]()
-* [`ICalendar`]()
-* [`OutlookCalendar`]()
-* [`CalendarBase`]() (for creating new services)
+* [`YahooCalendar`](https://jshor.github.io/datebook/class/src/YahooCalendar.js~YahooCalendar.html)
+* [`GoogleCalendar`](https://jshor.github.io/datebook/class/src/GoogleCalendar.js~GoogleCalendar.html)
+* [`ICalendar`](https://jshor.github.io/datebook/class/src/ICalendar.js~ICalendar.html)
+* [`OutlookCalendar`](https://jshor.github.io/datebook/class/src/OutlookCalendar.js~OutlookCalendar.html)
+* [`CalendarBase`](https://jshor.github.io/datebook/class/src/CalendarBase.js~CalendarBase.html) (for creating new services)
 
 ## Bugs
 

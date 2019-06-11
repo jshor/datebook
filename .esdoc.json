@@ -1,0 +1,16 @@
+{
+  "source": "./src",
+  "excludes": ["\\.spec\\.js$"],
+  "destination": "./docs",
+  "plugins": [{"name": "esdoc-standard-plugin"}],
+  "option": {
+    "manual": {
+      "asset": "./manual/asset",
+      "files": [
+        "./manual/Parameters.md",
+        "./README.md",
+        "./CHANGELOG.md"
+      ]
+    }
+  }
+}

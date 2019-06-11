@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/CalendarBase.js | datebook</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Generates URLs and downloads ICS files for adding events to popular calendar apps."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="datebook"><meta property="twitter:description" content="Generates URLs and downloads ICS files for adding events to popular calendar apps."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/jshor/datebook"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/CalendarBase.js~CalendarBase.html">CalendarBase</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/GoogleCalendar.js~GoogleCalendar.html">GoogleCalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ICalendar.js~ICalendar.html">ICalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/OutlookCalendar.js~OutlookCalendar.html">OutlookCalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/YahooCalendar.js~YahooCalendar.html">YahooCalendar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FORMAT">FORMAT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RECURRENCE">RECURRENCE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-URL">URL</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/calendars.js~Calendars.html">Calendars</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toIcsParamString">toIcsParamString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toParamString">toParamString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-toQueryString">toQueryString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-download">download</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-formatText">formatText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getBlob">getBlob</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getFileName">getFileName</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRrule">getRrule</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUid">getUid</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-safariFileSave">safariFileSave</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-formatTime">formatTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHoursDuration">getHoursDuration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getTimeCreated">getTimeCreated</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/CalendarBase.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import moment from &apos;moment&apos;
+import { FORMAT } from &apos;./constants&apos;
+
+/**
+ * Base calendar class. This class can be extended to add new calendar services.
+ */
+class CalendarBase {
+  /**
+   * Constructor.
+   * 
+   * @param {Object} options
+   * @param {String} options.description - event description
+   * @param {String} options.title - event title
+   * @param {String} options.location - event location 
+   * @param {String} options.start - event start time
+   * @param {String} [options.end] - event end time
+   * @param {Object} [options.recurrence]
+   * @param {String} [options.recurrence.frequency] - recurrence frequency (`DAILY`, `WEEKLY`, `MONTHLY`, `YEARLY`)
+   * @param {Number} [options.recurrence.interval] - time between recurrences
+   * @param {Number} [options.recurrence.count] - number of times event should repeat
+   * @param {String} [options.recurrence.end] - date when the last recurrence should occur
+   * @param {String} [options.recurrence.weekstart = &apos;SU&apos;] - uppercase, first two letters of the day that the week starts on
+   * @param {String} [options.recurrence.weekdays] - comma-separated list of uppercase, first two letters of the days the event occurs on
+   * @param {String} [options.recurrence.monthdays] - comma-separated list of monthdays	String of numbers
+   */
+  constructor (options) {
+    this.setText(options)
+    this.setTimestamps(options)
+  }
+  
+  /**
+   * Sets the description, title and location.
+   * 
+   * @private
+   * @param {Object} options
+   * @param {String} options.description - event description
+   * @param {String} options.title - event title
+   * @param {String} options.location - event location 
+   */
+  setText (options) {
+    this.description = options.description || &apos;&apos;
+    this.title = options.title || &apos;&apos;
+    this.location = options.location || &apos;&apos;
+  }
+  
+  /**
+   * Sets the time and recurrence parameters.
+   * 
+   * @private
+   * @param {Object} options
+   * @param {String} options.start - event start time
+   * @param {String} [options.end] - event end time
+   * @param {Boolean} [options.allday = false] - whether this is an all-day event
+   * @param {Recurrence} [options.recurrence] - event recurrence
+   */
+  setTimestamps (options) {
+    let format = FORMAT.DATE
+    
+    this.allday = !options.end
+    
+    if (this.allday) {
+      this.end = moment(options.start)
+        .add(1, &apos;days&apos;)
+        .format(format)
+    } else {
+      format += `T${FORMAT.TIME}`
+      this.end = moment(options.end).format(format)
+    }
+    
+    this.start = moment(options.start).format(format)
+    this.recurrence = options.recurrence
+  }
+}
+
+export default CalendarBase</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
