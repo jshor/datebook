@@ -1,6 +1,6 @@
 {
   "name": "datebook",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generates URLs and downloads ICS files for adding events to popular calendar apps.",
   "scripts": {
     "build": "parcel build ./src/index.js",
@@ -11,6 +11,7 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "release": "standard-version -n"
   },
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jshor/datebook"

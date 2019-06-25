@@ -10,17 +10,17 @@ script:
   - yarn release
   - git push --follow-tags -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git
 
-after_success: |
-  if [ -n "$GITHUB_TOKEN" ]; then
-    cd "$TRAVIS_BUILD_DIR"
-    cd docs
-    git init
-    git checkout -b gh-pages
-    git add .
-    git -c user.name='Travis CI' -c user.email='Travis CI' commit -m "Documentation"
-    git push -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git gh-pages &>/dev/null
-    cd "$TRAVIS_BUILD_DIR"
-  fi
+# after_success: |
+#   if [ -n "$GITHUB_TOKEN" ]; then
+#     cd "$TRAVIS_BUILD_DIR"
+#     cd docs
+#     git init
+#     git checkout -b gh-pages
+#     git add .
+#     git -c user.name='Travis CI' -c user.email='Travis CI' commit -m "Documentation"
+#     git push -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git gh-pages &>/dev/null
+#     cd "$TRAVIS_BUILD_DIR"
+#   fi
   
 deploy:
   provider: npm
