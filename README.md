@@ -9,34 +9,30 @@
 <br>
 
 <p align="center">
-  <a href="https://codecov.io/gh/jshor/datebook">
-    <img src="https://img.shields.io/codecov/c/github/jshor/datebook.svg?style=flat-square"
-         alt="Code coverage">
-  </a>
-
-  <a href="hhttps://travis-ci.org/jshor/datebook">
+  <a href="https://codecov.io/gh/jshor/datebook"><img
+    src="https://img.shields.io/codecov/c/github/jshor/datebook.svg?style=flat-square"
+    alt="Code coverage"
+  /></a>
+  
+  <a href="https://travis-ci.org/jshor/datebook"><img
     <img src="https://img.shields.io/travis/jshor/datebook.svg?style=flat-square"
-         alt="Build status">
-  </a>
+    alt="Build status"
+  /></a>
+  
+  <a href="https://david-dm.org/jshor/datebook#info=dependencies"><img
+    src="https://img.shields.io/david/jshor/datebook.svg?style=flat-square"
+    alt="Dependency Status"
+  /></a>
+  
+  <a href="https://npmjs.com/package/datebook"><img
+    src="http://img.shields.io/npm/v/datebook.svg?style=flat-square"
+    alt="npm version"
+  /></a>
 
-  <a href="https://david-dm.org/jshor/datebook#info=devDependencies">
-    <img src="https://img.shields.io/david/jshor/datebook.svg?style=flat-square"
-         alt="devDependencies Status">
-  </a>
-
-  <a href="https://david-dm.org/jshor/datebook#info=dependencies">
-    <img src="https://img.shields.io/david/jshor/datebook.svg?style=flat-square"
-         alt="Dependency Status">
-  </a>
-
-  <a href="LICENSE.md">
-    <img src="http://img.shields.io/:license-MIT-blue.svg?style=flat-square"
-         alt="License | MIT">
-  </a>
-
-  <a href="https://npmjs.com/packages/datebook">
-    <img src="http://img.shields.io/npm/v/datebook.svg?style=flat-square" />
-  </a>
+  <a href="LICENSE.md"><img
+    src="http://img.shields.io/:license-MIT-blue.svg?style=flat-square"
+    alt="License | MIT"
+  /></a>
 </p>
 
 <br>

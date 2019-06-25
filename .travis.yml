@@ -8,7 +8,7 @@ script:
   - yarn docs
   - yarn build
   - yarn release
-  - git push --follow-tags -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git master
+  - git push --follow-tags -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git
 
 after_success: |
   if [ -n "$GITHUB_TOKEN" ]; then

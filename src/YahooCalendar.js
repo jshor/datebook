@@ -7,7 +7,7 @@ import { toQueryString } from './utils/data'
  * Generates a Yahoo! Calendar url.
  * Note that Yahoo! Calendar's support for recurrence is limited to only the interval and frequency.
  * 
- * @example ```
+ * @example
  *  import { YahooCalendar } from 'datebook'
  * 
  *  const yahoo = new YahooCalendar({
@@ -23,7 +23,7 @@ import { toQueryString } from './utils/data'
  *  })
  * 
  *  yahoo.render() // https://calendar.yahoo.com/?v=60&title=Happy%20Hour&st=20190704T190000&desc=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&in_loc=The%20Bar%2C%20New%20York%2C%20NY&RPAT=02Wk&REND=20190610T123112&dur=0200
- * ```
+ *
  */
 export default class YahooCalendar extends CalendarBase {
   /**

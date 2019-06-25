@@ -5,7 +5,7 @@ import { getTimeCreated } from './utils/time'
 /**
  * Generates a downloadable ICS file.
  * 
- * @example ```
+ * @example
  *  import { ICalendar } from 'datebook'
  * 
  *  const icalendar = new ICalendar({
@@ -39,7 +39,7 @@ import { getTimeCreated } from './utils/time'
  *  // PRODID:mydomain.com
  * 
  *  icalendar.download() // downloads the .ics file as <title>.ics
- * ```
+ * 
  */
 export default class ICalendar extends CalendarBase {
   /**

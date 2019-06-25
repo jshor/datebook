@@ -6,7 +6,7 @@ import { toQueryString } from './utils/data'
  * Generates a an Outlook Calendar url.
  * Note that Outlook Calendar's query string params do not support recurrence.
  * 
- * @example ```
+ * @example
  *  import { OutlookCalendar } from 'datebook'
  * 
  *  const outlook = new OutlookCalendar({
@@ -18,7 +18,7 @@ import { toQueryString } from './utils/data'
  *  })
  * 
  *  outlook.render() // https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20190704T190000%2F20190704T210000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D2%3BUNTIL%3D20190610T123926
- * ```
+ *
  */
 export default class OutlookCalendar extends CalendarBase {
   /**
