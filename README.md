@@ -53,7 +53,7 @@ const icalendar = new ICalendar({
   start: '20190704T190000',
   end: '20190704T210000',
   recurrence: {
-    frequency: 'WEEKLY'
+    frequency: 'WEEKLY',
     interval: 2
   }
 })
