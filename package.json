@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "description": "Generates URLs and downloads ICS files for adding events to popular calendar apps.",
   "scripts": {
-    "build": "parcel build ./src/index.js",
+    "build": "webpack",
     "test": "jest",
     "docs": "esdoc",
     "test:ci": "jest && codecov",
@@ -11,7 +11,7 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "release": "standard-version -n"
   },
-  "main": "dist/index.js",
+  "main": "dist/datebook.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jshor/datebook"
@@ -44,6 +44,7 @@
     "autoprefixer": "^6.0.3",
     "babel-jest": "^24.4.0",
     "babel-loader": "^8.0.5",
+    "babili-webpack-plugin": "^0.1.2",
     "codecov": "^3.5.0",
     "commitizen": "^3.1.1",
     "esdoc": "^1.1.0",
@@ -52,7 +53,9 @@
     "jest": "^24.1.0",
     "jest-mock-random": "^1.0.2",
     "parcel-bundler": "^1.12.3",
-    "standard-version": "^6.0.1"
+    "standard-version": "^6.0.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "gitHooks": {
     "pre-push": "yarn test"
