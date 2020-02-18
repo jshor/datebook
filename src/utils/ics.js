@@ -79,15 +79,8 @@ export const getRrule = (recurrence) => {
  * @param {String} data - ics data
  */
 export const download = (title, data) => {
+  const blob = getBlob(data)
   const fileName = getFileName(title)
-  const isSafari = ~navigator
-    .userAgent
-    .toLowerCase()
-    .indexOf('safari')
 
-  if (isSafari) {
-    safariFileSave(data, fileName)
-  } else {
-    FileSaver.saveAs(getBlob(data), fileName)
-  }
+  FileSaver.saveAs(blob, fileName)
 }
