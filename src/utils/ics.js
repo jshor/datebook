@@ -1,7 +1,6 @@
 import FileSaver from 'file-saver'
 import { toIcsParamString } from './data'
 import { formatTime } from './time'
-import safariFileSave from './safariFileSave'
 
 /**
  * Removes line breaks and ensures that the string is no
