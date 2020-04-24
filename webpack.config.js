@@ -2,6 +2,12 @@ const path = require('path')
 const MinifyPlugin = require('babel-minify-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
+const plugins = [new MinifyPlugin()]
+
+if (process.argv.includes('--analyze')) {
+  plugins.push(new BundleAnalyzerPlugin())
+}
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -24,10 +30,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new MinifyPlugin(),
-    new BundleAnalyzerPlugin()
-  ],
+  plugins,
   mode: 'development',
   devtool: 'eval-source-map'
 }

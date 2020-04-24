@@ -6,23 +6,34 @@ import CalendarBase from '../CalendarBase'
 import ICalendar from '../ICalendar'
 
 jest.mock('../utils/ics')
-jest.mock('../utils/time')
 
 describe('ICalendar', () => {
+  let baseOpts
+
+  beforeEach(() => {
+    baseOpts = {
+      title: 'Fun Party',
+      description: 'BYOB',
+      location: 'New York',
+      start: '2019-07-04T19:00:00.000-05:00',
+      end: '2019-07-04T21:00:00.000-05:00',
+    }
+  })
+
   afterEach(() => {
     jest.clearAllMocks()
   })
 
   it('should be a subclass of CalendarBase', () => {
-    const result = new ICalendar({})
+    const result = new ICalendar(baseOpts)
+
     expect(result).toBeInstanceOf(CalendarBase)
   })
 
   describe('download()', () => {
     it('should call render and the download util', () => {
-      const obj = new ICalendar({
-        title: 'fake title',
-      })
+      const obj = new ICalendar(baseOpts)
+
       jest.spyOn(obj, 'render').mockReturnValue('renderedstring')
       obj.download()
 
@@ -36,21 +47,12 @@ describe('ICalendar', () => {
 
   describe('render()', () => {
     const originalWindow = global.window
-    const testOpts = {
-      title: 'Fun Party',
-      description: 'BYOB',
-      location: 'New York',
-      start: '20190704T190000',
-      end: '20190704T210000',
-      recurrence: {},
-    }
     const dtFormat = `${FORMAT.DATE}T${FORMAT.TIME}`
 
     beforeEach(() => {
       formatText.mockImplementation((...args) => args.join(' formatted '))
       getUid.mockReturnValue(24)
-      getTimeCreated.mockReturnValue('20190502')
-      getRrule.mockReturnValue('mockedRrule')
+      
       Object.defineProperty(global, 'window', {
         value: {
           location: {
@@ -69,20 +71,20 @@ describe('ICalendar', () => {
     })
 
     it('should format and truncate the description, location, and text, to 62, 64, and 66 characters respectively', () => {
-      const obj = new ICalendar(testOpts)
+      const obj = new ICalendar(baseOpts)
 
       obj.render()
 
       expect(formatText).toHaveBeenCalledTimes(3)
       expect(formatText.mock.calls).toEqual([
-        [testOpts.description, 62],
-        [testOpts.location, 64],
-        [testOpts.title, 66],
+        [baseOpts.description, 62],
+        [baseOpts.location, 64],
+        [baseOpts.title, 66],
       ])
     })
 
     it('should call getUid', () => {
-      const obj = new ICalendar(testOpts)
+      const obj = new ICalendar(baseOpts)
 
       obj.render()
 
@@ -90,15 +92,15 @@ describe('ICalendar', () => {
     })
 
     it('should call getTimeCreated', () => {
-      const obj = new ICalendar(testOpts)
+      const obj = new ICalendar(baseOpts)
 
       obj.render()
 
       expect(getTimeCreated).toHaveBeenCalledTimes(1)
     })
 
-    it('should render an ICS Param string', () => {
-      const obj = new ICalendar(testOpts)
+    it.only('should render an ICS Param string', () => {
+      const obj = new ICalendar(baseOpts)
 
       const rendered = obj.render()
 
@@ -107,18 +109,17 @@ describe('ICalendar', () => {
         'VERSION:2.0',
         'BEGIN:VEVENT',
         'CLASS:PUBLIC',
-        `DESCRIPTION:${testOpts.description} formatted 62`,
-        `DTSTART:${moment(testOpts.start).format(dtFormat)}`,
-        `DTEND:${moment(testOpts.end).format(dtFormat)}`,
-        `LOCATION:${testOpts.location} formatted 64`,
-        `SUMMARY:${testOpts.title} formatted 66`,
+        `DESCRIPTION:${baseOpts.description} formatted 62`,
+        `DTSTART:${moment(baseOpts.start).format(dtFormat)}`,
+        `DTEND:${moment(baseOpts.end).format(dtFormat)}`,
+        `LOCATION:${baseOpts.location} formatted 64`,
+        `SUMMARY:${baseOpts.title} formatted 66`,
         'TRANSP:TRANSPARENT',
-        'RRULE:mockedRrule',
         'END:VEVENT',
         'END:VCALENDAR',
         'UID:24',
-        'DTSTAMP:20190502',
-        'PRODID:foobar',
+        `DTSTAMP:${getTimeCreated()}`,
+        'PRODID:foobar'
       ].join('\n')
       expect(rendered).toBe(expected)
     })

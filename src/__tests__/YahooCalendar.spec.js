@@ -1,7 +1,5 @@
 import moment from 'moment'
 import { FORMAT, RECURRENCE, URL } from '../constants'
-import { formatTime, getHoursDuration } from '../utils/time'
-import { toQueryString } from '../utils/data'
 import CalendarBase from '../CalendarBase'
 import YahooCalendar from '../YahooCalendar'
 import queryStringToObj from '../../test_helpers/queryStringToObj'
@@ -14,23 +12,33 @@ const yahooFreqMap = {
   [YEARLY]: 'Yr',
 }
 
-const dateFormat = FORMAT.DATE
-const dtFormat = `${dateFormat}T${FORMAT.TIME}`
+const dtFormat = `${FORMAT.DATE}T${FORMAT.TIME}`
 
 describe('YahooCalendar', () => {
+  let testOpts
+
+  beforeEach(() => {
+    testOpts = {
+      title: 'Fun Party',
+      description: 'BYOB',
+      location: 'New York',
+      start: '2019-07-04T19:00:00.000-05:00'
+    }
+  })
+
   afterEach(() => {
     jest.clearAllMocks()
   })
 
   it('should be a subclass of CalendarBase', () => {
-    const result = new YahooCalendar({})
+    const result = new YahooCalendar(testOpts)
 
     expect(result).toBeInstanceOf(CalendarBase)
   })
 
   describe('formatDay()', () => {
     it('should change the day to titlecase', () => {
-      const obj = new YahooCalendar({})
+      const obj = new YahooCalendar(testOpts)
       const day = 'sUnDAy'
 
       const result = obj.formatDay(day)
@@ -46,7 +54,7 @@ describe('YahooCalendar', () => {
       }
 
       it('should format weekdays only', () => {
-        const obj = new YahooCalendar({})
+        const obj = new YahooCalendar(testOpts)
 
         const result = obj.getFrequency(weekdayRecurrence)
 
@@ -56,7 +64,8 @@ describe('YahooCalendar', () => {
 
     describe('if no weekdays', () => {
       it('should transform frequencies', () => {
-        const obj = new YahooCalendar({})
+        const obj = new YahooCalendar(testOpts)
+
         for (let freq of [ DAILY, WEEKLY, MONTHLY, YEARLY, 'foobar' ]) {
           const result = obj.getFrequency({
             frequency: freq,
@@ -71,7 +80,7 @@ describe('YahooCalendar', () => {
   describe('getRecurrence()', () => {
     it('should call getFrequency with the recurrence', () => {
       jest.spyOn(YahooCalendar.prototype, 'getFrequency').mockReturnValueOnce('mockRrule')
-      const obj = new YahooCalendar({})
+      const obj = new YahooCalendar(testOpts)
 
       const recurrence = {
         interval: 3,
@@ -83,7 +92,7 @@ describe('YahooCalendar', () => {
     })
 
     it('should prepend single digit interval with 0', () => {
-      const obj = new YahooCalendar({})
+      const obj = new YahooCalendar(testOpts)
       const recurrence = {
         interval: 3,
         frequency: DAILY,
@@ -94,7 +103,7 @@ describe('YahooCalendar', () => {
     })
 
     it('should return yahoo calendar rpat rule', () => {
-      const obj = new YahooCalendar({})
+      const obj = new YahooCalendar(testOpts)
       const recurrence = {
         interval: 10,
         frequency: DAILY,
@@ -107,7 +116,7 @@ describe('YahooCalendar', () => {
 
   describe('render()', () => {
     it('should use the correct baseUrl', () => {
-      const obj = new YahooCalendar({})
+      const obj = new YahooCalendar(testOpts)
       const result = obj.render()
       const baseUrl = result.split('?')[0]
 
@@ -119,7 +128,7 @@ describe('YahooCalendar', () => {
         title: 'Fun Party',
         description: 'BYOB',
         location: 'New York',
-        start: '20190704T190000',
+        start: '2019-07-04T19:00:00.000-05:00'
       }
 
       describe('no recurrence', () => {
@@ -135,8 +144,8 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: 'allday',
-            st: moment(testOpts.start).format(dateFormat),
-            et: moment('20190705').format(dateFormat),
+            st: moment(testOpts.start).format(FORMAT.DATE),
+            et: moment(testOpts.start).add(1, 'days').format(FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
           expect(expectedObj).toMatchObject(params)
@@ -145,12 +154,13 @@ describe('YahooCalendar', () => {
 
       describe('recurrence', () => {
         it('should format the query string', () => {
+          const recurrenceEnd = '2019-07-10T19:00:00.000-05:00'
           const obj = new YahooCalendar({
             ...testOpts,
             recurrence: {
               frequency: DAILY,
               interval: 1,
-              end: '20190710',
+              end: recurrenceEnd
             }
           })
           const result = obj.render()
@@ -162,12 +172,11 @@ describe('YahooCalendar', () => {
             title: 'Fun Party',
             desc: 'BYOB',
             in_loc: 'New York',
-            dur: '0000',
-            st: moment(testOpts.start).format(dateFormat),
+            dur: '2400',
+            st: moment(testOpts.start).format(FORMAT.DATE),
             RPAT: '01Dy',
-            REND: '20190710T000000',
+            REND: moment(recurrenceEnd).format(dtFormat)
           }
-          expect(expectedObj).toMatchObject(params)
           expect(params).toMatchObject(expectedObj)
         })
       })
@@ -178,8 +187,8 @@ describe('YahooCalendar', () => {
         title: 'Fun Party',
         description: 'BYOB',
         location: 'New York',
-        start: '20190704T190000',
-        end: '20190704T210000',
+        start: '2019-07-04T19:00:00.000-05:00',
+        end: '2019-07-04T21:00:00.000-05:00'
       }
 
       describe('no recurrence', () => {
@@ -204,12 +213,13 @@ describe('YahooCalendar', () => {
 
       describe('recurrence', () => {
         it('should format the query string', () => {
+          const recurrenceEnd = '2019-07-10T19:00:00.000-05:00'
           const obj = new YahooCalendar({
             ...testOpts,
             recurrence: {
               frequency: DAILY,
               interval: 1,
-              end: '20190710',
+              end: recurrenceEnd
             }
           })
           const result = obj.render()
@@ -224,9 +234,8 @@ describe('YahooCalendar', () => {
             dur: '0200',
             st: moment(testOpts.start).format(dtFormat),
             RPAT: '01Dy',
-            REND: '20190710T000000',
+            REND: moment(recurrenceEnd).format(dtFormat)
           }
-          expect(expectedObj).toMatchObject(params)
           expect(params).toMatchObject(expectedObj)
         })
       })

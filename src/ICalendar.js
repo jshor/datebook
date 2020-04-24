@@ -6,8 +6,9 @@ import { getTimeCreated } from './utils/time'
  * Generates a downloadable ICS file.
  * 
  * @example
- *  import { ICalendar } from 'datebook'
  * 
+ *  import { ICalendar } from 'datebook'
+ *
  *  const icalendar = new ICalendar({
  *    title: 'Happy Hour',
  *    location: 'The Bar, New York, NY',

@@ -1,5 +1,10 @@
-import moment from 'moment'
 import { FORMAT } from './constants'
+import {
+  formatTimestampString,
+  formatTimestampDate,
+  getHoursDuration,
+  parseDate
+} from './utils/time'
 
 /**
  * Base calendar class. This class can be extended to add new calendar services.
@@ -12,8 +17,8 @@ class CalendarBase {
    * @param {String} options.description - event description
    * @param {String} options.title - event title
    * @param {String} options.location - event location 
-   * @param {String} options.start - event start time
-   * @param {String} [options.end] - event end time
+   * @param {String} options.start - event start time, in [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse#Date_Time_String_Format) format
+   * @param {String} [options.end] - event end time, in [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse#Date_Time_String_Format) format
    * @param {Object} [options.recurrence]
    * @param {String} [options.recurrence.frequency] - recurrence frequency (`DAILY`, `WEEKLY`, `MONTHLY`, `YEARLY`)
    * @param {Number} [options.recurrence.interval] - time between recurrences
@@ -59,15 +64,20 @@ class CalendarBase {
     this.allday = !options.end
     
     if (this.allday) {
-      this.end = moment(options.start)
-        .add(1, 'days')
-        .format(format)
+      // if allday is specified, make the end date exactly 1 day from the start date
+      const end = parseDate(options.start)
+      
+      end.setDate(end.getDate() + 1)
+      
+      this.end = formatTimestampDate(end, format)
+      this.duration = getHoursDuration(options.start, end.toISOString())
     } else {
       format += `T${FORMAT.TIME}`
-      this.end = moment(options.end).format(format)
+      this.end = formatTimestampString(options.end, format)
+      this.duration = getHoursDuration(options.start, options.end)
     }
     
-    this.start = moment(options.start).format(format)
+    this.start = formatTimestampString(options.start, format)
     this.recurrence = options.recurrence
   }
 }

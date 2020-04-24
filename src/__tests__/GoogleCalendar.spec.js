@@ -1,7 +1,7 @@
 import CalendarBase from '../CalendarBase'
 import GoogleCalendar from '../GoogleCalendar'
 import { FORMAT, RECURRENCE, URL } from '../constants'
-import { formatTime } from '../utils/time'
+import { formatTimestampString } from '../utils/time'
 import * as Ics from '../utils/ics'
 import queryStringToObj from '../../test_helpers/queryStringToObj'
 
@@ -14,7 +14,7 @@ describe('GoogleCalendar', () => {
     title: 'Test Event',
     description: 'Test Description',
     location: 'Rockefeller Center',
-    start: '20150704T190000'
+    start: '2019-03-23T17:00:00.000-05:00'
   }
   const baseParams = {
     text: 'Test Event',
@@ -30,7 +30,7 @@ describe('GoogleCalendar', () => {
   })
 
   it('should be a subclass of CalendarBase', () => {
-    expect(new GoogleCalendar({})).toBeInstanceOf(CalendarBase)
+    expect(new GoogleCalendar(baseOpts)).toBeInstanceOf(CalendarBase)
   })
 
   describe('render()', () => {
@@ -68,9 +68,9 @@ describe('GoogleCalendar', () => {
         let paramsObj = queryStringToObj(queryString)
 
         let expectedDates = `${
-          formatTime(testObj.start, FORMAT.DATE)
+          formatTimestampString(testObj.start, FORMAT.DATE)
         }/${
-          formatTime(testObj.end, FORMAT.DATE)
+          formatTimestampString(testObj.end, FORMAT.DATE)
         }`
 
         expect(paramsObj.dates).toBe(expectedDates)

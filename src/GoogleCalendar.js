@@ -1,6 +1,6 @@
 import CalendarBase from './CalendarBase'
 import { FORMAT, URL } from './constants'
-import { formatTime } from './utils/time'
+import { formatTimestampString } from './utils/time'
 import { toQueryString } from './utils/data'
 import { getRrule } from './utils/ics'
 
@@ -46,12 +46,12 @@ export default class GoogleCalendar extends CalendarBase {
       location: this.location
     }
     
-    let start = formatTime(this.start, FORMAT.FULL)
-    let end = formatTime(this.end, FORMAT.FULL)
+    let start = formatTimestampString(this.start, FORMAT.FULL)
+    let end = formatTimestampString(this.end, FORMAT.FULL)
     
     if (this.allday) {
-      start = formatTime(this.start, FORMAT.DATE)
-      end = formatTime(this.end, FORMAT.DATE)
+      start = formatTimestampString(this.start, FORMAT.DATE)
+      end = formatTimestampString(this.end, FORMAT.DATE)
     }
     
     params.dates = `${start}/${end}`

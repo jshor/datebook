@@ -8,7 +8,7 @@ import {
   getRrule,
   download,
 } from '../ics'
-import { formatTime } from '../time'
+import { formatTimestampString } from '../time'
 import FileSaver from 'file-saver';
 import safariFileSave from '../safariFileSave'
 
@@ -118,15 +118,15 @@ describe('IcsUtil', () => {
         interval: 1,
         count: 5,
         weekStart: 'MO',
-        end: '20190502',
+        end: '2019-05-02',
         weekdays: 'MO',
         monthdays: '5',
       }
       const expectedRrule = `FREQ=${
         DAILY
-        };INTERVAL=1;COUNT=5;WKST=MO;UNTIL=${
-          formatTime(recurrence.end)
-        };BYDAY=MO;BYMONTHDAY=5`;
+        };INTERVAL=1;COUNT=5;WKST=MO;BYDAY=MO;BYMONTHDAY=5;UNTIL=${
+          formatTimestampString(recurrence.end)
+        }`;
 
       const actualRrule = getRrule(recurrence)
 
