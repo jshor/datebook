@@ -6,7 +6,12 @@ import queryStringToObj from '../../test_helpers/queryStringToObj'
 
 describe('Outlook Calendar', () => {
   it('should be a subclass of CalendarBase', () => {
-    expect(new OutlookCalendar({})).toBeInstanceOf(CalendarBase)
+    expect(new OutlookCalendar({
+      title: 'Fun Party',
+      description: 'BYOB',
+      location: 'New York',
+      start: '2019-07-04T19:00:00.000-05:00'
+    })).toBeInstanceOf(CalendarBase)
   })
 
   describe('render()', () => {
@@ -17,8 +22,8 @@ describe('Outlook Calendar', () => {
       testOpts.title = 'Music Concert'
       testOpts.location = 'New York'
       testOpts.description = 'a description'
-      testOpts.start = '20150704T190000';
-      testOpts.end = '20150704T220000';
+      testOpts.start = '2019-03-23T17:00:00.000-05:00'
+      testOpts.end = '2019-03-23T21:00:00.000-05:00'
     })
 
     afterEach(() => {

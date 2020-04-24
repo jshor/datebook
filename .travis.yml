@@ -4,14 +4,14 @@ node_js:
   - 10
 
 script:
-  - yarn test:ci
+  - yarn test
   - yarn docs
   - yarn build
   - yarn release
-  # - git push --follow-tags -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git
 
 after_success: |
-  if [ -n "$GITHUB_TOKEN" ]; then
+  if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_COMMIT_MESSAGE != *"chore(release)"* ]]; then
+    yarn codecov
     cd "$TRAVIS_BUILD_DIR"
     cd docs
     git init

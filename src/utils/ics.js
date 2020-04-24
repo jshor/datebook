@@ -1,6 +1,6 @@
 import FileSaver from 'file-saver'
 import { toIcsParamString } from './data'
-import { formatTime } from './time'
+import { formatTimestampString } from './time'
 import safariFileSave from './safariFileSave'
 
 /**
@@ -61,15 +61,30 @@ export const getUid = () => {
  * @param {*} recurrence
  */
 export const getRrule = (recurrence) => {
-  return toIcsParamString({
-    'FREQ': recurrence.frequency,
-    'INTERVAL': recurrence.interval,
-    'COUNT': recurrence.count,
-    'WKST': recurrence.weekStart,
-    'UNTIL': formatTime(recurrence.end),
-    'BYDAY': recurrence.weekdays,
-    'BYMONTHDAY': recurrence.monthdays
-  })
+  const keys = {
+    FREQ: 'frequency',
+    INTERVAL: 'interval',
+    COUNT: 'count',
+    WKST: 'weekStart',
+    BYDAY: 'weekdays',
+    BYMONTHDAY: 'monthdays'
+  }
+
+  // map all user-defined keys onto the rrule object
+  const rrule = Object
+    .keys(keys)
+    .filter((k) => recurrence.hasOwnProperty(keys[k]))
+    .reduce((values, key) => {
+      return Object.assign({}, values, {
+        [key]: recurrence[keys[key]]
+      })
+    }, {})
+
+  if (recurrence.end) {
+    rrule.UNTIL = formatTimestampString(recurrence.end)
+  }
+
+  return toIcsParamString(rrule)
 }
 
 /**

@@ -1,5 +1,9 @@
 module.exports = {
   collectCoverage: true,
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.js',
+    '!<rootDir>/src/utils/calendars.js'
+  ],
   coverageDirectory: '<rootDir>/coverage',
   coverageThreshold: {
     global: {

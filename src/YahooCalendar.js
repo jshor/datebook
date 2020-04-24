@@ -1,6 +1,6 @@
 import CalendarBase from './CalendarBase'
 import { RECURRENCE, URL } from './constants'
-import { formatTime, getHoursDuration } from './utils/time'
+import { formatTimestampString } from './utils/time'
 import { toQueryString } from './utils/data'
 
 /**
@@ -130,8 +130,11 @@ export default class YahooCalendar extends CalendarBase {
 
     if (this.recurrence) {
       params.RPAT = this.getRecurrence(this.recurrence)
-      params.REND = formatTime(this.recurrence.end)
-      params.dur = getHoursDuration(this.start, this.end)
+      params.dur = this.duration
+
+      if (this.recurrence.end) {
+        params.REND = formatTimestampString(this.recurrence.end)
+      }
     } else {
       params.et = this.end
     }
