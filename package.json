@@ -9,7 +9,8 @@
     "docs": "esdoc",
     "commit": "yarn git-cz",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "release": "standard-version -n"
+    "release": "standard-version -n",
+    "publish": "git push --follow-tags origin HEAD && npm publish"
   },
   "main": "dist/datebook.js",
   "repository": {
