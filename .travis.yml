@@ -10,7 +10,8 @@ script:
   - yarn release
 
 after_success: |
-  if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_COMMIT_MESSAGE != *"chore(release)"* ]]; then
+  if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_COMMIT_MESSAGE == *"chore(release)"* ]]; then
+    yarn publish
     yarn codecov
     cd "$TRAVIS_BUILD_DIR"
     cd docs
