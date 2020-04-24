@@ -1,13 +1,14 @@
-const BabiliPlugin = require("babili-webpack-plugin")
 const path = require('path')
+const MinifyPlugin = require('babel-minify-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'datebook.js',
-    path: path.resolve(__dirname, 'dist'),
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    path: path.join(__dirname, './dist'),      
+    filename: 'datebook.js',      
+    library: 'datebook',      
+    libraryTarget: 'umd'
   },
   resolve: {
     extensions: ['.js'],
@@ -24,7 +25,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new BabiliPlugin()
+    new MinifyPlugin(),
+    new BundleAnalyzerPlugin()
   ],
   mode: 'development',
   devtool: 'eval-source-map'
