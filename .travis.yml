@@ -9,20 +9,24 @@ script:
   - yarn build
   - yarn release
 
-after_success: |
-  if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_COMMIT_MESSAGE == *"chore(release)"* ]]; then
-    yarn publish
-    yarn codecov
-    cd "$TRAVIS_BUILD_DIR"
-    cd docs
-    git init
-    git checkout -b gh-pages
-    git add .
-    git -c user.name='Travis CI' -c user.email='Travis CI' commit -m "Documentation"
-    git push -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git gh-pages &>/dev/null
-    cd "$TRAVIS_BUILD_DIR"
-  fi
-  
+after_success:
+  - if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST == "false" && $TRAVIS_COMMIT_MESSAGE != *"chore(release)"* ]]; then
+      yarn release;
+      yarn codecov;
+      yarn publish;
+
+      if [[ $TRAVIS_COMMIT_MESSAGE != *"chore(release)"* ]]; then
+        cd "$TRAVIS_BUILD_DIR";
+        cd docs;
+        git init;
+        git checkout -b gh-pages;
+        git add .;
+        git -c user.name='Travis CI' -c user.email='Travis CI' commit -m "Documentation";
+        git push -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git gh-pages &>/dev/null;
+        cd "$TRAVIS_BUILD_DIR";
+      fi
+    fi
+    
 deploy:
   provider: npm
   email: "$NPM_EMAIL"
