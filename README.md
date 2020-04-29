@@ -4,26 +4,28 @@
   </a>
 </p>
 
-<p align="center">A library for adding events to calendar apps. It supports .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Online.</p>
+<p align="center">A library for adding events to popular calendar apps.</p>
+
+<p align="center">It supports .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Online.</p>
 
 <br>
 
 <p align="center">
   <a href="https://codecov.io/gh/jshor/datebook"><img
-    src="https://img.shields.io/codecov/c/github/jshor/datebook.svg?style=flat-square"
+    src="https://img.shields.io/codecov/c/github/jshor/datebook.svg?style=for-the-badge"
     alt="Code coverage"
   /></a> <a href="https://travis-ci.org/jshor/datebook"><img
-    src="https://img.shields.io/travis/jshor/datebook.svg?style=flat-square"
+    src="https://img.shields.io/travis/jshor/datebook.svg?style=for-the-badge"
     alt="Build status"
   /></a> <a href="https://david-dm.org/jshor/datebook#info=dependencies"><img
-    src="https://img.shields.io/david/jshor/datebook.svg?style=flat-square"
+    src="https://img.shields.io/david/jshor/datebook.svg?style=for-the-badge"
     alt="Dependency Status"
   /></a> <a href="https://npmjs.com/package/datebook"><img
-    src="http://img.shields.io/npm/v/datebook.svg?style=flat-square"
+    src="http://img.shields.io/npm/v/datebook.svg?style=for-the-badge"
     alt="npm version"
-  /></a> <a href="LICENSE.md"><img
-    src="http://img.shields.io/:license-MIT-blue.svg?style=flat-square"
-    alt="License | MIT"
+  /></a> <a href="https://bundlephobia.com/result?p=datebook"><img
+    src="https://img.shields.io/bundlephobia/min/datebook?style=for-the-badge"
+    alt="npm package size"
   /></a>
 </p>
 
@@ -69,10 +71,3 @@ icalendar.download()
 * [`OutlookCalendar`](https://jshor.github.io/datebook/class/src/OutlookCalendar.js~OutlookCalendar.html)
 * [`CalendarBase`](https://jshor.github.io/datebook/class/src/CalendarBase.js~CalendarBase.html) (for creating new services)
 
-## Bugs
-
-Please report all bugs [here](https://github.com/jshor/angular-addtocalendar/issues).
-
-## Changelog
-
-Available [here](https://github.com/jshor/angular-addtocalendar/blob/master/CHANGELOG.md).
