@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/jshor/datebook/compare/v4.0.0...v4.1.0) (2020-04-29)
+
+
+### Features
+
+* **nodejs:** adds SSR support ([#65](https://github.com/jshor/datebook/issues/65)) ([e7d8ea5](https://github.com/jshor/datebook/commit/e7d8ea573b8a5d6af42c2e28165c9b6ab884cbe6))
+
 ## [4.0.0](https://github.com/jshor/datebook/compare/v1.3.5...v4.0.0) (2020-04-29)
 
 
