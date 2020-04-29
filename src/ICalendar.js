@@ -65,9 +65,9 @@ export default class ICalendar extends CalendarBase {
    * @returns {String}
    */
   render () {
-    const description = formatText(this.description, 62)
-    const location = formatText(this.location, 64)
-    const summary = formatText(this.title, 66)
+    const description = formatText(this.description)
+    const location = formatText(this.location)
+    const summary = formatText(this.title)
     const event = [
       'CLASS:PUBLIC',
       `DESCRIPTION:${description}`,
