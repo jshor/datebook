@@ -4,8 +4,9 @@ node_js:
   - 10
 
 before_install:
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
   - git remote rm origin
-  - git remote add origin "https://symbology:$GITHUB_TOKEN@github.com/jshor/symbology.git"
+  - git remote add origin "https://symbology:$GITHUB_TOKEN@github.com/jshor/datebook.git"
 
 script:
   - echo "$TRAVIS_BRANCH"
@@ -16,9 +17,7 @@ script:
 after_success:
   - if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_COMMIT_MESSAGE != *"chore(release)"* ]]; then
       yarn release;
-      yarn codecov;
-      git push --follow-tags origin master;
-
+      
       if [[ $TRAVIS_COMMIT_MESSAGE != *"chore(release)"* ]]; then
         cd "$TRAVIS_BUILD_DIR";
         cd docs;
@@ -26,15 +25,10 @@ after_success:
         git checkout -b gh-pages;
         git add . ;
         git -c user.name='Travis CI' -c user.email='Travis CI' commit -m "Documentation";
-        git push -f origin gh-pages &>/dev/null;
+        git push -f -q https://jshor:$GITHUB_TOKEN@github.com/jshor/datebook.git gh-pages &>/dev/null;
         cd "$TRAVIS_BUILD_DIR";
       fi
+
+      git push --follow-tags origin HEAD:master;
+      npm publish;
     fi
-    
-deploy:
-  provider: npm
-  email: "$NPM_EMAIL"
-  api_key: "$NPM_TOKEN"
-  skip_cleanup: true
-  on:
-    tags: true

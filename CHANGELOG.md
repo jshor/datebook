@@ -1,5 +1,32 @@
 # Changelog
 
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.0.0](https://github.com/jshor/datebook/compare/v1.3.5...v3.0.0) (2020-04-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* This is no longer an Angular.js component. It is now a pure JS library and will be
+incompatible with old usage.
+
+### Bug Fixes
+
+* **bundle:** replaces parcel with webpack to address UMD export issues ([e4f7fc6](https://github.com/jshor/datebook/commit/e4f7fc6234332ff26d45cbe2c799267857c1c3e3))
+
+
+### Build System
+
+* **dist:** adds main script reference ([8278ce1](https://github.com/jshor/datebook/commit/8278ce116fc350fceacc8d7ec437f20a4cc253f2))
+* replaces babili with babel minifier ([#62](https://github.com/jshor/datebook/issues/62), [#64](https://github.com/jshor/datebook/issues/64), [#73](https://github.com/jshor/datebook/issues/73)) ([553c8e6](https://github.com/jshor/datebook/commit/553c8e6540cec0c96486d72bfb889e95bdce4d3f))
+
+
+### refactor
+
+* converts component to be a vanilla js library ([9a466aa](https://github.com/jshor/datebook/commit/9a466aa881675d407d6410d699b9a7c4f896b3cb))
+
+# Changelog
+
 ## v1.3.5
 
 - adds full recurrence support

@@ -1,6 +1,6 @@
 {
   "name": "datebook",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Generates URLs and downloads ICS files for adding events to popular calendar apps.",
   "scripts": {
     "build": "webpack",
