@@ -16,6 +16,7 @@ module.exports = {
     library: 'datebook',      
     libraryTarget: 'umd'
   },
+  target: 'node',
   resolve: {
     extensions: ['.js'],
   },
