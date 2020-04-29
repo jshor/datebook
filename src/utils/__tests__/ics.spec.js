@@ -52,12 +52,6 @@ describe('IcsUtil', () => {
 
       expect(formatted).toBe('foo\\nbar\\n\\nbaz')
     })
-
-    it('should truncate the string after backslash escaping newlines', () => {
-      const formatted = formatText(str, 10)
-
-      expect(formatted).toBe('foo\\nbar\\n')
-    })
   })
 
   describe('getBlob()', () => {

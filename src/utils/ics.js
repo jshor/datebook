@@ -8,17 +8,14 @@ import safariFileSave from './safariFileSave'
  * longer than maxLength chars (or 75 chars if none specified).
  *
  * @param {String} str - string to sanitize
- * @param {Number} maxLength
  * @returns {String}
  */
-export const formatText = (str, maxLength) => {
+export const formatText = (str) => {
   if (!str) {
     return ''
   }
-  str = str.replace(/\n/g, '\\n')
-  str = str.substring(0, maxLength)
-
-  return str
+  
+  return str.replace(/\n/g, '\\n')
 }
 
 /**
