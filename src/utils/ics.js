@@ -56,6 +56,17 @@ export const getUid = () => {
 }
 
 /**
+ * Returns the hostname for usage in `PRODID`. Returns `datebook` in Node.js.
+ *
+ * @returns {String}
+ */
+export const getProdId = () => {
+  return typeof window !== 'undefined'
+    ? window.location.host
+    : 'datebook'
+}
+
+/**
  * Converts the given recurrence options to RFC????
  *
  * @param {*} recurrence

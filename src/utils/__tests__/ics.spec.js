@@ -7,6 +7,7 @@ import {
   getUid,
   getRrule,
   download,
+  getProdId,
 } from '../ics'
 import { formatTimestampString } from '../time'
 import FileSaver from 'file-saver';
@@ -108,6 +109,30 @@ describe('IcsUtil', () => {
     it('should return a base-32 random UID', () => {
       const expectedUid = '4fzzzxkxflf'
       expect(getUid()).toBe(expectedUid)
+    })
+  })
+
+  describe('getProdId()', () => {
+    it('should return `datebook` in a non-browser context', () => {
+      Object.defineProperty(global, 'window', {
+        value: undefined,
+        writable: true
+      })
+
+      expect(getProdId()).toEqual('datebook')
+    })
+
+    it('should return the window host in the browser context', () => {
+      const host = 'mydomain.com'
+
+      Object.defineProperty(global, 'window', {
+        value: {
+          location: { host }
+        },
+        writable: true
+      })
+
+      expect(getProdId()).toEqual(host)
     })
   })
 

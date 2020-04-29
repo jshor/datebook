@@ -1,5 +1,5 @@
 import CalendarBase from './CalendarBase'
-import { formatText, getUid, getRrule, download } from './utils/ics'
+import { formatText, getUid, getProdId, getRrule, download } from './utils/ics'
 import { getTimeCreated } from './utils/time'
 
 /**
@@ -52,6 +52,8 @@ export default class ICalendar extends CalendarBase {
   
   /**
    * Downloads the rendered iCalendar.
+   * 
+   * @note Only works in browsers.
    */
   download () {
     download(this.title, this.render())
@@ -82,7 +84,7 @@ export default class ICalendar extends CalendarBase {
     
     const uid = getUid()
     const timeCreated = getTimeCreated()
-    const host = window.location.host
+    const host = getProdId()
     const calendar = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',

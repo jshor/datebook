@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { FORMAT } from '../constants'
-import { formatText, getUid, getRrule, download } from '../utils/ics'
+import { formatText, getUid, getProdId, download } from '../utils/ics'
 import { getTimeCreated } from '../utils/time'
 import CalendarBase from '../CalendarBase'
 import ICalendar from '../ICalendar'
@@ -52,15 +52,7 @@ describe('ICalendar', () => {
     beforeEach(() => {
       formatText.mockImplementation((...args) => args.join(' formatted '))
       getUid.mockReturnValue(24)
-      
-      Object.defineProperty(global, 'window', {
-        value: {
-          location: {
-            host: 'foobar',
-          },
-        },
-        writable: true,
-      })
+      getProdId.mockReturnValue('foobar')
     })
 
     afterEach(() => {
