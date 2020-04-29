@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/jshor/datebook/compare/v4.1.0...v4.1.1) (2020-04-29)
+
+
+### Bug Fixes
+
+* **ics:** removes maxlen for all fields ([#58](https://github.com/jshor/datebook/issues/58)) ([#83](https://github.com/jshor/datebook/issues/83)) ([7cf979e](https://github.com/jshor/datebook/commit/7cf979e71e99876bde4918c6b2a71cbe634ae460))
+
 ## [4.1.0](https://github.com/jshor/datebook/compare/v4.0.0...v4.1.0) (2020-04-29)
 
 
