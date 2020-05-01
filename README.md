@@ -35,7 +35,7 @@
 
 See the [full documentation here](https://jshor.github.io/datebook/)
 
-## Quick start
+## Quick Start
 
 ### Installation
 
@@ -43,7 +43,7 @@ See the [full documentation here](https://jshor.github.io/datebook/)
 yarn add datebook
 ```
 
-### Example usage
+### Example Usage
 
 ```js
 import { ICalendar } from 'datebook'
@@ -63,7 +63,7 @@ const icalendar = new ICalendar({
 icalendar.download()
 ```
 
-## Available classes
+## Available Classes
 
 * [`YahooCalendar`](https://jshor.github.io/datebook/class/src/YahooCalendar.js~YahooCalendar.html)
 * [`GoogleCalendar`](https://jshor.github.io/datebook/class/src/GoogleCalendar.js~GoogleCalendar.html)
@@ -71,3 +71,10 @@ icalendar.download()
 * [`OutlookCalendar`](https://jshor.github.io/datebook/class/src/OutlookCalendar.js~OutlookCalendar.html)
 * [`CalendarBase`](https://jshor.github.io/datebook/class/src/CalendarBase.js~CalendarBase.html) (for creating new services)
 
+## Browser Support
+
+The latest versions of all major browsers are supported.
+
+| <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png?raw=true" width="48px" height="48px" alt="Chrome logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png?raw=true" width="48px" height="48px" alt="Firefox logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_128x128.png" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_128x128.png" width="48px" height="48px" alt="Edge Browser Logo" > | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_128x128.png?raw=true" width="48px" height="48px" alt="Opera logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_128x128.png?raw=true" width="48px" height="48px" alt="Safari logo">
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| Yes ✅ | 20+ ✅ | 10+ ✅ | Yes ✅ | 15+ ✅ | 10.1+ ✅
