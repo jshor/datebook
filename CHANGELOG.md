@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.2](https://github.com/jshor/datebook/compare/v4.1.1...v4.1.2) (2020-05-13)
+
+
+### Bug Fixes
+
+* **timestamps:** fixes calendar timestamp formats ([#84](https://github.com/jshor/datebook/issues/84)) ([#85](https://github.com/jshor/datebook/issues/85)) ([0e41dd7](https://github.com/jshor/datebook/commit/0e41dd7369835bfc341ae939ec43e821acfdc550))
+
 ### [4.1.1](https://github.com/jshor/datebook/compare/v4.1.0...v4.1.1) (2020-04-29)
 
 
