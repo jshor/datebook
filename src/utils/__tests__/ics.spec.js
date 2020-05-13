@@ -144,7 +144,7 @@ describe('IcsUtil', () => {
       const expectedRrule = `FREQ=${
         DAILY
         };INTERVAL=1;COUNT=5;WKST=MO;BYDAY=MO;BYMONTHDAY=5;UNTIL=${
-          formatTimestampString(recurrence.end)
+          formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')
         }`;
 
       const actualRrule = getRrule(recurrence)

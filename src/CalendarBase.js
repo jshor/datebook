@@ -1,10 +1,5 @@
 import { FORMAT } from './constants'
-import {
-  formatTimestampString,
-  formatTimestampDate,
-  getHoursDuration,
-  parseDate
-} from './utils/time'
+import { parseDate } from './utils/time'
 
 /**
  * Base calendar class. This class can be extended to add new calendar services.
@@ -59,25 +54,17 @@ class CalendarBase {
    * @param {Recurrence} [options.recurrence] - event recurrence
    */
   setTimestamps (options) {
-    let format = FORMAT.DATE
-    
     this.allday = !options.end
     
     if (this.allday) {
       // if allday is specified, make the end date exactly 1 day from the start date
-      const end = parseDate(options.start)
-      
-      end.setDate(end.getDate() + 1)
-      
-      this.end = formatTimestampDate(end, format)
-      this.duration = getHoursDuration(options.start, end.toISOString())
+      this.end = parseDate(options.start)
+      this.end.setDate(this.end.getDate() + 1)
     } else {
-      format += `T${FORMAT.TIME}`
-      this.end = formatTimestampString(options.end, format)
-      this.duration = getHoursDuration(options.start, options.end)
+      this.end = parseDate(options.end)
     }
     
-    this.start = formatTimestampString(options.start, format)
+    this.start = parseDate(options.start)
     this.recurrence = options.recurrence
   }
 }

@@ -14,7 +14,7 @@ describe('GoogleCalendar', () => {
     title: 'Test Event',
     description: 'Test Description',
     location: 'Rockefeller Center',
-    start: '2019-03-23T17:00:00.000-05:00'
+    start: '2019-03-23T17:00:00.000'
   }
   const baseParams = {
     text: 'Test Event',

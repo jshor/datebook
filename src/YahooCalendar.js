@@ -1,6 +1,6 @@
 import CalendarBase from './CalendarBase'
 import { RECURRENCE, URL } from './constants'
-import { formatTimestampString } from './utils/time'
+import { formatTimestampString, addLeadingZero } from './utils/time'
 import { toQueryString } from './utils/data'
 
 /**
@@ -101,13 +101,37 @@ export default class YahooCalendar extends CalendarBase {
    */
   getRecurrence (recurrence) {
     const frequency = this.getFrequency(recurrence)
-    let { interval } = recurrence
+    const { interval } = recurrence
 
-    if (interval.toString().length === 1) {
-      interval = `0${interval}`
-    }
+    return `${addLeadingZero(interval)}${frequency}`
+  }
 
-    return `${interval}${frequency}`
+  /**
+   * Returns the duration between two given dates in hhmm format.
+   *
+   * @param {String} start
+   * @param {String} end
+   * @returns {String}
+   */
+  getDuration (start, end) {
+    const seconds = Math.floor((end - start) / 1000)
+    const hours = Math.floor(seconds / 3600)
+    const mins = ((seconds / 3600) % 1) * 60
+  
+    return `${addLeadingZero(hours)}${addLeadingZero(mins)}`
+  }
+
+  /**
+   * Returns the number of hours between two given dates.
+   * 
+   * @param {String} start
+   * @param {String} end
+   * @returns {Number}
+   */
+  getHoursDuration (start, end) {
+    const seconds = Math.floor((end - start) / 1000)
+    
+    return Math.floor(seconds / 3600)
   }
 
   /**
@@ -119,24 +143,33 @@ export default class YahooCalendar extends CalendarBase {
     const params = {
       v: 60, // version number; must be 60
       title: this.title,
-      st: this.start,
       desc: this.description,
       in_loc: this.location
     }
 
     if (this.allday) {
       params.dur = 'allday'
+      params.st = formatTimestampString(this.start, 'YYYYMMDD')
+    } else {
+      params.st = formatTimestampString(this.start, 'YYYYMMDDThhmmss')
+
+      if (this.getHoursDuration(this.start, this.end) > 99) {
+        // Yahoo only supports up to 99 hours, so we are forced to specify the end time instead of the duration
+        params.et = formatTimestampString(this.end, 'YYYYMMDDThhmmss')
+      } else {
+        // we prefer specifying duration in lieu of end time, because apparently Yahoo's end time is buggy w.r.t. timezones
+        params.dur = this.getDuration(this.start, this.end)
+      }
     }
 
     if (this.recurrence) {
       params.RPAT = this.getRecurrence(this.recurrence)
-      params.dur = this.duration
 
       if (this.recurrence.end) {
-        params.REND = formatTimestampString(this.recurrence.end)
+        params.REND = formatTimestampString(this.recurrence.end, 'YYYYMMDD')
+      } else {
+        params.REND = formatTimestampString(this.end, 'YYYYMMDD')
       }
-    } else {
-      params.et = this.end
     }
 
     const baseUrl = URL.YAHOO

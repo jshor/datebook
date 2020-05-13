@@ -39,22 +39,22 @@ export default class GoogleCalendar extends CalendarBase {
    * @returns {String}
    */
   render () {
+    let timestampFormat = 'YYYYMMDD'
+
+    if (!this.allday) {
+      timestampFormat += 'Thhmmss'
+    }
+
     const params = {
       action: 'TEMPLATE',
       text: this.title,
       details: this.description,
-      location: this.location
+      location: this.location,
+      dates: [
+        formatTimestampString(this.start, timestampFormat),
+        formatTimestampString(this.end, timestampFormat)
+      ].join('/')
     }
-    
-    let start = formatTimestampString(this.start, FORMAT.FULL)
-    let end = formatTimestampString(this.end, FORMAT.FULL)
-    
-    if (this.allday) {
-      start = formatTimestampString(this.start, FORMAT.DATE)
-      end = formatTimestampString(this.end, FORMAT.DATE)
-    }
-    
-    params.dates = `${start}/${end}`
     
     if (this.recurrence) {
       params.recur = `RRULE:${getRrule(this.recurrence)}`

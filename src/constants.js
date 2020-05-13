@@ -9,11 +9,11 @@ export const RECURRENCE = {
 
 export const FORMAT = {
   DATE: 'YYYYMMDD',
-  TIME: 'HHmmss'
+  TIME: 'hhmmss'
 }
 
 export const URL = {
   YAHOO: 'https://calendar.yahoo.com/',
   GOOGLE: 'https://calendar.google.com/calendar/render',
-  OUTLOOK: 'https://outlook.live.com/owa/'
+  OUTLOOK: 'https://outlook.live.com/calendar/0/deeplink/compose'
 }

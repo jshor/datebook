@@ -1,7 +1,6 @@
-import moment from 'moment'
 import { FORMAT } from '../constants'
 import { formatText, getUid, getProdId, download } from '../utils/ics'
-import { getTimeCreated } from '../utils/time'
+import { formatTimestampString, getTimeCreated } from '../utils/time'
 import CalendarBase from '../CalendarBase'
 import ICalendar from '../ICalendar'
 
@@ -15,8 +14,8 @@ describe('ICalendar', () => {
       title: 'Fun Party',
       description: 'BYOB',
       location: 'New York',
-      start: '2019-07-04T19:00:00.000-05:00',
-      end: '2019-07-04T21:00:00.000-05:00',
+      start: '2019-07-04T19:00:00.000',
+      end: '2019-07-04T21:00:00.000',
     }
   })
 
@@ -50,7 +49,7 @@ describe('ICalendar', () => {
     const dtFormat = `${FORMAT.DATE}T${FORMAT.TIME}`
 
     beforeEach(() => {
-      formatText.mockImplementation((...args) => args.join(' formatted '))
+      formatText.mockImplementation(s => s)
       getUid.mockReturnValue(24)
       getProdId.mockReturnValue('foobar')
     })
@@ -62,17 +61,29 @@ describe('ICalendar', () => {
       })
     })
 
-    it('should format and truncate the description, location, and text, to 62, 64, and 66 characters respectively', () => {
+    it('should format the description, location, and title with the sanitize function', () => {
       const obj = new ICalendar(baseOpts)
 
       obj.render()
 
       expect(formatText).toHaveBeenCalledTimes(3)
       expect(formatText.mock.calls).toEqual([
-        [baseOpts.description, 62],
-        [baseOpts.location, 64],
-        [baseOpts.title, 66],
+        [baseOpts.description],
+        [baseOpts.location],
+        [baseOpts.title]
       ])
+    })
+
+    it('should contain the RRULE parameter if a recurrence was specified', () => {
+      const obj = new ICalendar({
+        ...baseOpts,
+        recurrence: {
+          frequency: 'WEEKLY',
+          interval: 2
+        }
+      })
+
+      expect(obj.render()).toContain('RRULE:')
     })
 
     it('should call getUid', () => {
@@ -83,15 +94,7 @@ describe('ICalendar', () => {
       expect(getUid).toHaveBeenCalledTimes(1)
     })
 
-    it('should call getTimeCreated', () => {
-      const obj = new ICalendar(baseOpts)
-
-      obj.render()
-
-      expect(getTimeCreated).toHaveBeenCalledTimes(1)
-    })
-
-    it.only('should render an ICS Param string', () => {
+    it('should render an ICS Param string', () => {
       const obj = new ICalendar(baseOpts)
 
       const rendered = obj.render()
@@ -102,8 +105,8 @@ describe('ICalendar', () => {
         'BEGIN:VEVENT',
         'CLASS:PUBLIC',
         `DESCRIPTION:${baseOpts.description}`,
-        `DTSTART:${moment(baseOpts.start).format(dtFormat)}`,
-        `DTEND:${moment(baseOpts.end).format(dtFormat)}`,
+        `DTSTART:${formatTimestampString(new Date(baseOpts.start), dtFormat)}`,
+        `DTEND:${formatTimestampString(new Date(baseOpts.end), dtFormat)}`,
         `LOCATION:${baseOpts.location}`,
         `SUMMARY:${baseOpts.title}`,
         'TRANSP:TRANSPARENT',

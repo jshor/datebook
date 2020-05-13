@@ -1,6 +1,6 @@
 import CalendarBase from './CalendarBase'
 import { formatText, getUid, getProdId, getRrule, download } from './utils/ics'
-import { getTimeCreated } from './utils/time'
+import { getTimeCreated, formatTimestampString } from './utils/time'
 
 /**
  * Generates a downloadable ICS file.
@@ -71,8 +71,8 @@ export default class ICalendar extends CalendarBase {
     const event = [
       'CLASS:PUBLIC',
       `DESCRIPTION:${description}`,
-      `DTSTART:${this.start}`,
-      `DTEND:${this.end}`,
+      `DTSTART:${formatTimestampString(this.start, 'YYYYMMDDThhmmss')}`,
+      `DTEND:${formatTimestampString(this.end, 'YYYYMMDDThhmmss')}`,
       `LOCATION:${location}`,
       `SUMMARY:${summary}`,
       'TRANSP:TRANSPARENT'
