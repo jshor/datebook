@@ -89,7 +89,7 @@ export const getRrule = (recurrence) => {
     }, {})
 
   if (recurrence.end) {
-    rrule.UNTIL = formatTimestampString(recurrence.end)
+    rrule.UNTIL = formatTimestampString(new Date(recurrence.end), 'YYYYMMDDThhmmss')
   }
 
   return toIcsParamString(rrule)

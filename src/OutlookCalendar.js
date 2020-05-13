@@ -1,6 +1,7 @@
 import CalendarBase from './CalendarBase'
 import { URL } from './constants'
 import { toQueryString } from './utils/data'
+import { formatTimestampString } from './utils/time'
 
 /**
  * Generates a an Outlook Calendar url.
@@ -41,11 +42,17 @@ export default class OutlookCalendar extends CalendarBase {
    * @returns {String}
    */
   render () {
+    let timestampFormat = 'YYYY-MM-DD'
+
+    if (!this.allday) {
+      timestampFormat += 'Thh:mm:ss'
+    }
+
     const params = {
-      path: '/calendar/view/Month',
+      path: '/calendar/action/compose',
       rru: 'addevent',
-      startdt: this.start,
-      enddt: this.end,
+      startdt: formatTimestampString(this.start, timestampFormat),
+      enddt: formatTimestampString(this.end, timestampFormat),
       subject: this.title,
       body: this.description,
       location: this.location,

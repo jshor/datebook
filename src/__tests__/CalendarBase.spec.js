@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { FORMAT } from '../constants'
 import CalendarBase from '../CalendarBase'
 
 describe('Calendar Base', () => {
@@ -8,8 +7,8 @@ describe('Calendar Base', () => {
   beforeEach(() => {
     baseOpts = {
       title: 'Test Event',
-      start: '2019-03-23T17:00:00.000-05:00',
-      end: '2019-03-23T21:00:00.000-05:00'
+      start: '2019-03-23T17:00:00.000',
+      end: '2019-03-23T21:00:00.000'
     }
   })
 
@@ -93,7 +92,6 @@ describe('Calendar Base', () => {
   })
 
   describe('setTimestamps()', () => {
-    const dateFormat = FORMAT.DATE
     let calendarObj
 
     beforeEach(() => {
@@ -116,69 +114,68 @@ describe('Calendar Base', () => {
     describe('when options has no end', () => {
       it('should set allday to true', () => {
         calendarObj.setTimestamps({
-          start: '2019-03-23T17:00:00.000-05:00',
+          start: '2019-03-23T17:00:00.000',
           end: ''
         });
 
-        expect(calendarObj.allday).toBe(true);
+        expect(calendarObj.allday).toBe(true)
       })
 
       it('should set the end using the start + 1 day', () => {
         const testOpts = {
-          start: '2019-03-23T17:00:00.000-05:00',
+          start: '2019-03-23T17:00:00.000',
           end: ''
         }
 
         const expectedEnd = moment(testOpts.start)
           .add(1, 'days')
-          .format(dateFormat)
+          .unix() * 1000
 
         calendarObj.setTimestamps(testOpts)
-        expect(calendarObj.end).toBe(expectedEnd)
+        expect(calendarObj.end.getTime()).toBe(expectedEnd)
       })
 
       it('should set the start and end without the time of day', () => {
         const testOpts = {
-          start: '2019-03-23T17:00:00.000-05:00',
+          start: '2019-03-23T17:00:00.000',
           end: ''
         }
 
-        const expectedStart = moment(testOpts.start).format(dateFormat)
+        const expectedStart = moment(testOpts.start).unix() * 1000
         const expectedEnd = moment(testOpts.start)
           .add(1, 'days')
-          .format(dateFormat)
+          .unix() * 1000
 
         calendarObj.setTimestamps(testOpts)
 
-        expect(calendarObj.start).toBe(expectedStart)
-        expect(calendarObj.end).toBe(expectedEnd)
+        expect(calendarObj.start.getTime()).toBe(expectedStart)
+        expect(calendarObj.end.getTime()).toBe(expectedEnd)
       })
     })
 
     describe('when options has an end', () => {
       it('should set allday to false', () => {
         calendarObj.setTimestamps({
-          start: '2019-03-23T17:00:00.000-05:00',
-          end: '2019-03-23T21:00:00.000-05:00'
+          start: '2019-03-23T17:00:00.000',
+          end: '2019-03-23T21:00:00.000'
         });
 
         expect(calendarObj.allday).toBe(false);
       })
 
       it('should set the start and end including the time of day', () => {
-        const dateTimeFormat = `${dateFormat}T${FORMAT.TIME}`
         const testOpts = {
-          start: '2019-03-23T17:00:00.000-05:00',
-          end: '2019-03-23T21:00:00.000-05:00'
+          start: '2019-03-23T17:00:00.000',
+          end: '2019-03-23T21:00:00.000'
         }
 
-        const expectedStart = moment(testOpts.start).format(dateTimeFormat)
-        const expectedEnd = moment(testOpts.end).format(dateTimeFormat)
+        const expectedStart = moment(testOpts.start).unix() * 1000
+        const expectedEnd = moment(testOpts.end).unix() * 1000
 
         calendarObj.setTimestamps(testOpts)
 
-        expect(calendarObj.start).toBe(expectedStart)
-        expect(calendarObj.end).toBe(expectedEnd)
+        expect(calendarObj.start.getTime()).toBe(expectedStart)
+        expect(calendarObj.end.getTime()).toBe(expectedEnd)
       })
     })
   })
