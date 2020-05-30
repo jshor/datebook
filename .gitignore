@@ -3,8 +3,8 @@ coverage
 .idea
 .cache
 dist
+build
 npm-debug.log
 yarn-error.log
 *.sw*
-docs
 .DS_Store
