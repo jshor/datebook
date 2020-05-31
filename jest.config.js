@@ -17,6 +17,6 @@ module.exports = {
     '<rootDir>/src/**/*.spec.js'
   ],
   transform: {
-    '^.+\\.jsx?$': 'babel-jest'
+    '^.+\\.tsx?$': 'ts-jest'
   }
 }

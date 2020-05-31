@@ -1,7 +1,8 @@
 import safariFileSave from '../safariFileSave'
+import { mocked } from 'ts-jest/utils'
 
 const documentMock = {
-  createElement: jest.fn().mockImplementation(tagName => {
+  createElement: mocked(tagName => {
     const tag = {
       tagName,
       attrs: {},

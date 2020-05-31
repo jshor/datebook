@@ -9,7 +9,7 @@ if (process.argv.includes('--analyze')) {
 }
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     path: path.join(__dirname, './build/dist'),      
     filename: 'datebook.js',      
@@ -18,17 +18,18 @@ module.exports = {
   },
   target: 'node',
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.ts'],
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
+        test: /\.ts?$/,
+        loader: "awesome-typescript-loader"
+      },
+      {
+        test: /\.ts$/,
+        loader: "source-map-loader"
+      },
     ]
   },
   plugins,

@@ -1,8 +1,8 @@
 /**
  * Filters out invalid fields and formats for the given Datebook recurrence config.
  * 
- * @param {Object} value
- * @returns {Object}
+ * @param {object} value
+ * @returns {object}
  */
 export default function getFilteredRecurrence (value) {
   const recurrence = {...value}

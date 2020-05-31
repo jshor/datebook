@@ -1,7 +1,7 @@
 /*
  * Converts a query string to an object representation
- * @param {String} queryString
- * @returns {Object}
+ * @param {string} queryString
+ * @returns {object}
  */
 
 const queryStringToObj = (queryString) => {

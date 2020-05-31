@@ -4,22 +4,22 @@ import warn from './warn'
 /**
  * Adds a leading zero to a single-digit string and returns a two-digit string.
  * 
- * @param {String} s
- * @returns {String}
+ * @param {number | string} n
+ * @returns {string}
  */
-export const addLeadingZero = (s) => {
-  return `0${parseInt(s, 10)}`.slice(-2)
+export const addLeadingZero = (n: number | string): string => {
+  return `0${parseInt(n.toString(), 10)}`.slice(-2)
 }
 
 /**
  * Formats the given JS Date() object to the given format.
  * Format defaults to: YYYYMMDDTHHMMss
  * 
- * @param {Date} d
- * @param {String} format
- * @returns {String}
+ * @param {date} d
+ * @param {string} format
+ * @returns {string}
  */
-export const formatTimestampDate = (d, format) => {
+export const formatTimestampDate = (d: Date, format: string) => {
   const dateValues = {
     YYYY: d.getUTCFullYear(),
     MM: addLeadingZero(d.getUTCMonth() + 1),
@@ -39,10 +39,11 @@ export const formatTimestampDate = (d, format) => {
 /**
  * Parses the given string as a JS Date() object.
  * 
- * @param {Date | String} date
+ * @param {string} str
+ * @returns {date | string} date
  * @returns {Date}
  */
-export const parseDate = (date) => {
+export const parseDate = (date: Date | string) => {
   if (typeof date === 'string') {
     warn('Passing in `date` as a string')
     return new Date(date)
@@ -54,18 +55,18 @@ export const parseDate = (date) => {
 /**
  * Formats the given timestamp.
  *
- * @param {String} time
- * @param {String} format - momentjs format
- * @returns {String}
+ * @param {string} time
+ * @param {string} format - momentjs format
+ * @returns {string}
  */
-export const formatTimestampString = (str, format) => {
+export const formatTimestampString = (str: string, format: string) => {
   return formatTimestampDate(parseDate(str), format)
 }
 
 /**
  * Returns the current timestamp.
  *
- * @returns {String}
+ * @returns {string}
  */
 export const getTimeCreated = () => {
   return formatTimestampDate(new Date(), FORMAT.DATE)

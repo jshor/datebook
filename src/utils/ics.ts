@@ -2,15 +2,16 @@ import FileSaver from 'file-saver'
 import { toIcsParamString } from './data'
 import { formatTimestampString } from './time'
 import safariFileSave from './safariFileSave'
+import IRecurrence from '../interfaces/IRecurrence'
 
 /**
  * Removes line breaks and ensures that the string is no
  * longer than maxLength chars (or 75 chars if none specified).
  *
- * @param {String} str - string to sanitize
- * @returns {String}
+ * @param {string} str - string to sanitize
+ * @returns {string}
  */
-export const formatText = (str) => {
+export const formatText = (str: string) => {
   if (!str) {
     return ''
   }
@@ -21,10 +22,10 @@ export const formatText = (str) => {
 /**
  * The name of the file will be the event title with alphanumeric chars with the extension `.ics`.
  *
- * @param {String} icsData
- * @returns {Blob}
+ * @param {string} icsData
+ * @returns {blob}
  */
-export const getBlob = (icsData) => {
+export const getBlob = (icsData: string) => {
   return new Blob([icsData], {
     type: 'application/octet-stream' // TODO: change to text/calendar?
   })
@@ -33,10 +34,10 @@ export const getBlob = (icsData) => {
 /**
  * Transforms given string to be valid file name.
  *
- * @param {String} title
- * @returns {String}
+ * @param {string} title
+ * @returns {string}
  */
-export const getFileName = (title) => {
+export const getFileName = (title: string) => {
   if (!title) {
     return 'event.ics'
   }
@@ -46,7 +47,7 @@ export const getFileName = (title) => {
 /**
  * Returns a random base 36 hash for iCal UID.
  *
- * @returns {String}
+ * @returns {string}
  */
 export const getUid = () => {
   return Math.random().toString(36).substr(2)
@@ -55,7 +56,7 @@ export const getUid = () => {
 /**
  * Returns the hostname for usage in `PRODID`. Returns `datebook` in Node.js.
  *
- * @returns {String}
+ * @returns {string}
  */
 export const getProdId = () => {
   return typeof window !== 'undefined'
@@ -68,7 +69,7 @@ export const getProdId = () => {
  *
  * @param {*} recurrence
  */
-export const getRrule = (recurrence) => {
+export const getRrule = (recurrence: IRecurrence) => {
   const keys = {
     FREQ: 'frequency',
     INTERVAL: 'interval',
@@ -79,7 +80,7 @@ export const getRrule = (recurrence) => {
   }
 
   // map all user-defined keys onto the rrule object
-  const rrule = Object
+  const rrule: Record<string, string> = Object
     .keys(keys)
     .filter((k) => recurrence.hasOwnProperty(keys[k]))
     .reduce((values, key) => {
@@ -97,10 +98,10 @@ export const getRrule = (recurrence) => {
 /**
  * Downloads the given ics as an iCalendar file.
  *
- * @param {String} title - title of the event
- * @param {String} data - ics data
+ * @param {string} title - title of the event
+ * @param {string} data - ics data
  */
-export const download = (title, data) => {
+export const download = (title: string, data: string) => {
   const fileName = getFileName(title)
 
   if (window.hasOwnProperty('safari')) {
