@@ -2,7 +2,7 @@ import CalendarBase from '../CalendarBase'
 import { incrementDate } from '../utils/time'
 
 describe('Calendar Base', () => {
-  let baseOpts
+  let baseOpts 
 
   beforeEach(() => {
     baseOpts = {

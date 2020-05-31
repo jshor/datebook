@@ -1,7 +1,8 @@
 import CalendarBase from './CalendarBase'
 import { formatText, getUid, getProdId, getRrule, download } from './utils/ics'
-import { getTimeCreated, formatTimestampString } from './utils/time'
+import { getTimeCreated, formatDate } from './utils/time'
 import { FORMAT } from './constants'
+import IOptions from './interfaces/IOptions'
 
 /**
  * Generates a downloadable ICS file.
@@ -47,7 +48,7 @@ export default class ICalendar extends CalendarBase {
   /**
    * @inheritDoc
    */
-  constructor (options) {
+  constructor (options: IOptions) {
     super(options)
   }
   
@@ -63,7 +64,7 @@ export default class ICalendar extends CalendarBase {
   /**
    * Generates the iCalendar data.
    * 
-   * @returns {String}
+   * @returns {string}
    */
   render () {
     const description = formatText(this.description)
@@ -72,8 +73,8 @@ export default class ICalendar extends CalendarBase {
     const event = [
       'CLASS:PUBLIC',
       `DESCRIPTION:${description}`,
-      `DTSTART:${formatTimestampString(this.start, FORMAT.FULL)}`,
-      `DTEND:${formatTimestampString(this.end, FORMAT.FULL)}`,
+      `DTSTART:${formatDate(this.start, FORMAT.FULL)}`,
+      `DTEND:${formatDate(this.end, FORMAT.FULL)}`,
       `LOCATION:${location}`,
       `SUMMARY:${summary}`,
       'TRANSP:TRANSPARENT'

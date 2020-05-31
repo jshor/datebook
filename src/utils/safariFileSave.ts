@@ -1,10 +1,11 @@
 /**
  * Downloads the given ics. Meant to be used only for Safari.
  *
- * @param {String} data - ics data
- * @param {String} fileName - file name to save, ending in .ics
+ * @param {string} data - ics data
+ * @param {string} fileName - file name to save, ending in .ics
  */
-const safariFileSave = (data, fileName) => {
+
+const safariFileSave = (data: string, fileName: string) => {
   const anchor = document.createElement('a')
   const encodedData = encodeURIComponent(data)
 
