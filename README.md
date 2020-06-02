@@ -35,11 +35,11 @@
 
 ## Documentation
 
-See the [full documentation →](https://www.datebook.dev/)
+See the [full documentation →](https://datebook.dev/)
 
 ## Demo
 
-Try the [online calendar generators →](https://www.datebook.dev/generators/)
+Try the [online calendar generators →](https://datebook.dev/generators/)
 
 ## Quick Start
 
