@@ -21,6 +21,7 @@ after_success:
       if [[ $TRAVIS_COMMIT_MESSAGE != *"chore(release)"* ]]; then
         cd "$TRAVIS_BUILD_DIR";
         cd docs;
+        echo "datebook.dev" > CNAME;
         git init;
         git checkout -b gh-pages;
         git add . ;
