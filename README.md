@@ -1,7 +1,9 @@
 <p align="center">
-  <a href="https://jshor.github.io/datebook/">
-    <img src="https://raw.githubusercontent.com/jshor/datebook/master/manual/assets/logo.png" width="450" height="100" />
+  <a href="https://datebook.dev/">
+    <img src="https://datebook.dev/assets/logo.png" width="200" height="200" />
   </a>
+
+  <h1 style="text-align: center;" align="center">Datebook</h1>
 </p>
 
 <p align="center">A library for adding events to popular calendar apps.</p>
@@ -35,6 +37,10 @@
 
 See the [full documentation →](https://www.datebook.dev/)
 
+## Demo
+
+Try the [online calendar generators →](https://www.datebook.dev/generators/)
+
 ## Quick Start
 
 ### Installation
@@ -62,14 +68,6 @@ const icalendar = new ICalendar({
 
 icalendar.download()
 ```
-
-## Available Classes
-
-* [`YahooCalendar`](https://jshor.github.io/datebook/class/src/YahooCalendar.js~YahooCalendar.html)
-* [`GoogleCalendar`](https://jshor.github.io/datebook/class/src/GoogleCalendar.js~GoogleCalendar.html)
-* [`ICalendar`](https://jshor.github.io/datebook/class/src/ICalendar.js~ICalendar.html)
-* [`OutlookCalendar`](https://jshor.github.io/datebook/class/src/OutlookCalendar.js~OutlookCalendar.html)
-* [`CalendarBase`](https://jshor.github.io/datebook/class/src/CalendarBase.js~CalendarBase.html) (for creating new services)
 
 ## Browser Support
 

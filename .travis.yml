@@ -11,7 +11,7 @@ before_install:
 script:
   - echo "$TRAVIS_BRANCH"
   - yarn test
-  - yarn docs
+  - yarn docs:build
   - yarn build
 
 after_success:
