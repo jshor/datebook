@@ -33,7 +33,7 @@
 
 ## Documentation
 
-See the [full documentation here](https://jshor.github.io/datebook/)
+See the [full documentation →](https://www.datebook.dev/)
 
 ## Quick Start
 
