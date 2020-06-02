@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://datebook.dev/">
-    <img src="https://datebook.dev/assets/logo.png" width="200" height="200" />
+    <img src="https://datebook.dev/assets/logo.svg" width="200" height="200" />
   </a>
 
   <h1 style="text-align: center;" align="center">Datebook</h1>
