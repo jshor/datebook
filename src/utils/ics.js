@@ -83,9 +83,8 @@ export const getRrule = (recurrence) => {
     .keys(keys)
     .filter((k) => recurrence.hasOwnProperty(keys[k]))
     .reduce((values, key) => {
-      return Object.assign({}, values, {
-        [key]: recurrence[keys[key]]
-      })
+      values[key] = recurrence[keys[key]]
+      return values
     }, {})
 
   if (recurrence.end) {
