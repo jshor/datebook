@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.3](https://github.com/jshor/datebook/compare/v4.1.2...v4.1.3) (2020-06-12)
+
+
+### Bug Fixes
+
+* **ie:** fixes for IE11 ([#91](https://github.com/jshor/datebook/issues/91)) ([#92](https://github.com/jshor/datebook/issues/92)) ([c13cf49](https://github.com/jshor/datebook/commit/c13cf49610e9bf10793154d05ec23d694a658ea8))
+* **readme:** adds link to generator [ci skip] ([388b87f](https://github.com/jshor/datebook/commit/388b87f9f0c0150555083d361346bc08075f3613))
 
 ### [4.1.2](https://github.com/jshor/datebook/compare/v4.1.1...v4.1.2) (2020-05-13)
 
