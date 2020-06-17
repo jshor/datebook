@@ -102,14 +102,11 @@ export const getRrule = (recurrence) => {
  */
 export const download = (title, data) => {
   const fileName = getFileName(title)
-  const isSafari = ~navigator
-    .userAgent
-    .toLowerCase()
-    .indexOf('safari')
+  const blob = getBlob(data)
 
-  if (isSafari) {
+  if (window.hasOwnProperty('safari')) {
     safariFileSave(data, fileName)
   } else {
-    FileSaver.saveAs(getBlob(data), fileName)
+    FileSaver.saveAs(blob, fileName)
   }
 }
