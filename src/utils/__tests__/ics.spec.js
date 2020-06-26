@@ -165,43 +165,35 @@ describe('IcsUtil', () => {
       FileSaver.saveAs.mockClear()
     })
 
-    describe('on Safari', () => {
-      beforeEach(() => {
-        Object.defineProperty(global.navigator, 'userAgent', {
-          value: 'safari',
-          writable: true,
-        })
-      })
-
-      it('should invoke safariFileSave', () => {
-        const data = 'foobar'
-        const title = 'july 4<>'
-        const filename = 'july 4.ics'
-        download(title, data)
-        expect(FileSaver.saveAs).not.toHaveBeenCalled()
-        expect(safariFileSave).toHaveBeenCalledTimes(1)
-        expect(safariFileSave).toHaveBeenCalledWith(data, filename)
-      })
-    })
-
-    describe('on any other browser', () => {
-      beforeEach(() => {
-        Object.defineProperty(global.navigator, 'userAgent', {
-          value: 'chrome',
-          writable: true,
-        })
-      })
-
+    describe('on non-Safari browsers', () => {
       it('should save the data as a file', () => {
         const data = 'foobar'
         const blob = getBlob(data)
         const title = 'july 4<>'
         const filename = 'july 4.ics'
+
         download(title, data)
 
         expect(safariFileSave).not.toHaveBeenCalled()
         expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
         expect(FileSaver.saveAs).toHaveBeenCalledWith(blob, filename)
+      })
+    })
+
+    describe('on Safari', () => {
+      it('should invoke safariFileSave', () => {
+        const data = 'foobar'
+        const title = 'july 4<>'
+        const filename = 'july 4.ics'
+
+        global.window = Object.create(window)
+        global.window.safari = true
+
+        download(title, data)
+        
+        expect(FileSaver.saveAs).not.toHaveBeenCalled()
+        expect(safariFileSave).toHaveBeenCalledTimes(1)
+        expect(safariFileSave).toHaveBeenCalledWith(data, filename)
       })
     })
   })
