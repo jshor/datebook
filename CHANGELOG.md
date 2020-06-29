@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [4.1.4](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.4) (2020-06-26)
+### [4.1.5](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.4) (2020-06-29)
 
 
 ### Bug Fixes
