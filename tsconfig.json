@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
-      "outDir": "./dist",
-      "allowJs": true,
-      "target": "es5",
+    "outDir": "./dist",
+    "target": "es5",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "declaration": true,
+    "strict": true
   },
-      "include": [
-      "./src/**/*"
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "./src/**/*.spec.ts"
   ]
 }

@@ -1,21 +1,16 @@
-import FileSaver from 'file-saver'
+import * as FileSaver from 'file-saver'
 import { toIcsParamString } from './data'
 import { formatTimestampString } from './time'
 import safariFileSave from './safariFileSave'
 import IRecurrence from '../interfaces/IRecurrence'
 
 /**
- * Removes line breaks and ensures that the string is no
- * longer than maxLength chars (or 75 chars if none specified).
+ * Removes line breaks from a string. Returns an empty string if falsy.
  *
  * @param {string} str - string to sanitize
  * @returns {string}
  */
-export const formatText = (str: string) => {
-  if (!str) {
-    return ''
-  }
-  
+const formatText = (str: string = ''): string => {
   return str.replace(/\n/g, '\\n')
 }
 
@@ -23,9 +18,9 @@ export const formatText = (str: string) => {
  * The name of the file will be the event title with alphanumeric chars with the extension `.ics`.
  *
  * @param {string} icsData
- * @returns {blob}
+ * @returns {Blob}
  */
-export const getBlob = (icsData: string) => {
+const getBlob = (icsData: string): Blob => {
   return new Blob([icsData], {
     type: 'application/octet-stream' // TODO: change to text/calendar?
   })
@@ -37,7 +32,7 @@ export const getBlob = (icsData: string) => {
  * @param {string} title
  * @returns {string}
  */
-export const getFileName = (title: string) => {
+const getFileName = (title: string): string => {
   if (!title) {
     return 'event.ics'
   }
@@ -49,7 +44,7 @@ export const getFileName = (title: string) => {
  *
  * @returns {string}
  */
-export const getUid = () => {
+const getUid = (): string => {
   return Math.random().toString(36).substr(2)
 }
 
@@ -58,7 +53,7 @@ export const getUid = () => {
  *
  * @returns {string}
  */
-export const getProdId = () => {
+const getProdId = (): string => {
   return typeof window !== 'undefined'
     ? window.location.host
     : 'datebook'
@@ -67,29 +62,21 @@ export const getProdId = () => {
 /**
  * Converts the given recurrence options to RFC????
  *
- * @param {*} recurrence
+ * @param {IRecurrence} recurrence
+ * @returns {string}
  */
-export const getRrule = (recurrence: IRecurrence) => {
-  const keys = {
-    FREQ: 'frequency',
-    INTERVAL: 'interval',
-    COUNT: 'count',
-    WKST: 'weekStart',
-    BYDAY: 'weekdays',
-    BYMONTHDAY: 'monthdays'
+const getRrule = (recurrence: IRecurrence): string => {
+  const rrule: Record<string, any> = {
+    FREQ: recurrence.frequency,
+    INTERVAL: recurrence.interval?.toString(),
+    COUNT: recurrence.count?.toString(),
+    WKST: recurrence.weekstart,
+    BYDAY: recurrence.weekdays,
+    BYMONTHDAY: recurrence.monthdays
   }
 
-  // map all user-defined keys onto the rrule object
-  const rrule: Record<string, string> = Object
-    .keys(keys)
-    .filter((k) => recurrence.hasOwnProperty(keys[k]))
-    .reduce((values, key) => {
-      values[key] = recurrence[keys[key]]
-      return values
-    }, {})
-
   if (recurrence.end) {
-    rrule.UNTIL = formatTimestampString(new Date(recurrence.end), 'YYYYMMDDThhmmss')
+    rrule.UNTIL = formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')
   }
 
   return toIcsParamString(rrule)
@@ -101,7 +88,7 @@ export const getRrule = (recurrence: IRecurrence) => {
  * @param {string} title - title of the event
  * @param {string} data - ics data
  */
-export const download = (title: string, data: string) => {
+const download = (title: string, data: string): void => {
   const fileName = getFileName(title)
 
   if (window.hasOwnProperty('safari')) {
@@ -110,4 +97,14 @@ export const download = (title: string, data: string) => {
     const blob = getBlob(data)
     FileSaver.saveAs(blob, fileName)
   }
+}
+
+export default {
+  formatText,
+  getBlob,
+  getFileName,
+  getUid,
+  getProdId,
+  getRrule,
+  download
 }

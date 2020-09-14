@@ -1,8 +1,9 @@
 import { FORMAT, URL } from '../constants'
+import * as queryString from 'query-string'
 import CalendarBase from '../CalendarBase'
 import OutlookCalendar from '../OutlookCalendar'
-import queryStringToObj from '../../test_helpers/queryStringToObj'
-import { formatTimestampString } from '../utils/time'
+import time from '../utils/time'
+import IOptions from '../interfaces/IOptions'
 
 describe('Outlook Calendar', () => {
   it('should be a subclass of CalendarBase', () => {
@@ -15,7 +16,9 @@ describe('Outlook Calendar', () => {
   })
 
   describe('render()', () => {
-    let testOpts = {}
+    const testOpts: IOptions = {
+      start: '2019-03-23T17:00:00.000'
+    }
 
     beforeEach(() => {
       testOpts.title = 'Music Concert'
@@ -23,10 +26,6 @@ describe('Outlook Calendar', () => {
       testOpts.description = 'a description'
       testOpts.start = new Date('2019-03-23T17:00:00.000')
       testOpts.end = new Date('2019-03-23T21:00:00.000')
-    })
-
-    afterEach(() => {
-      testOpts = {}
     })
 
     it('should use the proper base URL', () => {
@@ -41,15 +40,13 @@ describe('Outlook Calendar', () => {
       it('should render the appropriate query string with timestamps formatted with time information, and allday = `false`', () => {
         const obj = new OutlookCalendar(testOpts)
         const result = obj.render()
-
-        const queryString = result.split('?')[1]
-        const paramsObj = queryStringToObj(queryString)
+        const paramsObj = queryString.parse(result.split('?')[1])
 
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: formatTimestampString(obj.start, FORMAT.OUTLOOK_FULL),
-          enddt: formatTimestampString(obj.end, FORMAT.OUTLOOK_FULL),
+          startdt: time.formatTimestampDate(obj.start, FORMAT.OUTLOOK_FULL),
+          enddt: time.formatTimestampDate(obj.end, FORMAT.OUTLOOK_FULL),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,
@@ -65,15 +62,13 @@ describe('Outlook Calendar', () => {
           end: undefined
         })
         const result = obj.render()
-
-        const queryString = result.split('?')[1]
-        const paramsObj = queryStringToObj(queryString)
+        const paramsObj = queryString.parse(result.split('?')[1])
 
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: formatTimestampString(obj.start, FORMAT.OUTLOOK_DATE),
-          enddt: formatTimestampString(obj.end, FORMAT.OUTLOOK_DATE),
+          startdt: time.formatTimestampDate(obj.start, FORMAT.OUTLOOK_FULL),
+          enddt: time.formatTimestampDate(obj.end, FORMAT.OUTLOOK_FULL),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,

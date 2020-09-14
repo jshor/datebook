@@ -3,10 +3,8 @@
   "version": "4.1.11",
   "description": "Generates URLs and downloads ICS files for adding events to popular calendar apps.",
   "scripts": {
-    "build": "webpack",
-    "build:analyze": "webpack --analyze",
+    "build": "tsc && webpack",
     "test": "jest",
-    "esdoc": "esdoc",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "commit": "yarn git-cz",
@@ -14,6 +12,7 @@
     "release": "standard-version -n"
   },
   "main": "dist/datebook.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/jshor/datebook"
@@ -38,33 +37,27 @@
   "bugs": {
     "url": "https://github.com/jshor/datebook/issues"
   },
-  "homepage": "https://github.com/jshor/datebook",
+  "homepage": "https://datebook.dev",
   "dependencies": {
     "file-saver": "^2.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@johmun/vue-tags-input": "^2.1.0",
+    "@types/file-saver": "^2.0.1",
     "@types/jest": "^26.0.14",
-    "autoprefixer": "^6.0.3",
-    "awesome-typescript-loader": "^5.2.1",
     "codecov": "^3.5.0",
     "commitizen": "^3.1.1",
     "husky": "^4.3.0",
-    "jest": "^24.1.0",
-    "jest-mock-random": "^1.0.2",
-    "moment": "^2.24.0",
-    "parcel-bundler": "^1.12.3",
-    "standard-version": "^8.0.1",
-    "ts-jest": "^26.1.0",
+    "jest": "^26.4.2",
+    "standard-version": "^6.0.1",
+    "ts-jest": "^26.3.0",
+    "ts-loader": "^8.0.3",
     "typescript": "^3.9.5",
     "vuepress": "^1.5.0",
-    "webpack": "^4.41.5",
-    "webpack-bundle-analyzer": "^3.7.0",
-    "webpack-cli": "^3.3.10"
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "config": {
     "commitizen": {

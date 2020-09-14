@@ -1,20 +1,19 @@
-import IRecurrence from "./IRecurrence";
+import IRecurrence from './IRecurrence'
 
 /**
  * Basic config options.
  */
-
 export default interface IOptions {
   /** The event description. */
-  description?: string;
+  description?: string
   /** The event title (i.e., summary). */
-  title?: string;
+  title?: string
   /** A summary description of the event location. */
-  location?: string;
+  location?: string
   /** The event start timestamp. */
-  start: string;
+  start: string | Date
   /** The event end timestamp. For all-day events, this field should be omitted. */
-  end?: string;
+  end?: string | Date
   /** The recurrence of an event is how often the event is supposed to occur. See {@link IRecurrence}. */
-  recurrence?: IRecurrence;
+  recurrence?: IRecurrence
 }

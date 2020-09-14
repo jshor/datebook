@@ -1,17 +1,17 @@
 import CalendarBase from './CalendarBase'
 import { RECURRENCE, URL, FORMAT } from './constants'
-import { formatDate, addLeadingZero, incrementDate } from './utils/time'
 import { toProperCase, toQueryString } from './utils/data'
+import time from './utils/time'
 import IOptions from './interfaces/IOptions'
 import IRecurrence from './interfaces/IRecurrence'
 
 /**
  * Generates a Yahoo! Calendar url.
  * Note that Yahoo! Calendar's support for recurrence is limited to only the interval and frequency.
- * 
+ *
  * @example
  *  import { YahooCalendar } from 'datebook'
- * 
+ *
  *  const yahoo = new YahooCalendar({
  *    title: 'Happy Hour',
  *    location: 'The Bar, New York, NY',
@@ -23,7 +23,7 @@ import IRecurrence from './interfaces/IRecurrence'
  *      interval: 2
  *    }
  *  })
- * 
+ *
  *  yahoo.render() // https://calendar.yahoo.com/?v=60&title=Happy%20Hour&st=20190704T190000&desc=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&in_loc=The%20Bar%2C%20New%20York%2C%20NY&RPAT=02Wk&REND=20190610T123112&dur=0200
  *
  */
@@ -61,7 +61,7 @@ export default class YahooCalendar extends CalendarBase {
    * @param {string} frequency
    * @returns {string}
    */
-  getFrequency (frequency: string): string {
+  getFrequency (frequency: string | undefined): string {
     const { FREQUENCY } = RECURRENCE
 
     switch (frequency) {
@@ -100,7 +100,7 @@ export default class YahooCalendar extends CalendarBase {
     }
 
     return [
-      addLeadingZero(interval),
+      time.addLeadingZero(interval),
       frequency,
       prefix,
       weekdays
@@ -109,11 +109,11 @@ export default class YahooCalendar extends CalendarBase {
 
   /**
    * Computes the number of days a recurrence will last.
-   * 
-   * @param {Object} recurrence 
-   * @returns {Number}
+   *
+   * @param {IRecurrence} recurrence
+   * @returns {number}
    */
-  getRecurrenceLengthDays (recurrence) {
+  getRecurrenceLengthDays (recurrence: IRecurrence): number {
     const { frequency, count } = recurrence
     const { FREQUENCY } = RECURRENCE
 
@@ -137,28 +137,28 @@ export default class YahooCalendar extends CalendarBase {
   /**
    * Returns the duration between two given dates in hhmm format.
    *
-   * @param {string} start
-   * @param {string} end
+   * @param {number} start
+   * @param {number} end
    * @returns {string}
    */
-  getDuration (start, end) {
+  getDuration (start: number, end: number): string {
     const seconds = Math.floor((end - start) / 1000)
     const hours = Math.floor(seconds / 3600)
     const mins = ((seconds / 3600) % 1) * 60
-  
-    return `${addLeadingZero(hours)}${addLeadingZero(mins)}`
+
+    return `${time.addLeadingZero(hours)}${time.addLeadingZero(mins)}`
   }
 
   /**
    * Returns the number of hours between two given dates.
-   * 
-   * @param {string} start
-   * @param {string} end
-   * @returns {Number}
+   *
+   * @param {number} start
+   * @param {number} end
+   * @returns {number}
    */
-  getHoursDuration (start, end) {
+  getHoursDuration (start: number, end: number): number {
     const seconds = Math.floor((end - start) / 1000)
-    
+
     return Math.floor(seconds / 3600)
   }
 
@@ -167,9 +167,9 @@ export default class YahooCalendar extends CalendarBase {
    *
    * @returns {string}
    */
-  render () {
-    const params: Record<string, string | number>  = {
-      v: 60, // version number; must be 60
+  render (): string {
+    const params: Record<string, string>  = {
+      v: '60', // version number; must be 60
       title: this.title,
       desc: this.description,
       in_loc: this.location
@@ -177,16 +177,16 @@ export default class YahooCalendar extends CalendarBase {
 
     if (this.allday) {
       params.dur = 'allday'
-      params.st = formatDate(this.start, FORMAT.DATE)
+      params.st = time.formatTimestampDate(this.start, FORMAT.DATE)
     } else {
-      params.st = formatDate(this.start, FORMAT.FULL)
+      params.st = time.formatTimestampDate(this.start, FORMAT.FULL)
 
-      if (this.getHoursDuration(this.start, this.end) > 99) {
+      if (this.getHoursDuration(this.start.getTime(), this.end.getTime()) > 99) {
         // Yahoo only supports up to 99 hours, so we are forced to specify the end time instead of the duration
-        params.et = formatDate(this.end, FORMAT.FULL)
+        params.et = time.formatTimestampDate(this.end, FORMAT.FULL)
       } else {
         // we prefer specifying duration in lieu of end time, because apparently Yahoo's end time is buggy w.r.t. timezones
-        params.dur = this.getDuration(this.start, this.end)
+        params.dur = this.getDuration(this.start.getTime(), this.end.getTime())
       }
     }
 
@@ -194,12 +194,12 @@ export default class YahooCalendar extends CalendarBase {
       params.RPAT = this.getRecurrence(this.recurrence)
 
       if (this.recurrence.end) {
-        params.REND = formatDate(this.recurrence.end, FORMAT.DATE)
+        params.REND = time.formatDate(this.recurrence.end, FORMAT.DATE)
       } else {
         const days = this.getRecurrenceLengthDays(this.recurrence)
-        const rend = incrementDate(this.end, Math.ceil(days))
+        const rend = time.incrementDate(this.end, Math.ceil(days))
 
-        params.REND = formatDate(rend, FORMAT.DATE)
+        params.REND = time.formatTimestampDate(rend, FORMAT.DATE)
       }
     }
 

@@ -1,6 +1,6 @@
 /**
  * Filters out invalid fields and formats for the given Datebook recurrence config.
- * 
+ *
  * @param {object} value
  * @returns {object}
  */
@@ -21,7 +21,7 @@ export default function getFilteredRecurrence (value) {
     // only yearly recurrences can specify the month
     delete recurrence.month
   }
-  
+
   if (recurrence.frequency === 'WEEKLY') {
     // strip the freq numbers in front of weekday days
     recurrence.weekdays = recurrence

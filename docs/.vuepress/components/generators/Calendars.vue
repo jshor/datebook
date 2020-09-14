@@ -30,7 +30,7 @@
       v-if="recurs"
       v-model="config.recurrence"
     />
-    
+
     <h2>Result</h2>
 
     <h3>Google Calendar URL</h3>
@@ -68,7 +68,7 @@ import {
   YahooCalendar,
   OutlookCalendar,
   ICalendar
-} from '../../../../src'
+} from '../../../../build/dist/datebook'
 
 export default {
   name: 'Calendars',
