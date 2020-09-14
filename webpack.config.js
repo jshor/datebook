@@ -1,37 +1,28 @@
 const path = require('path')
-const MinifyPlugin = require('babel-minify-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-
-const plugins = [new MinifyPlugin()]
-
-if (process.argv.includes('--analyze')) {
-  plugins.push(new BundleAnalyzerPlugin())
-}
 
 module.exports = {
   entry: './src/index.ts',
   output: {
-    path: path.join(__dirname, './build/dist'),      
-    filename: 'datebook.js',      
-    library: 'datebook',      
-    libraryTarget: 'umd'
+    path: path.join(__dirname, './build/dist'),
+    filename: 'datebook.js',
+    library: 'datebook',
+    libraryTarget: 'umd',
+    globalObject: 'this'
   },
   target: 'node',
-  resolve: {
-    extensions: ['.ts'],
-  },
   module: {
     rules: [
       {
-        test: /\.ts?$/,
-        loader: "awesome-typescript-loader"
-      },
-      {
-        test: /\.ts$/,
-        loader: "source-map-loader"
-      },
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true
+        }
+      }
     ]
   },
-  plugins,
+  resolve: {
+    extensions: ['.ts']
+  },
   mode: 'production'
 }

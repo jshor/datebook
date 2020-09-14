@@ -1,8 +1,9 @@
 import CalendarBase from '../CalendarBase'
 import { incrementDate } from '../utils/time'
+import IOptions from '../interfaces/IOptions'
 
 describe('Calendar Base', () => {
-  let baseOpts 
+  let baseOpts: IOptions
 
   beforeEach(() => {
     baseOpts = {
@@ -12,20 +13,13 @@ describe('Calendar Base', () => {
     }
   })
 
+  // afterEach(() => jest.resetAllMocks()) // TODO: need this, but it breaks tests... code smell
+
   describe('constructor()', () => {
-    let setTextSpy, setTimestampsSpy
-    
-    beforeEach(() => {
-      setTextSpy = jest.spyOn(CalendarBase.prototype, 'setText')
-      setTimestampsSpy = jest.spyOn(CalendarBase.prototype, 'setTimestamps')
-    })
-
-    afterEach(() => {
-      setTextSpy.mockClear()
-      setTimestampsSpy.mockClear()
-    })
-
     it('should call setText and setTimestamps with passed in options', () => {
+      jest.spyOn(CalendarBase.prototype, 'setText')
+      jest.spyOn(CalendarBase.prototype, 'setTimestamps')
+
       const testObj = new CalendarBase(baseOpts)
 
       expect(testObj.setText).toHaveBeenCalledTimes(1)
@@ -34,14 +28,16 @@ describe('Calendar Base', () => {
   })
 
   describe('setText()', () => {
-    let calendarObj
+    let calendarObj: CalendarBase
 
     beforeEach(() => {
       calendarObj = new CalendarBase(baseOpts)
     })
 
     it('should default to a blank string if options are falsey', () => {
-      calendarObj.setText({})
+      calendarObj.setText({
+        start: baseOpts.start
+      })
 
       expect(calendarObj.description).toBe('')
       expect(calendarObj.title).toBe('')
@@ -49,7 +45,8 @@ describe('Calendar Base', () => {
     })
 
     it('should set the description', () => {
-      const testOpts = {
+      const testOpts: IOptions = {
+        ...baseOpts,
         description: 'Descriptive Text'
       }
       calendarObj.setText(testOpts)
@@ -58,7 +55,8 @@ describe('Calendar Base', () => {
     })
 
     it('should set the title', () => {
-      const testOpts = {
+      const testOpts: IOptions = {
+        ...baseOpts,
         title: 'Meeting with Jeff'
       }
       calendarObj.setText(testOpts)
@@ -67,7 +65,8 @@ describe('Calendar Base', () => {
     })
 
     it('should set the location', () => {
-      const testOpts = {
+      const testOpts: IOptions = {
+        ...baseOpts,
         location: 'New York'
       }
       calendarObj.setText(testOpts)
@@ -76,7 +75,8 @@ describe('Calendar Base', () => {
     })
 
     it('should set all texts', () => {
-      const testOpts = {
+      const testOpts: IOptions = {
+        ...baseOpts,
         description: 'Descriptive Text',
         title: 'Meeting with Jeff',
         location: 'New York'
@@ -90,18 +90,22 @@ describe('Calendar Base', () => {
   })
 
   describe('setTimestamps()', () => {
+<<<<<<< HEAD
     const oneDay = 24 * 360 * 1000 // one day in UNIX time
     let calendarObj
+=======
+    let calendarObj: CalendarBase
+>>>>>>> cf365ac... refactor(test): implements ts-jest
 
     beforeEach(() => {
       calendarObj = new CalendarBase(baseOpts)
     })
 
     it('should set the recurrence', () => {
-      const testOpts = {
+      const testOpts: IOptions = {
         ...baseOpts,
         recurrence: {
-          weekst: 'MO'
+          weekstart: 'MO'
         }
       }
 
@@ -122,8 +126,13 @@ describe('Calendar Base', () => {
       })
 
       it('should set the end using the start + 1 day', () => {
+<<<<<<< HEAD
         const testOpts = {
           start: new Date('2019-03-23T17:00:00.000'),
+=======
+        const testOpts: IOptions = {
+          start: '2019-03-23T17:00:00.000',
+>>>>>>> cf365ac... refactor(test): implements ts-jest
           end: ''
         }
 
@@ -136,8 +145,13 @@ describe('Calendar Base', () => {
       })
 
       it('should set the start and end without the time of day', () => {
+<<<<<<< HEAD
         const testOpts = {
           start: new Date('2019-03-23T17:00:00.000'),
+=======
+        const testOpts: IOptions = {
+          start: '2019-03-23T17:00:00.000',
+>>>>>>> cf365ac... refactor(test): implements ts-jest
           end: ''
         }
 
@@ -161,9 +175,15 @@ describe('Calendar Base', () => {
       })
 
       it('should set the start and end including the time of day', () => {
+<<<<<<< HEAD
         const testOpts = {
           start: new Date('2019-03-23T17:00:00.000'),
           end: new Date('2019-03-23T21:00:00.000')
+=======
+        const testOpts: IOptions = {
+          start: '2019-03-23T17:00:00.000',
+          end: '2019-03-23T21:00:00.000'
+>>>>>>> cf365ac... refactor(test): implements ts-jest
         }
 
         calendarObj.setTimestamps(testOpts)

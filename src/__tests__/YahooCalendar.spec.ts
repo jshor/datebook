@@ -1,23 +1,16 @@
+import * as queryString from 'query-string'
 import { FORMAT, RECURRENCE, URL } from '../constants'
 import CalendarBase from '../CalendarBase'
 import YahooCalendar from '../YahooCalendar'
-import queryStringToObj from '../../test_helpers/queryStringToObj'
-import { formatTimestampString } from '../utils/time'
+import time from '../utils/time'
+import IOptions from '../interfaces/IOptions'
 
-const { FREQUENCY: { DAILY, WEEKLY, MONTHLY, YEARLY } } = RECURRENCE
-const yahooFreqMap = {
-  [DAILY]: 'Dy',
-  [WEEKLY]: 'Wk',
-  [MONTHLY]: 'Mh',
-  [YEARLY]: 'Yr',
-}
-
-const getFormattedDate = (s, f) => {
-  return formatTimestampString(new Date(s), f)
-}
+const {
+  FREQUENCY: { DAILY, WEEKLY, MONTHLY }
+} = RECURRENCE
 
 describe('YahooCalendar', () => {
-  let testOpts
+  let testOpts: IOptions
 
   beforeEach(() => {
     testOpts = {
@@ -28,9 +21,7 @@ describe('YahooCalendar', () => {
     }
   })
 
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
+  afterEach(() => jest.clearAllMocks())
 
   it('should be a subclass of CalendarBase', () => {
     const result = new YahooCalendar(testOpts)
@@ -45,7 +36,7 @@ describe('YahooCalendar', () => {
 
       expect(result).toEqual('SuMo')
     })
-    
+
     it('should strip out any non-alphanumeric chars', () => {
       const calendar = new YahooCalendar(testOpts)
       const result = calendar.getWeekdays(['3SU', '-2MO'])
@@ -89,7 +80,7 @@ describe('YahooCalendar', () => {
     it('should prepend single digit interval with 0', () => {
       const recurrence = {
         interval: 3,
-        frequency: DAILY,
+        frequency: DAILY
       }
 
       const result = obj.getRecurrence(recurrence)
@@ -99,7 +90,7 @@ describe('YahooCalendar', () => {
     it('should return yahoo calendar rpat rule', () => {
       const recurrence = {
         interval: 10,
-        frequency: DAILY,
+        frequency: DAILY
       }
 
       const result = obj.getRecurrence(recurrence)
@@ -180,26 +171,37 @@ describe('YahooCalendar', () => {
     it('should return the number of days in 100 years', () => {
       expect(obj.getRecurrenceLengthDays({})).toEqual(36525)
     })
+
+    it('should fall back to 1 day if no interval is specified', () => {
+      const obj = new YahooCalendar(testOpts)
+      const recurrence = {
+        frequency: DAILY
+      }
+
+      const result = obj.getRecurrence(recurrence)
+
+      expect(result).toBe('01Dy')
+    })
   })
-  
+
   describe('getDuration()', () => {
     it('should get the duration between two datetimes', () => {
       const calendar = new YahooCalendar(testOpts)
       const start = new Date('2019-03-23T17:00:00.000')
       const end = new Date('2019-03-23T20:23:00.000')
       const expectedDiff = '0323'
-      const actualDiff = calendar.getDuration(start, end)
+      const actualDiff = calendar.getDuration(start.getTime(), end.getTime())
 
       expect(actualDiff).toBe(expectedDiff)
     })
   })
-  
+
   describe('getHoursDuration()', () => {
     it('should get the duration between two datetimes', () => {
       const calendar = new YahooCalendar(testOpts)
       const start = new Date('2019-03-23T17:00:00.000')
       const end = new Date('2019-03-23T20:23:00.000') // 03:23:00 difference
-      const actualDiff = calendar.getHoursDuration(start, end)
+      const actualDiff = calendar.getHoursDuration(start.getTime(), end.getTime())
 
       expect(actualDiff).toBe(3)
     })
@@ -228,14 +230,14 @@ describe('YahooCalendar', () => {
           const result = obj.render()
 
           const querystring = result.split('?')[1]
-          const params = queryStringToObj(querystring)
+          const params = queryString.parse(querystring)
           const expectedObj = {
             v: '60',
             title: 'Fun Party',
             desc: 'BYOB',
             in_loc: 'New York',
             dur: 'allday',
-            st: getFormattedDate(testOpts.start, FORMAT.DATE)
+            st: time.formatTimestampString(testOpts.start, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
           expect(expectedObj).toMatchObject(params)
@@ -256,16 +258,16 @@ describe('YahooCalendar', () => {
           const result = obj.render()
 
           const querystring = result.split('?')[1]
-          const params = queryStringToObj(querystring)
+          const params = queryString.parse(querystring)
           const expectedObj = {
             v: '60',
             title: 'Fun Party',
             desc: 'BYOB',
             in_loc: 'New York',
             dur: 'allday',
-            st: getFormattedDate(testOpts.start, FORMAT.DATE),
+            st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
             RPAT: '01Dy',
-            REND: getFormattedDate(recurrenceEnd, FORMAT.DATE)
+            REND: time.formatTimestampString(recurrenceEnd, FORMAT.FULL),
           }
           expect(params).toMatchObject(expectedObj)
         })
@@ -288,37 +290,37 @@ describe('YahooCalendar', () => {
             const result = obj.render()
 
             const querystring = result.split('?')[1]
-            const params = queryStringToObj(querystring)
+            const params = queryString.parse(querystring)
             const expectedObj = {
               v: '60',
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-              st: getFormattedDate(testOpts.start, FORMAT.FULL),
+              st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
               dur: '0200'
             }
             expect(params).toMatchObject(expectedObj)
             expect(expectedObj).toMatchObject(params)
           })
         })
-        
+
         describe('when the duration of the event spans longer than 99 hours', () => {
           it('should format the query string with the time parameters in start/end timestamps', () => {
             const start = '2019-07-04T19:00:00.000'
             const end = '2019-07-08T23:00:00.000' // one-hundred-hour long event, (four days, three hours)
-            
+
             const obj = new YahooCalendar({ ...testOpts, start, end })
             const result = obj.render()
 
             const querystring = result.split('?')[1]
-            const params = queryStringToObj(querystring)
+            const params = queryString.parse(querystring)
             const expectedObj = {
               v: '60',
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-              st: getFormattedDate(start, FORMAT.FULL),
-              et: getFormattedDate(end, FORMAT.FULL)
+              st: time.formatTimestampString(start, FORMAT.FULL),
+              et: time.formatTimestampString(end, FORMAT.FULL)
             }
             expect(params).toMatchObject(expectedObj)
             expect(expectedObj).toMatchObject(params)
@@ -340,16 +342,16 @@ describe('YahooCalendar', () => {
           const result = obj.render()
 
           const querystring = result.split('?')[1]
-          const params = queryStringToObj(querystring)
+          const params = queryString.parse(querystring)
           const expectedObj = {
             v: '60',
             title: 'Fun Party',
             desc: 'BYOB',
             in_loc: 'New York',
             dur: '0200',
-            st: getFormattedDate(testOpts.start, FORMAT.FULL),
+            st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
             RPAT: '01Dy',
-            REND: getFormattedDate(recurrenceEnd, FORMAT.DATE)
+            REND: time.formatTimestampString(recurrenceEnd, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
         })

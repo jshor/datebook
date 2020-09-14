@@ -1,27 +1,20 @@
 import { FORMAT } from '../constants'
-import { formatText, getUid, getProdId, download } from '../utils/ics'
-import { formatTimestampString, getTimeCreated } from '../utils/time'
+import ics from '../utils/ics'
+import time from '../utils/time'
 import CalendarBase from '../CalendarBase'
 import ICalendar from '../ICalendar'
-
-jest.mock('../utils/ics')
+import IOptions from '../interfaces/IOptions'
 
 describe('ICalendar', () => {
-  let baseOpts
+  let baseOpts: IOptions = {
+    title: 'Fun Party',
+    description: 'BYOB',
+    location: 'New York',
+    start: new Date('2019-07-04T19:00:00.000'),
+    end: new Date('2019-07-04T21:00:00.000')
+  }
 
-  beforeEach(() => {
-    baseOpts = {
-      title: 'Fun Party',
-      description: 'BYOB',
-      location: 'New York',
-      start: new Date('2019-07-04T19:00:00.000'),
-      end: new Date('2019-07-04T21:00:00.000'),
-    }
-  })
-
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
+  afterEach(() => jest.resetAllMocks())
 
   it('should be a subclass of CalendarBase', () => {
     const result = new ICalendar(baseOpts)
@@ -32,31 +25,41 @@ describe('ICalendar', () => {
   describe('download()', () => {
     it('should call render and the download util', () => {
       const obj = new ICalendar(baseOpts)
+      const mockRender = 'renderedstring'
 
-      jest.spyOn(obj, 'render').mockReturnValue('renderedstring')
+      jest
+        .spyOn(ics, 'download')
+        .mockImplementation(jest.fn())
+      jest
+        .spyOn(obj, 'render')
+        .mockReturnValue(mockRender)
+
       obj.download()
 
       expect(obj.render).toHaveBeenCalledTimes(1)
-
-      const rendered = obj.render.mock.results[0].value
-      expect(download).toHaveBeenCalledTimes(1)
-      expect(download).toHaveBeenCalledWith(obj.title, rendered)
+      expect(ics.download).toHaveBeenCalledTimes(1)
+      expect(ics.download).toHaveBeenCalledWith(obj.title, mockRender)
     })
   })
 
   describe('render()', () => {
-    const originalWindow = global.window
+    const mockUuid = 'mock-uuid-1234'
 
     beforeEach(() => {
-      formatText.mockImplementation(s => s)
-      getUid.mockReturnValue(24)
-      getProdId.mockReturnValue('foobar')
+      jest
+        .spyOn(ics, 'formatText')
+        .mockImplementation(s => s || '')
+      jest
+        .spyOn(ics, 'getUid')
+        .mockReturnValue(mockUuid)
+      jest
+        .spyOn(ics, 'getProdId')
+        .mockReturnValue('foobar')
     })
 
     afterEach(() => {
       Object.defineProperty(global, 'window', {
-        value: originalWindow,
-        writable: true,
+        writable: true
       })
     })
 
@@ -65,12 +68,10 @@ describe('ICalendar', () => {
 
       obj.render()
 
-      expect(formatText).toHaveBeenCalledTimes(3)
-      expect(formatText.mock.calls).toEqual([
-        [baseOpts.description],
-        [baseOpts.location],
-        [baseOpts.title]
-      ])
+      expect(ics.formatText).toHaveBeenCalledTimes(3)
+      expect(ics.formatText).toHaveBeenCalledWith(baseOpts.description)
+      expect(ics.formatText).toHaveBeenCalledWith(baseOpts.location)
+      expect(ics.formatText).toHaveBeenCalledWith(baseOpts.title)
     })
 
     it('should contain the RRULE parameter if a recurrence was specified', () => {
@@ -90,14 +91,12 @@ describe('ICalendar', () => {
 
       obj.render()
 
-      expect(getUid).toHaveBeenCalledTimes(1)
+      expect(ics.getUid).toHaveBeenCalledTimes(1)
     })
 
     it('should render an ICS Param string', () => {
       const obj = new ICalendar(baseOpts)
-
       const rendered = obj.render()
-
       const expected = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
@@ -111,10 +110,11 @@ describe('ICalendar', () => {
         'TRANSP:TRANSPARENT',
         'END:VEVENT',
         'END:VCALENDAR',
-        'UID:24',
+        `UID:${mockUuid}`,
         `DTSTAMP:${getTimeCreated()}`,
         'PRODID:foobar'
       ].join('\n')
+
       expect(rendered).toBe(expected)
     })
   })

@@ -1,108 +1,64 @@
-import { mockRandomForEach } from 'jest-mock-random'
-import { RECURRENCE } from '../../constants'
-import {
-  formatText,
-  getBlob,
-  getFileName,
-  getUid,
-  getRrule,
-  download,
-  getProdId,
-} from '../ics'
-import { formatTimestampString } from '../time'
-import FileSaver from 'file-saver';
+import * as FileSaver from 'file-saver'
+import ics from '../ics'
 import safariFileSave from '../safariFileSave'
+import { formatTimestampString } from '../time'
+import { RECURRENCE } from '../../constants'
 
-jest.mock('file-saver')
 jest.mock('../safariFileSave')
 
-const { FREQUENCY: { DAILY } } = RECURRENCE
+const {
+  FREQUENCY: { DAILY }
+} = RECURRENCE
 
-const originalBlob = global.Blob
-const mockBlob = () => {
-  global.Blob = function fakeBlob(content, options) {
-    this.content = content
-    this.options = options
-  }
-}
-const unmockBlob = () => {
-  global.Blob = originalBlob
-}
 describe('IcsUtil', () => {
+  afterEach(() => jest.resetAllMocks())
+
   describe('formatText()', () => {
     const str = 'foo\nbar\n\nbaz'
 
-    it('should return an empty string if it is falsey', () => {
-      expect(formatText()).toBe('')
-      expect(formatText(false)).toBe('')
-      expect(formatText(null)).toBe('')
-      expect(formatText(undefined)).toBe('')
-      expect(formatText('')).toBe('')
-      expect(formatText(0)).toBe('')
-    })
-
     it('should backslash escape newlines', () => {
-      const formatted = formatText(str)
+      const formatted = ics.formatText(str)
 
       expect(formatted).toBe('foo\\nbar\\n\\nbaz')
     })
 
     it('should return the full string if maxLength is undefined', () => {
-      const formatted = formatText(str)
+      const formatted = ics.formatText(str)
 
       expect(formatted).toBe('foo\\nbar\\n\\nbaz')
     })
   })
 
   describe('getBlob()', () => {
-    beforeAll(mockBlob)
-
-    afterAll(unmockBlob)
-
-    it('should create a new Blob object with the passed in data', () => {
+    it('should set the MIME type as `application/octet-stream`', () => {
       const icsData = 'foobar'
+      const blob: Blob = ics.getBlob(icsData)
 
-      const blob = getBlob(icsData)
-
-      expect(blob.content).toEqual([icsData])
-    })
-
-    it('should set the MIME type as octet-stream', () => {
-      const icsData = 'foobar'
-
-      const blob = getBlob(icsData)
-
-      expect(blob.options).toEqual({
-        type: 'application/octet-stream'
-      })
+      expect(blob.type).toEqual('application/octet-stream')
     })
   })
 
   describe('getFileName()', () => {
-    it('should return event.ics if no title', () => {
-      expect(getFileName()).toBe('event.ics')
-      expect(getFileName(false)).toBe('event.ics')
-      expect(getFileName(null)).toBe('event.ics')
-      expect(getFileName(undefined)).toBe('event.ics')
-      expect(getFileName('')).toBe('event.ics')
-      expect(getFileName(0)).toBe('event.ics')
+    it('should return event.ics if no title is specified', () => {
+      expect(ics.getFileName('')).toBe('event.ics')
     })
 
     it('should remove all non-alphanumeric except underscore', () => {
       const testTitle = 'abcdef_ABCDEF1234567890-.,/[]\)(!@*#$^%^'
       const expectedFileName = 'abcdef_ABCDEF1234567890.ics'
-      const filename = getFileName(testTitle)
+      const filename = ics.getFileName(testTitle)
 
       expect(filename).toBe(expectedFileName)
     })
   })
 
   describe('getUid()', () => {
-    mockRandomForEach(0.1234567890123456)
-
     it('should return a base-32 random UID', () => {
-      const expectedUid = '4fzzzxkxflf'
-      expect(getUid()).toBe(expectedUid)
+      jest
+        .spyOn(Math, 'random')
+        .mockReturnValue(0.123456)
+
+      expect(ics.getUid()).toBe('4fzyo82mvyq')
     })
   })
 
@@ -113,7 +69,7 @@ describe('IcsUtil', () => {
         writable: true
       })
 
-      expect(getProdId()).toEqual('datebook')
+      expect(ics.getProdId()).toEqual('datebook')
     })
 
     it('should return the window host in the browser context', () => {
@@ -126,7 +82,7 @@ describe('IcsUtil', () => {
         writable: true
       })
 
-      expect(getProdId()).toEqual(host)
+      expect(ics.getProdId()).toEqual(host)
     })
   })
 
@@ -136,64 +92,65 @@ describe('IcsUtil', () => {
         frequency: DAILY,
         interval: 1,
         count: 5,
-        weekStart: 'MO',
+        weekstart: 'MO',
         end: '2019-05-02',
         weekdays: 'MO',
         monthdays: '5',
       }
-      const expectedRrule = `FREQ=${
-        DAILY
-        };INTERVAL=1;COUNT=5;WKST=MO;BYDAY=MO;BYMONTHDAY=5;UNTIL=${
-          formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')
-        }`;
+      const expectedRrule = [
+        `FREQ=${DAILY}`,
+        'INTERVAL=1',
+        'COUNT=5',
+        'WKST=MO',
+        'BYDAY=MO',
+        'BYMONTHDAY=5',
+        `UNTIL=${formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')}`
+      ].join(';')
 
-      const actualRrule = getRrule(recurrence)
+      const actualRrule = ics.getRrule(recurrence)
 
       expect(actualRrule).toBe(expectedRrule)
     })
   })
 
   describe('download()', () => {
-    const originalUserAgent = global.navigator.userAgent
+    beforeEach(() => {
+      jest
+        .spyOn(FileSaver, 'saveAs')
+        .mockImplementation(jest.fn())
+    })
 
     afterEach(() => {
-      Object.defineProperty(global.navigator, 'userAgent', {
-        value: originalUserAgent,
-        writable: true,
+      Object.defineProperty(window, 'navigator', {
+        value: {
+          userAgent: 'trident'
+        },
+        writable: true
       })
-      safariFileSave.mockClear()
-      FileSaver.saveAs.mockClear()
     })
 
     describe('on non-Safari browsers', () => {
-      it('should save the data as a file', () => {
-        const data = 'foobar'
-        const blob = getBlob(data)
-        const title = 'july 4<>'
-        const filename = 'july 4.ics'
+      it('should invoke FileSaver.saveAs()', () => {
+        ics.download('july 4.ics', 'foobar')
 
-        download(title, data)
-
-        expect(safariFileSave).not.toHaveBeenCalled()
         expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
-        expect(FileSaver.saveAs).toHaveBeenCalledWith(blob, filename)
+        expect(safariFileSave).not.toHaveBeenCalled()
       })
     })
 
     describe('on Safari', () => {
-      it('should invoke safariFileSave', () => {
-        const data = 'foobar'
-        const title = 'july 4<>'
-        const filename = 'july 4.ics'
+      it('should invoke safariFileSave()', () => {
+        Object.defineProperty(window, 'safari', {
+          value: {
+            window: true
+          },
+          writable: true
+        })
 
-        global.window = Object.create(window)
-        global.window.safari = true
+        ics.download('july 4.ics', 'foobar')
 
-        download(title, data)
-        
         expect(FileSaver.saveAs).not.toHaveBeenCalled()
         expect(safariFileSave).toHaveBeenCalledTimes(1)
-        expect(safariFileSave).toHaveBeenCalledWith(data, filename)
       })
     })
   })

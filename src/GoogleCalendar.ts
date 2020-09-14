@@ -1,16 +1,16 @@
 import CalendarBase from './CalendarBase'
 import { FORMAT, URL } from './constants'
-import { formatTimestampString } from './utils/time'
+import { formatTimestampDate } from './utils/time'
 import { toQueryString } from './utils/data'
-import { getRrule } from './utils/ics'
+import ics from './utils/ics'
 import IOptions from './interfaces/IOptions'
 
 /**
  * Generates a Google Calendar url.
- * 
+ *
  * @example
  *  import { GoogleCalendar } from 'datebook'
- * 
+ *
  *  const google = new GoogleCalendar({
  *    title: 'Happy Hour',
  *    location: 'The Bar, New York, NY',
@@ -22,9 +22,9 @@ import IOptions from './interfaces/IOptions'
  *      interval: 2
  *    }
  *  })
- * 
+ *
  *  google.render() // https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20190704T190000%2F20190704T210000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D2%3BUNTIL%3D20190610T123926
- * 
+ *
  */
 
 export default class GoogleCalendar extends CalendarBase {
@@ -34,10 +34,10 @@ export default class GoogleCalendar extends CalendarBase {
   constructor (options: IOptions) {
     super(options)
   }
-  
+
   /**
    * Generates the Google Calendar url.
-   * 
+   *
    * @returns {string}
    */
   render () {
@@ -47,24 +47,24 @@ export default class GoogleCalendar extends CalendarBase {
       timestampFormat += FORMAT.TIME
     }
 
-    const params: Record<string, string | number> = {
+    const params: Record<string, string> = {
       action: 'TEMPLATE',
       text: this.title,
       details: this.description,
       location: this.location,
       dates: [
-        formatTimestampString(this.start, timestampFormat),
-        formatTimestampString(this.end, timestampFormat)
+        formatTimestampDate(this.start, timestampFormat),
+        formatTimestampDate(this.end, timestampFormat)
       ].join('/')
     }
-    
+
     if (this.recurrence) {
-      params.recur = `RRULE:${getRrule(this.recurrence)}`
+      params.recur = `RRULE:${ics.getRrule(this.recurrence)}`
     }
-    
+
     const baseUrl = URL.GOOGLE
     const queryString = toQueryString(params)
-    
+
     return `${baseUrl}?${queryString}`
   }
 }

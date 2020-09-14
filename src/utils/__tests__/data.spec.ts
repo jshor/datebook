@@ -1,7 +1,7 @@
 import { toIcsParamString, toParamString, toQueryString } from '../data';
 
 describe('DataUtil', () => {
-  let params;
+  let params: Record<string, string>
 
   beforeEach(() => {
     params = {
@@ -9,6 +9,8 @@ describe('DataUtil', () => {
       dates: '20170508/20170509'
     }
   })
+
+  afterEach(() => jest.resetAllMocks())
 
   describe('toIcsParamString()', () => {
     it('should create a semicolon-delimited string of params', () => {
@@ -27,7 +29,7 @@ describe('DataUtil', () => {
     })
 
     it('should ignore undefined values', () => {
-      params.foo = undefined
+      delete params.foo
       const icsParamString = toIcsParamString(params)
       const icsParams = icsParamString.split(';')
       const icsParamKeys = icsParams.map(param => param.split('=')[0])
@@ -54,7 +56,7 @@ describe('DataUtil', () => {
       })
 
       it('should ignore undefined values', () => {
-        params.foo = undefined
+        delete params.foo
         const paramString = toParamString(params)
         const parsedParams = paramString.split(';')
         const parsedParamKeys = parsedParams.map(param => param.split('=')[0])
@@ -82,18 +84,18 @@ describe('DataUtil', () => {
       })
 
       describe('with defined transformFn', () => {
-        const sillyTransform = str => str.split('').join('AAA')
-        const sillyUntransform = str => str.split('AAA').join('')
+        const transform = (str: string) => str.split('').join('AAA')
+        const untransform = (str: string) => str.split('AAA').join('')
 
         it('should use the provided delimiter and transformFn', () => {
-          const paramString = toParamString(params, delimiter, sillyTransform)
+          const paramString = toParamString(params, delimiter, transform)
           const parsedParams = paramString
             .split(delimiter)
             .reduce((acc, kv) => {
               const [k, v] = kv.split('=')
               return {
                 ...acc,
-                [k]: sillyUntransform(v)
+                [k]: untransform(v)
               }
             }, {})
 
@@ -126,7 +128,7 @@ describe('DataUtil', () => {
     })
 
     it('should ignore undefined values', () => {
-      params.foo = undefined
+      delete params.foo
       const queryString = toQueryString(params)
       const queryParams = queryString.split('&')
       const queryKeys = queryParams.map(param => param.split('=')[0])

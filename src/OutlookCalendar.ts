@@ -1,16 +1,16 @@
 import CalendarBase from './CalendarBase'
 import { FORMAT, URL } from './constants'
 import { toQueryString } from './utils/data'
-import { formatTimestampString } from './utils/time'
+import { formatTimestampDate } from './utils/time'
 import IOptions from './interfaces/IOptions'
 
 /**
  * Generates an Outlook Calendar url.
  * Note that Outlook Calendar's query string params do not support recurrence.
- * 
+ *
  * @example
  *  import { OutlookCalendar } from 'datebook'
- * 
+ *
  *  const outlook = new OutlookCalendar({
  *    title: 'Happy Hour',
  *    location: 'The Bar, New York, NY',
@@ -18,7 +18,7 @@ import IOptions from './interfaces/IOptions'
  *    start: '20190704T190000',
  *    end: '20190704T210000'
  *  })
- * 
+ *
  *  outlook.render() // https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20190704T190000%2F20190704T210000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D2%3BUNTIL%3D20190610T123926
  *
  */
@@ -32,10 +32,10 @@ export default class OutlookCalendar extends CalendarBase {
   constructor (options: IOptions) {
     super(options)
   }
-  
+
   /**
    * Generates the Outlook url.
-   * 
+   *
    * @returns {string}
    */
   render () {
@@ -46,18 +46,18 @@ export default class OutlookCalendar extends CalendarBase {
     }
 
     const params: Record<string, string | number | boolean> = {
-      rru: 'addevent', 
-      startdt: formatTimestampString(this.start, timestampFormat),
-      enddt: formatTimestampString(this.end, timestampFormat),
+      rru: 'addevent',
+      startdt: formatTimestampDate(this.start, timestampFormat),
+      enddt: formatTimestampDate(this.end, timestampFormat),
       subject: this.title,
       body: this.description,
       location: this.location,
-      allday: this.allday
+      allday: this.allday.toString()
     }
-    
+
     const baseUrl = URL.OUTLOOK
     const queryString = toQueryString(params)
-    
+
     return `${baseUrl}?path=/calendar/action/compose&${queryString}`
   }
 }
