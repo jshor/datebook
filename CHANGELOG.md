@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.6](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.6) (2020-09-14)
+
+
+### Bug Fixes
+
+* **edge:** updates incorrect Safari check ([#94](https://github.com/jshor/datebook/issues/94)) ([#96](https://github.com/jshor/datebook/issues/96)) ([901f87d](https://github.com/jshor/datebook/commit/901f87d341fa0fcf9f3826e1693f1e425eaec60b))
+* don't create blob until we need to ([#101](https://github.com/jshor/datebook/issues/101)) ([c6e3ee6](https://github.com/jshor/datebook/commit/c6e3ee6413493b142dde7fce9c9584fd5ac5b570))
+
 ### [4.1.5](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.4) (2020-06-29)
 
 
