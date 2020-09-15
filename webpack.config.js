@@ -11,7 +11,7 @@ if (process.argv.includes('--analyze')) {
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, './dist'),      
+    path: path.join(__dirname, './build/dist'),      
     filename: 'datebook.js',      
     library: 'datebook',      
     libraryTarget: 'umd'

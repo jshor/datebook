@@ -1,0 +1,32 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - master
+  release:
+    types: [created]
+
+env:
+  GIT_USER: 'github-actions'
+  GIT_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  ARTIFACT_DIR: 'build'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Install Yarn
+        run: npm i -g yarn
+      - name: Install npm dependencies
+        run: yarn
+      - name: Run unit tests
+        run: yarn test
+      - name: Build package
+        run: yarn build
+      - name: Build documentation
+        run: yarn docs:build

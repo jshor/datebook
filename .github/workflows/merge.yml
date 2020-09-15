@@ -1,0 +1,98 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - master
+  release:
+    types: [created]
+
+env:
+  GIT_USER: 'github-actions'
+  GIT_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  ARTIFACT_DIR: 'build'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Install Yarn
+        run: npm i -g yarn
+      - name: Install npm dependencies
+        run: yarn
+      - name: Run unit tests
+        run: yarn test
+      - name: Build package
+        run: yarn build
+      - name: Build documentation
+        run: yarn docs:build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_DIR }}
+          path: ${{ env.ARTIFACT_DIR }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          git-user-name: ${{ env.GIT_USER }}
+          git-user-email: ${{ env.GIT_EMAIL }}
+          tag-prefix: 'v'
+          release-count: '0'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Pull latest
+        run: git pull origin master
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_DIR }}
+          path: ${{ env.ARTIFACT_DIR }}
+      - name: Create CNAME Record
+        run: echo "test-repo.github.io" > ${{ env.ARTIFACT_DIR }}/CNAME
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@3.6.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_CONFIG_NAME: ${{ env.GIT_USER }}
+          GIT_CONFIG_EMAIL: ${{ env.GIT_EMAIL }}
+          BRANCH: gh-pages
+          FOLDER: ${{ env.ARTIFACT_DIR }}
+          CLEAN: true
+
+  publish-npm:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pull latest
+        run: git pull origin master
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_DIR }}
+          path: ${{ env.ARTIFACT_DIR }}
+      - name: Copy dist
+        run: cp -r ${{ env.ARTIFACT_DIR }}/dist . && rm -rf build
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
