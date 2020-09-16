@@ -1,4 +1,5 @@
 import { FORMAT } from '../constants'
+import warn from './warn'
 
 /**
  * Adds a leading zero to a single-digit string and returns a two-digit string.
@@ -38,11 +39,16 @@ export const formatTimestampDate = (d, format) => {
 /**
  * Parses the given string as a JS Date() object.
  * 
- * @param {String} str
+ * @param {Date | String} date
  * @returns {Date}
  */
-export const parseDate = (str) => { // TODO: check if `time` is valid date
-  return new Date(str)
+export const parseDate = (date) => {
+  if (typeof date === 'string') {
+    warn('Passing in `date` as a string')
+    return new Date(date)
+  }
+
+  return date
 }
 
 /**
@@ -63,4 +69,21 @@ export const formatTimestampString = (str, format) => {
  */
 export const getTimeCreated = () => {
   return formatTimestampDate(new Date(), FORMAT.DATE)
+}
+
+/**
+ * Increments dates by the given number of days.
+ * This will account for edge cases, such as leap years.
+ * 
+ * @param {Date} dateInput - date to increment
+ * @param {Number} increment - number of days
+ * @returns {Date}
+ */
+export const incrementDate = (dateInput, increment) => {
+  const additionalTime = increment * 86400000
+  const newDate = new Date()
+  
+  newDate.setTime(dateInput.getTime() + additionalTime)
+
+  return newDate
 }

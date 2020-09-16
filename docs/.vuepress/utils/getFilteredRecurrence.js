@@ -7,6 +7,10 @@
 export default function getFilteredRecurrence (value) {
   const recurrence = {...value}
 
+  if (recurrence.end) {
+    recurrence.end = new Date(recurrence.end)
+  }
+
   if (recurrence.frequency === 'DAILY') {
     // these fields are invalid for daily recurrences
     delete recurrence.weekdays

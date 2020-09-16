@@ -24,7 +24,7 @@ describe('YahooCalendar', () => {
       title: 'Fun Party',
       description: 'BYOB',
       location: 'New York',
-      start: '2019-07-04T19:00:00.000'
+      start: new Date('2019-07-04T19:00:00.000')
     }
   })
 

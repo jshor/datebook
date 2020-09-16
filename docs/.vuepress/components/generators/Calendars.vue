@@ -113,6 +113,12 @@ export default {
         recurrence: getFilteredRecurrence(this.config.recurrence)
       }
 
+      config.start = new Date(config.start)
+
+      if (config.end) {
+        config.end = new Date(config.end)
+      }
+
       if (this.allday) {
         delete config.end
       }

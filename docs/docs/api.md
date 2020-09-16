@@ -24,9 +24,9 @@ import { ICalendar } from 'datebook'
 const calendar = new ICalendar({
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
-  description: 'Let\'s blow off some steam from our weekly deployments to enjoy a tall cold one!',
-  start: '2020-07-04T19:00:00',
-  end: '2020-07-04T23:30:00',
+  description: 'Let\'s blow off some steam with a tall cold one!',
+  start: new Date('2022-07-08T19:00:00'),
+  end: new Date('2022-07-08T23:30:00'),
   recurrence: {
     frequency: 'WEEKLY',
     interval: 2
@@ -43,18 +43,18 @@ BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
 CLASS:PUBLIC
-DESCRIPTION:Let's blow off some steam from our weekly deployments to enjoy a tall cold one!
-DTSTART:20190704T190000
-DTEND:20190704T230000
+DESCRIPTION:Let's blow off some steam with a tall cold one!
+DTSTART:20220708T190000
+DTEND:20220708T230000
 LOCATION:The Bar, New York, NY
 SUMMARY:Happy Hour
 TRANSP:TRANSPARENT
-RRULE:FREQ=WEEKLY;INTERVAL=2
+RRULE:FREQ=DAILY;INTERVAL=1
 END:VEVENT
 END:VCALENDAR
-UID:nmikriwwll
-DTSTAMP:20200602
-PRODID:localhost:8080
+UID:19hq3v1lm15
+DTSTAMP:20200916
+PRODID:datebook.dev
 ```
 
 ## `YahooCalendar(options)`
@@ -73,9 +73,9 @@ import { YahooCalendar } from 'datebook'
 const yahooCalendar = new YahooCalendar({
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
-  description: 'Let\'s blow off some steam from our weekly deployments to enjoy a tall cold one!',
-  start: '2020-07-04T19:00:00',
-  end: '2020-07-04T23:30:00',
+  description: 'Let\'s blow off some steam with a tall cold one!',
+  start: new Date('2022-07-08T19:00:00'),
+  end: new Date('2022-07-08T23:30:00'),
   recurrence: {
     frequency: 'WEEKLY',
     interval: 2
@@ -88,7 +88,7 @@ yahooCalendar.render()
 ##### Result:
 
 ```
-https://calendar.yahoo.com/?v=60&title=Happy%20Hour&st=20190704T190000&desc=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&in_loc=The%20Bar%2C%20New%20York%2C%20NY&RPAT=02Wk&REND=20190610T123112&dur=0200
+https://calendar.yahoo.com/?v=60&title=Happy%20Hour&desc=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&in_loc=The%20Bar%2C%20New%20York%2C%20NY&st=20220708T190000&dur=0400&RPAT=01Wk&REND=20220708
 ```
 
 This will open a modal in Yahoo! Calendar similar to the following:
@@ -111,9 +111,9 @@ import { GoogleCalendar } from 'datebook'
 const googleCalendar = new GoogleCalendar({
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
-  description: 'Let\'s blow off some steam from our weekly deployments to enjoy a tall cold one!',
-  start: '2020-07-04T19:00:00',
-  end: '2020-07-04T23:30:00',
+  description: 'Let\'s blow off some steam with a tall cold one!',
+  start: new Date('2022-07-08T19:00:00'),
+  end: new Date('2022-07-08T23:30:00'),
   recurrence: {
     frequency: 'WEEKLY',
     interval: 2
@@ -126,7 +126,7 @@ googleCalendar.render()
 ##### Result:
 
 ```
-https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20190704T190000%2F20190704T210000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D2%3BUNTIL%3D20190610T123926
+https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20220708T190000%2F20220708T230000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1
 ```
 
 This will open a form in Gmail similar to the following:
@@ -149,9 +149,9 @@ import { OutlookCalendar } from 'datebook'
 const outlookCalendar = new OutlookCalendar({
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
-  description: 'Let\'s blow off some steam from our weekly deployments to enjoy a tall cold one!',
-  start: '2020-07-04T19:00:00',
-  end: '2020-07-04T23:30:00',
+  description: 'Let\'s blow off some steam with a tall cold one!',
+  start: new Date('2022-07-08T19:00:00'),
+  end: new Date('2022-07-08T23:30:00'),
   recurrence: {
     frequency: 'WEEKLY',
     interval: 2
@@ -164,7 +164,7 @@ outlookCalendar.render()
 ##### Result:
 
 ```
-https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2019-07-04T19%3A00%3A00&enddt=2019-07-04T23%3A00%3A00&subject=Happy%20Hour&body=Let's%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&allday=false
+https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2022-07-08T19%3A00%3A00&enddt=2022-07-08T23%3A00%3A00&subject=Happy%20Hour&body=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&allday=false
 ```
 
 This will open a modal in Outlook Online calendar similar to the following:
