@@ -19,7 +19,7 @@ const addLeadingZero = (n: number | string): string => {
  * @param {string} format
  * @returns {string}
  */
-const formatTimestampDate = (d: Date, format: string) => {
+const formatTimestampDate = (d: Date = new Date(), format: string): string => {
   const dateValues = {
     YYYY: d.getUTCFullYear(),
     MM: addLeadingZero(d.getUTCMonth() + 1),
@@ -59,7 +59,7 @@ const parseDate = (date: Date | string) => {
  * @param {string} format - momentjs format
  * @returns {string}
  */
-const formatTimestampString = (str: string, format: string) => {
+const formatTimestampString = (str: string, format: string): string => {
   return formatTimestampDate(parseDate(str), format)
 }
 
@@ -68,7 +68,7 @@ const formatTimestampString = (str: string, format: string) => {
  *
  * @returns {string}
  */
-const getTimeCreated = () => {
+const getTimeCreated = (): string => {
   return formatTimestampDate(new Date(), FORMAT.DATE)
 }
 
@@ -80,19 +80,22 @@ const getTimeCreated = () => {
  * @param {number} increment - number of days
  * @returns {Date}
  */
-const incrementDate = (dateInput: Date, increment: number): Date => {
+const incrementDate = (dateInput: Date | string, increment: number): Date => {
   const additionalTime = increment * 86400000
   const newDate = new Date()
+  const curTime = typeof dateInput === 'string'
+    ? new Date(dateInput)
+    : dateInput
 
-  newDate.setTime(dateInput.getTime() + additionalTime)
+  newDate.setTime(curTime.getTime() + additionalTime)
 
   return newDate
 }
 
 export default {
   addLeadingZero,
-  parseDate,
   formatTimestampDate,
+  parseDate,
   formatTimestampString,
   getTimeCreated,
   incrementDate

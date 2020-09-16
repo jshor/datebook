@@ -1,10 +1,10 @@
 import * as queryString from 'query-string'
 import CalendarBase from '../CalendarBase'
 import GoogleCalendar from '../GoogleCalendar'
-import { FORMAT, RECURRENCE, URL } from '../constants'
-import { formatTimestampDate } from '../utils/time'
-import ics from '../utils/ics'
 import IOptions from '../interfaces/IOptions'
+import ics from '../utils/ics'
+import time from '../utils/time'
+import { FORMAT, RECURRENCE, URL } from '../constants'
 
 const { FREQUENCY: { DAILY } } = RECURRENCE
 
@@ -36,7 +36,7 @@ describe('GoogleCalendar', () => {
       testObj = new GoogleCalendar(baseOpts)
 
       result = testObj.render()
-      let baseUrl = result.split('?')[0]
+      const baseUrl = result.split('?')[0]
 
       expect(baseUrl).toBe(URL.GOOGLE)
     })
@@ -59,9 +59,9 @@ describe('GoogleCalendar', () => {
 
         const paramsObj = queryString.parse(result.split('?')[1])
         const expectedDates = `${
-          formatTimestampDate(testObj.start, FORMAT.DATE)
+          time.formatTimestampDate(testObj.start, FORMAT.DATE)
         }/${
-          formatTimestampDate(testObj.end, FORMAT.DATE)
+          time.formatTimestampDate(testObj.end, FORMAT.DATE)
         }`
 
         expect(paramsObj.dates).toBe(expectedDates)
@@ -93,8 +93,8 @@ describe('GoogleCalendar', () => {
           recurrence: {
             frequency: DAILY,
             interval: 1,
-            count: 5,
-          },
+            count: 5
+          }
         })
 
         result = testObj.render()

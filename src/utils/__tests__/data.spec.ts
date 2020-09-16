@@ -1,4 +1,4 @@
-import { toIcsParamString, toParamString, toQueryString } from '../data';
+import data from '../data'
 
 describe('DataUtil', () => {
   let params: Record<string, string>
@@ -14,7 +14,7 @@ describe('DataUtil', () => {
 
   describe('toIcsParamString()', () => {
     it('should create a semicolon-delimited string of params', () => {
-      const icsParamString = toIcsParamString(params)
+      const icsParamString = data.toIcsParamString(params)
       const icsParams = icsParamString
         .split(';')
         .reduce((acc, kv) => {
@@ -30,7 +30,7 @@ describe('DataUtil', () => {
 
     it('should ignore undefined values', () => {
       delete params.foo
-      const icsParamString = toIcsParamString(params)
+      const icsParamString = data.toIcsParamString(params)
       const icsParams = icsParamString.split(';')
       const icsParamKeys = icsParams.map(param => param.split('=')[0])
 
@@ -41,7 +41,7 @@ describe('DataUtil', () => {
   describe('toParamString()', () => {
     describe('without optional params', () => {
       it('should create a semicolon-delimited string of params', () => {
-        const paramString = toParamString(params)
+        const paramString = data.toParamString(params)
         const parsedParams = paramString
           .split(';')
           .reduce((acc, kv) => {
@@ -57,7 +57,7 @@ describe('DataUtil', () => {
 
       it('should ignore undefined values', () => {
         delete params.foo
-        const paramString = toParamString(params)
+        const paramString = data.toParamString(params)
         const parsedParams = paramString.split(';')
         const parsedParamKeys = parsedParams.map(param => param.split('=')[0])
 
@@ -69,7 +69,7 @@ describe('DataUtil', () => {
       const delimiter = '&&'
 
       it('should use the provided delimiter', () => {
-        const paramString = toParamString(params, delimiter)
+        const paramString = data.toParamString(params, delimiter)
         const parsedParams = paramString
           .split(delimiter)
           .reduce((acc, kv) => {
@@ -88,7 +88,7 @@ describe('DataUtil', () => {
         const untransform = (str: string) => str.split('AAA').join('')
 
         it('should use the provided delimiter and transformFn', () => {
-          const paramString = toParamString(params, delimiter, transform)
+          const paramString = data.toParamString(params, delimiter, transform)
           const parsedParams = paramString
             .split(delimiter)
             .reduce((acc, kv) => {
@@ -108,7 +108,7 @@ describe('DataUtil', () => {
   describe('toQueryString()', () => {
 
     it('should create a query string representation of the passed in object', () => {
-      const queryString = toQueryString(params)
+      const queryString = data.toQueryString(params)
       const queryParams = queryString.split('&')
       const paramKeys = Object.keys(params).sort()
       const queryKeys = queryParams.map(param => param.split('=')[0])
@@ -117,9 +117,9 @@ describe('DataUtil', () => {
     })
 
     it('should URI encode params', () => {
-      const queryString = toQueryString(params)
+      const queryString = data.toQueryString(params)
       const queryParams = queryString.split('&')
-      for (let kv of queryParams) {
+      for (const kv of queryParams) {
         const [key, queryValue] = kv.split('=')
         const uriEncodedValue = encodeURIComponent(params[key])
 
@@ -129,7 +129,7 @@ describe('DataUtil', () => {
 
     it('should ignore undefined values', () => {
       delete params.foo
-      const queryString = toQueryString(params)
+      const queryString = data.toQueryString(params)
       const queryParams = queryString.split('&')
       const queryKeys = queryParams.map(param => param.split('=')[0])
 

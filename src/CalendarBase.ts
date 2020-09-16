@@ -1,8 +1,7 @@
-import { FORMAT } from './constants'
-import { parseDate } from './utils/time'
 import ICalendarBase from './interfaces/ICalendarBase'
-import IRecurrence from './interfaces/IRecurrence';
-import IOptions from './interfaces/IOptions';
+import IRecurrence from './interfaces/IRecurrence'
+import IOptions from './interfaces/IOptions'
+import time from './utils/time'
 
 /**
  * Base calendar class. This class can be extended to add new calendar services.
@@ -13,47 +12,47 @@ class CalendarBase implements ICalendarBase {
    *
    * @type {boolean}
    */
-  allday: boolean = false
+  allday = false
 
   /**
    * Event description.
    *
    * @type {string}
    */
-  description: string = ''
+  description = ''
 
   /**
    * Event title.
    *
    * @type {string}
    */
-  title: string = ''
+  title = ''
 
   /**
    * Event physical location.
    *
    * @type {string}
    */
-  location: string = ''
+  location = ''
 
   /**
    * Start time of the event.
    *
    * @type {Date}
    */
-  start: Date = new Date()
+  start = new Date()
 
   /**
    * End time of the event.
    *
    * @type {Date}
    */
-  end: Date = new Date()
+  end = new Date()
 
   /**
    * Event recurrence specification. See {@link IRecurrence}
    *
-   * @type {Date}
+   * @type {IRecurrence}
    */
   recurrence?: IRecurrence
 
@@ -72,7 +71,7 @@ class CalendarBase implements ICalendarBase {
    *
    * @param {IOptions} options
    */
-  setText (options: IOptions) {
+  setText (options: IOptions): void {
     this.description = options.description || ''
     this.title = options.title || ''
     this.location = options.location || ''
@@ -83,22 +82,22 @@ class CalendarBase implements ICalendarBase {
    *
    * @param {IOptions} options
    */
-  setTimestamps (options: IOptions) {
-    if (options.end) {
-      this.end = parseDate(options.end)
+  setTimestamps (options: IOptions): void {
+    this.allday = !options.end
+    this.start = time.parseDate(options.start)
+
+    if (this.end) {
+      this.end = time.parseDate(options.end)
     } else {
-      // if no end date is specified, make this an all-day event
-      // set the end date exactly 1 day from the start date
-      this.allday = true
-      this.end = parseDate(options.start)
-      this.end.setDate(this.end.getDate() + 1)
+      // if allday is specified, make the end date exactly 1 day from the start date
+      this.end = time.incrementDate(this.start, 1)
     }
 
-    if (options.recurrence) {
-      this.recurrence = options.recurrence
-    }
+    this.recurrence = options.recurrence
 
-    this.start = parseDate(options.start)
+    if (this.recurrence && this.recurrence.end) {
+      this.recurrence.end = time.parseDate(this.recurrence.end)
+    }
   }
 }
 

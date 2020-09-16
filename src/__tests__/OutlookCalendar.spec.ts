@@ -2,8 +2,8 @@ import { FORMAT, URL } from '../constants'
 import * as queryString from 'query-string'
 import CalendarBase from '../CalendarBase'
 import OutlookCalendar from '../OutlookCalendar'
-import time from '../utils/time'
 import IOptions from '../interfaces/IOptions'
+import time from '../utils/time'
 
 describe('Outlook Calendar', () => {
   it('should be a subclass of CalendarBase', () => {

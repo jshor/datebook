@@ -14,6 +14,7 @@ export default interface IOptions {
   start: string | Date
   /** The event end timestamp. For all-day events, this field should be omitted. */
   end?: string | Date
+  /** The event end timestamp. For all-day events, this field should be omitted. */
   /** The recurrence of an event is how often the event is supposed to occur. See {@link IRecurrence}. */
   recurrence?: IRecurrence
 }

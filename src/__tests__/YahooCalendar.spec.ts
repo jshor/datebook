@@ -8,6 +8,15 @@ import IOptions from '../interfaces/IOptions'
 const {
   FREQUENCY: { DAILY, WEEKLY, MONTHLY }
 } = RECURRENCE
+<<<<<<< HEAD
+=======
+const yahooFreqMap = {
+  [DAILY]: 'Dy',
+  [WEEKLY]: 'Wk',
+  [MONTHLY]: 'Mh',
+  [YEARLY]: 'Yr'
+}
+>>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
 
 describe('YahooCalendar', () => {
   let testOpts: IOptions
@@ -65,8 +74,17 @@ describe('YahooCalendar', () => {
       expect(obj.getFrequency(FREQUENCY.WEEKLY)).toEqual('Wk')
     })
 
+<<<<<<< HEAD
     it('should default to daily recurrences', () => {
       expect(obj.getFrequency(FREQUENCY.DAILY)).toEqual('Dy')
+=======
+        for (const frequency of [ DAILY, WEEKLY, MONTHLY, YEARLY, 'foobar' ]) {
+          const result = obj.getFrequency({ frequency })
+          const expected = yahooFreqMap[frequency] || yahooFreqMap[WEEKLY]
+          expect(result).toBe(expected)
+        }
+      })
+>>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
     })
   })
 
@@ -265,9 +283,15 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: 'allday',
+<<<<<<< HEAD
             st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
             RPAT: '01Dy',
             REND: time.formatTimestampString(recurrenceEnd, FORMAT.FULL),
+=======
+            st: time.formatTimestampString(testOpts.start, 'YYYYMMDD'),
+            RPAT: '01Dy',
+            REND: time.formatTimestampString(recurrenceEnd, 'YYYYMMDD')
+>>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
           }
           expect(params).toMatchObject(expectedObj)
         })
@@ -296,7 +320,11 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
+<<<<<<< HEAD
               st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
+=======
+              st: time.formatTimestampString(testOpts.start, 'YYYYMMDDThhmmss'),
+>>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
               dur: '0200'
             }
             expect(params).toMatchObject(expectedObj)
@@ -319,8 +347,13 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
+<<<<<<< HEAD
               st: time.formatTimestampString(start, FORMAT.FULL),
               et: time.formatTimestampString(end, FORMAT.FULL)
+=======
+              st: time.formatTimestampString(start, 'YYYYMMDDThhmmss'),
+              et: time.formatTimestampString(end, 'YYYYMMDDThhmmss')
+>>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
             }
             expect(params).toMatchObject(expectedObj)
             expect(expectedObj).toMatchObject(params)
@@ -349,9 +382,15 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: '0200',
+<<<<<<< HEAD
             st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
             RPAT: '01Dy',
             REND: time.formatTimestampString(recurrenceEnd, FORMAT.DATE)
+=======
+            st: time.formatTimestampString(testOpts.start, 'YYYYMMDDThhmmss'),
+            RPAT: '01Dy',
+            REND: time.formatTimestampString(recurrenceEnd, 'YYYYMMDD')
+>>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
           }
           expect(params).toMatchObject(expectedObj)
         })

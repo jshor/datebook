@@ -1,4 +1,4 @@
-const identity = (str: string) => str
+const identity = (str: string): string => str
 
 type Identity = (str: string) => string
 
@@ -7,14 +7,13 @@ type Identity = (str: string) => string
  *
  * @param {Record<string, string>} params
  * @param {string} [delimiter = ';']
- * @param {function} [transformFn = identity] - transformation function to be
- * applied to each param. If omitted, no transform occurs
+ * @param {Function} [transformFn = identity] - transformation function to be applied to each param
  * @returns {string}
  */
-export const toParamString = (params: Record<string, string>, delimiter: string = ';', transformFn: Identity = identity) => {
+const toParamString = (params: Record<string, string>, delimiter = ';', transformFn: Identity = identity): string => {
   const paramString = []
 
-  for (let key in params) {
+  for (const key in params) {
     if (params.hasOwnProperty(key) && params[key] !== undefined) {
       paramString.push(`${key}=${transformFn(params[key])}`)
     }
@@ -29,7 +28,7 @@ export const toParamString = (params: Record<string, string>, delimiter: string 
  * @param {Record<string, string>} params
  * @returns {string}
  */
-export const toQueryString = (params: Record<string, string>): string => {
+const toQueryString = (params: Record<string, string>): string => {
   return toParamString(params, '&', encodeURIComponent)
 }
 
@@ -39,6 +38,12 @@ export const toQueryString = (params: Record<string, string>): string => {
  * @param {Record<string, string>} params
  * @returns {string}
  */
-export const toIcsParamString = (params: Record<string, string>): string => {
+const toIcsParamString = (params: Record<string, string>): string => {
   return toParamString(params, ';')
+}
+
+export default {
+  toParamString,
+  toQueryString,
+  toIcsParamString
 }

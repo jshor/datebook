@@ -1,16 +1,16 @@
 import * as FileSaver from 'file-saver'
-import { toIcsParamString } from './data'
-import { formatTimestampString } from './time'
+import data from './data'
+import time from './time'
 import safariFileSave from './safariFileSave'
 import IRecurrence from '../interfaces/IRecurrence'
 
 /**
  * Removes line breaks from a string. Returns an empty string if falsy.
  *
- * @param {string} str - string to sanitize
+ * @param {string} [str = ''] - string to sanitize
  * @returns {string}
  */
-const formatText = (str: string = ''): string => {
+const formatText = (str = ''): string => {
   return str.replace(/\n/g, '\\n')
 }
 
@@ -76,10 +76,10 @@ const getRrule = (recurrence: IRecurrence): string => {
   }
 
   if (recurrence.end) {
-    rrule.UNTIL = formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')
+    rrule.UNTIL = time.formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')
   }
 
-  return toIcsParamString(rrule)
+  return data.toIcsParamString(rrule)
 }
 
 /**
