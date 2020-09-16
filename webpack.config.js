@@ -32,6 +32,5 @@ module.exports = {
     ]
   },
   plugins,
-  mode: 'development',
-  devtool: 'eval-source-map'
+  mode: 'production'
 }
