@@ -48,6 +48,7 @@ jobs:
           git-user-email: ${{ env.GIT_EMAIL }}
           tag-prefix: 'v'
           release-count: '0'
+          skip-on-empty: false
 
   deploy:
     needs: build
@@ -64,7 +65,7 @@ jobs:
           name: ${{ env.ARTIFACT_DIR }}
           path: ${{ env.ARTIFACT_DIR }}
       - name: Create CNAME Record
-        run: echo "test-repo.github.io" > ${{ env.ARTIFACT_DIR }}/CNAME
+        run: echo "datebook.dev" > ${{ env.ARTIFACT_DIR }}/docs/CNAME
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.6.1
         with:
@@ -72,7 +73,7 @@ jobs:
           GIT_CONFIG_NAME: ${{ env.GIT_USER }}
           GIT_CONFIG_EMAIL: ${{ env.GIT_EMAIL }}
           BRANCH: gh-pages
-          FOLDER: ${{ env.ARTIFACT_DIR }}
+          FOLDER: ${{ env.ARTIFACT_DIR }}/docs
           CLEAN: true
 
   publish-npm:
