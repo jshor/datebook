@@ -1,12 +1,12 @@
-import { FORMAT } from '../constants'
-import ics from '../utils/ics'
-import time from '../utils/time'
 import CalendarBase from '../CalendarBase'
 import ICalendar from '../ICalendar'
 import IOptions from '../interfaces/IOptions'
+import ics from '../utils/ics'
+import time  from '../utils/time'
+import { FORMAT } from '../constants'
 
 describe('ICalendar', () => {
-  let baseOpts: IOptions = {
+  const baseOpts: IOptions = {
     title: 'Fun Party',
     description: 'BYOB',
     location: 'New York',
@@ -103,15 +103,15 @@ describe('ICalendar', () => {
         'BEGIN:VEVENT',
         'CLASS:PUBLIC',
         `DESCRIPTION:${baseOpts.description}`,
-        `DTSTART:${formatTimestampString(new Date(baseOpts.start), FORMAT.FULL)}`,
-        `DTEND:${formatTimestampString(new Date(baseOpts.end), FORMAT.FULL)}`,
+        `DTSTART:${time.formatTimestampString(new Date(baseOpts.start), FORMAT.FULL)}`,
+        `DTEND:${time.formatTimestampString(new Date(baseOpts.end), FORMAT.FULL)}`,
         `LOCATION:${baseOpts.location}`,
         `SUMMARY:${baseOpts.title}`,
         'TRANSP:TRANSPARENT',
         'END:VEVENT',
         'END:VCALENDAR',
         `UID:${mockUuid}`,
-        `DTSTAMP:${getTimeCreated()}`,
+        `DTSTAMP:${time.getTimeCreated()}`,
         'PRODID:foobar'
       ].join('\n')
 

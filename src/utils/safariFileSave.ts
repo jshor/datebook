@@ -4,8 +4,7 @@
  * @param {string} data - ics data
  * @param {string} fileName - file name to save, ending in .ics
  */
-
-const safariFileSave = (data: string, fileName: string) => {
+const safariFileSave = (data: string, fileName: string): void => {
   const anchor = document.createElement('a')
   const encodedData = encodeURIComponent(data)
 

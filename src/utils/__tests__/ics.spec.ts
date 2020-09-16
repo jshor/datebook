@@ -1,7 +1,7 @@
 import * as FileSaver from 'file-saver'
 import ics from '../ics'
+import time from '../time'
 import safariFileSave from '../safariFileSave'
-import { formatTimestampString } from '../time'
 import { RECURRENCE } from '../../constants'
 
 jest.mock('../safariFileSave')
@@ -44,7 +44,7 @@ describe('IcsUtil', () => {
     })
 
     it('should remove all non-alphanumeric except underscore', () => {
-      const testTitle = 'abcdef_ABCDEF1234567890-.,/[]\)(!@*#$^%^'
+      const testTitle = 'abcdef_ABCDEF1234567890-.,/[])(!@*#$^%^'
       const expectedFileName = 'abcdef_ABCDEF1234567890.ics'
       const filename = ics.getFileName(testTitle)
 
@@ -95,7 +95,7 @@ describe('IcsUtil', () => {
         weekstart: 'MO',
         end: '2019-05-02',
         weekdays: 'MO',
-        monthdays: '5',
+        monthdays: '5'
       }
       const expectedRrule = [
         `FREQ=${DAILY}`,
@@ -104,7 +104,7 @@ describe('IcsUtil', () => {
         'WKST=MO',
         'BYDAY=MO',
         'BYMONTHDAY=5',
-        `UNTIL=${formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')}`
+        `UNTIL=${time.formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')}`
       ].join(';')
 
       const actualRrule = ics.getRrule(recurrence)

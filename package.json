@@ -5,8 +5,10 @@
   "scripts": {
     "build": "tsc && webpack",
     "test": "jest",
+    "lint": "yarn eslint ./src",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "typedoc": "typedoc --out build/typedoc",
     "commit": "yarn git-cz",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "release": "standard-version -n"
@@ -20,7 +22,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "yarn test"
+      "pre-push": "yarn lint && yarn test"
     }
   },
   "keywords": [
@@ -47,14 +49,19 @@
     "@johmun/vue-tags-input": "^2.1.0",
     "@types/file-saver": "^2.0.1",
     "@types/jest": "^26.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
     "codecov": "^3.5.0",
     "commitizen": "^3.1.1",
+    "eslint": "^7.9.0",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
+    "query-string": "^6.13.2",
     "standard-version": "^6.0.1",
     "ts-jest": "^26.3.0",
     "ts-loader": "^8.0.3",
-    "typescript": "^3.9.5",
+    "typedoc": "^0.19.1",
+    "typescript": "^4.0.2",
     "vuepress": "^1.5.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"

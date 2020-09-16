@@ -1,33 +1,15 @@
 import CalendarBase from './CalendarBase'
 import { RECURRENCE, URL, FORMAT } from './constants'
-import { toProperCase, toQueryString } from './utils/data'
+import data from './utils/data'
 import time from './utils/time'
 import IOptions from './interfaces/IOptions'
 import IRecurrence from './interfaces/IRecurrence'
 
 /**
  * Generates a Yahoo! Calendar url.
- * Note that Yahoo! Calendar's support for recurrence is limited to only the interval and frequency.
  *
- * @example
- *  import { YahooCalendar } from 'datebook'
- *
- *  const yahoo = new YahooCalendar({
- *    title: 'Happy Hour',
- *    location: 'The Bar, New York, NY',
- *    description: 'Let\'s blow off some steam from our weekly deployments to enjoy a tall cold one!',
- *    start: '20190704T190000',
- *    end: '20190704T210000',
- *    recurrence: {
- *      frequency: 'WEEKLY'
- *      interval: 2
- *    }
- *  })
- *
- *  yahoo.render() // https://calendar.yahoo.com/?v=60&title=Happy%20Hour&st=20190704T190000&desc=Let%27s%20blow%20off%20some%20steam%20from%20our%20weekly%20deployments%20to%20enjoy%20a%20tall%20cold%20one!&in_loc=The%20Bar%2C%20New%20York%2C%20NY&RPAT=02Wk&REND=20190610T123112&dur=0200
- *
+ * @remark Yahoo! Calendar's support for recurrence is limited to only the interval and frequency.
  */
-
 export default class YahooCalendar extends CalendarBase {
   /**
    * Constructor.
@@ -49,7 +31,7 @@ export default class YahooCalendar extends CalendarBase {
   getWeekdays (weekdays: string[] = []): string {
     return weekdays
       .map(w => {
-        return toProperCase(w.replace(/[^A-Z]/ig, ''))
+        return data.toProperCase(w.replace(/[^A-Z]/ig, ''))
       })
       .join('')
   }
@@ -204,7 +186,7 @@ export default class YahooCalendar extends CalendarBase {
     }
 
     const baseUrl = URL.YAHOO
-    const queryString = toQueryString(params)
+    const queryString = data.toQueryString(params)
 
     return `${baseUrl}?${queryString}`
   }

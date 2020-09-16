@@ -7,8 +7,8 @@ export default interface ICalendarBase {
   allday: boolean
   description: string
   location: string
-  start: Date
-  end?: Date
+  start: Date | string
+  end?: Date | string
   recurrence?: IRecurrence
   title: string
 }
