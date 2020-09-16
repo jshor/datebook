@@ -1,8 +1,4 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [4.1.6](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.6) (2020-09-14)
+# [4.1.6](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.6) (2020-09-14)
 
 
 ### Bug Fixes
@@ -10,14 +6,14 @@ All notable changes to this project will be documented in this file. See [standa
 * **edge:** updates incorrect Safari check ([#94](https://github.com/jshor/datebook/issues/94)) ([#96](https://github.com/jshor/datebook/issues/96)) ([901f87d](https://github.com/jshor/datebook/commit/901f87d341fa0fcf9f3826e1693f1e425eaec60b))
 * don't create blob until we need to ([#101](https://github.com/jshor/datebook/issues/101)) ([c6e3ee6](https://github.com/jshor/datebook/commit/c6e3ee6413493b142dde7fce9c9584fd5ac5b570))
 
-### [4.1.5](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.4) (2020-06-29)
+# [4.1.5](https://github.com/jshor/datebook/compare/v4.1.3...v4.1.4) (2020-06-29)
 
 
 ### Bug Fixes
 
 * **edge:** updates incorrect Safari check ([#94](https://github.com/jshor/datebook/issues/94)) ([#96](https://github.com/jshor/datebook/issues/96)) ([901f87d](https://github.com/jshor/datebook/commit/901f87d341fa0fcf9f3826e1693f1e425eaec60b))
 
-### [4.1.3](https://github.com/jshor/datebook/compare/v4.1.2...v4.1.3) (2020-06-12)
+# [4.1.3](https://github.com/jshor/datebook/compare/v4.1.2...v4.1.3) (2020-06-12)
 
 
 ### Bug Fixes
@@ -25,14 +21,14 @@ All notable changes to this project will be documented in this file. See [standa
 * **ie:** fixes for IE11 ([#91](https://github.com/jshor/datebook/issues/91)) ([#92](https://github.com/jshor/datebook/issues/92)) ([c13cf49](https://github.com/jshor/datebook/commit/c13cf49610e9bf10793154d05ec23d694a658ea8))
 * **readme:** adds link to generator [ci skip] ([388b87f](https://github.com/jshor/datebook/commit/388b87f9f0c0150555083d361346bc08075f3613))
 
-### [4.1.2](https://github.com/jshor/datebook/compare/v4.1.1...v4.1.2) (2020-05-13)
+# [4.1.2](https://github.com/jshor/datebook/compare/v4.1.1...v4.1.2) (2020-05-13)
 
 
 ### Bug Fixes
 
 * **timestamps:** fixes calendar timestamp formats ([#84](https://github.com/jshor/datebook/issues/84)) ([#85](https://github.com/jshor/datebook/issues/85)) ([0e41dd7](https://github.com/jshor/datebook/commit/0e41dd7369835bfc341ae939ec43e821acfdc550))
 
-### [4.1.1](https://github.com/jshor/datebook/compare/v4.1.0...v4.1.1) (2020-04-29)
+# [4.1.1](https://github.com/jshor/datebook/compare/v4.1.0...v4.1.1) (2020-04-29)
 
 
 ### Bug Fixes

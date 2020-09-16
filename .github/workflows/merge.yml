@@ -8,8 +8,8 @@ on:
     types: [created]
 
 env:
-  GIT_USER: 'github-actions'
-  GIT_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+  GIT_USER: 'jshor' # 'github-actions'
+  GIT_EMAIL: 'jpshor@gmail.com' # '41898282+github-actions[bot]@users.noreply.github.com'
   ARTIFACT_DIR: 'build'
 
 jobs:
@@ -43,11 +43,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: TriPSs/conventional-changelog-action@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           git-user-name: ${{ env.GIT_USER }}
           git-user-email: ${{ env.GIT_EMAIL }}
           tag-prefix: 'v'
           release-count: '0'
+          skip-on-empty: false
 
   deploy:
     needs: build
@@ -64,15 +65,15 @@ jobs:
           name: ${{ env.ARTIFACT_DIR }}
           path: ${{ env.ARTIFACT_DIR }}
       - name: Create CNAME Record
-        run: echo "test-repo.github.io" > ${{ env.ARTIFACT_DIR }}/CNAME
+        run: echo "datebook.dev" > ${{ env.ARTIFACT_DIR }}/docs/CNAME
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.6.1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_CONFIG_NAME: ${{ env.GIT_USER }}
           GIT_CONFIG_EMAIL: ${{ env.GIT_EMAIL }}
           BRANCH: gh-pages
-          FOLDER: ${{ env.ARTIFACT_DIR }}
+          FOLDER: ${{ env.ARTIFACT_DIR }}/docs
           CLEAN: true
 
   publish-npm:
