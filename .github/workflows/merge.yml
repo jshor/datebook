@@ -8,8 +8,8 @@ on:
     types: [created]
 
 env:
-  GIT_USER: 'jshor' # 'github-actions'
-  GIT_EMAIL: 'jpshor@gmail.com' # '41898282+github-actions[bot]@users.noreply.github.com'
+  GIT_USER: 'GitHub Actions'
+  GIT_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
   ARTIFACT_DIR: 'build'
 
 jobs:
@@ -69,7 +69,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.6.1
         with:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_CONFIG_NAME: ${{ env.GIT_USER }}
           GIT_CONFIG_EMAIL: ${{ env.GIT_EMAIL }}
           BRANCH: gh-pages
