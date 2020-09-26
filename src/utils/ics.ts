@@ -76,7 +76,7 @@ const getRrule = (recurrence: IRecurrence): string => {
   }
 
   if (recurrence.end) {
-    rrule.UNTIL = time.formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')
+    rrule.UNTIL = time.formatDate(recurrence.end, 'YYYYMMDDThhmmss')
   }
 
   return data.toIcsParamString(rrule)

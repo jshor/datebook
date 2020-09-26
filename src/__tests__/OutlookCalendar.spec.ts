@@ -11,13 +11,13 @@ describe('Outlook Calendar', () => {
       title: 'Fun Party',
       description: 'BYOB',
       location: 'New York',
-      start: '2019-07-04T19:00:00.000'
+      start: new Date('2019-07-04T19:00:00.000')
     })).toBeInstanceOf(CalendarBase)
   })
 
   describe('render()', () => {
     const testOpts: IOptions = {
-      start: '2019-03-23T17:00:00.000'
+      start: new Date('2019-03-23T17:00:00.000')
     }
 
     beforeEach(() => {
@@ -45,8 +45,8 @@ describe('Outlook Calendar', () => {
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: time.formatTimestampDate(obj.start, FORMAT.OUTLOOK_FULL),
-          enddt: time.formatTimestampDate(obj.end, FORMAT.OUTLOOK_FULL),
+          startdt: time.formatDate(obj.start, FORMAT.OUTLOOK_FULL),
+          enddt: time.formatDate(obj.end, FORMAT.OUTLOOK_FULL),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,
@@ -67,8 +67,8 @@ describe('Outlook Calendar', () => {
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: time.formatTimestampDate(obj.start, FORMAT.OUTLOOK_FULL),
-          enddt: time.formatTimestampDate(obj.end, FORMAT.OUTLOOK_FULL),
+          startdt: time.formatDate(obj.start, FORMAT.OUTLOOK_FULL),
+          enddt: time.formatDate(obj.end, FORMAT.OUTLOOK_FULL),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,

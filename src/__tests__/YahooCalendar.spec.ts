@@ -8,15 +8,6 @@ import IOptions from '../interfaces/IOptions'
 const {
   FREQUENCY: { DAILY, WEEKLY, MONTHLY }
 } = RECURRENCE
-<<<<<<< HEAD
-=======
-const yahooFreqMap = {
-  [DAILY]: 'Dy',
-  [WEEKLY]: 'Wk',
-  [MONTHLY]: 'Mh',
-  [YEARLY]: 'Yr'
-}
->>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
 
 describe('YahooCalendar', () => {
   let testOpts: IOptions
@@ -74,17 +65,8 @@ describe('YahooCalendar', () => {
       expect(obj.getFrequency(FREQUENCY.WEEKLY)).toEqual('Wk')
     })
 
-<<<<<<< HEAD
     it('should default to daily recurrences', () => {
       expect(obj.getFrequency(FREQUENCY.DAILY)).toEqual('Dy')
-=======
-        for (const frequency of [ DAILY, WEEKLY, MONTHLY, YEARLY, 'foobar' ]) {
-          const result = obj.getFrequency({ frequency })
-          const expected = yahooFreqMap[frequency] || yahooFreqMap[WEEKLY]
-          expect(result).toBe(expected)
-        }
-      })
->>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
     })
   })
 
@@ -239,7 +221,7 @@ describe('YahooCalendar', () => {
         title: 'Fun Party',
         description: 'BYOB',
         location: 'New York',
-        start: '2019-07-04T19:00:00.000'
+        start: new Date('2019-07-04T19:00:00.000')
       }
 
       describe('no recurrence', () => {
@@ -255,7 +237,7 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: 'allday',
-            st: time.formatTimestampString(testOpts.start, FORMAT.DATE)
+            st: time.formatDate(obj.start, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
           expect(expectedObj).toMatchObject(params)
@@ -264,7 +246,7 @@ describe('YahooCalendar', () => {
 
       describe('recurrence', () => {
         it('should format the query string with start and end times containing only their dates', () => {
-          const recurrenceEnd = '2019-07-10T19:00:00.000'
+          const recurrenceEnd = new Date('2019-07-10T19:00:00.000')
           const obj = new YahooCalendar({
             ...testOpts,
             recurrence: {
@@ -283,15 +265,9 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: 'allday',
-<<<<<<< HEAD
-            st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
+            st: time.formatDate(testOpts.start, FORMAT.DATE),
             RPAT: '01Dy',
-            REND: time.formatTimestampString(recurrenceEnd, FORMAT.FULL),
-=======
-            st: time.formatTimestampString(testOpts.start, 'YYYYMMDD'),
-            RPAT: '01Dy',
-            REND: time.formatTimestampString(recurrenceEnd, 'YYYYMMDD')
->>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
+            REND: time.formatDate(recurrenceEnd, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
         })
@@ -303,8 +279,8 @@ describe('YahooCalendar', () => {
         title: 'Fun Party',
         description: 'BYOB',
         location: 'New York',
-        start: '2019-07-04T19:00:00.000',
-        end: '2019-07-04T21:00:00.000' // two-hour long event (19h to 21h)
+        start: new Date('2019-07-04T19:00:00.000'),
+        end: new Date('2019-07-04T21:00:00.000') // two-hour long event (19h to 21h)
       }
 
       describe('no recurrence', () => {
@@ -320,11 +296,7 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-<<<<<<< HEAD
-              st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
-=======
-              st: time.formatTimestampString(testOpts.start, 'YYYYMMDDThhmmss'),
->>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
+              st: time.formatDate(testOpts.start, FORMAT.FULL),
               dur: '0200'
             }
             expect(params).toMatchObject(expectedObj)
@@ -334,8 +306,8 @@ describe('YahooCalendar', () => {
 
         describe('when the duration of the event spans longer than 99 hours', () => {
           it('should format the query string with the time parameters in start/end timestamps', () => {
-            const start = '2019-07-04T19:00:00.000'
-            const end = '2019-07-08T23:00:00.000' // one-hundred-hour long event, (four days, three hours)
+            const start = new Date('2019-07-04T19:00:00.000')
+            const end = new Date('2019-07-08T23:00:00.000') // one-hundred-hour long event, (four days, three hours)
 
             const obj = new YahooCalendar({ ...testOpts, start, end })
             const result = obj.render()
@@ -347,13 +319,8 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-<<<<<<< HEAD
-              st: time.formatTimestampString(start, FORMAT.FULL),
-              et: time.formatTimestampString(end, FORMAT.FULL)
-=======
-              st: time.formatTimestampString(start, 'YYYYMMDDThhmmss'),
-              et: time.formatTimestampString(end, 'YYYYMMDDThhmmss')
->>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
+              st: time.formatDate(start, FORMAT.FULL),
+              et: time.formatDate(end, FORMAT.FULL)
             }
             expect(params).toMatchObject(expectedObj)
             expect(expectedObj).toMatchObject(params)
@@ -363,7 +330,7 @@ describe('YahooCalendar', () => {
 
       describe('recurrence', () => {
         it('should format the query string with RPAT and REND params', () => {
-          const recurrenceEnd = '2019-07-10T19:00:00.000'
+          const recurrenceEnd = new Date('2019-07-10T19:00:00.000')
           const obj = new YahooCalendar({
             ...testOpts,
             recurrence: {
@@ -382,15 +349,9 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: '0200',
-<<<<<<< HEAD
-            st: time.formatTimestampString(testOpts.start, FORMAT.FULL),
+            st: time.formatDate(testOpts.start, FORMAT.FULL),
             RPAT: '01Dy',
-            REND: time.formatTimestampString(recurrenceEnd, FORMAT.DATE)
-=======
-            st: time.formatTimestampString(testOpts.start, 'YYYYMMDDThhmmss'),
-            RPAT: '01Dy',
-            REND: time.formatTimestampString(recurrenceEnd, 'YYYYMMDD')
->>>>>>> 878ccf7... refactor(ts): adds ESLint, TypeDoc
+            REND: time.formatDate(recurrenceEnd, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
         })

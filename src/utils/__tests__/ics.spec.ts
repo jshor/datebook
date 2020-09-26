@@ -93,7 +93,7 @@ describe('IcsUtil', () => {
         interval: 1,
         count: 5,
         weekstart: 'MO',
-        end: '2019-05-02',
+        end: new Date('2019-05-02'),
         weekdays: 'MO',
         monthdays: '5'
       }
@@ -104,7 +104,7 @@ describe('IcsUtil', () => {
         'WKST=MO',
         'BYDAY=MO',
         'BYMONTHDAY=5',
-        `UNTIL=${time.formatTimestampString(recurrence.end, 'YYYYMMDDThhmmss')}`
+        `UNTIL=${time.formatDate(recurrence.end, 'YYYYMMDDThhmmss')}`
       ].join(';')
 
       const actualRrule = ics.getRrule(recurrence)

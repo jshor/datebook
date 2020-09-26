@@ -59,9 +59,9 @@ describe('GoogleCalendar', () => {
 
         const paramsObj = queryString.parse(result.split('?')[1])
         const expectedDates = `${
-          time.formatTimestampDate(testObj.start, FORMAT.DATE)
+          time.formatDate(testObj.start, FORMAT.DATE)
         }/${
-          time.formatTimestampDate(testObj.end, FORMAT.DATE)
+          time.formatDate(testObj.end, FORMAT.DATE)
         }`
 
         expect(paramsObj.dates).toBe(expectedDates)
