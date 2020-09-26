@@ -1,3 +1,12 @@
+## [4.1.9](https://github.com/jshor/datebook/compare/v4.1.8...v4.1.9) (2020-09-26)
+
+
+### Bug Fixes
+
+* updates formats to use UTC dates ([#113](https://github.com/jshor/datebook/issues/113)) ([ebdd0d1](https://github.com/jshor/datebook/commit/ebdd0d1bc8ffb3b154f22c6d7e2b3cacabf8d355))
+
+
+
 ## [4.1.8](https://github.com/jshor/datebook/compare/v4.1.7...v4.1.8) (2020-09-26)
 
 
