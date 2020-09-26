@@ -1,5 +1,4 @@
 import { FORMAT } from '../constants'
-import warn from './warn'
 
 /**
  * Adds a leading zero to a single-digit string and returns a two-digit string.
@@ -19,8 +18,13 @@ const addLeadingZero = (n: number | string): string => {
  * @param {string} format
  * @returns {string}
  */
+<<<<<<< HEAD
 const formatTimestampDate = (d: Date = new Date(), format: string): string => {
   const dateValues = {
+=======
+const formatDate = (d: Date = new Date(), format: string): string => {
+  const dateValues: Record<string, string | number> = {
+>>>>>>> d8c964c... refactor: removes ability to specify time as strings
     YYYY: d.getUTCFullYear(),
     MM: addLeadingZero(d.getUTCMonth() + 1),
     DD: addLeadingZero(d.getUTCDate()),
@@ -37,39 +41,12 @@ const formatTimestampDate = (d: Date = new Date(), format: string): string => {
 }
 
 /**
- * Parses the given string as a JS Date() object.
- *
- * @param {string} str
- * @returns {date | string} date
- * @returns {Date}
- */
-const parseDate = (date: Date | string) => {
-  if (typeof date === 'string') {
-    warn('Passing in `date` as a string')
-    return new Date(date)
-  }
-
-  return date
-}
-
-/**
- * Formats the given timestamp.
- *
- * @param {string} time
- * @param {string} format - momentjs format
- * @returns {string}
- */
-const formatTimestampString = (str: string, format: string): string => {
-  return formatTimestampDate(parseDate(str), format)
-}
-
-/**
  * Returns the current timestamp.
  *
  * @returns {string}
  */
 const getTimeCreated = (): string => {
-  return formatTimestampDate(new Date(), FORMAT.DATE)
+  return formatDate(new Date(), FORMAT.DATE)
 }
 
 /**
@@ -77,26 +54,21 @@ const getTimeCreated = (): string => {
  * This will account for edge cases, such as leap years.
  *
  * @param {Date} dateInput - date to increment
- * @param {number} increment - number of days
+ * @param {number} days - number of days
  * @returns {Date}
  */
-const incrementDate = (dateInput: Date | string, increment: number): Date => {
-  const additionalTime = increment * 86400000
+const incrementDate = (dateInput: Date, days: number): Date => {
+  const additionalTime = days * 86400000
   const newDate = new Date()
-  const curTime = typeof dateInput === 'string'
-    ? new Date(dateInput)
-    : dateInput
 
-  newDate.setTime(curTime.getTime() + additionalTime)
+  newDate.setTime(dateInput.getTime() + additionalTime)
 
   return newDate
 }
 
 export default {
   addLeadingZero,
-  formatTimestampDate,
-  parseDate,
-  formatTimestampString,
+  formatDate,
   getTimeCreated,
   incrementDate
 }

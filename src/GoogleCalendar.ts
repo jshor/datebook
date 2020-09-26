@@ -34,8 +34,8 @@ export default class GoogleCalendar extends CalendarBase {
       details: this.description,
       location: this.location,
       dates: [
-        time.formatTimestampDate(this.start, timestampFormat),
-        time.formatTimestampDate(this.end, timestampFormat)
+        time.formatDate(this.start, timestampFormat),
+        time.formatDate(this.end, timestampFormat)
       ].join('/')
     }
 

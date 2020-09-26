@@ -113,8 +113,7 @@ describe('Calendar Base', () => {
 
       it('should set allday to true', () => {
         calendarObj.setTimestamps({
-          start: new Date('2019-03-23T17:00:00.000'),
-          end: ''
+          start: new Date('2019-03-23T17:00:00.000')
         })
 
         expect(calendarObj.allday).toBe(true)

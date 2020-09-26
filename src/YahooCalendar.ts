@@ -159,13 +159,13 @@ export default class YahooCalendar extends CalendarBase {
 
     if (this.allday) {
       params.dur = 'allday'
-      params.st = time.formatTimestampDate(this.start, FORMAT.DATE)
+      params.st = time.formatDate(this.start, FORMAT.DATE)
     } else {
-      params.st = time.formatTimestampDate(this.start, FORMAT.FULL)
+      params.st = time.formatDate(this.start, FORMAT.FULL)
 
       if (this.getHoursDuration(this.start.getTime(), this.end.getTime()) > 99) {
         // Yahoo only supports up to 99 hours, so we are forced to specify the end time instead of the duration
-        params.et = time.formatTimestampDate(this.end, FORMAT.FULL)
+        params.et = time.formatDate(this.end, FORMAT.FULL)
       } else {
         // we prefer specifying duration in lieu of end time, because apparently Yahoo's end time is buggy w.r.t. timezones
         params.dur = this.getDuration(this.start.getTime(), this.end.getTime())
@@ -181,7 +181,7 @@ export default class YahooCalendar extends CalendarBase {
         const days = this.getRecurrenceLengthDays(this.recurrence)
         const rend = time.incrementDate(this.end, Math.ceil(days))
 
-        params.REND = time.formatTimestampDate(rend, FORMAT.DATE)
+        params.REND = time.formatDate(rend, FORMAT.DATE)
       }
     }
 

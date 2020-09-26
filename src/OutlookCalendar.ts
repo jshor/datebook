@@ -33,8 +33,8 @@ export default class OutlookCalendar extends CalendarBase {
 
     const params: Record<string, string | number | boolean> = {
       rru: 'addevent',
-      startdt: time.formatTimestampDate(this.start, timestampFormat),
-      enddt: time.formatTimestampDate(this.end, timestampFormat),
+      startdt: time.formatDate(this.start, timestampFormat),
+      enddt: time.formatDate(this.end, timestampFormat),
       subject: this.title,
       body: this.description,
       location: this.location,

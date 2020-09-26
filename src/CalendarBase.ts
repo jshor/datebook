@@ -84,10 +84,10 @@ class CalendarBase implements ICalendarBase {
    */
   setTimestamps (options: IOptions): void {
     this.allday = !options.end
-    this.start = time.parseDate(options.start)
+    this.start = options.start
 
-    if (this.end) {
-      this.end = time.parseDate(options.end)
+    if (options.end) {
+      this.end = options.end
     } else {
       // if allday is specified, make the end date exactly 1 day from the start date
       this.end = time.incrementDate(this.start, 1)
@@ -96,7 +96,7 @@ class CalendarBase implements ICalendarBase {
     this.recurrence = options.recurrence
 
     if (this.recurrence && this.recurrence.end) {
-      this.recurrence.end = time.parseDate(this.recurrence.end)
+      this.recurrence.end = this.recurrence.end
     }
   }
 }

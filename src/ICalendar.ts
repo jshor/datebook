@@ -36,8 +36,8 @@ export default class ICalendar extends CalendarBase {
     const event = [
       'CLASS:PUBLIC',
       `DESCRIPTION:${description}`,
-      `DTSTART:${time.formatTimestampDate(this.start, FORMAT.FULL)}`,
-      `DTEND:${time.formatTimestampDate(this.end, FORMAT.FULL)}`,
+      `DTSTART:${time.formatDate(this.start, FORMAT.FULL)}`,
+      `DTEND:${time.formatDate(this.end, FORMAT.FULL)}`,
       `LOCATION:${location}`,
       `SUMMARY:${summary}`,
       'TRANSP:TRANSPARENT'
