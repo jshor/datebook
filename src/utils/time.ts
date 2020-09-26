@@ -6,7 +6,7 @@ import { FORMAT } from '../constants'
  * @param {number | string} n
  * @returns {string}
  */
-const addLeadingZero = (n: number | string): string => {
+const addLeadingZero = (n: number | string = ''): string => {
   return `0${parseInt(n.toString(), 10)}`.slice(-2)
 }
 
@@ -14,17 +14,12 @@ const addLeadingZero = (n: number | string): string => {
  * Formats the given JS Date() object to the given format.
  * Format defaults to: YYYYMMDDTHHMMss
  *
- * @param {Date} d
+ * @param {Date} [d = new Date()]
  * @param {string} format
  * @returns {string}
  */
-<<<<<<< HEAD
-const formatTimestampDate = (d: Date = new Date(), format: string): string => {
-  const dateValues = {
-=======
 const formatDate = (d: Date = new Date(), format: string): string => {
   const dateValues: Record<string, string | number> = {
->>>>>>> d8c964c... refactor: removes ability to specify time as strings
     YYYY: d.getUTCFullYear(),
     MM: addLeadingZero(d.getUTCMonth() + 1),
     DD: addLeadingZero(d.getUTCDate()),

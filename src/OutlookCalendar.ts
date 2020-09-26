@@ -31,7 +31,7 @@ export default class OutlookCalendar extends CalendarBase {
       timestampFormat += FORMAT.OUTLOOK_TIME
     }
 
-    const params: Record<string, string | number | boolean> = {
+    const params: Record<string, string> = {
       rru: 'addevent',
       startdt: time.formatDate(this.start, timestampFormat),
       enddt: time.formatDate(this.end, timestampFormat),

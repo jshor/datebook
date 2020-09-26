@@ -94,7 +94,7 @@ describe('IcsUtil', () => {
         count: 5,
         weekstart: 'MO',
         end: new Date('2019-05-02'),
-        weekdays: 'MO',
+        weekdays: ['MO'],
         monthdays: '5'
       }
       const expectedRrule = [

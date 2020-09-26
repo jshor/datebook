@@ -47,7 +47,7 @@ describe('YahooCalendar', () => {
 
   describe('getFrequency()', () => {
     const { FREQUENCY } = RECURRENCE
-    let obj
+    let obj: YahooCalendar
 
     beforeEach(() => {
       obj = new YahooCalendar(testOpts)
@@ -71,7 +71,7 @@ describe('YahooCalendar', () => {
   })
 
   describe('getRecurrence()', () => {
-    let obj
+    let obj: YahooCalendar
 
     beforeEach(() => {
       obj = new YahooCalendar(testOpts)
@@ -133,38 +133,38 @@ describe('YahooCalendar', () => {
 
   describe('getRecurrenceLengthDays()', () => {
     const { FREQUENCY } = RECURRENCE
-    let obj
+    let obj: YahooCalendar
 
     beforeEach(() => {
       obj = new YahooCalendar(testOpts)
     })
 
-    describe('when the count is specified in a recurrence', () => {
-      const count = 10
+    describe('when the interval is specified in a recurrence', () => {
+      const interval = 10
 
-      it('should return (count * 365.25) days for a yearly recurrence', () => {
+      it('should return (interval * 365.25) days for a yearly recurrence', () => {
         expect(obj.getRecurrenceLengthDays({
           frequency: FREQUENCY.YEARLY,
-          count
-        })).toEqual(365.25 * count)
+          interval
+        })).toEqual(365.25 * interval)
       })
 
-      it('should return (count * 30.42) days for a monthly recurrence', () => {
+      it('should return (interval * 30.42) days for a monthly recurrence', () => {
         expect(obj.getRecurrenceLengthDays({
           frequency: FREQUENCY.MONTHLY,
-          count
-        })).toEqual(30.42 * count)
+          interval
+        })).toEqual(30.42 * interval)
       })
 
-      it('should return (count * 7) days for a weekly recurrence', () => {
+      it('should return (interval * 7) days for a weekly recurrence', () => {
         expect(obj.getRecurrenceLengthDays({
           frequency: FREQUENCY.WEEKLY,
-          count
-        })).toEqual(7 * count)
+          interval
+        })).toEqual(7 * interval)
       })
 
-      it('should return the count itself as the number of days if no frequency is specified', () => {
-        expect(obj.getRecurrenceLengthDays({ count })).toEqual(count)
+      it('should return the interval itself as the number of days if no frequency is specified', () => {
+        expect(obj.getRecurrenceLengthDays({ interval })).toEqual(interval)
       })
     })
 
@@ -172,7 +172,18 @@ describe('YahooCalendar', () => {
       expect(obj.getRecurrenceLengthDays({})).toEqual(36525)
     })
 
-    it('should fall back to 1 day if no interval is specified', () => {
+    it('should fall back to days if no frequency is specified', () => {
+      const obj = new YahooCalendar(testOpts)
+      const recurrence = {
+        interval: 3
+      }
+
+      const result = obj.getRecurrence(recurrence)
+
+      expect(result).toBe('03Dy')
+    })
+
+    it('should fall back to one day if no interval is specified', () => {
       const obj = new YahooCalendar(testOpts)
       const recurrence = {
         frequency: DAILY

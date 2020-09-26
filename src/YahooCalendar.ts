@@ -64,14 +64,14 @@ export default class YahooCalendar extends CalendarBase {
    * @param {IRecurrence} recurrence
    * @returns {string}
    */
-  getRecurrence (recurrence: IRecurrence) {
+  getRecurrence (recurrence: IRecurrence): string {
     const frequency = this.getFrequency(recurrence.frequency)
     const weekdays = this.getWeekdays(recurrence.weekdays)
-    const { interval } = recurrence
+    const { interval = 1 } = recurrence
 
     let prefix = ''
 
-    if (weekdays.length && recurrence.frequency === RECURRENCE.FREQUENCY.MONTHLY) {
+    if (recurrence.weekdays?.length && recurrence.frequency === RECURRENCE.FREQUENCY.MONTHLY) {
       // YC only supports the first count of a recurring weekday
       // e.g., -1FR,2TU (every last Friday and every second Tuesday) is NOT supported, but
       // -1FR,TU (every last Friday and Tuesday) IS supported -- strip out all prefixes from
@@ -96,19 +96,19 @@ export default class YahooCalendar extends CalendarBase {
    * @returns {number}
    */
   getRecurrenceLengthDays (recurrence: IRecurrence): number {
-    const { frequency, count } = recurrence
+    const { frequency, interval } = recurrence
     const { FREQUENCY } = RECURRENCE
 
-    if (count) {
+    if (interval) {
       switch (frequency) {
         case FREQUENCY.YEARLY:
-          return count * 365.25
+          return interval * 365.25
         case FREQUENCY.MONTHLY:
-          return count * 30.42 // avg days in a year
+          return interval * 30.42 // avg days in a year
         case FREQUENCY.WEEKLY:
-          return count * 7
+          return interval * 7
         default:
-          return count // daily
+          return interval // daily
       }
     }
 

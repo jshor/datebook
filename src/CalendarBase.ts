@@ -94,10 +94,6 @@ class CalendarBase implements ICalendarBase {
     }
 
     this.recurrence = options.recurrence
-
-    if (this.recurrence && this.recurrence.end) {
-      this.recurrence.end = this.recurrence.end
-    }
   }
 }
 
