@@ -37,7 +37,7 @@ describe('safariFileSave()', () => {
     documentMock.createEvent.mockClear()
     Object.defineProperty(global, 'document', {
       writable: true,
-      value: originalDocument,
+      value: originalDocument
     })
   })
 

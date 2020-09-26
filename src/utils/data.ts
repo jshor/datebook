@@ -42,8 +42,22 @@ const toIcsParamString = (params: Record<string, string>): string => {
   return toParamString(params, ';')
 }
 
+/**
+ * Converts the given string to ProperCase.
+ *
+ * @param {string} s
+ * @returns {string}
+ */
+const toProperCase = (s: string): string => {
+  return [
+    s[0].toUpperCase(),
+    s.slice(-s.length + 1).toLowerCase()
+  ].join('')
+}
+
 export default {
   toParamString,
   toQueryString,
-  toIcsParamString
+  toIcsParamString,
+  toProperCase
 }

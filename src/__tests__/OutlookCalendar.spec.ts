@@ -1,9 +1,10 @@
-import { FORMAT, URL } from '../constants'
+
 import * as queryString from 'query-string'
 import CalendarBase from '../CalendarBase'
 import OutlookCalendar from '../OutlookCalendar'
-import IOptions from '../interfaces/IOptions'
 import time from '../utils/time'
+import IOptions from '../interfaces/IOptions'
+import { FORMAT, URL } from '../constants'
 
 describe('Outlook Calendar', () => {
   it('should be a subclass of CalendarBase', () => {
@@ -67,8 +68,8 @@ describe('Outlook Calendar', () => {
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: time.formatDate(obj.start, FORMAT.OUTLOOK_FULL),
-          enddt: time.formatDate(obj.end, FORMAT.OUTLOOK_FULL),
+          startdt: time.formatDate(obj.start, FORMAT.OUTLOOK_DATE),
+          enddt: time.formatDate(obj.end, FORMAT.OUTLOOK_DATE),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,
