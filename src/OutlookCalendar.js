@@ -1,5 +1,5 @@
 import CalendarBase from './CalendarBase'
-import { URL } from './constants'
+import { FORMAT, URL } from './constants'
 import { toQueryString } from './utils/data'
 import { formatTimestampString } from './utils/time'
 
@@ -42,10 +42,10 @@ export default class OutlookCalendar extends CalendarBase {
    * @returns {String}
    */
   render () {
-    let timestampFormat = 'YYYY-MM-DD'
+    let timestampFormat = FORMAT.OUTLOOK_DATE
 
     if (!this.allday) {
-      timestampFormat += 'Thh:mm:ss'
+      timestampFormat += FORMAT.OUTLOOK_TIME
     }
 
     const params = {

@@ -13,6 +13,9 @@ module.exports = {
       statements: 90
     }
   },
+  testMatch: [
+    '<rootDir>/src/**/*.spec.js'
+  ],
   transform: {
     '^.+\\.jsx?$': 'babel-jest'
   }
