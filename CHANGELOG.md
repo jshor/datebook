@@ -1,3 +1,12 @@
+## [4.1.8](https://github.com/jshor/datebook/compare/v4.1.7...v4.1.8) (2020-09-26)
+
+
+### Bug Fixes
+
+* changes date params to use JS Date ([#112](https://github.com/jshor/datebook/issues/112)) ([289f09c](https://github.com/jshor/datebook/commit/289f09c45f1401224fc2202811878c9f36ad115f)), closes [#93](https://github.com/jshor/datebook/issues/93) [#104](https://github.com/jshor/datebook/issues/104) [#107](https://github.com/jshor/datebook/issues/107)
+
+
+
 ## [4.1.7](https://github.com/jshor/datebook/compare/v4.1.6...v4.1.7) (2020-09-26)
 
 
