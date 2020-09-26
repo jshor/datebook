@@ -1,5 +1,5 @@
 import CalendarBase from './CalendarBase'
-import { RECURRENCE, URL } from './constants'
+import { RECURRENCE, URL, FORMAT } from './constants'
 import { formatTimestampString, addLeadingZero } from './utils/time'
 import { toQueryString } from './utils/data'
 
@@ -149,13 +149,13 @@ export default class YahooCalendar extends CalendarBase {
 
     if (this.allday) {
       params.dur = 'allday'
-      params.st = formatTimestampString(this.start, 'YYYYMMDD')
+      params.st = formatTimestampString(this.start, FORMAT.DATE)
     } else {
-      params.st = formatTimestampString(this.start, 'YYYYMMDDThhmmss')
+      params.st = formatTimestampString(this.start, FORMAT.FULL)
 
       if (this.getHoursDuration(this.start, this.end) > 99) {
         // Yahoo only supports up to 99 hours, so we are forced to specify the end time instead of the duration
-        params.et = formatTimestampString(this.end, 'YYYYMMDDThhmmss')
+        params.et = formatTimestampString(this.end, FORMAT.FULL)
       } else {
         // we prefer specifying duration in lieu of end time, because apparently Yahoo's end time is buggy w.r.t. timezones
         params.dur = this.getDuration(this.start, this.end)
@@ -166,9 +166,9 @@ export default class YahooCalendar extends CalendarBase {
       params.RPAT = this.getRecurrence(this.recurrence)
 
       if (this.recurrence.end) {
-        params.REND = formatTimestampString(this.recurrence.end, 'YYYYMMDD')
+        params.REND = formatTimestampString(this.recurrence.end, FORMAT.DATE)
       } else {
-        params.REND = formatTimestampString(this.end, 'YYYYMMDD')
+        params.REND = formatTimestampString(this.end, FORMAT.DATE)
       }
     }
 

@@ -46,7 +46,6 @@ describe('ICalendar', () => {
 
   describe('render()', () => {
     const originalWindow = global.window
-    const dtFormat = `${FORMAT.DATE}T${FORMAT.TIME}`
 
     beforeEach(() => {
       formatText.mockImplementation(s => s)
@@ -105,8 +104,8 @@ describe('ICalendar', () => {
         'BEGIN:VEVENT',
         'CLASS:PUBLIC',
         `DESCRIPTION:${baseOpts.description}`,
-        `DTSTART:${formatTimestampString(new Date(baseOpts.start), dtFormat)}`,
-        `DTEND:${formatTimestampString(new Date(baseOpts.end), dtFormat)}`,
+        `DTSTART:${formatTimestampString(new Date(baseOpts.start), FORMAT.FULL)}`,
+        `DTEND:${formatTimestampString(new Date(baseOpts.end), FORMAT.FULL)}`,
         `LOCATION:${baseOpts.location}`,
         `SUMMARY:${baseOpts.title}`,
         'TRANSP:TRANSPARENT',

@@ -39,10 +39,10 @@ export default class GoogleCalendar extends CalendarBase {
    * @returns {String}
    */
   render () {
-    let timestampFormat = 'YYYYMMDD'
+    let timestampFormat = FORMAT.DATE
 
     if (!this.allday) {
-      timestampFormat += 'Thhmmss'
+      timestampFormat += FORMAT.TIME
     }
 
     const params = {

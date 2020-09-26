@@ -1,4 +1,4 @@
-import { URL } from '../constants'
+import { FORMAT, URL } from '../constants'
 import CalendarBase from '../CalendarBase'
 import OutlookCalendar from '../OutlookCalendar'
 import queryStringToObj from '../../test_helpers/queryStringToObj'
@@ -48,8 +48,8 @@ describe('Outlook Calendar', () => {
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: formatTimestampString(obj.start, 'YYYY-MM-DDThh:mm:ss'),
-          enddt: formatTimestampString(obj.end, 'YYYY-MM-DDThh:mm:ss'),
+          startdt: formatTimestampString(obj.start, FORMAT.OUTLOOK_FULL),
+          enddt: formatTimestampString(obj.end, FORMAT.OUTLOOK_FULL),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,
@@ -72,8 +72,8 @@ describe('Outlook Calendar', () => {
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: formatTimestampString(obj.start, 'YYYY-MM-DD'),
-          enddt: formatTimestampString(obj.end, 'YYYY-MM-DD'),
+          startdt: formatTimestampString(obj.start, FORMAT.OUTLOOK_DATE),
+          enddt: formatTimestampString(obj.end, FORMAT.OUTLOOK_DATE),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,

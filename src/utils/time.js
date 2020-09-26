@@ -21,12 +21,12 @@ export const addLeadingZero = (s) => {
  */
 export const formatTimestampDate = (d, format) => {
   const dateValues = {
-    YYYY: d.getFullYear(),
-    MM: addLeadingZero(d.getMonth() + 1),
-    DD: addLeadingZero(d.getDate()),
-    hh: addLeadingZero(d.getHours()),
-    mm: addLeadingZero(d.getMinutes()),
-    ss: addLeadingZero(d.getSeconds()),
+    YYYY: d.getUTCFullYear(),
+    MM: addLeadingZero(d.getUTCMonth() + 1),
+    DD: addLeadingZero(d.getUTCDate()),
+    hh: addLeadingZero(d.getUTCHours()),
+    mm: addLeadingZero(d.getUTCMinutes()),
+    ss: addLeadingZero(d.getUTCSeconds())
   }
 
   return Object

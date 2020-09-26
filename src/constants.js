@@ -9,7 +9,11 @@ export const RECURRENCE = {
 
 export const FORMAT = {
   DATE: 'YYYYMMDD',
-  TIME: 'hhmmss'
+  TIME: 'ThhmmssZ',
+  FULL: 'YYYYMMDDThhmmssZ',
+  OUTLOOK_DATE: 'YYYY-MM-DD',
+  OUTLOOK_TIME: 'Thh:mm:ssZ',
+  OUTLOOK_FULL: 'YYYY-MM-DDThh:mm:ssZ'
 }
 
 export const URL = {

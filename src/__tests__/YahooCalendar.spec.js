@@ -197,9 +197,9 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: 'allday',
-            st: getFormattedDate(testOpts.start, 'YYYYMMDD'),
+            st: getFormattedDate(testOpts.start, FORMAT.DATE),
             RPAT: '01Dy',
-            REND: getFormattedDate(recurrenceEnd, 'YYYYMMDD')
+            REND: getFormattedDate(recurrenceEnd, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
         })
@@ -228,7 +228,7 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-              st: getFormattedDate(testOpts.start, 'YYYYMMDDThhmmss'),
+              st: getFormattedDate(testOpts.start, FORMAT.FULL),
               dur: '0200'
             }
             expect(params).toMatchObject(expectedObj)
@@ -251,8 +251,8 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-              st: getFormattedDate(start, 'YYYYMMDDThhmmss'),
-              et: getFormattedDate(end, 'YYYYMMDDThhmmss')
+              st: getFormattedDate(start, FORMAT.FULL),
+              et: getFormattedDate(end, FORMAT.FULL)
             }
             expect(params).toMatchObject(expectedObj)
             expect(expectedObj).toMatchObject(params)
@@ -281,9 +281,9 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: '0200',
-            st: getFormattedDate(testOpts.start, 'YYYYMMDDThhmmss'),
+            st: getFormattedDate(testOpts.start, FORMAT.FULL),
             RPAT: '01Dy',
-            REND: getFormattedDate(recurrenceEnd, 'YYYYMMDD')
+            REND: getFormattedDate(recurrenceEnd, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
         })
