@@ -19,9 +19,6 @@
   /></a> <a href="https://travis-ci.org/jshor/datebook"><img
     src="https://img.shields.io/travis/jshor/datebook.svg?style=for-the-badge"
     alt="Build status"
-  /></a> <a href="https://david-dm.org/jshor/datebook#info=dependencies"><img
-    src="https://img.shields.io/david/jshor/datebook.svg?style=for-the-badge"
-    alt="Dependency Status"
   /></a> <a href="https://npmjs.com/package/datebook"><img
     src="http://img.shields.io/npm/v/datebook.svg?style=for-the-badge"
     alt="npm version"
@@ -57,9 +54,9 @@ import { ICalendar } from 'datebook'
 const icalendar = new ICalendar({
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
-  description: 'Let\'s blow off some steam from our weekly deployments to enjoy a tall cold one!',
-  start: '2020-07-04T19:00:00',
-  end: '2020-07-04T23:30:00',
+  description: 'Let\'s blow off some steam with a tall cold one!',
+  start: new Date('2022-07-08T19:00:00'),
+  end: new Date('2022-07-08T23:30:00'),
   recurrence: {
     frequency: 'WEEKLY',
     interval: 2

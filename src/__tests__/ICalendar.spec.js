@@ -14,8 +14,8 @@ describe('ICalendar', () => {
       title: 'Fun Party',
       description: 'BYOB',
       location: 'New York',
-      start: '2019-07-04T19:00:00.000',
-      end: '2019-07-04T21:00:00.000',
+      start: new Date('2019-07-04T19:00:00.000'),
+      end: new Date('2019-07-04T21:00:00.000'),
     }
   })
 

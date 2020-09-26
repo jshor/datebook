@@ -30,19 +30,27 @@ A summary description of the event location. Line breaks are automatically strip
 
 ### start
 
-* Type: `string`
+* Type: [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date), or `string` (deprecated)
 * Required: **yes**
-* Valid value: any [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value.
+* Valid value: a valid `Date` reference, or any [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value (deprecated).
 
 The event start timestamp. See [date formats](date.md) for more information.
 
+:::warning Note
+Specifying dates as strings is deprecated and will be removed in version **5.0.0**.
+:::
+
 ### end
 
-* Type: `string`
+* Type: [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date), or `string` (deprecated)
 * Required: **yes**, if not an all-day event
-* Valid value: any [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value.
+* Valid value: a valid `Date` reference, or any [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value (deprecated).
 
 The event end timestamp. For all-day events, this field should be omitted. See [date formats](date.md) for more information.
+
+:::warning Deprecation Notice
+Specifying dates as strings is deprecated and will be removed in version **5.0.0**.
+:::
 
 ## Recurrence
 
@@ -54,7 +62,7 @@ The recurrence of an event is how often the event is supposed to occur. Some exa
 
 Recurrence is **optional**.
 
-:::warning Note
+:::warning Deprecation Notice
 This feature is not supported in Outlook online calendars.
 :::
 
@@ -94,14 +102,15 @@ If this parameter is specified in conjunction with [`end`](#recurrence-end), the
 
 ### recurrence.end
 
-* Type: `string`
+* Type: [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date), or `string` (deprecated)
 * Required: no
-* Valid value: any [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value.
+* Valid value: a valid `Date` reference, or any [ISO 8601](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value (deprecated).
 
 The latest date that this event may occur on. See [time formats](date.md) for more information.
 
 :::warning Important
-If this parameter is specified in conjunction with [`end`](#recurrence-end), the recurrence will end either when `count` is completed, or when `end` occurs, whichever happens first.
+* Specifying dates as strings is deprecated and will be removed in version **5.0.0**.
+* If this parameter is specified in conjunction with [`end`](#recurrence-end), the recurrence will end either when `count` is completed, or when `end` occurs, whichever happens first.
 :::
 
 ### recurrence.weekdays

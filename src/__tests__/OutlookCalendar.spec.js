@@ -21,8 +21,8 @@ describe('Outlook Calendar', () => {
       testOpts.title = 'Music Concert'
       testOpts.location = 'New York'
       testOpts.description = 'a description'
-      testOpts.start = '2019-03-23T17:00:00.000'
-      testOpts.end = '2019-03-23T21:00:00.000'
+      testOpts.start = new Date('2019-03-23T17:00:00.000')
+      testOpts.end = new Date('2019-03-23T21:00:00.000')
     })
 
     afterEach(() => {

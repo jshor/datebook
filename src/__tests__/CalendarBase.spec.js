@@ -1,5 +1,5 @@
-import moment from 'moment'
 import CalendarBase from '../CalendarBase'
+import { incrementDate } from '../utils/time'
 
 describe('Calendar Base', () => {
   let baseOpts
@@ -7,8 +7,8 @@ describe('Calendar Base', () => {
   beforeEach(() => {
     baseOpts = {
       title: 'Test Event',
-      start: '2019-03-23T17:00:00.000',
-      end: '2019-03-23T21:00:00.000'
+      start: new Date('2019-03-23T17:00:00.000'),
+      end: new Date('2019-03-23T21:00:00.000')
     }
   })
 
@@ -30,8 +30,6 @@ describe('Calendar Base', () => {
 
       expect(testObj.setText).toHaveBeenCalledTimes(1)
       expect(testObj.setTimestamps).toHaveBeenCalledTimes(1)
-      // expect(testObj.setText).toHaveBeenCalledWith(baseOpts)
-      // expect(testObj.setTimestamps).toHaveBeenCalledWith(testOpts)
     })
   })
 
@@ -92,6 +90,7 @@ describe('Calendar Base', () => {
   })
 
   describe('setTimestamps()', () => {
+    const oneDay = 24 * 360 * 1000 // one day in UNIX time
     let calendarObj
 
     beforeEach(() => {
@@ -112,70 +111,65 @@ describe('Calendar Base', () => {
     })
 
     describe('when options has no end', () => {
+
       it('should set allday to true', () => {
         calendarObj.setTimestamps({
-          start: '2019-03-23T17:00:00.000',
+          start: new Date('2019-03-23T17:00:00.000'),
           end: ''
-        });
+        })
 
         expect(calendarObj.allday).toBe(true)
       })
 
       it('should set the end using the start + 1 day', () => {
         const testOpts = {
-          start: '2019-03-23T17:00:00.000',
+          start: new Date('2019-03-23T17:00:00.000'),
           end: ''
         }
 
-        const expectedEnd = moment(testOpts.start)
-          .add(1, 'days')
-          .unix() * 1000
-
         calendarObj.setTimestamps(testOpts)
-        expect(calendarObj.end.getTime()).toBe(expectedEnd)
+
+        expect(calendarObj.start.toString())
+          .toEqual(testOpts.start.toString())
+        expect(calendarObj.end.toString())
+          .toEqual(incrementDate(testOpts.start, 1).toString())
       })
 
       it('should set the start and end without the time of day', () => {
         const testOpts = {
-          start: '2019-03-23T17:00:00.000',
+          start: new Date('2019-03-23T17:00:00.000'),
           end: ''
         }
 
-        const expectedStart = moment(testOpts.start).unix() * 1000
-        const expectedEnd = moment(testOpts.start)
-          .add(1, 'days')
-          .unix() * 1000
-
         calendarObj.setTimestamps(testOpts)
 
-        expect(calendarObj.start.getTime()).toBe(expectedStart)
-        expect(calendarObj.end.getTime()).toBe(expectedEnd)
+        expect(calendarObj.start.toString())
+          .toEqual(testOpts.start.toString())
+        expect(calendarObj.end.toString())
+          .toEqual(incrementDate(testOpts.start, 1).toString())
       })
     })
 
     describe('when options has an end', () => {
       it('should set allday to false', () => {
         calendarObj.setTimestamps({
-          start: '2019-03-23T17:00:00.000',
-          end: '2019-03-23T21:00:00.000'
-        });
+          start: new Date('2019-03-23T17:00:00.000'),
+          end: new Date('2019-03-23T21:00:00.000')
+        })
 
-        expect(calendarObj.allday).toBe(false);
+        expect(calendarObj.allday).toBe(false)
       })
 
       it('should set the start and end including the time of day', () => {
         const testOpts = {
-          start: '2019-03-23T17:00:00.000',
-          end: '2019-03-23T21:00:00.000'
+          start: new Date('2019-03-23T17:00:00.000'),
+          end: new Date('2019-03-23T21:00:00.000')
         }
-
-        const expectedStart = moment(testOpts.start).unix() * 1000
-        const expectedEnd = moment(testOpts.end).unix() * 1000
 
         calendarObj.setTimestamps(testOpts)
 
-        expect(calendarObj.start.getTime()).toBe(expectedStart)
-        expect(calendarObj.end.getTime()).toBe(expectedEnd)
+        expect(calendarObj.start).toEqual(testOpts.start)
+        expect(calendarObj.end).toEqual(testOpts.end)
       })
     })
   })
