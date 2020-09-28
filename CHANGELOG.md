@@ -1,3 +1,12 @@
+## [4.1.10](https://github.com/jshor/datebook/compare/v4.1.9...v4.1.10) (2020-09-28)
+
+
+### Bug Fixes
+
+* **yahoo:** corrects weekday recurrences ([#114](https://github.com/jshor/datebook/issues/114)) ([e747e51](https://github.com/jshor/datebook/commit/e747e513de7a96086b503e3c3b982f22239b2206))
+
+
+
 ## [4.1.9](https://github.com/jshor/datebook/compare/v4.1.8...v4.1.9) (2020-09-26)
 
 
