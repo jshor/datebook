@@ -1,3 +1,21 @@
+# [5.0.0](https://github.com/jshor/datebook/compare/v4.1.11...v5.0.0) (2020-09-28)
+
+
+### Code Refactoring
+
+* removes ability to specify time as strings ([af23513](https://github.com/jshor/datebook/commit/af2351304d481aaa33139c7c9b1be630fc5cc614))
+* removes calendars util ([82e2516](https://github.com/jshor/datebook/commit/82e25168c2c4937f044444e6132604560288b0da))
+
+
+### BREAKING CHANGES
+
+* Removes getGoogleCalendarUrl(), getYahooCalendarUrl(),
+getMicrosoftCalendarUrl(), and downloadIcs().
+* Removes ability to pass `start`, `end`, or
+`recurrence.end` as strings. They must now be passed as Date objects.
+
+
+
 ## [4.1.11](https://github.com/jshor/datebook/compare/v4.1.10...v4.1.11) (2020-09-28)
 
 
