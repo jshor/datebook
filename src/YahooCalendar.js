@@ -1,7 +1,7 @@
 import CalendarBase from './CalendarBase'
 import { RECURRENCE, URL, FORMAT } from './constants'
-import { formatTimestampString, addLeadingZero } from './utils/time'
-import { toQueryString } from './utils/data'
+import { formatTimestampString, addLeadingZero, incrementDate } from './utils/time'
+import { toProperCase, toQueryString } from './utils/data'
 
 /**
  * Generates a Yahoo! Calendar url.
@@ -49,50 +49,45 @@ export default class YahooCalendar extends CalendarBase {
   }
 
   /**
-   * Converts the capitalized two-letter day abbreviation to ProperCase.
+   * Maps the given Recurrence weekdays to a Yahoo! weekdays format.
+   * This will strip out any count prefixes, as they're not supported by YC.
+   * Example: 1MO,2TU,3WE becomes MoTuWe
    *
-   * @param {String} day
+   * @param {String[]} [weekdays = []]
    * @returns {String}
    */
-  formatDay (day) {
-    const first = day.charAt(0)
-    const last = day.charAt(1).toLowerCase()
-
-    return `${first}${last}`
+  getWeekdays (weekdays = []) {
+    return weekdays
+      .map(w => {
+        return toProperCase(w.replace(/[^A-Z]/ig, ''))
+      })
+      .join('')
   }
 
   /**
-   * Converts the RFC 5545 FREQ param to to Yahoo! frequency format.
+   * Maps the given Recurrence frequency to a Yahoo! frequency format.
+   * Example: DAILY becomes Dy; MONTHLY becomes Mh
    *
-   * @param {Object} recurrence
-   * @param {String} [recurrence.frequency] -
-   * @param {String} [recurrence.weekdays] -
+   * @param {String} frequency
    * @returns {String}
    */
-  getFrequency ({ frequency, weekdays }) {
+  getFrequency (frequency) {
     const { FREQUENCY } = RECURRENCE
 
-    if (weekdays) {
-      return weekdays
-        .split(',')
-        .map(this.formatDay)
-        .join('')
-    }
-
     switch (frequency) {
-      case FREQUENCY.DAILY:
-        return 'Dy'
-      case FREQUENCY.MONTHLY:
-        return 'Mh'
       case FREQUENCY.YEARLY:
         return 'Yr'
-      default:
+      case FREQUENCY.MONTHLY:
+        return 'Mh'
+      case FREQUENCY.WEEKLY:
         return 'Wk'
+      default:
+        return 'Dy' // daily
     }
   }
 
   /**
-   * Converts the RFC 5545 to Yahoo! recurrence format.
+   * Converts the Recurrence to a Yahoo! recurrence string.
    *
    * @param {Object} recurrence
    * @param {String} [recurrence.frequency] -
@@ -100,10 +95,55 @@ export default class YahooCalendar extends CalendarBase {
    * @returns {String}
    */
   getRecurrence (recurrence) {
-    const frequency = this.getFrequency(recurrence)
+    const frequency = this.getFrequency(recurrence.frequency)
+    const weekdays = this.getWeekdays(recurrence.weekdays)
     const { interval } = recurrence
 
-    return `${addLeadingZero(interval)}${frequency}`
+    let prefix = ''
+
+    if (weekdays.length && recurrence.frequency === RECURRENCE.FREQUENCY.MONTHLY) {
+      // YC only supports the first count of a recurring weekday
+      // e.g., -1FR,2TU (every last Friday and every second Tuesday) is NOT supported, but
+      // -1FR,TU (every last Friday and Tuesday) IS supported -- strip out all prefixes from
+      // the list, then find the first nonzero prefix (if any) and prepend it to the list
+      const matches = recurrence.weekdays[0].match(/^([1-5])/)
+
+      prefix = matches ? matches[0] : '1'
+    }
+
+    return [
+      addLeadingZero(interval),
+      frequency,
+      prefix,
+      weekdays
+    ].join('')
+  }
+
+  /**
+   * Computes the number of days a recurrence will last.
+   * 
+   * @param {Object} recurrence 
+   * @returns {Number}
+   */
+  getRecurrenceLengthDays (recurrence) {
+    const { frequency, count } = recurrence
+    const { FREQUENCY } = RECURRENCE
+
+    if (count) {
+      switch (frequency) {
+        case FREQUENCY.YEARLY:
+          return count * 365.25
+        case FREQUENCY.MONTHLY:
+          return count * 30.42 // avg days in a year
+        case FREQUENCY.WEEKLY:
+          return count * 7
+        default:
+          return count // daily
+      }
+    }
+
+    // if no frequency is specified, set an arbitrarily-long recurrence end
+    return 365.25 * 100 // 100 years
   }
 
   /**
@@ -168,7 +208,10 @@ export default class YahooCalendar extends CalendarBase {
       if (this.recurrence.end) {
         params.REND = formatTimestampString(this.recurrence.end, FORMAT.DATE)
       } else {
-        params.REND = formatTimestampString(this.end, FORMAT.DATE)
+        const days = this.getRecurrenceLengthDays(this.recurrence)
+        const rend = incrementDate(this.end, Math.ceil(days))
+
+        params.REND = formatTimestampString(rend, FORMAT.DATE)
       }
     }
 

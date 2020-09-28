@@ -131,7 +131,14 @@ These days may be prefixed with a non-zero integer to represent the occurrence t
 :::
 
 :::warning Important
-The [`frequency`](#recurrence-frequency) parameter must be set to `WEEKLY` for `weekdays` to take effect.
+* The [`frequency`](#recurrence-frequency) parameter must be set to `WEEKLY` or `MONTHLY` for `weekdays` to take effect.
+* In `MONTHLY` mode, Yahoo! Calendar only supports one **nonnegative** weekday.
+:::
+
+:::danger Caution when specifying weekdays using Yahoo! Calendar in MONTHLY mode
+Only the first **nonnegative** *n*th-day(s) prefix is taken into account, and used for the rest of the days of the week specified.
+
+For example, if you pass in `['2FR', '1TU']` (every second Friday and every first Tuesday), it would fall back to `['2FR', 'TU`]` (**every second Friday** *and* **every second Tuesday**) instead.
 :::
 
 ### recurrence.monthdays
