@@ -49,7 +49,6 @@ export default class OutlookCalendar extends CalendarBase {
     }
 
     const params = {
-      path: '/calendar/action/compose',
       rru: 'addevent',
       startdt: formatTimestampString(this.start, timestampFormat),
       enddt: formatTimestampString(this.end, timestampFormat),
@@ -62,6 +61,6 @@ export default class OutlookCalendar extends CalendarBase {
     const baseUrl = URL.OUTLOOK
     const queryString = toQueryString(params)
     
-    return `${baseUrl}?${queryString}`
+    return `${baseUrl}?path=/calendar/action/compose&${queryString}`
   }
 }
