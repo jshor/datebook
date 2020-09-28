@@ -36,3 +36,11 @@ export const toQueryString = params => toParamString(params, '&', encodeURICompo
  * @returns {String}
  */
 export const toIcsParamString = params => toParamString(params, ';')
+
+/**
+ * Converts the given string to ProperCase.
+ * 
+ * @param {string} s
+ * @returns {string} 
+ */
+export const toProperCase = s => `${s[0].toUpperCase()}${s.slice(-s.length + 1).toLowerCase()}`

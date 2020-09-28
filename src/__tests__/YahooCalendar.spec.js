@@ -38,81 +38,147 @@ describe('YahooCalendar', () => {
     expect(result).toBeInstanceOf(CalendarBase)
   })
 
-  describe('formatDay()', () => {
-    it('should change the day to titlecase', () => {
-      const obj = new YahooCalendar(testOpts)
-      const day = 'sUnDAy'
+  describe('getWeekdays()', () => {
+    it('should return a string of all weekdays joined', () => {
+      const calendar = new YahooCalendar(testOpts)
+      const result = calendar.getWeekdays(['SU', 'MO'])
 
-      const result = obj.formatDay(day)
+      expect(result).toEqual('SuMo')
+    })
+    
+    it('should strip out any non-alphanumeric chars', () => {
+      const calendar = new YahooCalendar(testOpts)
+      const result = calendar.getWeekdays(['3SU', '-2MO'])
 
-      expect(result).toBe('su')
+      expect(result).toEqual('SuMo')
     })
   })
 
   describe('getFrequency()', () => {
-    describe('if weekdays', () => {
-      const weekdayRecurrence = {
-        weekdays: 'SUNDAY,TUESDAY,WEDNESDAY'
-      }
+    const { FREQUENCY } = RECURRENCE
+    let obj
 
-      it('should format weekdays only', () => {
-        const obj = new YahooCalendar(testOpts)
-
-        const result = obj.getFrequency(weekdayRecurrence)
-
-        expect(result).toBe('SuTuWe')
-      })
+    beforeEach(() => {
+      obj = new YahooCalendar(testOpts)
     })
 
-    describe('if no weekdays', () => {
-      it('should transform frequencies', () => {
-        const obj = new YahooCalendar(testOpts)
+    it('should return `Yr` for yearly recurrences', () => {
+      expect(obj.getFrequency(FREQUENCY.YEARLY)).toEqual('Yr')
+    })
 
-        for (let freq of [ DAILY, WEEKLY, MONTHLY, YEARLY, 'foobar' ]) {
-          const result = obj.getFrequency({
-            frequency: freq,
-          })
-          const expected = yahooFreqMap[freq] || yahooFreqMap[WEEKLY]
-          expect(result).toBe(expected)
-        }
-      })
+    it('should return `Mh` for monthly recurrences', () => {
+      expect(obj.getFrequency(FREQUENCY.MONTHLY)).toEqual('Mh')
+    })
+
+    it('should return `Wk` for monthly recurrences', () => {
+      expect(obj.getFrequency(FREQUENCY.WEEKLY)).toEqual('Wk')
+    })
+
+    it('should default to daily recurrences', () => {
+      expect(obj.getFrequency(FREQUENCY.DAILY)).toEqual('Dy')
     })
   })
 
   describe('getRecurrence()', () => {
-    it('should call getFrequency with the recurrence', () => {
-      jest.spyOn(YahooCalendar.prototype, 'getFrequency').mockReturnValueOnce('mockRrule')
-      const obj = new YahooCalendar(testOpts)
+    let obj
 
-      const recurrence = {
-        interval: 3,
-        frequency: DAILY,
-      }
-      obj.getRecurrence(recurrence)
-      expect(obj.getFrequency).toHaveBeenCalledTimes(1)
-      expect(obj.getFrequency).toHaveBeenCalledWith(recurrence)
+    beforeEach(() => {
+      obj = new YahooCalendar(testOpts)
     })
 
     it('should prepend single digit interval with 0', () => {
-      const obj = new YahooCalendar(testOpts)
       const recurrence = {
         interval: 3,
         frequency: DAILY,
       }
 
       const result = obj.getRecurrence(recurrence)
-      expect(result).toBe(`0${recurrence.interval}Dy`)
+      expect(result).toBe('03Dy')
     })
 
     it('should return yahoo calendar rpat rule', () => {
-      const obj = new YahooCalendar(testOpts)
       const recurrence = {
         interval: 10,
         frequency: DAILY,
       }
 
       const result = obj.getRecurrence(recurrence)
-      expect(result).toBe(`${recurrence.interval}Dy`)
+      expect(result).toBe('10Dy')
+    })
+
+    it('should append the weekdays, prefixed with `1`, to the recurrence', () => {
+      const recurrence = {
+        interval: 10,
+        frequency: MONTHLY,
+        weekdays: ['SU', 'MO']
+      }
+
+      const result = obj.getRecurrence(recurrence)
+      expect(result).toBe('10Mh1SuMo')
+    })
+
+    it('should return the weekdays with the first weekdays\' count for monthly recurrences', () => {
+      const recurrence = {
+        interval: 10,
+        frequency: MONTHLY,
+        weekdays: ['2SU', '3MO']
+      }
+
+      const result = obj.getRecurrence(recurrence)
+      expect(result).toBe('10Mh2SuMo')
+    })
+
+    it('should return the weekdays\' counts for weekly recurrences', () => {
+      const recurrence = {
+        interval: 10,
+        frequency: WEEKLY,
+        weekdays: ['2SU', '3MO']
+      }
+
+      const result = obj.getRecurrence(recurrence)
+      expect(result).toBe('10WkSuMo')
+    })
+  })
+
+  describe('getRecurrenceLengthDays()', () => {
+    const { FREQUENCY } = RECURRENCE
+    let obj
+
+    beforeEach(() => {
+      obj = new YahooCalendar(testOpts)
+    })
+
+    describe('when the count is specified in a recurrence', () => {
+      const count = 10
+
+      it('should return (count * 365.25) days for a yearly recurrence', () => {
+        expect(obj.getRecurrenceLengthDays({
+          frequency: FREQUENCY.YEARLY,
+          count
+        })).toEqual(365.25 * count)
+      })
+
+      it('should return (count * 30.42) days for a monthly recurrence', () => {
+        expect(obj.getRecurrenceLengthDays({
+          frequency: FREQUENCY.MONTHLY,
+          count
+        })).toEqual(30.42 * count)
+      })
+
+      it('should return (count * 7) days for a weekly recurrence', () => {
+        expect(obj.getRecurrenceLengthDays({
+          frequency: FREQUENCY.WEEKLY,
+          count
+        })).toEqual(7 * count)
+      })
+
+      it('should return the count itself as the number of days if no frequency is specified', () => {
+        expect(obj.getRecurrenceLengthDays({ count })).toEqual(count)
+      })
+    })
+
+    it('should return the number of days in 100 years', () => {
+      expect(obj.getRecurrenceLengthDays({})).toEqual(36525)
     })
   })
   
