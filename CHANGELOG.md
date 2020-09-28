@@ -1,3 +1,12 @@
+## [4.1.11](https://github.com/jshor/datebook/compare/v4.1.10...v4.1.11) (2020-09-28)
+
+
+### Bug Fixes
+
+* **outlook:** prevents path from being encoded ([#115](https://github.com/jshor/datebook/issues/115)) ([f588947](https://github.com/jshor/datebook/commit/f588947d590263cc3faf10ccc5b063852b3432c6))
+
+
+
 ## [4.1.10](https://github.com/jshor/datebook/compare/v4.1.9...v4.1.10) (2020-09-28)
 
 
