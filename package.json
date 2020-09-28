@@ -43,7 +43,6 @@
     "@johmun/vue-tags-input": "^2.1.0",
     "@types/file-saver": "^2.0.1",
     "@types/jest": "^26.0.14",
-    "@types/query-string": "^6.3.0",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
     "codecov": "^3.5.0",
