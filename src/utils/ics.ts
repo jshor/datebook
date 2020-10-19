@@ -3,6 +3,7 @@ import data from './data'
 import time from './time'
 import safariFileSave from './safariFileSave'
 import IRecurrence from '../interfaces/IRecurrence'
+import { FORMAT } from '../constants'
 
 /**
  * Removes line breaks from a string. Returns an empty string if falsy.
@@ -76,7 +77,7 @@ const getRrule = (recurrence: IRecurrence): string => {
   }
 
   if (recurrence.end) {
-    rrule.UNTIL = time.formatDate(recurrence.end, 'YYYYMMDDThhmmss')
+    rrule.UNTIL = time.formatDate(recurrence.end, FORMAT.FULL)
   }
 
   return data.toIcsParamString(rrule)
