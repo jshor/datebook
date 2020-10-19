@@ -84,6 +84,20 @@ const getRrule = (recurrence: IRecurrence): string => {
 }
 
 /**
+ * Returns true if the current browser is Safari.
+ *
+ * @returns {boolean}
+ */
+const isSafari = (): boolean => {
+  return window.hasOwnProperty('safari') || (
+    // check to ensure navigator is not Chrome (which includes Safari in the user agent)
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
+    // browsers on iOS are wrappers around Safari, but include CriOS (Chrome), FxiOS (Firefox), etc.
+    !/(cr|fx)ios[^a-z]/i.test(navigator.userAgent)
+  )
+}
+
+/**
  * Downloads the given ics as an iCalendar file.
  *
  * @param {string} title - title of the event
@@ -92,10 +106,11 @@ const getRrule = (recurrence: IRecurrence): string => {
 const download = (title: string, data: string): void => {
   const fileName = getFileName(title)
 
-  if (window.hasOwnProperty('safari')) {
+  if (isSafari()) {
     safariFileSave(data, fileName)
   } else {
     const blob = getBlob(data)
+
     FileSaver.saveAs(blob, fileName)
   }
 }
