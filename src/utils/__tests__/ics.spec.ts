@@ -2,7 +2,7 @@ import * as FileSaver from 'file-saver'
 import ics from '../ics'
 import time from '../time'
 import safariFileSave from '../safariFileSave'
-import { RECURRENCE } from '../../constants'
+import { FORMAT, RECURRENCE } from '../../constants'
 
 jest.mock('../safariFileSave')
 
@@ -104,7 +104,7 @@ describe('IcsUtil', () => {
         'WKST=MO',
         'BYDAY=MO',
         'BYMONTHDAY=5',
-        `UNTIL=${time.formatDate(recurrence.end, 'YYYYMMDDThhmmss')}`
+        `UNTIL=${time.formatDate(recurrence.end, FORMAT.FULL)}`
       ].join(';')
 
       const actualRrule = ics.getRrule(recurrence)
