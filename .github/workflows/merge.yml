@@ -11,6 +11,7 @@ env:
   GIT_USER: 'GitHub Actions'
   GIT_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
   ARTIFACT_DIR: 'build'
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
   build:
