@@ -3,7 +3,7 @@ import * as queryString from 'query-string'
 import CalendarBase from '../CalendarBase'
 import OutlookCalendar from '../OutlookCalendar'
 import time from '../utils/time'
-import IOptions from '../interfaces/IOptions'
+import CalendarOptions from '../types/CalendarOptions'
 import { FORMAT, URL } from '../constants'
 
 describe('Outlook Calendar', () => {
@@ -17,7 +17,7 @@ describe('Outlook Calendar', () => {
   })
 
   describe('render()', () => {
-    const testOpts: IOptions = {
+    const testOpts: CalendarOptions = {
       start: new Date('2019-03-23T17:00:00.000')
     }
 

@@ -1,6 +1,6 @@
-import ICalendarBase from './interfaces/ICalendarBase'
-import IRecurrence from './interfaces/IRecurrence'
-import IOptions from './interfaces/IOptions'
+import ICalendarBase from './types/ICalendarBase'
+import CalendarRecurrence from './types/CalendarRecurrence'
+import CalendarOptions from './types/CalendarOptions'
 import time from './utils/time'
 
 /**
@@ -50,18 +50,18 @@ class CalendarBase implements ICalendarBase {
   end = new Date()
 
   /**
-   * Event recurrence specification. See {@link IRecurrence}
+   * Event recurrence specification. See {@link CalendarRecurrence}
    *
-   * @type {IRecurrence}
+   * @type {CalendarRecurrence}
    */
-  recurrence?: IRecurrence
+  recurrence?: CalendarRecurrence
 
   /**
    * Constructor.
    *
-   * @param {IOptions} options
+   * @param {CalendarOptions} options
    */
-  constructor (options: IOptions) {
+  constructor (options: CalendarOptions) {
     this.setText(options)
     this.setTimestamps(options)
   }
@@ -69,9 +69,9 @@ class CalendarBase implements ICalendarBase {
   /**
    * Sets the description, title and location.
    *
-   * @param {IOptions} options
+   * @param {CalendarOptions} options
    */
-  setText (options: IOptions): void {
+  public setText (options: CalendarOptions): void {
     this.description = options.description || ''
     this.title = options.title || ''
     this.location = options.location || ''
@@ -80,9 +80,9 @@ class CalendarBase implements ICalendarBase {
   /**
    * Sets the time and recurrence parameters.
    *
-   * @param {IOptions} options
+   * @param {CalendarOptions} options
    */
-  setTimestamps (options: IOptions): void {
+  public setTimestamps (options: CalendarOptions): void {
     this.allday = !options.end
     this.start = options.start
 
@@ -94,6 +94,15 @@ class CalendarBase implements ICalendarBase {
     }
 
     this.recurrence = options.recurrence
+  }
+
+  /**
+   * Render stub.
+   *
+   * @throws {Error}
+   */
+  public render (): string {
+    throw new Error('Render not implemented')
   }
 }
 

@@ -1,10 +1,10 @@
 /**
  * Recurrence config options.
  */
-export default interface IRecurrence {
+type CalendarRecurrence = {
   /** The Julian interval of how often this event should occur. */
   frequency?: string
-  /** The amount of time that will occur between recurrences. The scale of the time depends on {@link IRecurrence.frequency}. */
+  /** The amount of time that will occur between recurrences. The scale of the time depends on {@link CalendarRecurrence.frequency}. */
   interval?: number
   /** The maximum number of times the event should repeat. */
   count?: number
@@ -17,3 +17,5 @@ export default interface IRecurrence {
   /** The days of the month that the event should occur on.  */
   monthdays?: string
 }
+
+export default CalendarRecurrence

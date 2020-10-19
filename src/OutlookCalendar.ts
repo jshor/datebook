@@ -1,6 +1,6 @@
 import CalendarBase from './CalendarBase'
 import { FORMAT, URL } from './constants'
-import IOptions from './interfaces/IOptions'
+import CalendarOptions from './types/CalendarOptions'
 import data from './utils/data'
 import time  from './utils/time'
 
@@ -13,9 +13,9 @@ export default class OutlookCalendar extends CalendarBase {
   /**
    * Constructor.
    *
-   * @param {IOptions} options - calendar options
+   * @param {CalendarOptions} options - calendar options
    */
-  constructor (options: IOptions) {
+  constructor (options: CalendarOptions) {
     super(options)
   }
 
@@ -24,7 +24,7 @@ export default class OutlookCalendar extends CalendarBase {
    *
    * @returns {string}
    */
-  render (): string {
+  public render (): string {
     let timestampFormat = FORMAT.OUTLOOK_DATE
 
     if (!this.allday) {
