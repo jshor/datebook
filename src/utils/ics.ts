@@ -92,10 +92,11 @@ const getRrule = (recurrence: IRecurrence): string => {
 const download = (title: string, data: string): void => {
   const fileName = getFileName(title)
 
-  if (window.hasOwnProperty('safari')) {
+  if (window.hasOwnProperty('safari') || /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
     safariFileSave(data, fileName)
   } else {
     const blob = getBlob(data)
+
     FileSaver.saveAs(blob, fileName)
   }
 }
