@@ -3,14 +3,14 @@ import { FORMAT, RECURRENCE, URL } from '../constants'
 import CalendarBase from '../CalendarBase'
 import YahooCalendar from '../YahooCalendar'
 import time from '../utils/time'
-import IOptions from '../interfaces/IOptions'
+import CalendarOptions from '../types/CalendarOptions'
 
 const {
   FREQUENCY: { DAILY, WEEKLY, MONTHLY }
 } = RECURRENCE
 
 describe('YahooCalendar', () => {
-  let testOpts: IOptions
+  let testOpts: CalendarOptions
 
   beforeEach(() => {
     testOpts = {
@@ -195,24 +195,24 @@ describe('YahooCalendar', () => {
     })
   })
 
-  describe('getDuration()', () => {
+  describe('getICSDuration()', () => {
     it('should get the duration between two datetimes', () => {
       const calendar = new YahooCalendar(testOpts)
       const start = new Date('2019-03-23T17:00:00.000')
       const end = new Date('2019-03-23T20:23:00.000')
       const expectedDiff = '0323'
-      const actualDiff = calendar.getDuration(start.getTime(), end.getTime())
+      const actualDiff = calendar.getICSDuration(start.getTime(), end.getTime())
 
       expect(actualDiff).toBe(expectedDiff)
     })
   })
 
-  describe('getHoursDuration()', () => {
+  describe('getHoursICSDuration()', () => {
     it('should get the duration between two datetimes', () => {
       const calendar = new YahooCalendar(testOpts)
       const start = new Date('2019-03-23T17:00:00.000')
       const end = new Date('2019-03-23T20:23:00.000') // 03:23:00 difference
-      const actualDiff = calendar.getHoursDuration(start.getTime(), end.getTime())
+      const actualDiff = calendar.getHoursICSDuration(start.getTime(), end.getTime())
 
       expect(actualDiff).toBe(3)
     })

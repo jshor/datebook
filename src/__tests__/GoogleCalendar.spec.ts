@@ -1,7 +1,7 @@
 import * as queryString from 'query-string'
 import CalendarBase from '../CalendarBase'
 import GoogleCalendar from '../GoogleCalendar'
-import IOptions from '../interfaces/IOptions'
+import CalendarOptions from '../types/CalendarOptions'
 import ics from '../utils/ics'
 import time from '../utils/time'
 import { FORMAT, RECURRENCE, URL } from '../constants'
@@ -9,7 +9,7 @@ import { FORMAT, RECURRENCE, URL } from '../constants'
 const { FREQUENCY: { DAILY } } = RECURRENCE
 
 describe('GoogleCalendar', () => {
-  const baseOpts: IOptions = {
+  const baseOpts: CalendarOptions = {
     title: 'Test Event',
     description: 'Test Description',
     location: 'Rockefeller Center',

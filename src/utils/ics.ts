@@ -2,7 +2,7 @@ import * as FileSaver from 'file-saver'
 import data from './data'
 import time from './time'
 import safariFileSave from './safariFileSave'
-import IRecurrence from '../interfaces/IRecurrence'
+import CalendarRecurrence from '../types/CalendarRecurrence'
 import { FORMAT } from '../constants'
 
 /**
@@ -63,10 +63,10 @@ const getProdId = (): string => {
 /**
  * Converts the given recurrence options to RFC????
  *
- * @param {IRecurrence} recurrence
+ * @param {CalendarRecurrence} recurrence
  * @returns {string}
  */
-const getRrule = (recurrence: IRecurrence): string => {
+const getRrule = (recurrence: CalendarRecurrence): string => {
   const rrule: Record<string, any> = {
     FREQ: recurrence.frequency,
     INTERVAL: recurrence.interval?.toString(),

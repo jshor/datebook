@@ -1,5 +1,5 @@
 import CalendarBase from './CalendarBase'
-import IOptions from './interfaces/IOptions'
+import CalendarOptions from './types/CalendarOptions'
 import data from './utils/data'
 import ics from './utils/ics'
 import time from './utils/time'
@@ -12,7 +12,7 @@ export default class GoogleCalendar extends CalendarBase {
   /**
    * @inheritDoc
    */
-  constructor (options: IOptions) {
+  constructor (options: CalendarOptions) {
     super(options)
   }
 
@@ -21,7 +21,7 @@ export default class GoogleCalendar extends CalendarBase {
    *
    * @returns {string}
    */
-  render (): string {
+  public render (): string {
     let timestampFormat = FORMAT.DATE
 
     if (!this.allday) {

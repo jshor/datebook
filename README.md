@@ -49,21 +49,42 @@ yarn add datebook
 ### Example Usage
 
 ```js
-import { ICalendar } from 'datebook'
-
-const icalendar = new ICalendar({
+const config = {
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
   description: 'Let\'s blow off some steam with a tall cold one!',
   start: new Date('2022-07-08T19:00:00'),
   end: new Date('2022-07-08T23:30:00'),
+  // an event that recurs every two weeks:
   recurrence: {
     frequency: 'WEEKLY',
     interval: 2
   }
-})
+}
+```
+
+#### iCalendar
+
+```js
+const icalendar = new ICalendar(config)
 
 icalendar.download()
+```
+
+This will download `Happy Hour.ics` onto the user's device. On most mobile devices, this will open the default calendar app with the event.
+
+#### Google Calendar
+
+```js
+const googleCalendar = new GoogleCalendar(config)
+
+googleCalendar.render()
+```
+
+`googleCalendar.render()` will return a URL that the user can navigate to and pre-fill event details:
+
+```
+https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20220708T190000%2F20220708T230000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1
 ```
 
 ## Browser Support

@@ -2,8 +2,8 @@ import CalendarBase from './CalendarBase'
 import { RECURRENCE, URL, FORMAT } from './constants'
 import data from './utils/data'
 import time from './utils/time'
-import IOptions from './interfaces/IOptions'
-import IRecurrence from './interfaces/IRecurrence'
+import CalendarOptions from './types/CalendarOptions'
+import CalendarRecurrence from './types/CalendarRecurrence'
 
 /**
  * Generates a Yahoo! Calendar url.
@@ -14,9 +14,9 @@ export default class YahooCalendar extends CalendarBase {
   /**
    * Constructor.
    *
-   * @param {IOptions} options - calendar options
+   * @param {CalendarOptions} options - calendar options
    */
-  constructor (options: IOptions) {
+  constructor (options: CalendarOptions) {
     super(options)
   }
 
@@ -28,7 +28,7 @@ export default class YahooCalendar extends CalendarBase {
    * @param {string[]} [weekdays = []]
    * @returns {string}
    */
-  getWeekdays (weekdays: string[] = []): string {
+  public getWeekdays (weekdays: string[] = []): string {
     return weekdays
       .map(w => {
         return data.toProperCase(w.replace(/[^A-Z]/ig, ''))
@@ -43,7 +43,7 @@ export default class YahooCalendar extends CalendarBase {
    * @param {string} frequency
    * @returns {string}
    */
-  getFrequency (frequency: string | undefined): string {
+  public getFrequency (frequency: string | undefined): string {
     const { FREQUENCY } = RECURRENCE
 
     switch (frequency) {
@@ -61,10 +61,10 @@ export default class YahooCalendar extends CalendarBase {
   /**
    * Converts the Recurrence to a Yahoo! recurrence string.
    *
-   * @param {IRecurrence} recurrence
+   * @param {CalendarRecurrence} recurrence
    * @returns {string}
    */
-  getRecurrence (recurrence: IRecurrence): string {
+  public getRecurrence (recurrence: CalendarRecurrence): string {
     const frequency = this.getFrequency(recurrence.frequency)
     const weekdays = this.getWeekdays(recurrence.weekdays)
     const { interval = 1 } = recurrence
@@ -92,10 +92,10 @@ export default class YahooCalendar extends CalendarBase {
   /**
    * Computes the number of days a recurrence will last.
    *
-   * @param {IRecurrence} recurrence
+   * @param {CalendarRecurrence} recurrence
    * @returns {number}
    */
-  getRecurrenceLengthDays (recurrence: IRecurrence): number {
+  public getRecurrenceLengthDays (recurrence: CalendarRecurrence): number {
     const { frequency, interval } = recurrence
     const { FREQUENCY } = RECURRENCE
 
@@ -123,7 +123,7 @@ export default class YahooCalendar extends CalendarBase {
    * @param {number} end
    * @returns {string}
    */
-  getDuration (start: number, end: number): string {
+  public getICSDuration (start: number, end: number): string {
     const seconds = Math.floor((end - start) / 1000)
     const hours = Math.floor(seconds / 3600)
     const mins = ((seconds / 3600) % 1) * 60
@@ -138,7 +138,7 @@ export default class YahooCalendar extends CalendarBase {
    * @param {number} end
    * @returns {number}
    */
-  getHoursDuration (start: number, end: number): number {
+  public getHoursICSDuration (start: number, end: number): number {
     const seconds = Math.floor((end - start) / 1000)
 
     return Math.floor(seconds / 3600)
@@ -149,7 +149,7 @@ export default class YahooCalendar extends CalendarBase {
    *
    * @returns {string}
    */
-  render (): string {
+  public render (): string {
     const params: Record<string, string>  = {
       v: '60', // version number; must be 60
       title: this.title,
@@ -163,12 +163,12 @@ export default class YahooCalendar extends CalendarBase {
     } else {
       params.st = time.formatDate(this.start, FORMAT.FULL)
 
-      if (this.getHoursDuration(this.start.getTime(), this.end.getTime()) > 99) {
+      if (this.getHoursICSDuration(this.start.getTime(), this.end.getTime()) > 99) {
         // Yahoo only supports up to 99 hours, so we are forced to specify the end time instead of the duration
         params.et = time.formatDate(this.end, FORMAT.FULL)
       } else {
         // we prefer specifying duration in lieu of end time, because apparently Yahoo's end time is buggy w.r.t. timezones
-        params.dur = this.getDuration(this.start.getTime(), this.end.getTime())
+        params.dur = this.getICSDuration(this.start.getTime(), this.end.getTime())
       }
     }
 

@@ -1,12 +1,13 @@
 import CalendarBase from '../CalendarBase'
 import ICalendar from '../ICalendar'
-import IOptions from '../interfaces/IOptions'
+import CalendarOptions from '../types/CalendarOptions'
 import ics from '../utils/ics'
 import time  from '../utils/time'
 import { FORMAT } from '../constants'
+import ICSAlarm from '../types/ICSAlarm'
 
 describe('ICalendar', () => {
-  const baseOpts: IOptions = {
+  const baseOpts: CalendarOptions = {
     title: 'Fun Party',
     description: 'BYOB',
     location: 'New York',
@@ -20,6 +21,123 @@ describe('ICalendar', () => {
     const result = new ICalendar(baseOpts)
 
     expect(result).toBeInstanceOf(CalendarBase)
+  })
+
+  describe('addAlarm()', () => {
+    let obj: ICalendar
+
+    beforeEach(() => {
+      obj = new ICalendar(baseOpts)
+    })
+
+    it('should add a one-hour-long `PROCEDURE` alarm with the given date, repeating 23 times, with an application attached', () => {
+      const alarm: ICSAlarm = {
+        action: 'PROCEDURE',
+        trigger: new Date('1998-01-01T05:00:00Z'),
+        repeat: 23,
+        duration: {
+          after: true,
+          hours: 1
+        },
+        attach: {
+          params: 'FMTTYPE=application/binary',
+          url: 'ftp://host.com/novo-procs/felizano.exe'
+        }
+      }
+
+      obj.addAlarm(alarm)
+
+      expect(obj.render()).toContain([
+        'BEGIN:VALARM',
+        'ACTION:PROCEDURE',
+        'DURATION:PT1H',
+        'REPEAT:23',
+        'ATTACH;FMTTYPE=application/binary:ftp://host.com/novo-procs/felizano.exe',
+        'TRIGGER;VALUE=DATE-TIME:19980101T050000Z',
+        'END:VALARM'
+      ].join('\n'))
+    })
+
+    it('should add a `DISPLAY` alarm with an email CID set as the attachment', () => {
+      const alarm: ICSAlarm = {
+        action: 'DISPLAY',
+        trigger: new Date('1998-01-01T05:00:00Z'),
+        attach: {
+          url: 'CID:john.doe@example.com'
+        }
+      }
+
+      obj.addAlarm(alarm)
+
+      expect(obj.render()).toContain([
+        'BEGIN:VALARM',
+        'ACTION:DISPLAY',
+        'ATTACH:CID:john.doe@example.com',
+        'TRIGGER;VALUE=DATE-TIME:19980101T050000Z',
+        'END:VALARM'
+      ].join('\n'))
+    })
+
+    it('should add a three-minute-long `DISPLAY` alarm with the given description and summary', () => {
+      const alarm: ICSAlarm = {
+        action: 'DISPLAY',
+        trigger: new Date('1998-01-01T05:00:00Z'),
+        description: 'the event description',
+        summary: 'a quick summary',
+        duration: {
+          after: true,
+          minutes: 3
+        }
+      }
+
+      obj.addAlarm(alarm)
+
+      expect(obj.render()).toContain([
+        'BEGIN:VALARM',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:the event description',
+        'SUMMARY:a quick summary',
+        'DURATION:PT3M',
+        'TRIGGER;VALUE=DATE-TIME:19980101T050000Z',
+        'END:VALARM'
+      ].join('\n'))
+    })
+
+    it('should trigger an alarm five minutes before the event', () => {
+      const alarm: ICSAlarm = {
+        action: 'DISPLAY',
+        trigger: {
+          minutes: 5
+        }
+      }
+
+      obj.addAlarm(alarm)
+
+      expect(obj.render()).toContain([
+        'BEGIN:VALARM',
+        'ACTION:DISPLAY',
+        'TRIGGER:-PT5M',
+        'END:VALARM'
+      ].join('\n'))
+    })
+
+    it('should trigger an alarm five minutes before the event', () => {
+      const alarm: ICSAlarm = {
+        action: 'DISPLAY',
+        trigger: {
+          minutes: 5
+        }
+      }
+
+      obj.addAlarm(alarm)
+
+      expect(obj.render()).toContain([
+        'BEGIN:VALARM',
+        'ACTION:DISPLAY',
+        'TRIGGER:-PT5M',
+        'END:VALARM'
+      ].join('\n'))
+    })
   })
 
   describe('download()', () => {

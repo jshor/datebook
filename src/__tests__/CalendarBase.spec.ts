@@ -1,9 +1,9 @@
 import CalendarBase from '../CalendarBase'
 import time from '../utils/time'
-import IOptions from '../interfaces/IOptions'
+import CalendarOptions from '../types/CalendarOptions'
 
 describe('Calendar Base', () => {
-  let baseOpts: IOptions
+  let baseOpts: CalendarOptions
 
   beforeEach(() => {
     baseOpts = {
@@ -45,7 +45,7 @@ describe('Calendar Base', () => {
     })
 
     it('should set the description', () => {
-      const testOpts: IOptions = {
+      const testOpts: CalendarOptions = {
         ...baseOpts,
         description: 'Descriptive Text'
       }
@@ -55,7 +55,7 @@ describe('Calendar Base', () => {
     })
 
     it('should set the title', () => {
-      const testOpts: IOptions = {
+      const testOpts: CalendarOptions = {
         ...baseOpts,
         title: 'Meeting with Jeff'
       }
@@ -65,7 +65,7 @@ describe('Calendar Base', () => {
     })
 
     it('should set the location', () => {
-      const testOpts: IOptions = {
+      const testOpts: CalendarOptions = {
         ...baseOpts,
         location: 'New York'
       }
@@ -75,7 +75,7 @@ describe('Calendar Base', () => {
     })
 
     it('should set all texts', () => {
-      const testOpts: IOptions = {
+      const testOpts: CalendarOptions = {
         ...baseOpts,
         description: 'Descriptive Text',
         title: 'Meeting with Jeff',
@@ -97,7 +97,7 @@ describe('Calendar Base', () => {
     })
 
     it('should set the recurrence', () => {
-      const testOpts: IOptions = {
+      const testOpts: CalendarOptions = {
         ...baseOpts,
         recurrence: {
           weekstart: 'MO'
@@ -120,7 +120,7 @@ describe('Calendar Base', () => {
       })
 
       xit('should set the end using the start + 1 day', () => {
-        const testOpts: IOptions = {
+        const testOpts: CalendarOptions = {
           start: new Date('2019-03-23T17:00:00.000')
         }
 
@@ -144,7 +144,7 @@ describe('Calendar Base', () => {
       })
 
       it('should set the start and end including the time of day', () => {
-        const testOpts: IOptions = {
+        const testOpts: CalendarOptions = {
           start: new Date('2019-03-23T17:00:00.000'),
           end: new Date('2019-03-23T21:00:00.000')
         }
