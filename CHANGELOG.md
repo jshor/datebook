@@ -1,3 +1,12 @@
+## [5.0.5](https://github.com/jshor/datebook/compare/v5.0.4...v5.0.5) (2020-10-19)
+
+
+### Bug Fixes
+
+* **ics:** corrects timestamp format for recurrences ([497a97e](https://github.com/jshor/datebook/commit/497a97e7d07a1329f6613d4c2a5b77902e6f10c2))
+
+
+
 ## [5.0.4](https://github.com/jshor/datebook/compare/v5.0.3...v5.0.4) (2020-10-19)
 
 
