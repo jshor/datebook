@@ -54,7 +54,7 @@ export default class ICalendar extends CalendarBase {
       `${duration.days}D`,
       `${duration.hours}H`,
       `${duration.minutes}M`,
-      `${duration.seconds}S`,
+      `${duration.seconds}S`
     ].filter((s: string) => /^[0-9]+[A-Z]$/.exec(s)) // exclude zero-duration features
 
     features.unshift(duration.after ? 'PT' : '-PT')
@@ -139,7 +139,7 @@ export default class ICalendar extends CalendarBase {
       'END:VCALENDAR',
       `UID:${ics.getUid()}`,
       `DTSTAMP:${time.getTimeCreated()}`,
-      `PRODID:${ics.getProdId()}`,
+      `PRODID:${ics.getProdId()}`
     ].join('\n')
   }
 }
