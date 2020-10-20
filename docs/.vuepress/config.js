@@ -33,7 +33,11 @@ module.exports = {
         editLinkText: 'Edit this page on GitHub',
         nav: [
           {
-            text: 'Documentation',
+            text: 'Configuration',
+            link: '/config/basic.html'
+          },
+          {
+            text: 'Calendar Types',
             link: '/docs/'
           },
           {
@@ -43,9 +47,52 @@ module.exports = {
         ],
         sidebar: [
           {
-            title: 'Documentation',
+            title: 'Configuration',
+            path: '/config/basic.html',
+            children: [
+              {
+                title: 'Basic Config',
+                path: '/config/basic.md'
+              },
+              {
+                title: 'Recurrences',
+                path: '/config/recurrence.md'
+              },
+              {
+                title: 'Dates',
+                path: '/config/date.md'
+              },
+              {
+                title: 'Alarms',
+                path: '/config/alarms.md'
+              },
+              {
+                title: 'Durations',
+                path: '/config/durations.md'
+              }
+            ]
+          },
+          {
+            title: 'Calendar Types',
             path: '/docs/',
-            children: getDir('docs')
+            children: [
+              {
+                title: 'iCalendar',
+                path: '/docs/icalendar.md'
+              },
+              {
+                title: 'Yahoo! Calendar',
+                path: '/docs/yahoo.md'
+              },
+              {
+                title: 'Google Calendar',
+                path: '/docs/google.md'
+              },
+              {
+                title: 'Outlook Web Calendar',
+                path: '/docs/outlook.md'
+              }
+            ]
           },
           {
             title: 'Calendar Generators',

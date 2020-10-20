@@ -48,8 +48,8 @@ yarn add datebook
 
 ### Example Usage
 
-```js
-const config = {
+```ts
+const config: CalendarOptions = {
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
   description: 'Let\'s blow off some steam with a tall cold one!',
@@ -65,7 +65,7 @@ const config = {
 
 #### iCalendar
 
-```js
+```ts
 const icalendar = new ICalendar(config)
 
 icalendar.download()
