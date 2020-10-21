@@ -13,7 +13,7 @@ footer: © 2020 Datebook.
   </div>
   <div class="feature">
     <h2>Major Apps Supported</h2>
-    <p>Supports .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Online.</p>
+    <p>Fully supports .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Web.</p>
   </div>
   <div class="feature">
     <h2>No Server Needed</h2>

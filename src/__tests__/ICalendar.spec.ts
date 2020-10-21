@@ -212,7 +212,7 @@ describe('ICalendar', () => {
       expect(ics.getUid).toHaveBeenCalledTimes(1)
     })
 
-    it('should render an ICS Param string', () => {
+    it('should render ICS file content string for a single event', () => {
       const obj = new ICalendar(baseOpts)
       const rendered = obj.render()
       const expected = [
@@ -227,6 +227,57 @@ describe('ICalendar', () => {
         `SUMMARY:${baseOpts.title}`,
         'TRANSP:TRANSPARENT',
         'END:VEVENT',
+        'END:VCALENDAR',
+        `UID:${mockUuid}`,
+        `DTSTAMP:${time.getTimeCreated()}`,
+        'PRODID:foobar'
+      ].join('\n')
+
+      expect(rendered).toBe(expected)
+    })
+
+    it('should render multiple VEVENT entries for additional events', () => {
+      const secondEventOpts: CalendarOptions = {
+        title: 'Monthly Meeting with Boss Man',
+        location: 'Conference Room 2A, Big Company, Brooklyn, NY',
+        description: 'Meeting to discuss weekly things',
+        start: new Date('2022-07-08T19:00:00'),
+        end: new Date('2019-07-04T21:00:00.000')
+      }
+
+      const obj = new ICalendar(baseOpts)
+      const secondEvent = new ICalendar(secondEventOpts)
+
+      const rendered = obj
+        .addEvent(secondEvent)
+        .render()
+
+      const expected = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+
+        // second event
+        'BEGIN:VEVENT',
+        'CLASS:PUBLIC',
+        `DESCRIPTION:${secondEventOpts.description}`,
+        `DTSTART:${time.formatDate(secondEventOpts.start, FORMAT.FULL)}`,
+        `DTEND:${time.formatDate(baseOpts.end, FORMAT.FULL)}`,
+        `LOCATION:${secondEventOpts.location}`,
+        `SUMMARY:${secondEventOpts.title}`,
+        'TRANSP:TRANSPARENT',
+        'END:VEVENT',
+
+        // base event
+        'BEGIN:VEVENT',
+        'CLASS:PUBLIC',
+        `DESCRIPTION:${baseOpts.description}`,
+        `DTSTART:${time.formatDate(baseOpts.start, FORMAT.FULL)}`,
+        `DTEND:${time.formatDate(baseOpts.end, FORMAT.FULL)}`,
+        `LOCATION:${baseOpts.location}`,
+        `SUMMARY:${baseOpts.title}`,
+        'TRANSP:TRANSPARENT',
+        'END:VEVENT',
+
         'END:VCALENDAR',
         `UID:${mockUuid}`,
         `DTSTAMP:${time.getTimeCreated()}`,
