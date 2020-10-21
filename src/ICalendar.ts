@@ -11,8 +11,15 @@ import ICSPropertyValue from './types/ICSPropertyValue'
  * Generates a downloadable ICS file.
  */
 export default class ICalendar extends CalendarBase {
-  /** List of VEVENT property-value entries */
-  properties: string[] = []
+  /**
+   * List of additional ICalendar events to add.
+   */
+  private additionalEvents: ICalendar[] = []
+
+  /**
+   * List of VEVENT property-value entries
+   */
+  private properties: string[] = []
 
   /**
    * @inheritDoc
@@ -60,6 +67,18 @@ export default class ICalendar extends CalendarBase {
     features.unshift(duration.after ? 'PT' : '-PT')
 
     return features.join('')
+  }
+
+  /**
+   * Adds the given event to the same `.ics` file instance.
+   *
+   * @param {ICalendar} event
+   * @returns {ICalendar}
+   */
+  public addEvent = (event: ICalendar): this => {
+    this.additionalEvents.push(event)
+
+    return this
   }
 
   /**
@@ -130,12 +149,20 @@ export default class ICalendar extends CalendarBase {
    * @returns {string}
    */
   public render = (): string => {
+    const vEvents: string[] = this
+      .additionalEvents
+      .concat(this)
+      .reduce((properties: string[], calendar: ICalendar) => [
+        ...properties,
+        'BEGIN:VEVENT',
+        ...calendar.properties,
+        'END:VEVENT'
+      ], [])
+
     return [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'BEGIN:VEVENT',
-      ...this.properties,
-      'END:VEVENT',
+      ...vEvents,
       'END:VCALENDAR',
       `UID:${ics.getUid()}`,
       `DTSTAMP:${time.getTimeCreated()}`,

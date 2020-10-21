@@ -20,9 +20,30 @@ const options: CalendarOptions = {
   }
 }
 
-const calendar = new ICalendar(options)
+const icalendar = new ICalendar(options)
 ```
 
+## `addEvent(icalendar: ICalendar)` <Badge text="6.0.0" vertical="middle" />
+
+* **`icalendar: ICalendar`** - `ICalendar` instance of the event to add
+
+This method allows you to add multiple events to a single `.ics` file. Returns the `ICalendar` instance.
+
+### Example
+
+```ts
+const secondEvent = new ICalendar({
+  title: 'Monthly Meeting with Boss Man',
+  location: 'Conference Room 2A, Big Company, Brooklyn, NY',
+  description: 'Meeting to discuss weekly things',
+  start: new Date('2022-07-08T19:00:00'),
+  recurrence: {
+    frequency: 'MONTHLY'
+  }
+})
+
+icalendar.addEvent(secondEvent)
+```
 
 ## `addAlarm(alarm: Alarm)` <Badge text="6.0.0" vertical="middle" />
 
