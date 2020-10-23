@@ -6,7 +6,7 @@ The following classes are available for creating calendars. See [Basic Usage](RE
 
 ## `ICalendar(options)`
 
-Generates a Yahoo! Calendar instance.
+Generates an iCalendar Calendar instance.
 
 ### `render()`
 
