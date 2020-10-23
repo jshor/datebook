@@ -1,3 +1,7 @@
+## [5.0.6](https://github.com/jshor/datebook/compare/v5.0.5...v5.0.6) (2020-10-23)
+
+
+
 ## [5.0.5](https://github.com/jshor/datebook/compare/v5.0.4...v5.0.5) (2020-10-19)
 
 
