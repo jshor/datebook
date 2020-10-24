@@ -1,3 +1,19 @@
+# [6.0.0](https://github.com/jshor/datebook/compare/v5.0.7...v6.0.0) (2020-10-24)
+
+
+### Features
+
+* **ics:** adds property management, alarms ([d63c88a](https://github.com/jshor/datebook/commit/d63c88a4e0c63d0d75fa28a42f829b07984020b9))
+* **ics:** implements support for multiple events ([beda826](https://github.com/jshor/datebook/commit/beda8268ebc225bb6e2674d855a7408d9c6dbfa8))
+
+
+### BREAKING CHANGES
+
+* **ics:** renames IOptions to type CalendarOptions, IRecurrence
+to CalendarRecurrence.
+
+
+
 ## [5.0.7](https://github.com/jshor/datebook/compare/v5.0.6...v5.0.7) (2020-10-24)
 
 
