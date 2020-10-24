@@ -1,3 +1,12 @@
+## [5.0.7](https://github.com/jshor/datebook/compare/v5.0.6...v5.0.7) (2020-10-24)
+
+
+### Bug Fixes
+
+* **ics:** adds proper detection for iOS Safari ([754397c](https://github.com/jshor/datebook/commit/754397c8318ac8a862bca708c342bf13390f9932))
+
+
+
 ## [5.0.6](https://github.com/jshor/datebook/compare/v5.0.5...v5.0.6) (2020-10-23)
 
 
