@@ -105,7 +105,7 @@ This will add a [second event](https://datebook.dev/docs/icalendar.html#addevent
 icalendar.addProperty('CATEGORIES', 'MEETINGS,MANAGEMENT')
 ```
 
-This will [add the `CATEGORIES` ICS property](http://localhost:8080/docs/icalendar.html#addproperty-key-string-value-icspropertyvalue) to the iCalendar instance.
+This will [add the `CATEGORIES` ICS property](https://datebook.dev/docs/icalendar.html#addproperty-key-string-value-icspropertyvalue) to the iCalendar instance.
 
 ##### Downloading
 
@@ -113,7 +113,7 @@ This will [add the `CATEGORIES` ICS property](http://localhost:8080/docs/icalend
 icalendar.download()
 ```
 
-This will [download](http://localhost:8080/docs/icalendar.html#download) `Happy Hour.ics` onto the user's device. On most mobile devices, this will open the default calendar app with the event.
+This will [download](https://datebook.dev/docs/icalendar.html#download) `Happy Hour.ics` onto the user's device. On most mobile devices, this will open the default calendar app with the event.
 
 #### Google Calendar
 
@@ -123,7 +123,7 @@ const googleCalendar = new GoogleCalendar(config)
 googleCalendar.render()
 ```
 
-[`googleCalendar.render()`](http://localhost:8080/docs/google.html#render) will return a URL that the user can navigate to and pre-fill event details:
+[`googleCalendar.render()`](https://datebook.dev/docs/google.html#render) will return a URL that the user can navigate to and pre-fill event details:
 
 ```
 https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20220708T190000%2F20220708T230000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1
