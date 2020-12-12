@@ -72,7 +72,7 @@ jobs:
       - name: Create CNAME Record
         run: echo "datebook.dev" > ${{ env.ARTIFACT_DIR }}/docs/CNAME
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.6.1
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_CONFIG_NAME: ${{ env.GIT_USER }}
