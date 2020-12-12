@@ -4,6 +4,8 @@ Generates a Yahoo! Calendar instance.
 
 * **`options: CalendarOptions`** - Basic calendar [configuration options](/config/basic.md).
 
+### Example
+
 ```ts
 import { YahooCalendar } from 'datebook'
 
@@ -20,6 +22,27 @@ const options: CalendarOptions = {
 }
 
 const yahooCalendar = new YahooCalendar(options)
+```
+
+## `setParam(key: string, value: string): YahooCalendar`
+
+Sets a parameter on the URL. This may be used to either set additional optional properties, or override existing ones. Pass a value of `null` to remove an existing property.
+
+Returns the `YahooCalendar` instance.
+
+### Additional properties
+
+* **in_st** - Event location street address.
+* **in_csz** - Event location city, state, and zip.
+* **in_ph** - Event location phone number.
+
+### Example
+
+```ts
+yahooCalendar
+  .setParam('in_st', '1 Main St.')
+  .setParam('in_csz', 'New York, NY, 10001')
+  .setParam('in_ph', '555-555-5555')
 ```
 
 ## `render()`

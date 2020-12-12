@@ -4,6 +4,8 @@ Generates a Google Calendar instance.
 
 * **`options: CalendarOptions`** - Basic calendar [configuration options](/config/basic.md).
 
+### Example
+
 ```ts
 import { GoogleCalendar } from 'datebook'
 
@@ -19,7 +21,28 @@ const options: CalendarOptions = {
   }
 }
 
-const yahooCalendar = new GoogleCalendar(options)
+const googleCalendar = new GoogleCalendar(options)
+```
+
+## `setParam(key: string, value: string): GoogleCalendar`
+
+Sets a parameter on the URL. This may be used to either set additional optional properties, or override existing ones. Pass a value of `null` to remove an existing property.
+
+Returns the `GoogleCalendar` instance.
+
+### Additional properties
+
+* **crm** - *Customer Relationship Management*, as to how the event appears on the calendar. May be set to `AVAILABLE`, `BUSY`, or `BLOCKING`.
+* **trp** - [Transparency](https://tools.ietf.org/html/rfc5545#section-3.8.2.7), to show an attendee as busy (`true`) or available (`false`).
+* **src** - The email address source Google calendar to add this event to.
+
+### Example
+
+```ts
+googleCalendar
+  .setParam('crm', 'BUSY')
+  .setParam('trp', 'true')
+  .setParam('src', 'johndoe@example.com')
 ```
 
 ## `render()`

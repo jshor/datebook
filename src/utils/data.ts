@@ -25,11 +25,20 @@ const toParamString = (params: Record<string, string>, delimiter = ';', transfor
 /**
  * Creates a query string from a flat key-value pair.
  *
- * @param {Record<string, string>} params
+ * @param {Record<string, string | null>} params
  * @returns {string}
  */
-const toQueryString = (params: Record<string, string>): string => {
-  return toParamString(params, '&', encodeURIComponent)
+const toQueryString = (params: Record<string, string | null>): string => {
+  // filter the record set to remove null values
+  const filteredParams = Object
+    .keys(params)
+    .filter(p => params[p] !== null)
+    .reduce((p: Record<string, string>, k: string) => ({
+      ...p,
+      [k]: params[k] as string
+    }), {})
+
+  return toParamString(filteredParams, '&', encodeURIComponent)
 }
 
 /**

@@ -11,29 +11,21 @@ import ICSPropertyValue from './types/ICSPropertyValue'
  * Generates a downloadable ICS file.
  */
 export default class ICalendar extends CalendarBase {
-  /**
-   * List of additional ICalendar events to add.
-   */
+  /** List of additional ICalendar events to add. */
   private additionalEvents: ICalendar[] = []
 
-  /**
-   * List of VEVENT property-value entries
-   */
+  /** List of VEVENT property-value entries */
   private properties: string[] = []
 
-  /**
-   * @inheritDoc
-   */
-  constructor (options: CalendarOptions) {
-    super(options)
-
-    this.addBaseProperties()
+  constructor (opts: CalendarOptions) {
+    super(opts)
+    this.setInitialParams()
   }
 
   /**
-   * Adds the basic meta properties to the instance.
+   * Sets the basic properties for the calendar instance.
    */
-  private addBaseProperties = (): void => {
+  protected setInitialParams = (): void => {
     this
       .addProperty('CLASS', 'PUBLIC')
       .addProperty('DESCRIPTION', ics.formatText(this.description))

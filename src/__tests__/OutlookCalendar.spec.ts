@@ -46,8 +46,8 @@ describe('Outlook Calendar', () => {
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: time.formatDate(obj.start, FORMAT.OUTLOOK_FULL),
-          enddt: time.formatDate(obj.end, FORMAT.OUTLOOK_FULL),
+          startdt: time.formatDate(testOpts.start, FORMAT.OUTLOOK_FULL),
+          enddt: time.formatDate(testOpts.end, FORMAT.OUTLOOK_FULL),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,
@@ -57,19 +57,20 @@ describe('Outlook Calendar', () => {
     })
 
     describe('when the event is an all-day event', () => {
-      it('should render the appropriate query string with timestamps only with their dates, and allday = `true`', () => {
+      it('should render with date-only timestamps for an all-day event', () => {
         const obj = new OutlookCalendar({
           ...testOpts,
           end: undefined
         })
         const result = obj.render()
         const paramsObj = queryString.parse(result.split('?')[1])
+        const endDate = time.incrementDate(testOpts.start, 1)
 
         expect(paramsObj).toMatchObject({
           path: '/calendar/action/compose',
           rru: 'addevent',
-          startdt: time.formatDate(obj.start, FORMAT.OUTLOOK_DATE),
-          enddt: time.formatDate(obj.end, FORMAT.OUTLOOK_DATE),
+          startdt: time.formatDate(testOpts.start, FORMAT.OUTLOOK_DATE),
+          enddt: time.formatDate(endDate, FORMAT.OUTLOOK_DATE),
           subject: testOpts.title,
           body: testOpts.description,
           location: testOpts.location,

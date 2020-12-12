@@ -32,7 +32,7 @@
 
 ## Documentation
 
-See the [full documentation →](https://datebook.dev/)
+[Read the docs →](https://datebook.dev/docs/)
 
 ## Demo
 
