@@ -156,7 +156,7 @@ describe('ICalendar', () => {
 
       expect(obj.render).toHaveBeenCalledTimes(1)
       expect(ics.download).toHaveBeenCalledTimes(1)
-      expect(ics.download).toHaveBeenCalledWith(obj.title, mockRender)
+      expect(ics.download).toHaveBeenCalledWith(baseOpts.title, mockRender)
     })
   })
 

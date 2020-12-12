@@ -1,4 +1,5 @@
-import { FORMAT } from '../constants'
+import { RECURRENCE, FORMAT } from '../constants'
+import CalendarRecurrence from '../types/CalendarRecurrence'
 
 /**
  * Adds a leading zero to a single-digit string and returns a two-digit string.
@@ -8,6 +9,61 @@ import { FORMAT } from '../constants'
  */
 const addLeadingZero = (n: number | string = ''): string => {
   return `0${parseInt(n.toString(), 10)}`.slice(-2)
+}
+
+/**
+ * Returns the duration between two given dates in hhmm format.
+ *
+ * @param {number} start
+ * @param {number} end
+ * @returns {string}
+ */
+const getDuration = (start: number, end: number): string => {
+  const seconds = Math.floor((end - start) / 1000)
+  const hours = Math.floor(seconds / 3600)
+  const mins = ((seconds / 3600) % 1) * 60
+
+  return `${addLeadingZero(hours)}${addLeadingZero(mins)}`
+}
+
+/**
+ * Returns the number of hours between two given dates.
+ *
+ * @param {number} start
+ * @param {number} end
+ * @returns {number}
+ */
+const getHoursDiff = (start: number, end: number): number => {
+  const seconds = Math.floor((end - start) / 1000)
+
+  return Math.floor(seconds / 3600)
+}
+
+/**
+ * Computes the number of days a recurrence will last.
+ *
+ * @param {CalendarRecurrence} recurrence
+ * @returns {number}
+ */
+const getRecurrenceLengthDays = (recurrence: CalendarRecurrence): number => {
+  const { frequency, interval } = recurrence
+  const { FREQUENCY } = RECURRENCE
+
+  if (interval) {
+    switch (frequency) {
+      case FREQUENCY.YEARLY:
+        return interval * 365.25
+      case FREQUENCY.MONTHLY:
+        return interval * 30.42 // avg days in a year
+      case FREQUENCY.WEEKLY:
+        return interval * 7
+      default:
+        return interval // daily
+    }
+  }
+
+  // if no frequency is specified, set an arbitrarily-long recurrence end
+  return 365.25 * 100 // 100 years
 }
 
 /**
@@ -63,6 +119,9 @@ const incrementDate = (dateInput: Date, days: number): Date => {
 
 export default {
   addLeadingZero,
+  getDuration,
+  getHoursDiff,
+  getRecurrenceLengthDays,
   formatDate,
   getTimeCreated,
   incrementDate

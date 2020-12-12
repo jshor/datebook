@@ -1,8 +1,8 @@
 import CalendarBase from './CalendarBase'
 import { FORMAT, URL } from './constants'
-import CalendarOptions from './types/CalendarOptions'
 import data from './utils/data'
 import time  from './utils/time'
+import CalendarOptions from './types/CalendarOptions'
 
 /**
  * Generates an Outlook Calendar url.
@@ -10,13 +10,30 @@ import time  from './utils/time'
  * @remark Outlook Calendar's query string params do not support recurrence.
  */
 export default class OutlookCalendar extends CalendarBase {
+  constructor (opts: CalendarOptions) {
+    super(opts)
+    this.setInitialParams()
+  }
+
   /**
-   * Constructor.
-   *
-   * @param {CalendarOptions} options - calendar options
+   * Sets the basic properties for the calendar instance.
    */
-  constructor (options: CalendarOptions) {
-    super(options)
+  protected setInitialParams = (): void => {
+    let timestampFormat = FORMAT.OUTLOOK_DATE
+
+    if (!this.isAllDay) {
+      timestampFormat += FORMAT.OUTLOOK_TIME
+    }
+
+    this
+      .setParam('rru', 'addevent')
+      .setParam('path', '/calendar/action/compose')
+      .setParam('startdt', time.formatDate(this.start, timestampFormat))
+      .setParam('enddt', time.formatDate(this.end, timestampFormat))
+      .setParam('subject', this.title)
+      .setParam('body', this.description)
+      .setParam('location', this.location)
+      .setParam('allday', this.isAllDay.toString())
   }
 
   /**
@@ -24,26 +41,10 @@ export default class OutlookCalendar extends CalendarBase {
    *
    * @returns {string}
    */
-  public render (): string {
-    let timestampFormat = FORMAT.OUTLOOK_DATE
-
-    if (!this.allday) {
-      timestampFormat += FORMAT.OUTLOOK_TIME
-    }
-
-    const params: Record<string, string> = {
-      rru: 'addevent',
-      startdt: time.formatDate(this.start, timestampFormat),
-      enddt: time.formatDate(this.end, timestampFormat),
-      subject: this.title,
-      body: this.description,
-      location: this.location,
-      allday: this.allday.toString()
-    }
-
+  public render = (): string => {
     const baseUrl = URL.OUTLOOK
-    const queryString = data.toQueryString(params)
+    const queryString = data.toQueryString(this.params)
 
-    return `${baseUrl}?path=/calendar/action/compose&${queryString}`
+    return `${baseUrl}?${queryString}`
   }
 }

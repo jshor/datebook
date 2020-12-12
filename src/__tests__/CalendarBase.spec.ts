@@ -2,46 +2,41 @@ import CalendarBase from '../CalendarBase'
 import time from '../utils/time'
 import CalendarOptions from '../types/CalendarOptions'
 
+class ExtendedCalendar extends CalendarBase {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setInitialParams = () => {}
+  render = () => ''
+  getParams = () => ({
+    title: this.title,
+    location: this.location,
+    description: this.description,
+    start: this.start,
+    end: this.end,
+    isAllDay: this.isAllDay,
+    recurrence: this.recurrence
+  })
+}
+
 describe('Calendar Base', () => {
-  let baseOpts: CalendarOptions
+  const baseOpts: CalendarOptions = {
+    title: 'Test Event',
+    start: new Date('2019-03-23T17:00:00.000'),
+    end: new Date('2019-03-23T21:00:00.000')
+  }
 
-  beforeEach(() => {
-    baseOpts = {
-      title: 'Test Event',
-      start: new Date('2019-03-23T17:00:00.000'),
-      end: new Date('2019-03-23T21:00:00.000')
-    }
-  })
-
-  // afterEach(() => jest.resetAllMocks()) // TODO: need this, but it breaks tests... code smell
-
-  describe('constructor()', () => {
-    it('should call setText and setTimestamps with passed in options', () => {
-      jest.spyOn(CalendarBase.prototype, 'setText')
-      jest.spyOn(CalendarBase.prototype, 'setTimestamps')
-
-      const testObj = new CalendarBase(baseOpts)
-
-      expect(testObj.setText).toHaveBeenCalledTimes(1)
-      expect(testObj.setTimestamps).toHaveBeenCalledTimes(1)
-    })
-  })
+  afterEach(() => jest.clearAllMocks())
 
   describe('setText()', () => {
-    let calendarObj: CalendarBase
-
-    beforeEach(() => {
-      calendarObj = new CalendarBase(baseOpts)
-    })
-
     it('should default to a blank string if options are falsey', () => {
-      calendarObj.setText({
-        start: baseOpts.start
-      })
+      const testOpts: CalendarOptions = {
+        ...baseOpts,
+        title: undefined
+      }
+      const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-      expect(calendarObj.description).toBe('')
-      expect(calendarObj.title).toBe('')
-      expect(calendarObj.location).toBe('')
+      expect(resultParams.description).toBe('')
+      expect(resultParams.title).toBe('')
+      expect(resultParams.location).toBe('')
     })
 
     it('should set the description', () => {
@@ -49,9 +44,9 @@ describe('Calendar Base', () => {
         ...baseOpts,
         description: 'Descriptive Text'
       }
-      calendarObj.setText(testOpts)
+      const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-      expect(calendarObj.description).toBe(testOpts.description)
+      expect(resultParams.description).toBe(testOpts.description)
     })
 
     it('should set the title', () => {
@@ -59,9 +54,9 @@ describe('Calendar Base', () => {
         ...baseOpts,
         title: 'Meeting with Jeff'
       }
-      calendarObj.setText(testOpts)
+      const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-      expect(calendarObj.title).toBe(testOpts.title)
+      expect(resultParams.title).toBe(testOpts.title)
     })
 
     it('should set the location', () => {
@@ -69,9 +64,9 @@ describe('Calendar Base', () => {
         ...baseOpts,
         location: 'New York'
       }
-      calendarObj.setText(testOpts)
+      const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-      expect(calendarObj.location).toBe(testOpts.location)
+      expect(resultParams.location).toBe(testOpts.location)
     })
 
     it('should set all texts', () => {
@@ -81,21 +76,15 @@ describe('Calendar Base', () => {
         title: 'Meeting with Jeff',
         location: 'New York'
       }
-      calendarObj.setText(testOpts)
+      const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-      expect(calendarObj.description).toBe(testOpts.description)
-      expect(calendarObj.title).toBe(testOpts.title)
-      expect(calendarObj.location).toBe(testOpts.location)
+      expect(resultParams.description).toBe(testOpts.description)
+      expect(resultParams.title).toBe(testOpts.title)
+      expect(resultParams.location).toBe(testOpts.location)
     })
   })
 
   describe('setTimestamps()', () => {
-    let calendarObj: CalendarBase
-
-    beforeEach(() => {
-      calendarObj = new CalendarBase(baseOpts)
-    })
-
     it('should set the recurrence', () => {
       const testOpts: CalendarOptions = {
         ...baseOpts,
@@ -103,44 +92,47 @@ describe('Calendar Base', () => {
           weekstart: 'MO'
         }
       }
+      const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-      calendarObj.setTimestamps(testOpts)
-
-      expect(calendarObj.recurrence).toBe(testOpts.recurrence)
+      expect(resultParams.recurrence).toBe(testOpts.recurrence)
     })
 
     describe('when options has no end', () => {
+      it('should set `isAllDay` to true', () => {
+        const testOpts = {
+          ...baseOpts,
+          start: new Date('2019-03-23T17:00:00.000'),
+          end: undefined
+        }
+        const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-      it('should set allday to true', () => {
-        calendarObj.setTimestamps({
-          start: new Date('2019-03-23T17:00:00.000')
-        })
-
-        expect(calendarObj.allday).toBe(true)
+        expect(resultParams.isAllDay).toBe(true)
       })
 
-      xit('should set the end using the start + 1 day', () => {
+      it('should set the end using the start + 1 day', () => {
         const testOpts: CalendarOptions = {
-          start: new Date('2019-03-23T17:00:00.000')
+          ...baseOpts,
+          start: new Date('2019-03-23T17:00:00.000'),
+          end: undefined
         }
+        const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-        calendarObj.setTimestamps(testOpts)
-
-        expect(calendarObj.start.toString())
+        expect(resultParams.start.toString())
           .toEqual(testOpts.start.toString())
-        expect(calendarObj.end.toString())
+        expect(resultParams.end.toString())
           .toEqual(time.incrementDate(testOpts.start, 1).toString())
       })
     })
 
     describe('when options has an end', () => {
       it('should set allday to false', () => {
-        calendarObj.setTimestamps({
+        const testOpts = {
           start: new Date('2019-03-23T17:00:00.000'),
           end: new Date('2019-03-23T21:00:00.000')
-        })
+        }
+        const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-        expect(calendarObj.allday).toBe(false)
+        expect(resultParams.isAllDay).toBe(false)
       })
 
       it('should set the start and end including the time of day', () => {
@@ -148,11 +140,10 @@ describe('Calendar Base', () => {
           start: new Date('2019-03-23T17:00:00.000'),
           end: new Date('2019-03-23T21:00:00.000')
         }
+        const resultParams = (new ExtendedCalendar(testOpts)).getParams()
 
-        calendarObj.setTimestamps(testOpts)
-
-        expect(calendarObj.start).toEqual(testOpts.start)
-        expect(calendarObj.end).toEqual(testOpts.end)
+        expect(resultParams.start).toEqual(testOpts.start)
+        expect(resultParams.end).toEqual(testOpts.end)
       })
     })
   })

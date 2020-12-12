@@ -1,19 +1,45 @@
 import CalendarBase from './CalendarBase'
-import CalendarOptions from './types/CalendarOptions'
 import data from './utils/data'
 import ics from './utils/ics'
 import time from './utils/time'
 import { FORMAT, URL } from './constants'
+import CalendarOptions from './types/CalendarOptions'
 
 /**
  * Generates a Google Calendar url.
  */
 export default class GoogleCalendar extends CalendarBase {
+  constructor (opts: CalendarOptions) {
+    super(opts)
+    this.setInitialParams()
+  }
+
   /**
-   * @inheritDoc
+   * Sets the basic properties for the calendar instance.
    */
-  constructor (options: CalendarOptions) {
-    super(options)
+  protected setInitialParams = (): void => {
+    let timestampFormat = FORMAT.DATE
+
+    if (!this.isAllDay) {
+      timestampFormat += FORMAT.TIME
+    }
+
+    const dates = [
+      time.formatDate(this.start, timestampFormat),
+      time.formatDate(this.end, timestampFormat)
+    ].join('/')
+
+    this
+      .setParam('action', 'TEMPLATE')
+      .setParam('dates', dates)
+      .setParam('text', this.title)
+      .setParam('details', this.description)
+      .setParam('location', this.location)
+      .setParam('allday', this.isAllDay.toString())
+
+    if (this.recurrence) {
+      this.setParam('recur', `RRULE:${ics.getRrule(this.recurrence)}`)
+    }
   }
 
   /**
@@ -21,30 +47,9 @@ export default class GoogleCalendar extends CalendarBase {
    *
    * @returns {string}
    */
-  public render (): string {
-    let timestampFormat = FORMAT.DATE
-
-    if (!this.allday) {
-      timestampFormat += FORMAT.TIME
-    }
-
-    const params: Record<string, string> = {
-      action: 'TEMPLATE',
-      text: this.title,
-      details: this.description,
-      location: this.location,
-      dates: [
-        time.formatDate(this.start, timestampFormat),
-        time.formatDate(this.end, timestampFormat)
-      ].join('/')
-    }
-
-    if (this.recurrence) {
-      params.recur = `RRULE:${ics.getRrule(this.recurrence)}`
-    }
-
+  public render = (): string => {
     const baseUrl = URL.GOOGLE
-    const queryString = data.toQueryString(params)
+    const queryString = data.toQueryString(this.params)
 
     return `${baseUrl}?${queryString}`
   }

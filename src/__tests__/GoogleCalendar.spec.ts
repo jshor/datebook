@@ -21,7 +21,6 @@ describe('GoogleCalendar', () => {
     location: 'Rockefeller Center',
     action: 'TEMPLATE'
   }
-  let testObj
 
   afterEach(() => jest.resetAllMocks())
 
@@ -30,53 +29,86 @@ describe('GoogleCalendar', () => {
   })
 
   describe('render()', () => {
-    let result
+    const FULL_DATE_FORMAT = `${FORMAT.DATE}${FORMAT.TIME}`
 
     it('should use the proper base URL', () => {
-      testObj = new GoogleCalendar(baseOpts)
-
-      result = testObj.render()
+      const calendar = new GoogleCalendar(baseOpts)
+      const result = calendar.render()
       const baseUrl = result.split('?')[0]
 
       expect(baseUrl).toBe(URL.GOOGLE)
     })
 
     it('should handle the text parts', () => {
-      testObj = new GoogleCalendar(baseOpts)
+      const calendar = new GoogleCalendar(baseOpts)
+      const result = calendar.render()
+      const params = queryString.parse(result.split('?')[1])
 
-      result = testObj.render()
+      expect(params).toMatchObject(baseParams)
+    })
 
-      const paramsObj = queryString.parse(result.split('?')[1])
+    describe('an event spanning multiple days', () => {
+      it('should have start and end date formatted including time-of-day', () => {
+        const opts = {
+          ...baseOpts,
+          start: new Date('2019-03-23T17:00:00.000'),
+          end: new Date('2019-05-23T19:00:00.000')
+        }
+        const calendar = new GoogleCalendar(opts)
+        const result = calendar.render()
+        const params = queryString.parse(result.split('?')[1])
+        const expectedDates = `${
+          time.formatDate(opts.start, FULL_DATE_FORMAT)
+        }/${
+          time.formatDate(opts.end, FULL_DATE_FORMAT)
+        }`
 
-      expect(paramsObj).toMatchObject(baseParams)
+        expect(params.dates).toBe(expectedDates)
+      })
+    })
+
+    describe('an event that lasts less than a day', () => {
+      it('should have start and end date formatted including time-of-day', () => {
+        const opts = {
+          ...baseOpts,
+          start: new Date('2019-03-23T17:00:00.000'),
+          end: new Date('2019-03-23T19:00:00.000')
+        }
+        const calendar = new GoogleCalendar(opts)
+        const result = calendar.render()
+        const params = queryString.parse(result.split('?')[1])
+        const expectedDates = `${
+          time.formatDate(opts.start, FULL_DATE_FORMAT)
+        }/${
+          time.formatDate(opts.end, FULL_DATE_FORMAT)
+        }`
+
+        expect(params.dates).toBe(expectedDates)
+      })
     })
 
     describe('an all-day event', () => {
       it('should have start and end date formatted without time-of-day', () => {
-        testObj = new GoogleCalendar(baseOpts)
-
-        result = testObj.render()
-
-        const paramsObj = queryString.parse(result.split('?')[1])
+        const calendar = new GoogleCalendar(baseOpts)
+        const result = calendar.render()
+        const params = queryString.parse(result.split('?')[1])
         const expectedDates = `${
-          time.formatDate(testObj.start, FORMAT.DATE)
+          time.formatDate(baseOpts.start, FORMAT.DATE)
         }/${
-          time.formatDate(testObj.end, FORMAT.DATE)
+          time.formatDate(time.incrementDate(baseOpts.start, 1), FORMAT.DATE)
         }`
 
-        expect(paramsObj.dates).toBe(expectedDates)
+        expect(params.dates).toBe(expectedDates)
       })
     })
 
     describe('without recurrence', () => {
       it('should not include recur param', () => {
-        testObj = new GoogleCalendar(baseOpts)
+        const calendar = new GoogleCalendar(baseOpts)
+        const result = calendar.render()
+        const params = queryString.parse(result.split('?')[1])
 
-        result = testObj.render()
-
-        const paramsObj = queryString.parse(result.split('?')[1])
-
-        expect(paramsObj).not.toHaveProperty('recur')
+        expect(params).not.toHaveProperty('recur')
       })
     })
 
@@ -88,7 +120,7 @@ describe('GoogleCalendar', () => {
       })
 
       it('should use the result of getRrule', () => {
-        testObj = new GoogleCalendar({
+        const calendar = new GoogleCalendar({
           ...baseOpts,
           recurrence: {
             frequency: DAILY,
@@ -96,14 +128,11 @@ describe('GoogleCalendar', () => {
             count: 5
           }
         })
-
-        result = testObj.render()
-
-        const paramsObj = queryString.parse(result.split('?')[1])
-        const { recur } = paramsObj
+        const result = calendar.render()
+        const params = queryString.parse(result.split('?')[1])
+        const { recur } = params
 
         expect(ics.getRrule).toHaveBeenCalledTimes(1)
-        expect(ics.getRrule).toHaveBeenCalledWith(testObj.recurrence)
         expect(recur).toBe('RRULE:FREQ=DAILY;INTERVAL=1;COUNT=5')
       })
     })
