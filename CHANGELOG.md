@@ -1,3 +1,12 @@
+# [6.1.0](https://github.com/jshor/datebook/compare/v6.0.4...v6.1.0) (2020-12-21)
+
+
+### Features
+
+* **params:** adds ability to update cal params ([59433ca](https://github.com/jshor/datebook/commit/59433ca0a5e6b64b350c1400842c784d539fe6c7))
+
+
+
 ## [6.0.4](https://github.com/jshor/datebook/compare/v6.0.3...v6.0.4) (2020-12-12)
 
 
