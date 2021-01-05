@@ -100,11 +100,10 @@ const isSafari = (): boolean => {
 /**
  * Downloads the given ics as an iCalendar file.
  *
- * @param {string} title - title of the event
+ * @param {string} fileName - filename of the event file
  * @param {string} data - ics data
  */
-const download = (title: string, data: string): void => {
-  const fileName = getFileName(title)
+const download = (fileName: string, data: string): void => {
 
   if (isSafari()) {
     safariFileSave(data, fileName)

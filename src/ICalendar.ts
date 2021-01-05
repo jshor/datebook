@@ -130,9 +130,11 @@ export default class ICalendar extends CalendarBase {
    * Downloads the rendered iCalendar.
    *
    * @remark Only works in browsers.
+   *
+   * @param {string} filename optional explicit filename, if not provided then will be constructed from title
    */
-  public download = (): void => {
-    ics.download(this.title, this.render())
+  public download = (filename?: string): void => {
+    ics.download(filename || ics.getFileName(this.title), this.render())
   }
 
   /**
