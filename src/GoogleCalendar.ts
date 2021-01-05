@@ -42,7 +42,7 @@ export default class GoogleCalendar extends CalendarBase {
     }
 
     if (this.attendees.length > 0) {
-      this.setParam('add', this.renderAttendees())
+      this.setParam('add', data.toMailtoList(this.attendees).join(','))
     }
   }
 

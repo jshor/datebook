@@ -175,5 +175,49 @@ describe('YahooCalendar', () => {
         })
       })
     })
+
+    describe('attendees', () => {
+      it('should render the `inv_list` param with the value of the attendees as a list of mailtos', () => {
+        const obj = new YahooCalendar({
+          ...testOpts,
+          attendees: [
+            {
+              name: 'John Doe',
+              email: 'john@doe.com',
+              icsOptions: {
+                rsvp: true
+              }
+            },
+            {
+              name: 'Jane Doe',
+              email: 'jane@doe.com'
+            }
+          ]
+        })
+        const result = obj.render()
+        const querystring = result.split('?')[1]
+        const params = queryString.parse(querystring)
+        const expectedObj = {
+          v: '60',
+          title: 'Fun Party',
+          desc: 'BYOB',
+          in_loc: 'New York',
+          dur: 'allday',
+          st: time.formatDate(testOpts.start, FORMAT.DATE),
+          inv_list: 'John Doe <john@doe.com>,Jane Doe <jane@doe.com>'
+        }
+
+        expect(params).toMatchObject(expectedObj)
+      })
+
+      it('should not include the `inv_list` param when no attendees are assigned', () => {
+        const obj = new YahooCalendar(testOpts)
+        const result = obj.render()
+        const querystring = result.split('?')[1]
+        const params = queryString.parse(querystring)
+
+        expect(params).not.toHaveProperty('inv_list')
+      })
+    })
   })
 })

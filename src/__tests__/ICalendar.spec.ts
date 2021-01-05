@@ -5,6 +5,7 @@ import ics from '../utils/ics'
 import time  from '../utils/time'
 import { FORMAT } from '../constants'
 import ICSAlarm from '../types/ICSAlarm'
+import CalendarAttendee from '../types/CalendarAttendee'
 
 describe('ICalendar', () => {
   const baseOpts: CalendarOptions = {
@@ -305,6 +306,140 @@ describe('ICalendar', () => {
       ].join('\n')
 
       expect(rendered).toBe(expected)
+    })
+
+    describe('with attendees', () => {
+      const configWithAttendees = (attendees: CalendarAttendee[]): CalendarOptions => ({
+        title: 'Monthly Meeting with Boss Man',
+        location: 'Conference Room 2A, Big Company, Brooklyn, NY',
+        description: 'Meeting to discuss weekly things',
+        start: new Date('2022-07-08T19:00:00'),
+        end: new Date('2019-07-04T21:00:00.000'),
+        attendees
+      })
+
+      it('should render an attendee with the common name present', () => {
+        const eventOpts = configWithAttendees([
+          {
+            name: 'John Doe',
+            email: 'john@doe.com',
+            icsOptions: {
+              sentBy: 'MAILTO:boss@company.com'
+            }
+          }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;CN=John Doe;SENT-BY=MAILTO:boss@company.com;RSVP=FALSE:MAILTO:john@doe.com')
+      })
+
+      it('should render an attendee with a quoted `DELEGATED-FROM` param', () => {
+        const eventOpts = configWithAttendees([
+          {
+            email: 'john@doe.com',
+            icsOptions: {
+              delegatedFrom: 'MAILTO:boss@company.com'
+            }
+          }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;DELEGATED-FROM=MAILTO:boss@company.com;RSVP=FALSE:MAILTO:john@doe.com')
+      })
+
+      it('should render an attendee with a quoted `PARTSTAT` param', () => {
+        const eventOpts = configWithAttendees([
+          {
+            email: 'john@doe.com',
+            icsOptions: {
+              partStat: 'ACCEPTED'
+            }
+          }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;PARTSTAT=ACCEPTED;RSVP=FALSE:MAILTO:john@doe.com')
+      })
+
+      it('should render an attendee with a quoted `ROLE` param', () => {
+        const eventOpts = configWithAttendees([
+          {
+            email: 'john@doe.com',
+            icsOptions: {
+              role: 'REQ-PARTICIPANT'
+            }
+          }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE:MAILTO:john@doe.com')
+      })
+
+      it('should render a non-RSVP\'d attendee', () => {
+        const eventOpts = configWithAttendees([
+          {
+            email: 'john@doe.com'
+          }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;RSVP=FALSE:MAILTO:john@doe.com')
+      })
+
+      it('should render an RSVP\'d attendee', () => {
+        const eventOpts = configWithAttendees([
+          {
+            email: 'john@doe.com',
+            icsOptions: {
+              rsvp: true
+            }
+          }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;RSVP=TRUE:MAILTO:john@doe.com')
+      })
+
+      it('should render an attendee with a quoted `SENT-BY` param', () => {
+        const eventOpts = configWithAttendees([
+          {
+            email: 'john@doe.com',
+            icsOptions: {
+              sentBy: 'MAILTO:boss@company.com'
+            }
+          }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;SENT-BY=MAILTO:boss@company.com;RSVP=FALSE:MAILTO:john@doe.com')
+      })
+
+      it('should render multiple attendees', () => {
+        const eventOpts = configWithAttendees([
+          { email: 'john@doe.com' },
+          { email: 'jane@doe.com' }
+        ])
+
+        const obj = new ICalendar(eventOpts)
+        const rendered = obj.render()
+
+        expect(rendered).toContain('ATTENDEE;RSVP=FALSE:MAILTO:john@doe.com')
+        expect(rendered).toContain('ATTENDEE;RSVP=FALSE:MAILTO:jane@doe.com')
+      })
     })
   })
 })

@@ -32,12 +32,8 @@ abstract class CalendarBase implements ICalendarBase {
   /** Calendar service query string params. */
   protected params: Record<string, string | null> = {}
 
-  /**
-   * An array of event attendees. See {@link CalendarAttendee}
-   *
-   * @type {Array<CalendarAttendee>}
-   */
-  attendees: Array<CalendarAttendee> = []
+  /** Array of event attendees. See {@link CalendarAttendee} */
+  protected attendees: CalendarAttendee[] = []
 
   /**
    * Constructor.
@@ -82,48 +78,15 @@ abstract class CalendarBase implements ICalendarBase {
 
   /**
    * Sets the attendees array if attendees are supplied.
-   * Extend this method in child classes if additional manipulation
-   * must occur.
    *
    * @param {CalendarOptions} options
    */
-  public setAttendees (options: CalendarOptions): void {
+  protected setAttendees (options: CalendarOptions): void {
     if (Array.isArray(options.attendees)) {
       this.attendees = options.attendees
     } else {
       this.attendees = []
     }
-  }
-
-  /**
-   * Transforms the array of attendee objects into an array of attendee
-   * strings. Extend this method in child classes if additional manipulation
-   * must occur (i.e. ICalendar)
-   */
-  public renderAttendeesArr (): Array<string> {
-    if (this.attendees.length === 0) {
-      throw new Error('No attendees')
-    }
-    return this.attendees.map(({
-      name,
-      email,
-    }) => {
-      const mailTo = `<${email}>`
-      let commonName = email
-      if (name) {
-        commonName = name
-      }
-      return `${commonName} ${mailTo}`
-    })
-  }
-
-  /**
-   * Joins the results of `this.renderAttendeesArr` using a join character.
-   * Extend this method in child classes if a different join character is
-   * neeeded.
-   */
-  public renderAttendees (): string {
-    return this.renderAttendeesArr().join(',')
   }
 
   /**

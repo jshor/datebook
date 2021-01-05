@@ -34,6 +34,10 @@ export default class OutlookCalendar extends CalendarBase {
       .setParam('body', this.description)
       .setParam('location', this.location)
       .setParam('allday', this.isAllDay.toString())
+
+    if (this.attendees.length > 0) {
+      this.setParam('to', data.toMailtoList(this.attendees).join(','))
+    }
   }
 
   /**
