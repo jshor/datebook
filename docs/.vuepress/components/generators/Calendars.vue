@@ -68,7 +68,7 @@ import {
   YahooCalendar,
   OutlookCalendar,
   ICalendar
-} from '../../../../build/dist/datebook'
+} from '../../../../dist/datebook'
 
 export default {
   name: 'Calendars',

@@ -7,11 +7,6 @@ on:
   release:
     types: [created]
 
-env:
-  GIT_USER: 'github-actions'
-  GIT_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
-  ARTIFACT_DIR: 'build'
-
 jobs:
   build:
     runs-on: ubuntu-latest

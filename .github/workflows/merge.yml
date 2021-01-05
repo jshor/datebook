@@ -10,7 +10,6 @@ on:
 env:
   GIT_USER: 'GitHub Actions'
   GIT_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
-  ARTIFACT_DIR: 'build'
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
@@ -31,15 +30,20 @@ jobs:
         run: yarn test
       - name: Build package
         run: yarn build
-      - name: Build documentation
-        run: yarn docs:build
       - name: Report coverage
         run: yarn codecov
-      - name: Upload artifact
+      - name: Upload bundle artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_DIR }}
-          path: ${{ env.ARTIFACT_DIR }}
+          name: dist
+          path: dist
+      - name: Build documentation
+        run: yarn docs:build
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docs
+          path: build
 
   release:
     needs: build
@@ -64,21 +68,21 @@ jobs:
           persist-credentials: false
       - name: Pull latest
         run: git pull origin master
-      - name: Download artifact
+      - name: Download bundle artifact
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_DIR }}
-          path: ${{ env.ARTIFACT_DIR }}
+          name: docs
+          path: build
       - name: Create CNAME Record
-        run: echo "datebook.dev" > ${{ env.ARTIFACT_DIR }}/docs/CNAME
-      - name: Deploy to GitHub Pages
+        run: echo "datebook.dev" > build/docs/CNAME
+      - name: Deploy docs to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_CONFIG_NAME: ${{ env.GIT_USER }}
           GIT_CONFIG_EMAIL: ${{ env.GIT_EMAIL }}
           BRANCH: gh-pages
-          FOLDER: ${{ env.ARTIFACT_DIR }}/docs
+          FOLDER: build/docs
           CLEAN: true
 
   publish-npm:
@@ -88,13 +92,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Pull latest
         run: git pull origin master
-      - name: Download artifact
+      - name: Download bundle artifact
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_DIR }}
-          path: ${{ env.ARTIFACT_DIR }}
-      - name: Copy dist
-        run: cp -r ${{ env.ARTIFACT_DIR }}/dist . && rm -rf build
+          name: dist
+          path: dist
       - uses: actions/setup-node@v1
         with:
           node-version: 14
