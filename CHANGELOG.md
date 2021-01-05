@@ -1,3 +1,13 @@
+# [6.3.0](https://github.com/jshor/datebook/compare/v6.2.0...v6.3.0) (2021-01-05)
+
+
+### Features
+
+* **attendees:** implements cross-calendar support ([eabd3c1](https://github.com/jshor/datebook/commit/eabd3c1ca32ccc2baaabf822a50f2c41a4ebd81b))
+* **config:** adds support for attendees ([33b8f8e](https://github.com/jshor/datebook/commit/33b8f8ec76f8285b16f1d2eedc311c443053bbc4)), closes [#131](https://github.com/jshor/datebook/issues/131)
+
+
+
 # [6.2.0](https://github.com/jshor/datebook/compare/v6.1.1...v6.2.0) (2021-01-05)
 
 
