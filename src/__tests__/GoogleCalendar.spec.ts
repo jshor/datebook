@@ -137,4 +137,38 @@ describe('GoogleCalendar', () => {
       })
     })
   })
+
+  describe('attendees', () => {
+    it('should render the `add` param with the value of the attendees as a list of mailtos', () => {
+      const calendar = new GoogleCalendar({
+        ...baseOpts,
+        attendees: [
+          {
+            name: 'John Doe',
+            email: 'john@doe.com',
+            icsOptions: {
+              rsvp: true
+            }
+          },
+          {
+            name: 'Jane Doe',
+            email: 'jane@doe.com'
+          }
+        ]
+      })
+      const result = calendar.render()
+      const params = queryString.parse(result.split('?')[1])
+
+      expect(params.add).toEqual('John Doe <john@doe.com>,Jane Doe <jane@doe.com>')
+    })
+
+    it('should not include the `add` param when no attendees are assigned', () => {
+      const obj = new GoogleCalendar(baseOpts)
+      const result = obj.render()
+      const querystring = result.split('?')[1]
+      const params = queryString.parse(querystring)
+
+      expect(params).not.toHaveProperty('add')
+    })
+  })
 })

@@ -28,8 +28,9 @@ export default class YahooCalendar extends CalendarBase {
 
     this.setTimeParams()
     this.setRecurrenceParams()
+
     if (this.attendees.length > 0) {
-      this.setParam('inv_list', this.renderAttendees())
+      this.setParam('inv_list', data.toMailtoList(this.attendees).join(','))
     }
   }
 

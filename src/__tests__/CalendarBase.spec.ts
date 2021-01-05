@@ -147,36 +147,4 @@ describe('Calendar Base', () => {
       })
     })
   })
-
-  describe('setAttendees()', () => {
-    let calendarObj: CalendarBase
-
-    beforeEach(() => {
-      calendarObj = new CalendarBase(baseOpts)
-    })
-
-    describe('with no attendees property', () => {
-      it('should set an empty array', () => {
-        calendarObj.setAttendees(baseOpts)
-
-        expect(calendarObj.attendees).toEqual([])
-      })
-    })
-
-    describe('with no elements in attendees array', () => {
-      it('should set an empty array', () => {
-        const testOpts = {
-          ...baseOpts,
-          attendees: []
-        }
-        calendarObj.setAttendees(testOpts)
-
-        expect(calendarObj.attendees).toEqual([])
-      })
-    })
-
-    describe('with attendees provided', () => {
-      xit('should set the attendees (no transformation)', () => {})
-    })
-  })
 })

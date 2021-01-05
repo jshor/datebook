@@ -1,9 +1,11 @@
 import CalendarBase from './CalendarBase'
 import { FORMAT } from './constants'
+import data from './utils/data'
 import ics from './utils/ics'
 import time from './utils/time'
 import CalendarOptions from './types/CalendarOptions'
 import ICSAlarm from './types/ICSAlarm'
+import ICSAttendeeOptions from './types/ICSAttendeeOptions'
 import ICSDuration from './types/ICSDuration'
 import ICSPropertyValue from './types/ICSPropertyValue'
 
@@ -38,6 +40,40 @@ export default class ICalendar extends CalendarBase {
     if (this.recurrence) {
       this.addProperty('RRULE', ics.getRrule(this.recurrence))
     }
+
+    if (this.attendees.length > 0) {
+      this
+        .attendees
+        .forEach(({ email, name, icsOptions = {} }) => {
+          const params = this.getAttendeeParams(icsOptions, name)
+          const mailto = `MAILTO:${email}`
+
+          this.addProperty(params, mailto)
+        })
+    }
+  }
+
+  /**
+   * Generates the ATTENDEE property param based on user-specified options and the attendee name.
+   *
+   * @param {ICSAttendeeOptions} options
+   * @param {string} name
+   * @returns {string}
+   */
+  private getAttendeeParams = (options: ICSAttendeeOptions, name?: string): string => {
+    const params: Record<string, string> = {}
+
+    if (name) params['CN'] = name
+    if (options.delegatedFrom) params['DELEGATED-FROM'] = options.delegatedFrom
+    if (options.partStat) params['PARTSTAT'] = options.partStat
+    if (options.role) params['ROLE'] = options.role
+    if (options.sentBy) params['SENT-BY'] = options.sentBy
+
+    params['RSVP'] = options.rsvp ? 'TRUE' : 'FALSE'
+
+    const paramString = data.toParamString(params, ';')
+
+    return `ATTENDEE;${paramString}`
   }
 
   /**

@@ -1,3 +1,5 @@
+import CalendarAttendee from '../types/CalendarAttendee'
+
 const identity = (str: string): string => str
 
 type Identity = (str: string) => string
@@ -52,6 +54,22 @@ const toIcsParamString = (params: Record<string, string>): string => {
 }
 
 /**
+ * Renders a comma-separated string of mailto values.
+ * (e.g., 'John Doe <john@doe.com>,Jane Doe <jane@doe.com>')
+ *
+ * @param {CalendarAttendee[]} attendees
+ * @returns {string[]}
+ */
+const toMailtoList = (attendees: CalendarAttendee[]): string[] => {
+  return attendees
+    .map(({ email, name }) => {
+      return name
+        ? `${name} <${email}>`
+        : email
+    })
+}
+
+/**
  * Converts the given string to ProperCase.
  *
  * @param {string} s
@@ -68,5 +86,6 @@ export default {
   toParamString,
   toQueryString,
   toIcsParamString,
+  toMailtoList,
   toProperCase
 }

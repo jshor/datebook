@@ -105,6 +105,43 @@ describe('DataUtil', () => {
     })
   })
 
+  describe('toMailtoList()', () => {
+    it('should render a list of MAILTO URIs', () => {
+      const mailtoList = data.toMailtoList([
+        {
+          name: 'John Doe',
+          email: 'john@doe.com',
+          icsOptions: {
+            rsvp: true
+          }
+        },
+        {
+          name: 'Jane Doe',
+          email: 'jane@doe.com'
+        }
+      ])
+
+      expect(mailtoList).toHaveLength(2)
+      expect(mailtoList).toContain('John Doe <john@doe.com>')
+      expect(mailtoList).toContain('Jane Doe <jane@doe.com>')
+    })
+
+    it('should render an attendee as just the email if the name is not present', () => {
+      const mailtoList = data.toMailtoList([
+        {
+          email: 'john@doe.com'
+        },
+        {
+          name: 'Jane Doe',
+          email: 'jane@doe.com'
+        }
+      ])
+
+      expect(mailtoList).toContain('john@doe.com')
+      expect(mailtoList).toContain('Jane Doe <jane@doe.com>')
+    })
+  })
+
   describe('toQueryString()', () => {
 
     it('should create a query string representation of the passed in object', () => {

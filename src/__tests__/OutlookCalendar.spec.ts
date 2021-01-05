@@ -78,5 +78,49 @@ describe('Outlook Calendar', () => {
         })
       })
     })
+
+    describe('attendees', () => {
+      it('should render the `to` param with the value of the attendees as a list of mailtos', () => {
+        const obj = new OutlookCalendar({
+          ...testOpts,
+          attendees: [
+            {
+              name: 'John Doe',
+              email: 'john@doe.com',
+              icsOptions: {
+                rsvp: true
+              }
+            },
+            {
+              name: 'Jane Doe',
+              email: 'jane@doe.com'
+            }
+          ]
+        })
+        const result = obj.render()
+        const paramsObj = queryString.parse(result.split('?')[1])
+
+        expect(paramsObj).toMatchObject({
+          path: '/calendar/action/compose',
+          rru: 'addevent',
+          startdt: time.formatDate(testOpts.start, FORMAT.OUTLOOK_FULL),
+          enddt: time.formatDate(testOpts.end, FORMAT.OUTLOOK_FULL),
+          subject: testOpts.title,
+          body: testOpts.description,
+          location: testOpts.location,
+          allday: 'false',
+          to: 'John Doe <john@doe.com>,Jane Doe <jane@doe.com>'
+        })
+      })
+
+      it('should not include the `to` param when no attendees are assigned', () => {
+        const obj = new OutlookCalendar(testOpts)
+        const result = obj.render()
+        const querystring = result.split('?')[1]
+        const params = queryString.parse(querystring)
+
+        expect(params).not.toHaveProperty('to')
+      })
+    })
   })
 })
