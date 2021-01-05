@@ -40,6 +40,10 @@ export default class GoogleCalendar extends CalendarBase {
     if (this.recurrence) {
       this.setParam('recur', `RRULE:${ics.getRrule(this.recurrence)}`)
     }
+
+    if (this.attendees.length > 0) {
+      this.setParam('add', this.renderAttendees())
+    }
   }
 
   /**

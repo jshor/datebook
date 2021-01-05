@@ -1,4 +1,5 @@
 import CalendarRecurrence from './CalendarRecurrence'
+import CalendarAttendee from './CalendarAttendee'
 
 /**
  * Basic config options.
@@ -16,6 +17,8 @@ type CalendarOptions = {
   end?: Date
   /** The recurrence of an event is how often the event is supposed to occur. See {@link CalendarRecurrence}. */
   recurrence?: CalendarRecurrence
+  /** An array of attendee objects, representing people who will be invited to the event (optional). See {@link CalendarAttendee}.  */
+  attendees?: Array<CalendarAttendee>
 }
 
 export default CalendarOptions
