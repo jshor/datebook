@@ -178,6 +178,8 @@ DTSTAMP:20200916
 PRODID:datebook.dev
 ```
 
-## `download()`
+## `download(fileName?: string)`
+
+* **`fileName: string`** - optional file name
 
 Downloads a `.ics` file on the user's browser for use in local calendars and email clients.
