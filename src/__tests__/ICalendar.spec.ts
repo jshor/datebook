@@ -156,7 +156,27 @@ describe('ICalendar', () => {
 
       expect(obj.render).toHaveBeenCalledTimes(1)
       expect(ics.download).toHaveBeenCalledTimes(1)
-      expect(ics.download).toHaveBeenCalledWith(baseOpts.title, mockRender)
+      expect(ics.download).toHaveBeenCalledWith(`${baseOpts.title}.ics`, mockRender)
+    })
+  })
+
+  describe('download(filename)', () => {
+    it('should call render and the download util with provided filename', () => {
+      const obj = new ICalendar(baseOpts)
+      const mockRender = 'renderedstring'
+
+      jest
+        .spyOn(ics, 'download')
+        .mockImplementation(jest.fn())
+      jest
+        .spyOn(obj, 'render')
+        .mockReturnValue(mockRender)
+
+      obj.download('test.ics')
+
+      expect(obj.render).toHaveBeenCalledTimes(1)
+      expect(ics.download).toHaveBeenCalledTimes(1)
+      expect(ics.download).toHaveBeenCalledWith('test.ics', mockRender)
     })
   })
 
