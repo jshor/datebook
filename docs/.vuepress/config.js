@@ -59,10 +59,6 @@ module.exports = {
                 path: '/config/recurrence.md'
               },
               {
-                title: 'Dates',
-                path: '/config/date.md'
-              },
-              {
                 title: 'Alarms',
                 path: '/config/alarms.md'
               },

@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   entry: './src/index.ts',
   output: {
-    path: path.join(__dirname, './build/dist'),
+    path: path.join(__dirname, './dist'),
     filename: 'datebook.js',
     library: 'datebook',
     libraryTarget: 'umd',
