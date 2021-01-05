@@ -1,3 +1,13 @@
+# [6.2.0](https://github.com/jshor/datebook/compare/v6.1.1...v6.2.0) (2021-01-05)
+
+
+### Features
+
+* **ics:** allow providing .ics filename, without relying on title ([9fc3314](https://github.com/jshor/datebook/commit/9fc3314b3810c4fe745f057bb6449cb98180a6a3))
+* **ics:** allow providing .ics filename, without relying on title ([ad356ed](https://github.com/jshor/datebook/commit/ad356ed47d82b7b85d6fcc770d39ec2c0688bb1d))
+
+
+
 ## [6.1.1](https://github.com/jshor/datebook/compare/v6.1.0...v6.1.1) (2020-12-23)
 
 
