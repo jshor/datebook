@@ -19,6 +19,9 @@ export default class ICalendar extends CalendarBase {
   /** List of VEVENT property-value entries */
   private properties: string[] = []
 
+  /** Key-value pair of basic calendar properties. */
+  private meta: Record<string, string> = {}
+
   constructor (opts: CalendarOptions) {
     super(opts)
     this.setInitialParams()
@@ -28,6 +31,11 @@ export default class ICalendar extends CalendarBase {
    * Sets the basic properties for the calendar instance.
    */
   protected setInitialParams = (): void => {
+    this
+      .setMeta('UID', ics.getUid())
+      .setMeta('DTSTAMP', time.getTimeCreated())
+      .setMeta('PRODID', ics.getProdId())
+
     this
       .addProperty('CLASS', 'PUBLIC')
       .addProperty('DESCRIPTION', ics.formatText(this.description))
@@ -95,6 +103,19 @@ export default class ICalendar extends CalendarBase {
     features.unshift(duration.after ? 'PT' : '-PT')
 
     return features.join('')
+  }
+
+  /**
+   * Sets iCalendar meta properties, such as UID, DTSTAMP, etc.
+   *
+   * @param {string} key
+   * @param {string} value
+   * @returns {ICalendar}
+   */
+  public setMeta = (key: string, value: string): this => {
+    this.meta[key] = value
+
+    return this
   }
 
   /**
@@ -189,14 +210,18 @@ export default class ICalendar extends CalendarBase {
         'END:VEVENT'
       ], [])
 
+    const meta: string[] = Object
+      .keys(this.meta)
+      .map((key: string) => {
+        return `${key}:${this.meta[key]}`
+      })
+
     return [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       ...vEvents,
       'END:VCALENDAR',
-      `UID:${ics.getUid()}`,
-      `DTSTAMP:${time.getTimeCreated()}`,
-      `PRODID:${ics.getProdId()}`
+      ...meta
     ].join('\n')
   }
 }
