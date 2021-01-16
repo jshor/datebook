@@ -1,4 +1,3 @@
-
 # Basic Config
 
 ## title
@@ -31,7 +30,7 @@ A summary description of the event location. Line breaks are automatically strip
 * Required: **yes**
 * Valid value: a valid `Date` reference
 
-The event start timestamp. See [date formats](date.md) for more information.
+The event start timestamp.
 
 ## end
 
@@ -39,7 +38,7 @@ The event start timestamp. See [date formats](date.md) for more information.
 * Required: **yes**, if not an all-day event
 * Valid value: a valid `Date` reference
 
-The event end timestamp. For all-day events, this field should be omitted. See [date formats](date.md) for more information.
+The event end timestamp. For all-day events, this field should be omitted.
 
 ## recurrence
 
@@ -48,3 +47,11 @@ The event end timestamp. For all-day events, this field should be omitted. See [
 * Valid value: a valid `CalendarRecurrence` object
 
 The specification for when the event should repeat. See [CalendarRecurrence](recurrence.md) for more information.
+
+## attendees <Badge text="6.2.3" vertical="middle" />
+
+* Type: [`CalendarAttendee[]`](attendees.md)
+* Required: no
+* Valid value: an array of valid `CalendarAttendee` objects
+
+A list of attendees for the event. See [CalendarAttendee](attendees.md) for more information.
