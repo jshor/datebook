@@ -1,3 +1,12 @@
+## [6.3.1](https://github.com/jshor/datebook/compare/v6.3.0...v6.3.1) (2021-01-16)
+
+
+### Bug Fixes
+
+* **types:** corrects webpack types dist dir ([#138](https://github.com/jshor/datebook/issues/138)) ([a6a2fb5](https://github.com/jshor/datebook/commit/a6a2fb5ea81c0a77feef820062540352514636e0))
+
+
+
 # [6.3.0](https://github.com/jshor/datebook/compare/v6.2.0...v6.3.0) (2021-01-05)
 
 
