@@ -1,3 +1,12 @@
+# [6.4.0](https://github.com/jshor/datebook/compare/v6.3.1...v6.4.0) (2021-01-16)
+
+
+### Features
+
+* **ics:** adds setMeta method ([2810148](https://github.com/jshor/datebook/commit/281014873458bf18a5d4ff43276d4407683fa9e9))
+
+
+
 ## [6.3.1](https://github.com/jshor/datebook/compare/v6.3.0...v6.3.1) (2021-01-16)
 
 
