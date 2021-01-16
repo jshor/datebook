@@ -111,12 +111,26 @@ DTSTAMP:20200916
 PRODID:datebook.dev
 ```
 
+## `setMeta(key: string, value: string)` <Badge text="6.0.0" vertical="middle" />
+
+Sets iCalendar meta properties, such as `UID`, `DTSTAMP`, etc. Returns the `ICalendar` instance.
+
+* **`key: string`** - iCalendar meta property key.
+* **`value: string`** - Value of the meta property.
+
+### Example
+
+```ts
+calendar
+  .setMeta('UID', 'e9de89b0a5e9ad6efd5e5ab543ec617c')
+  .render()
+```
 
 ## `addProperty(key: string, value: ICSPropertyValue)` <Badge text="6.0.0" vertical="middle" />
 
-Adds any additional desired iCalendar property having the given key-value pair to the instance. Returns the `ICalendar` instance.
+Adds any additional desired iCalendar event property having the given key-value pair to the instance. Returns the `ICalendar` instance.
 
-* **`key: string`** - iCalendar property name.
+* **`key: string`** - iCalendar event property name.
 * **`value: Record<string, any> | string | number`** - A key-value subset of properties, or a valid value.
 
 
