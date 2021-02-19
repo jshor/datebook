@@ -9,7 +9,7 @@ The [basic config object](#basic.md) accepts a parameter `attendees` as a list o
 
 The attendee's name.
 
-## name
+## email
 
 * Type: `string`
 * Required: **yes**
