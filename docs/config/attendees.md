@@ -54,7 +54,7 @@ The participation role of the attendee.
 
 Whether or not the attendee is RSVP'd to the event.
 
-## icsOptions.delegatedFrom
+## icsOptions.sentBy
 
 * Type: `string`
 * Required: no
