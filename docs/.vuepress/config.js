@@ -55,6 +55,10 @@ module.exports = {
                 path: '/config/basic.md'
               },
               {
+                title: 'Attendees',
+                path: '/config/attendees.md'
+              },
+              {
                 title: 'Recurrences',
                 path: '/config/recurrence.md'
               },

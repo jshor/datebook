@@ -3,7 +3,7 @@ home: true
 heroImage: /assets/logo.svg
 actionText: Read the docs →
 actionLink: /docs/
-footer: © 2020 Datebook.
+footer: © 2021 Datebook.
 ---
 
 <div class="features">
