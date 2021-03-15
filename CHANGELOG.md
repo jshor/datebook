@@ -1,3 +1,12 @@
+# [6.5.0](https://github.com/jshor/datebook/compare/v6.4.4...v6.5.0) (2021-03-15)
+
+
+### Features
+
+* **outlook:** implements setHost ([#150](https://github.com/jshor/datebook/issues/150)) ([20bc7ff](https://github.com/jshor/datebook/commit/20bc7ffe71fb7914d2a2fb09721e258231ce3ae7))
+
+
+
 ## [6.4.4](https://github.com/jshor/datebook/compare/v6.4.3...v6.4.4) (2021-03-09)
 
 
