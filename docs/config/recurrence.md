@@ -55,7 +55,7 @@ If this parameter is specified in conjunction with [`end`](#end), the recurrence
 The latest date that this event may occur on.
 
 :::warning Important
-If this parameter is specified in conjunction with [`end`](#end), the recurrence will end either when `count` is completed, or when `end` occurs, whichever happens first.
+If this parameter is specified in conjunction with [`count`](#count), the recurrence will end either when `count` is completed, or when `end` occurs, whichever happens first.
 :::
 
 ## weekdays

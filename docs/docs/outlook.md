@@ -22,6 +22,23 @@ const options: CalendarOptions = {
 const outlookCalendar = new OutlookCalendar(options)
 ```
 
+## `setHost(host: string): OutlookCalendar`
+
+Sets the host service type. The default host for Outlook is **`live`**.
+
+Returns the `OutlookCalendar` instance.
+
+### Valid hosts
+
+* **`live`** - For personal Outlook accounts (default).
+* **`office`** - For Office365 Outlook accounts.
+
+### Example
+
+```ts
+outlookCalendar.setHost('outlook.office.com')
+```
+
 ## `setParam(key: string, value: string): OutlookCalendar`
 
 Sets a parameter on the URL. This may be used to either set additional optional properties, or override existing ones. Pass a value of `null` to remove an existing property.

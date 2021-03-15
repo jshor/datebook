@@ -10,9 +10,13 @@ import CalendarOptions from './types/CalendarOptions'
  * @remark Outlook Calendar's query string params do not support recurrence.
  */
 export default class OutlookCalendar extends CalendarBase {
+  /** Base URL for the host service. */
+  private baseUrl: string = URL.OUTLOOK
+
   constructor (opts: CalendarOptions) {
     super(opts)
     this.setInitialParams()
+    this.setHost('live')
   }
 
   /**
@@ -41,14 +45,27 @@ export default class OutlookCalendar extends CalendarBase {
   }
 
   /**
+   * Sets the host service type. The default host for Outlook is **`live`**.
+   *
+   * @param {string} host - `live` (for personal accounts) or `office` (for Office365)
+   * @returns {OutlookCalendar}
+   */
+  public setHost = (host: string) => {
+    if (['live', 'office'].includes(host)) {
+      this.baseUrl = URL.OUTLOOK.replace('{{host}}', host)
+    }
+
+    return this
+  }
+
+  /**
    * Generates the Outlook url.
    *
    * @returns {string}
    */
   public render = (): string => {
-    const baseUrl = URL.OUTLOOK
     const queryString = data.toQueryString(this.params)
 
-    return `${baseUrl}?${queryString}`
+    return `${this.baseUrl}?${queryString}`
   }
 }
