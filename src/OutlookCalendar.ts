@@ -50,7 +50,7 @@ export default class OutlookCalendar extends CalendarBase {
    * @param {string} host - `live` (for personal accounts) or `office` (for Office365)
    * @returns {OutlookCalendar}
    */
-  public setHost = (host: string) => {
+  public setHost = (host: string): this => {
     if (['live', 'office'].includes(host)) {
       this.baseUrl = URL.OUTLOOK.replace('{{host}}', host)
     }
