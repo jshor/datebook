@@ -91,6 +91,32 @@ const formatDate = (d: Date = new Date(), format: string): string => {
     }, format)
 }
 
+
+/**
+ * Formats the given JS Date() object to the given format, not using UTC
+ * Format defaults to: YYYYMMDDTHHMMss
+ *
+ * @param {Date} [d = new Date()]
+ * @param {string} format
+ * @returns {string}
+ */
+const formatDateNoUtc = (d: Date = new Date(), format: string): string => {
+  const dateValues: Record<string, string | number> = {
+    YYYY: d.getUTCFullYear(),
+    MM: addLeadingZero(d.getMonth() + 1),
+    DD: addLeadingZero(d.getDate()),
+    hh: addLeadingZero(d.getHours()),
+    mm: addLeadingZero(d.getMinutes()),
+    ss: addLeadingZero(d.getSeconds())
+  }
+
+  return Object
+    .keys(dateValues)
+    .reduce((date: string, key: string): string => {
+      return date.replace(key, dateValues[key].toString())
+    }, format)
+}
+
 /**
  * Returns the current timestamp.
  *
@@ -123,6 +149,7 @@ export default {
   getHoursDiff,
   getRecurrenceLengthDays,
   formatDate,
+  formatDateNoUtc,
   getTimeCreated,
   incrementDate
 }
