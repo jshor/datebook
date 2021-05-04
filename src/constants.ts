@@ -11,6 +11,7 @@ export const FORMAT = {
   DATE: 'YYYYMMDD',
   TIME: 'ThhmmssZ',
   FULL: 'YYYYMMDDThhmmssZ',
+  NO_UTC_FULL: 'YYYYMMDDThhmmss',
   OUTLOOK_DATE: 'YYYY-MM-DD',
   OUTLOOK_TIME: 'Thh:mm:ssZ',
   OUTLOOK_FULL: 'YYYY-MM-DDThh:mm:ssZ'

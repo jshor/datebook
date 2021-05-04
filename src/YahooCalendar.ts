@@ -43,11 +43,11 @@ export default class YahooCalendar extends CalendarBase {
         .setParam('dur', 'allday')
         .setParam('st', time.formatDateNoUtc(this.start, FORMAT.DATE))
     } else {
-      this.setParam('st', time.formatDateNoUtc(this.start, FORMAT.FULL))
+      this.setParam('st', time.formatDateNoUtc(this.start, FORMAT.NO_UTC_FULL))
 
       if (time.getHoursDiff(this.start.getTime(), this.end.getTime()) > 99) {
         // Yahoo only supports up to 99 hours, so we are forced to specify the end time instead of the duration
-        this.setParam('et', time.formatDateNoUtc(this.end, FORMAT.FULL))
+        this.setParam('et', time.formatDateNoUtc(this.end, FORMAT.NO_UTC_FULL))
       } else {
         // we prefer specifying duration in lieu of end time, because apparently Yahoo's end time is buggy w.r.t. timezones
         this.setParam('dur', time.getDuration(this.start.getTime(), this.end.getTime()))

@@ -102,7 +102,7 @@ const formatDate = (d: Date = new Date(), format: string): string => {
  */
 const formatDateNoUtc = (d: Date = new Date(), format: string): string => {
   const dateValues: Record<string, string | number> = {
-    YYYY: d.getUTCFullYear(),
+    YYYY: d.getFullYear(),
     MM: addLeadingZero(d.getMonth() + 1),
     DD: addLeadingZero(d.getDate()),
     hh: addLeadingZero(d.getHours()),
