@@ -84,6 +84,15 @@ describe('time utils', () => {
     })
   })
 
+  describe('formatDateNoUTC()', () => {
+    it('should format the timestamp with the given formats, without Z at the end', () => {
+      const timestamp = '2019-03-23T17:00:00-03:00'
+      const actualDateOutput = time.formatDateNoUtc(new Date(timestamp), FORMAT.DATE)
+
+      expect(actualDateOutput).toBe('20190323')
+    })
+  })
+
   describe('incrementDate()', () => {
     it('should increment the date by one day', () => {
       const incrementedDate = time.incrementDate(new Date('2020-04-01'), 1)

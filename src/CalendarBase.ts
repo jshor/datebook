@@ -66,12 +66,8 @@ abstract class CalendarBase implements ICalendarBase {
     this.isAllDay = !options.end
     this.start = options.start
 
-    if (options.end) {
-      this.end = options.end
-    } else {
-      // if no end date is specified, make the end date exactly 1 day from the start date
-      this.end = time.incrementDate(this.start, 1)
-    }
+    // if no end date is specified, make the end date exactly 1 day from the start date
+    this.end = options.end || time.incrementDate(this.start, 1)
 
     this.recurrence = options.recurrence
   }
@@ -82,11 +78,7 @@ abstract class CalendarBase implements ICalendarBase {
    * @param {CalendarOptions} options
    */
   protected setAttendees (options: CalendarOptions): void {
-    if (Array.isArray(options.attendees)) {
-      this.attendees = options.attendees
-    } else {
-      this.attendees = []
-    }
+    this.attendees = Array.isArray(options.attendees) ? options.attendees : []
   }
 
   /**

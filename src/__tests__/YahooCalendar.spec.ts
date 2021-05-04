@@ -114,7 +114,7 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-              st: time.formatDate(testOpts.start, FORMAT.FULL),
+              st: time.formatDateNoUtc(testOpts.start, FORMAT.NO_UTC_FULL),
               dur: '0200'
             }
             expect(params).toMatchObject(expectedObj)
@@ -137,8 +137,8 @@ describe('YahooCalendar', () => {
               title: 'Fun Party',
               desc: 'BYOB',
               in_loc: 'New York',
-              st: time.formatDate(start, FORMAT.FULL),
-              et: time.formatDate(end, FORMAT.FULL)
+              st: time.formatDateNoUtc(start, FORMAT.NO_UTC_FULL),
+              et: time.formatDateNoUtc(end, FORMAT.NO_UTC_FULL)
             }
             expect(params).toMatchObject(expectedObj)
             expect(expectedObj).toMatchObject(params)
@@ -167,9 +167,9 @@ describe('YahooCalendar', () => {
             desc: 'BYOB',
             in_loc: 'New York',
             dur: '0200',
-            st: time.formatDate(testOpts.start, FORMAT.FULL),
+            st: time.formatDateNoUtc(testOpts.start, FORMAT.NO_UTC_FULL),
             RPAT: '01Dy',
-            REND: time.formatDate(recurrenceEnd, FORMAT.DATE)
+            REND: time.formatDateNoUtc(recurrenceEnd, FORMAT.DATE)
           }
           expect(params).toMatchObject(expectedObj)
         })
@@ -203,7 +203,7 @@ describe('YahooCalendar', () => {
           desc: 'BYOB',
           in_loc: 'New York',
           dur: 'allday',
-          st: time.formatDate(testOpts.start, FORMAT.DATE),
+          st: time.formatDateNoUtc(testOpts.start, FORMAT.DATE),
           inv_list: 'John Doe <john@doe.com>,Jane Doe <jane@doe.com>'
         }
 
