@@ -1,3 +1,12 @@
+## [6.5.3](https://github.com/jshor/datebook/compare/v6.5.2...v6.5.3) (2021-05-04)
+
+
+### Bug Fixes
+
+* for yahoo time not in UTC ([#153](https://github.com/jshor/datebook/issues/153)) ([298f6d0](https://github.com/jshor/datebook/commit/298f6d0b83a3fdc8f2422ce10b635450eb728982))
+
+
+
 ## [6.5.2](https://github.com/jshor/datebook/compare/v6.5.1...v6.5.2) (2021-04-30)
 
 
