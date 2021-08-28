@@ -1,3 +1,12 @@
+## [6.5.9](https://github.com/jshor/datebook/compare/v6.5.8...v6.5.9) (2021-08-28)
+
+
+### Bug Fixes
+
+* **ics:** makes properties member public [#162](https://github.com/jshor/datebook/issues/162) ([9e69218](https://github.com/jshor/datebook/commit/9e69218c7ffdc830797b88329484491718400414))
+
+
+
 ## [6.5.8](https://github.com/jshor/datebook/compare/v6.5.7...v6.5.8) (2021-08-28)
 
 
