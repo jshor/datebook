@@ -48,6 +48,10 @@ The event end timestamp. For all-day events, this field should be omitted.
 
 The specification for when the event should repeat. See [CalendarRecurrence](recurrence.md) for more information.
 
+:::warning Note
+This feature is not supported in Yahoo or Outlook online calendars.
+:::
+
 ## attendees <Badge text="6.2.3" vertical="middle" />
 
 * Type: [`CalendarAttendee[]`](attendees.md)

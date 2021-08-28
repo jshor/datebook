@@ -9,7 +9,7 @@ The `CalendarRecurrence` object specifies how often the event is supposed to occ
 Recurrence is **optional**.
 
 :::warning Note
-This feature is not supported in Outlook online calendars.
+This feature is not supported in Yahoo or Outlook online calendars.
 :::
 
 ## frequency

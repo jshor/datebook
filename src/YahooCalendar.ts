@@ -2,7 +2,6 @@ import CalendarBase from './CalendarBase'
 import { URL, FORMAT } from './constants'
 import data from './utils/data'
 import time from './utils/time'
-import yahooUtils from './utils/yahoo'
 import CalendarOptions from './types/CalendarOptions'
 
 /**
@@ -27,7 +26,6 @@ export default class YahooCalendar extends CalendarBase {
       .setParam('in_loc', this.location)
 
     this.setTimeParams()
-    this.setRecurrenceParams()
 
     if (this.attendees.length > 0) {
       this.setParam('inv_list', data.toMailtoList(this.attendees).join(','))
@@ -51,24 +49,6 @@ export default class YahooCalendar extends CalendarBase {
       } else {
         // we prefer specifying duration in lieu of end time, because apparently Yahoo's end time is buggy w.r.t. timezones
         this.setParam('dur', time.getDuration(this.start.getTime(), this.end.getTime()))
-      }
-    }
-  }
-
-  /**
-   * Sets the recurrence parameters, if recurrence is specified.
-   */
-  private setRecurrenceParams = (): void => {
-    if (this.recurrence) {
-      this.setParam('RPAT', yahooUtils.getRecurrence(this.recurrence))
-
-      if (this.recurrence.end) {
-        this.setParam('REND', time.formatDateNoUtc(this.recurrence.end, FORMAT.DATE))
-      } else {
-        const days = time.getRecurrenceLengthDays(this.recurrence)
-        const rend = time.incrementDate(this.end, Math.ceil(days))
-
-        this.setParam('REND', time.formatDateNoUtc(rend, FORMAT.DATE))
       }
     }
   }
