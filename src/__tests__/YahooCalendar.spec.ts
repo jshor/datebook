@@ -1,5 +1,5 @@
 import * as queryString from 'query-string'
-import { FORMAT, RECURRENCE, URL } from '../constants'
+import { FORMAT, URL } from '../constants'
 import CalendarBase from '../CalendarBase'
 import YahooCalendar from '../YahooCalendar'
 import time from '../utils/time'
@@ -42,53 +42,22 @@ describe('YahooCalendar', () => {
         start: new Date('2019-07-04T19:00:00.000')
       }
 
-      describe('no recurrence', () => {
-        it('should format the query string without an end time', () => {
-          const obj = new YahooCalendar(testOpts)
-          const result = obj.render()
+      it('should format the query string without an end time', () => {
+        const obj = new YahooCalendar(testOpts)
+        const result = obj.render()
 
-          const querystring = result.split('?')[1]
-          const params = queryString.parse(querystring)
-          const expectedObj = {
-            v: '60',
-            title: 'Fun Party',
-            desc: 'BYOB',
-            in_loc: 'New York',
-            dur: 'allday',
-            st: time.formatDate(testOpts.start, FORMAT.DATE)
-          }
-          expect(params).toMatchObject(expectedObj)
-          expect(expectedObj).toMatchObject(params)
-        })
-      })
-
-      describe('recurrence', () => {
-        it('should format the query string with start and end times containing only their dates', () => {
-          const recurrenceEnd = new Date('2019-07-10T19:00:00.000')
-          const obj = new YahooCalendar({
-            ...testOpts,
-            recurrence: {
-              frequency: RECURRENCE.FREQUENCY.DAILY,
-              interval: 1,
-              end: recurrenceEnd
-            }
-          })
-          const result = obj.render()
-
-          const querystring = result.split('?')[1]
-          const params = queryString.parse(querystring)
-          const expectedObj = {
-            v: '60',
-            title: 'Fun Party',
-            desc: 'BYOB',
-            in_loc: 'New York',
-            dur: 'allday',
-            st: time.formatDate(testOpts.start, FORMAT.DATE),
-            RPAT: '01Dy',
-            REND: time.formatDate(recurrenceEnd, FORMAT.DATE)
-          }
-          expect(params).toMatchObject(expectedObj)
-        })
+        const querystring = result.split('?')[1]
+        const params = queryString.parse(querystring)
+        const expectedObj = {
+          v: '60',
+          title: 'Fun Party',
+          desc: 'BYOB',
+          in_loc: 'New York',
+          dur: 'allday',
+          st: time.formatDate(testOpts.start, FORMAT.DATE)
+        }
+        expect(params).toMatchObject(expectedObj)
+        expect(expectedObj).toMatchObject(params)
       })
     })
 
@@ -101,62 +70,9 @@ describe('YahooCalendar', () => {
         end: new Date('2019-07-04T21:00:00.000') // two-hour long event (19h to 21h)
       }
 
-      describe('no recurrence', () => {
-        describe('when the duration of the event spans 99 hours or fewer', () => {
-          it('should format the query string with the time parameters with the start time and duration of two hours', () => {
-            const obj = new YahooCalendar(testOpts)
-            const result = obj.render()
-
-            const querystring = result.split('?')[1]
-            const params = queryString.parse(querystring)
-            const expectedObj = {
-              v: '60',
-              title: 'Fun Party',
-              desc: 'BYOB',
-              in_loc: 'New York',
-              st: time.formatDateNoUtc(testOpts.start, FORMAT.NO_UTC_FULL),
-              dur: '0200'
-            }
-            expect(params).toMatchObject(expectedObj)
-            expect(expectedObj).toMatchObject(params)
-          })
-        })
-
-        describe('when the duration of the event spans longer than 99 hours', () => {
-          it('should format the query string with the time parameters in start/end timestamps', () => {
-            const start = new Date('2019-07-04T19:00:00.000')
-            const end = new Date('2019-07-08T23:00:00.000') // one-hundred-hour long event, (four days, three hours)
-
-            const obj = new YahooCalendar({ ...testOpts, start, end })
-            const result = obj.render()
-
-            const querystring = result.split('?')[1]
-            const params = queryString.parse(querystring)
-            const expectedObj = {
-              v: '60',
-              title: 'Fun Party',
-              desc: 'BYOB',
-              in_loc: 'New York',
-              st: time.formatDateNoUtc(start, FORMAT.NO_UTC_FULL),
-              et: time.formatDateNoUtc(end, FORMAT.NO_UTC_FULL)
-            }
-            expect(params).toMatchObject(expectedObj)
-            expect(expectedObj).toMatchObject(params)
-          })
-        })
-      })
-
-      describe('recurrence', () => {
-        it('should format the query string with RPAT and REND params', () => {
-          const recurrenceEnd = new Date('2019-07-10T19:00:00.000')
-          const obj = new YahooCalendar({
-            ...testOpts,
-            recurrence: {
-              frequency: RECURRENCE.FREQUENCY.DAILY,
-              interval: 1,
-              end: recurrenceEnd
-            }
-          })
+      describe('when the duration of the event spans 99 hours or fewer', () => {
+        it('should format the query string with the time parameters with the start time and duration of two hours', () => {
+          const obj = new YahooCalendar(testOpts)
           const result = obj.render()
 
           const querystring = result.split('?')[1]
@@ -166,12 +82,34 @@ describe('YahooCalendar', () => {
             title: 'Fun Party',
             desc: 'BYOB',
             in_loc: 'New York',
-            dur: '0200',
             st: time.formatDateNoUtc(testOpts.start, FORMAT.NO_UTC_FULL),
-            RPAT: '01Dy',
-            REND: time.formatDateNoUtc(recurrenceEnd, FORMAT.DATE)
+            dur: '0200'
           }
           expect(params).toMatchObject(expectedObj)
+          expect(expectedObj).toMatchObject(params)
+        })
+      })
+
+      describe('when the duration of the event spans longer than 99 hours', () => {
+        it('should format the query string with the time parameters in start/end timestamps', () => {
+          const start = new Date('2019-07-04T19:00:00.000')
+          const end = new Date('2019-07-08T23:00:00.000') // one-hundred-hour long event, (four days, three hours)
+
+          const obj = new YahooCalendar({ ...testOpts, start, end })
+          const result = obj.render()
+
+          const querystring = result.split('?')[1]
+          const params = queryString.parse(querystring)
+          const expectedObj = {
+            v: '60',
+            title: 'Fun Party',
+            desc: 'BYOB',
+            in_loc: 'New York',
+            st: time.formatDateNoUtc(start, FORMAT.NO_UTC_FULL),
+            et: time.formatDateNoUtc(end, FORMAT.NO_UTC_FULL)
+          }
+          expect(params).toMatchObject(expectedObj)
+          expect(expectedObj).toMatchObject(params)
         })
       })
     })
