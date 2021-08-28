@@ -17,7 +17,7 @@ export default class ICalendar extends CalendarBase {
   private additionalEvents: ICalendar[] = []
 
   /** List of VEVENT property-value entries */
-  private properties: string[] = []
+  public properties: string[] = []
 
   /** Key-value pair of basic calendar properties. */
   private meta: Record<string, string> = {}
