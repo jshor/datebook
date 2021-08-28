@@ -1,3 +1,18 @@
+# [7.0.0](https://github.com/jshor/datebook/compare/v6.5.9...v7.0.0) (2021-08-28)
+
+
+### Code Refactoring
+
+* **yahoo:** removes RPAT parameter ([598a53d](https://github.com/jshor/datebook/commit/598a53d8faa0dcf23b485ec6d26ef2c9eb11c3db))
+
+
+### BREAKING CHANGES
+
+* **yahoo:** removes the ability to specify recurrences with Yahoo
+calendar as this ability has been removed by Yahoo.
+
+
+
 ## [6.5.9](https://github.com/jshor/datebook/compare/v6.5.8...v6.5.9) (2021-08-28)
 
 
