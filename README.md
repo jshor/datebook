@@ -49,6 +49,8 @@ yarn add datebook
 ### Examples
 
 ```ts
+import { ICalendar } from 'datebook'
+
 const config: CalendarOptions = {
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
