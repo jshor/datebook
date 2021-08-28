@@ -1,3 +1,12 @@
+## [6.5.8](https://github.com/jshor/datebook/compare/v6.5.7...v6.5.8) (2021-08-28)
+
+
+### Bug Fixes
+
+* **ics:** fixes all-day timestamps [#157](https://github.com/jshor/datebook/issues/157) ([#158](https://github.com/jshor/datebook/issues/158)) ([25b8b7b](https://github.com/jshor/datebook/commit/25b8b7b92454187e9278373c4fd315aa20e56a27))
+
+
+
 ## [6.5.7](https://github.com/jshor/datebook/compare/v6.5.6...v6.5.7) (2021-06-29)
 
 
