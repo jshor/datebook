@@ -36,7 +36,7 @@ Returns the `OutlookCalendar` instance.
 ### Example
 
 ```ts
-outlookCalendar.setHost('outlook.office.com')
+outlookCalendar.setHost('office')
 ```
 
 ## `setParam(key: string, value: string): OutlookCalendar`
