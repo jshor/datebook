@@ -1,3 +1,7 @@
+## [7.0.6](https://github.com/jshor/datebook/compare/v7.0.5...v7.0.6) (2021-10-11)
+
+
+
 ## [7.0.5](https://github.com/jshor/datebook/compare/v7.0.4...v7.0.5) (2021-10-11)
 
 
