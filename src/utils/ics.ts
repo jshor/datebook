@@ -12,7 +12,10 @@ import { FORMAT } from '../constants'
  * @returns {string}
  */
 const formatText = (str = ''): string => {
-  return str.replace(/\n/g, '\\n')
+  return str
+    .replace(/\\/g, '\\\\')
+    .replace(/\n/g, '\\n')
+    .replace(/[,;]/g, '\\$&')
 }
 
 /**
