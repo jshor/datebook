@@ -1,9 +1,9 @@
-import * as FileSaver from 'file-saver'
-import data from './data'
-import time from './time'
-import safariFileSave from './safariFileSave'
-import CalendarRecurrence from '../types/CalendarRecurrence'
-import { FORMAT } from '../constants'
+import * as FileSaver from "file-saver";
+import data from "./data";
+import time from "./time";
+import safariFileSave from "./safariFileSave";
+import CalendarRecurrence from "../types/CalendarRecurrence";
+import { FORMAT } from "../constants";
 
 /**
  * Removes line breaks from a string. Returns an empty string if falsy.
@@ -11,9 +11,12 @@ import { FORMAT } from '../constants'
  * @param {string} [str = ''] - string to sanitize
  * @returns {string}
  */
-const formatText = (str = ''): string => {
-  return str.replace(/\n/g, '\\n')
-}
+const formatText = (str = ""): string => {
+  return str
+    .replace(/\\/g, "\\\\")
+    .replace(/\n/g, "\\n")
+    .replace(/[,;]/g, "\\$&");
+};
 
 /**
  * The name of the file will be the event title with alphanumeric chars with the extension `.ics`.
@@ -23,9 +26,9 @@ const formatText = (str = ''): string => {
  */
 const getBlob = (icsData: string): Blob => {
   return new Blob([icsData], {
-    type: 'application/octet-stream' // TODO: change to text/calendar?
-  })
-}
+    type: "application/octet-stream" // TODO: change to text/calendar?
+  });
+};
 
 /**
  * Transforms given string to be valid file name.
@@ -35,10 +38,10 @@ const getBlob = (icsData: string): Blob => {
  */
 const getFileName = (title: string): string => {
   if (!title) {
-    return 'event.ics'
+    return "event.ics";
   }
-  return `${title.replace(/[^\w ]/g, '')}.ics`
-}
+  return `${title.replace(/[^\w ]/g, "")}.ics`;
+};
 
 /**
  * Returns a random base 36 hash for iCal UID.
@@ -46,8 +49,10 @@ const getFileName = (title: string): string => {
  * @returns {string}
  */
 const getUid = (): string => {
-  return Math.random().toString(36).substr(2)
-}
+  return Math.random()
+    .toString(36)
+    .substr(2);
+};
 
 /**
  * Returns the hostname for usage in `PRODID`. Returns `datebook` in Node.js.
@@ -55,10 +60,8 @@ const getUid = (): string => {
  * @returns {string}
  */
 const getProdId = (): string => {
-  return typeof window !== 'undefined'
-    ? window.location.host
-    : 'datebook'
-}
+  return typeof window !== "undefined" ? window.location.host : "datebook";
+};
 
 /**
  * Converts the given recurrence options to RFC????
@@ -74,14 +77,14 @@ const getRrule = (recurrence: CalendarRecurrence): string => {
     WKST: recurrence.weekstart,
     BYDAY: recurrence.weekdays,
     BYMONTHDAY: recurrence.monthdays
-  }
+  };
 
   if (recurrence.end) {
-    rrule.UNTIL = time.formatDate(recurrence.end, FORMAT.FULL)
+    rrule.UNTIL = time.formatDate(recurrence.end, FORMAT.FULL);
   }
 
-  return data.toIcsParamString(rrule)
-}
+  return data.toIcsParamString(rrule);
+};
 
 /**
  * Returns true if the current browser is Safari.
@@ -89,13 +92,14 @@ const getRrule = (recurrence: CalendarRecurrence): string => {
  * @returns {boolean}
  */
 const isSafari = (): boolean => {
-  return window.hasOwnProperty('safari') || (
+  return (
+    window.hasOwnProperty("safari") ||
     // check to ensure navigator is not Chrome (which includes Safari in the user agent)
-    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
-    // browsers on iOS are wrappers around Safari, but include CriOS (Chrome), FxiOS (Firefox), etc.
-    !/(cr|fx)ios[^a-z]/i.test(navigator.userAgent)
-  )
-}
+    (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
+      // browsers on iOS are wrappers around Safari, but include CriOS (Chrome), FxiOS (Firefox), etc.
+      !/(cr|fx)ios[^a-z]/i.test(navigator.userAgent))
+  );
+};
 
 /**
  * Downloads the given ics as an iCalendar file.
@@ -104,15 +108,14 @@ const isSafari = (): boolean => {
  * @param {string} data - ics data
  */
 const download = (fileName: string, data: string): void => {
-
   if (isSafari()) {
-    safariFileSave(data, fileName)
+    safariFileSave(data, fileName);
   } else {
-    const blob = getBlob(data)
+    const blob = getBlob(data);
 
-    FileSaver.saveAs(blob, fileName)
+    FileSaver.saveAs(blob, fileName);
   }
-}
+};
 
 export default {
   formatText,
@@ -122,4 +125,4 @@ export default {
   getProdId,
   getRrule,
   download
-}
+};
