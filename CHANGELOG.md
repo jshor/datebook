@@ -1,3 +1,12 @@
+## [7.0.8](https://github.com/jshor/datebook/compare/v7.0.7...v7.0.8) (2021-12-23)
+
+
+### Bug Fixes
+
+* **ics:** escapes special characters for text types ([#183](https://github.com/jshor/datebook/issues/183)) ([ca2f348](https://github.com/jshor/datebook/commit/ca2f3480b60959afbb4dbf27134020ccf797ddf8))
+
+
+
 ## [7.0.7](https://github.com/jshor/datebook/compare/v7.0.6...v7.0.7) (2021-10-21)
 
 
