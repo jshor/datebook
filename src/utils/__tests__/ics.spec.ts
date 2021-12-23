@@ -14,16 +14,20 @@ describe('IcsUtil', () => {
   afterEach(() => jest.resetAllMocks())
 
   describe('formatText()', () => {
-    const str = 'foo\nbar\n\nbaz'
-
     it('should backslash escape newlines', () => {
-      const formatted = ics.formatText(str)
+      const formatted = ics.formatText('foo\nbar\n\nbaz')
 
       expect(formatted).toBe('foo\\nbar\\n\\nbaz')
     })
 
+    it('should backslash escape special characters', () => {
+      const formatted = ics.formatText('foo, bar, baz; qux\\ quux')
+
+      expect(formatted).toBe('foo\\, bar\\, baz\\; qux\\\\ quux')
+    })
+
     it('should return the full string if maxLength is undefined', () => {
-      const formatted = ics.formatText(str)
+      const formatted = ics.formatText('foo\nbar\n\nbaz')
 
       expect(formatted).toBe('foo\\nbar\\n\\nbaz')
     })
