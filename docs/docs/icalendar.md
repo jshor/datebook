@@ -49,7 +49,7 @@ icalendar.addEvent(secondEvent)
 
 Adds an alarm. Multiple different alarms may be added to a single instance. Returns the `ICalendar` instance.
 
-* **`alarm: Alarm`** - [Alarm options](config.md#alarms).
+* **`alarm: Alarm`** - [Alarm options](../config/alarms.md).
 
 
 ### Example
