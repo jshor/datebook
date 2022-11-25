@@ -3,18 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Datebook</title>
-    <meta name="generator" content="VuePress 1.8.2">
-    <link rel="icon" href="/assets/favicon.svg">
-    <meta name="description" content="Add events to popular calendar apps.">
-    
-    <link rel="preload" href="/assets/css/0.styles.42b493bb.css" as="style"><link rel="preload" href="/assets/js/app.443b660f.js" as="script"><link rel="preload" href="/assets/js/18.8cba54c6.js" as="script"><link rel="prefetch" href="/assets/js/1.339404b5.js"><link rel="prefetch" href="/assets/js/10.db6bccfa.js"><link rel="prefetch" href="/assets/js/11.ff8b0565.js"><link rel="prefetch" href="/assets/js/12.e0d1b283.js"><link rel="prefetch" href="/assets/js/13.1e10dd60.js"><link rel="prefetch" href="/assets/js/14.a88022dd.js"><link rel="prefetch" href="/assets/js/15.c137494b.js"><link rel="prefetch" href="/assets/js/16.c5e48f92.js"><link rel="prefetch" href="/assets/js/17.7c3b84d3.js"><link rel="prefetch" href="/assets/js/19.ca98900e.js"><link rel="prefetch" href="/assets/js/20.3674cd35.js"><link rel="prefetch" href="/assets/js/21.5d911d4b.js"><link rel="prefetch" href="/assets/js/22.0d64c9ba.js"><link rel="prefetch" href="/assets/js/23.7f605da6.js"><link rel="prefetch" href="/assets/js/24.0aa59391.js"><link rel="prefetch" href="/assets/js/25.14deddc6.js"><link rel="prefetch" href="/assets/js/26.174f916d.js"><link rel="prefetch" href="/assets/js/27.cdf8490f.js"><link rel="prefetch" href="/assets/js/28.00448294.js"><link rel="prefetch" href="/assets/js/29.3da21b78.js"><link rel="prefetch" href="/assets/js/3.02bb1008.js"><link rel="prefetch" href="/assets/js/30.15a9f817.js"><link rel="prefetch" href="/assets/js/31.60e6ea26.js"><link rel="prefetch" href="/assets/js/4.024a5858.js"><link rel="prefetch" href="/assets/js/5.8112f95e.js"><link rel="prefetch" href="/assets/js/6.b50db6ad.js"><link rel="prefetch" href="/assets/js/7.755f9521.js"><link rel="prefetch" href="/assets/js/8.08c8f98f.js"><link rel="prefetch" href="/assets/js/9.f2064f0f.js">
-    <link rel="stylesheet" href="/assets/css/0.styles.42b493bb.css">
+    <meta name="generator" content="VuePress 2.0.0-beta.53">
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html, body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme');
+			const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+				document.documentElement.classList.toggle('dark', true);
+			}
+    </script>
+    <link rel="icon" href="/assets/favicon.svg"><title> | Datebook</title><meta name="description" content="Add events to popular calendar apps.">
+    <link rel="preload" href="/assets/style.264acc0a.css" as="style" /><link rel="stylesheet" href="/assets/style.264acc0a.css" />
+    <link rel="modulepreload" href="/assets/app.c40d39d3.js"><link rel="modulepreload" href="/assets/404.html.a5a90d61.js"><link rel="modulepreload" href="/assets/404.html.d2dc3323.js"><link rel="prefetch" href="/assets/index.html.b2db4dab.js" as="script" /><link rel="prefetch" href="/assets/start.html.184b70bd.js" as="script" /><link rel="prefetch" href="/assets/google.html.6a69ec76.js" as="script" /><link rel="prefetch" href="/assets/icalendar.html.876658c1.js" as="script" /><link rel="prefetch" href="/assets/outlook.html.6caf7b7c.js" as="script" /><link rel="prefetch" href="/assets/yahoo.html.7ce45fb7.js" as="script" /><link rel="prefetch" href="/assets/alarms.html.e28a7c0f.js" as="script" /><link rel="prefetch" href="/assets/attendees.html.9d49693a.js" as="script" /><link rel="prefetch" href="/assets/basic.html.6efa0f39.js" as="script" /><link rel="prefetch" href="/assets/durations.html.bee89d86.js" as="script" /><link rel="prefetch" href="/assets/recurrence.html.e892973e.js" as="script" /><link rel="prefetch" href="/assets/index.html.1b6827d9.js" as="script" /><link rel="prefetch" href="/assets/index.html.4bad6d83.js" as="script" /><link rel="prefetch" href="/assets/start.html.14448456.js" as="script" /><link rel="prefetch" href="/assets/google.html.bc404437.js" as="script" /><link rel="prefetch" href="/assets/icalendar.html.8c82ccdd.js" as="script" /><link rel="prefetch" href="/assets/outlook.html.a8ecf1c6.js" as="script" /><link rel="prefetch" href="/assets/yahoo.html.31f3dee2.js" as="script" /><link rel="prefetch" href="/assets/alarms.html.44447216.js" as="script" /><link rel="prefetch" href="/assets/attendees.html.d49dce9e.js" as="script" /><link rel="prefetch" href="/assets/basic.html.f036d59d.js" as="script" /><link rel="prefetch" href="/assets/durations.html.09a1643f.js" as="script" /><link rel="prefetch" href="/assets/recurrence.html.445f6bdb.js" as="script" /><link rel="prefetch" href="/assets/index.html.c238c7e7.js" as="script" /><link rel="prefetch" href="/assets/Generator.86125861.js" as="script" /><link rel="prefetch" href="/assets/ConfigObject.1e03fe71.js" as="script" /><link rel="prefetch" href="/assets/Plural.f0c39a92.js" as="script" /><link rel="prefetch" href="/assets/Row.d6324f7d.js" as="script" /><link rel="prefetch" href="/assets/Basics.4cc54ffb.js" as="script" /><link rel="prefetch" href="/assets/Dates.dadc5f91.js" as="script" /><link rel="prefetch" href="/assets/Recurrence.f934db49.js" as="script" /><link rel="prefetch" href="/assets/Weekdays.0feda226.js" as="script" /><link rel="prefetch" href="/assets/Months.9fe2b338.js" as="script" /><link rel="prefetch" href="/assets/Nth.cab37520.js" as="script" />
   </head>
   <body>
-    <div id="app" data-server-rendered="true"><div class="theme-container"><div class="theme-default-content"><h1>404</h1> <blockquote>How did we get here?</blockquote> <a href="/" class="router-link-active">
-      Take me home.
-    </a></div></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.443b660f.js" defer></script><script src="/assets/js/18.8cba54c6.js" defer></script>
+    <div id="app"><!--[--><div class="theme-container"><main class="page"><div class="theme-default-content"><h1>404</h1><blockquote>Looks like we&#39;ve got some broken links.</blockquote><a href="/" class="">Take me home</a></div></main></div><!----><!--]--></div>
+    <script type="module" src="/assets/app.c40d39d3.js" defer></script>
   </body>
 </html>
