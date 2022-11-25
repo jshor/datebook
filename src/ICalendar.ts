@@ -34,7 +34,6 @@ export default class ICalendar extends CalendarBase {
     this
       .setMeta('UID', ics.getUid())
       .setMeta('DTSTAMP', time.getTimeCreated())
-      .setMeta('PRODID', ics.getProdId())
       .addProperty('CLASS', 'PUBLIC')
       .addProperty('DESCRIPTION', ics.formatText(this.description))
       .addProperty('LOCATION', ics.formatText(this.location))
@@ -111,6 +110,19 @@ export default class ICalendar extends CalendarBase {
     features.unshift(duration.after ? 'PT' : '-PT')
 
     return features.join('')
+  }
+
+  /**
+   * Returns the iCalendar meta properties, formatted as VEVENT entry lines.
+   *
+   * @returns {string[]}
+   */
+  public getMeta = (): string[] => {
+    return Object
+      .keys(this.meta)
+      .map((key: string) => {
+        return `${key}:${this.meta[key]}`
+      })
   }
 
   /**
@@ -208,28 +220,25 @@ export default class ICalendar extends CalendarBase {
    * @returns {string}
    */
   public render = (): string => {
-    const vEvents: string[] = this
-      .additionalEvents
-      .concat(this)
-      .reduce((properties: string[], calendar: ICalendar) => [
-        ...properties,
-        'BEGIN:VEVENT',
-        ...calendar.properties,
-        'END:VEVENT'
-      ], [])
+    const events = [
+      this,
+      ...this.additionalEvents
+    ]
 
-    const meta: string[] = Object
-      .keys(this.meta)
-      .map((key: string) => {
-        return `${key}:${this.meta[key]}`
-      })
+    const vEvents = events.reduce((properties: string[], calendar: ICalendar) => [
+      ...properties,
+      'BEGIN:VEVENT',
+      ...calendar.properties,
+      ...calendar.getMeta(),
+      'END:VEVENT'
+    ], [])
 
     return [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       ...vEvents,
-      'END:VCALENDAR',
-      ...meta
+      `PRODID:${ics.getProdId()}`,
+      'END:VCALENDAR'
     ].join('\n')
   }
 }

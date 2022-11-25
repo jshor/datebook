@@ -12,7 +12,7 @@ describe('time utils', () => {
     })
 
     it('should get the current time in date time format', () => {
-      expect(time.getTimeCreated()).toBe(time.formatDate(new Date(), FORMAT.DATE))
+      expect(time.getTimeCreated()).toBe(time.formatDate(new Date(), FORMAT.FULL))
     })
   })
 
