@@ -42,7 +42,7 @@ export default defineUserConfig({
       },
       {
         text: 'API',
-        link: '/api/'
+        link: '/api/icalendar'
       },
       {
         text: 'Try it',
