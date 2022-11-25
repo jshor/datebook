@@ -4,7 +4,7 @@
 
     <select
       v-if="multiple"
-      v-model.number="recurrence.scalar"
+      v-model.number="scalar"
       @change="change">
       <option value="1">first</option>
       <option value="-1">last</option>
@@ -12,17 +12,17 @@
 
     <input
       v-if="multiple"
-      v-model.number="recurrence.interval"
+      v-model.number="interval"
       @change="change"
       type="number"
       step="1"
       min="1"
       max="5"
-      size="1"
+      :size="1"
     />
 
     <select
-      v-model="recurrence.weekday"
+      v-model="weekday"
       @change="change">
       <option
         v-for="weekday in weekdays"
@@ -30,23 +30,24 @@
         :key="weekday">
         <plural
           :text="weekday"
-          :n="recurrence.interval"
+          :n="interval"
         />
       </option>
     </select>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, watch, ref } from 'vue'
 import Plural from '../displays/Plural.vue'
 
-export default {
+export default defineComponent({
   name: 'Weekdays',
   components: {
     Plural
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       required: true
     },
@@ -55,49 +56,46 @@ export default {
       default: false
     }
   },
-  data () {
-    return {
-      recurrence: {
-        scalar: 1,
-        interval: 1,
-        weekday: 'SU'
-      },
-      weekdays: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-      ]
-    }
-  },
-  methods: {
-    change () {
-      this.$emit('input', [
-        this.recurrence.scalar * this.recurrence.interval,
-        this.recurrence.weekday
+  setup (props, { emit }) {
+    const weekdays = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ]
+    const scalar = ref(1)
+    const interval = ref(1)
+    const weekday = ref('SU')
+
+    watch(() => props.modelValue, newValue => {
+      const data = newValue.match(/^([\-0-9]+)?([A-Z]{2})$/)
+
+      if (data?.length) {
+        const i = parseInt(data[1], 10)
+
+        scalar.value = i < 0 ? -1 : 1
+        interval.value = Math.abs(i || 1)
+        weekday.value = data[2]
+      }
+    }, { immediate: true })
+
+    function change () {
+      emit('update:modelValue', [
+        scalar.value * interval.value,
+        weekday.value
       ].join(''))
     }
-  },
-  watch: {
-    value: {
-      handler (newValue) {
-        const data = newValue.match(/^([\-0-9]+)?([A-Z]{2})$/)
 
-        if (data.length) {
-          const interval = parseInt(data[1], 10)
-
-          this.recurrence = {
-            scalar: interval < 0 ? -1 : 1,
-            interval: Math.abs(interval || 1),
-            weekday: data[2]
-          }
-        }
-      },
-      immediate: true
+    return {
+      weekdays,
+      scalar,
+      interval,
+      weekday,
+      change
     }
   }
-}
+})
 </script>

@@ -9,15 +9,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Row'
-}
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'Row',
+  emits: ['delete']
+})
 </script>
 
 <style>
 .row {
-  background-color: #e8e8e8;
+  background-color: var(--c-bg-lighter);
   padding: 0.5rem;
   display: flex;
   align-items: center;
@@ -27,7 +30,7 @@ export default {
 }
 
 .row__delete {
-  color: #A63232;
+  color: var(--c-danger);
   margin-right: 0.5rem;
   font-weight: bold;
   font-size: 1.5rem;
@@ -36,6 +39,6 @@ export default {
 }
 
 .row__delete:hover {
-  color: red;
+  color: var(--c-danger-text);
 }
 </style>

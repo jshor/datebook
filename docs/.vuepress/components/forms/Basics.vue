@@ -4,7 +4,7 @@
       <label for="title">Event Title</label>
       <br />
       <input
-        v-model="data.title"
+        v-model="model.title"
         type="text"
         id="title"
         class="details__input"
@@ -15,7 +15,7 @@
       <label for="location">Location</label>
       <br />
       <input
-        v-model="data.location"
+        v-model="model.location"
         type="text"
         id="location"
         class="details__input"
@@ -26,7 +26,7 @@
       <label for="description">Details</label>
       <br />
       <textarea
-        v-model="data.description"
+        v-model="model.description"
         id="description"
         class="details__textarea"
         placeholder="Give some event details..."
@@ -35,44 +35,46 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, PropType, watch, ref } from 'vue'
+import CalendarOptions from '../../../../src/types/CalendarOptions'
+
+export default defineComponent({
   name: 'Basics',
   props: {
-    value: {
-      type: Object,
+    modelValue: {
+      type: Object as PropType<CalendarOptions>,
       required: true
     }
   },
-  data () {
-    return {
-      data: {}
-    }
-  },
-  watch: {
-    value: {
-      handler (value) {
-        this.data = value
-      },
+  setup (props, { emit }) {
+    const model = ref<CalendarOptions>({
+      title: '',
+      description: '',
+      location: '',
+      start: new Date()
+    })
+
+    watch(props.modelValue, value => {
+      model.value = value
+    }, {
       immediate: true,
       deep: true
-    },
-    data: {
-      handler (value) {
-        this.$emit('input', value)
-      },
+    })
+
+    watch(model, value => {
+      emit('update:modelValue', value)
+    }, {
       immediate: true,
       deep: true
-    }
+    })
+
+    return { model }
   }
-}
+})
 </script>
 
 <style>
-.details {
-
-}
-
 .details__field {
   margin-bottom: 1rem;
 }
