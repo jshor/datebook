@@ -1,6 +1,6 @@
 {
   "name": "datebook",
-  "version": "7.0.8",
+  "version": "7.0.9",
   "description": "Generates URLs and downloads ICS files for adding events to popular calendar apps.",
   "keywords": [
     "icalendar",
