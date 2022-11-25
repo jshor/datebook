@@ -38,6 +38,33 @@ describe('ICalendar', () => {
     ].join('\n'))
   })
 
+  describe('addEvent()', () => {
+    const renderIcs = (i: number) => new ICalendar({
+      title: `Event ${i}`,
+      location: 'online',
+      description: 'Example description',
+      start: new Date('2021-09-01T17:00:00'),
+      end: new Date('2021-09-01T19:00:00')
+    })
+
+    it('should render with two additional events in the correct order', () => {
+      const ics = renderIcs(1)
+
+      ics.addEvent(renderIcs(2))
+      ics.addEvent(renderIcs(3))
+
+      const titles = ics
+        .render()
+        .match(/SUMMARY:Event [0-9]/ig)
+
+      expect(titles).toEqual([
+        'SUMMARY:Event 1',
+        'SUMMARY:Event 2',
+        'SUMMARY:Event 3'
+      ])
+    })
+  })
+
   describe('addAlarm()', () => {
     let obj: ICalendar
 
@@ -261,11 +288,11 @@ describe('ICalendar', () => {
         'TRANSP:TRANSPARENT',
         `DTSTART:${time.formatDate(baseOpts.start, FORMAT.FULL)}`,
         `DTEND:${time.formatDate(baseOpts.end, FORMAT.FULL)}`,
-        'END:VEVENT',
-        'END:VCALENDAR',
         `UID:${mockUuid}`,
         `DTSTAMP:${time.getTimeCreated()}`,
-        'PRODID:foobar'
+        'END:VEVENT',
+        'PRODID:foobar',
+        'END:VCALENDAR'
       ].join('\n')
 
       expect(rendered).toBe(expected)
@@ -291,17 +318,6 @@ describe('ICalendar', () => {
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
 
-        // second event
-        'BEGIN:VEVENT',
-        'CLASS:PUBLIC',
-        `DESCRIPTION:${secondEventOpts.description}`,
-        `LOCATION:${secondEventOpts.location}`,
-        `SUMMARY:${secondEventOpts.title}`,
-        'TRANSP:TRANSPARENT',
-        `DTSTART:${time.formatDate(secondEventOpts.start, FORMAT.FULL)}`,
-        `DTEND:${time.formatDate(baseOpts.end, FORMAT.FULL)}`,
-        'END:VEVENT',
-
         // base event
         'BEGIN:VEVENT',
         'CLASS:PUBLIC',
@@ -311,12 +327,25 @@ describe('ICalendar', () => {
         'TRANSP:TRANSPARENT',
         `DTSTART:${time.formatDate(baseOpts.start, FORMAT.FULL)}`,
         `DTEND:${time.formatDate(baseOpts.end, FORMAT.FULL)}`,
-        'END:VEVENT',
-
-        'END:VCALENDAR',
         `UID:${mockUuid}`,
         `DTSTAMP:${time.getTimeCreated()}`,
-        'PRODID:foobar'
+        'END:VEVENT',
+
+        // second event
+        'BEGIN:VEVENT',
+        'CLASS:PUBLIC',
+        `DESCRIPTION:${secondEventOpts.description}`,
+        `LOCATION:${secondEventOpts.location}`,
+        `SUMMARY:${secondEventOpts.title}`,
+        'TRANSP:TRANSPARENT',
+        `DTSTART:${time.formatDate(secondEventOpts.start, FORMAT.FULL)}`,
+        `DTEND:${time.formatDate(baseOpts.end, FORMAT.FULL)}`,
+        `UID:${mockUuid}`,
+        `DTSTAMP:${time.getTimeCreated()}`,
+        'END:VEVENT',
+
+        'PRODID:foobar',
+        'END:VCALENDAR'
       ].join('\n')
 
       expect(rendered).toBe(expected)

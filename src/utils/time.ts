@@ -123,7 +123,7 @@ const formatDateNoUtc = (d: Date = new Date(), format: string): string => {
  * @returns {string}
  */
 const getTimeCreated = (): string => {
-  return formatDate(new Date(), FORMAT.DATE)
+  return formatDate(new Date(), FORMAT.FULL)
 }
 
 /**
