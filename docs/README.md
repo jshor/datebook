@@ -2,7 +2,7 @@
 home: true
 heroImage: /assets/logo.svg
 actionText: Read the docs →
-actionLink: /docs/
+actionLink: /start
 footer: © 2023 Datebook.
 ---
 
