@@ -99,7 +99,7 @@ describe('IcsUtil', () => {
         weekstart: 'MO',
         end: new Date('2019-05-02'),
         weekdays: ['MO'],
-        monthdays: '5'
+        monthdays: [5]
       }
       const expectedRrule = [
         `FREQ=${DAILY}`,

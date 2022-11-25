@@ -15,7 +15,9 @@ type CalendarRecurrence = {
   /** The days of the week that the event should occur on. */
   weekdays?: string[]
   /** The days of the month that the event should occur on.  */
-  monthdays?: string
+  monthdays?: number[]
+  /** The month number (1-12) of the annual recurrence. */
+  month?: number
 }
 
 export default CalendarRecurrence
