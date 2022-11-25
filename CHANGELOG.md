@@ -1,3 +1,12 @@
+## [7.0.10](https://github.com/jshor/datebook/compare/v7.0.9...v7.0.10) (2022-11-25)
+
+
+### Bug Fixes
+
+* **recurrence:** adds missing months param ([e84c73e](https://github.com/jshor/datebook/commit/e84c73ebad41f42d67d3a8e45b2d46de37722e34))
+
+
+
 ## [7.0.9](https://github.com/jshor/datebook/compare/v7.0.8...v7.0.9) (2022-11-25)
 
 
