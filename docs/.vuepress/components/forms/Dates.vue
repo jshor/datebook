@@ -4,7 +4,7 @@
       <label for="start">Date start</label>
       <br />
       <input
-        v-model="start"
+        v-model="model.start"
         type="datetime-local"
         id="start"
         class="dates__input"
@@ -15,8 +15,8 @@
       <label for="end">Date end</label>
       <br />
       <input
-        v-model="end"
-        :disabled="allday"
+        v-model="model.end"
+        :disabled="isAllDay"
         type="datetime-local"
         id="end"
         class="dates__input"
@@ -37,23 +37,20 @@ export default defineComponent({
       type: Object as PropType<CalendarOptions>,
       required: true
     },
-    allday: {
+    isAllDay: {
       type: Boolean,
       default: true
     }
   },
   setup (props, { emit }) {
-    const model = ref<CalendarOptions>()
-    const start = ref('')
-    const end = ref('')
-
-    watch(() => props.allday, () => {
-      end.value = ''
-    }, { immediate: true })
+    const model = ref({
+      start: (new Date()).toISOString(),
+      end: ''
+    })
 
     watch(props.modelValue, value => {
-      start.value = (new Date(value.start)).toISOString()
-      end.value = value.end
+      model.value.start = (new Date(value.start)).toISOString()
+      model.value.end = value.end
         ? (new Date(value.end)).toISOString()
         : ''
     }, {
@@ -61,20 +58,24 @@ export default defineComponent({
       deep: true
     })
 
-    watch(model, () => {
-      emit('update:modelValue', {
-        ...props.modelValue,
-        start: new Date(start.value),
-        end: end.value
-          ? new Date(end.value)
-          : undefined
-      })
-    }, {
+    watch(() => props.isAllDay, update, { immediate: true })
+
+    watch(model, update, {
       immediate: true,
       deep: true
     })
 
-    return { start, end }
+    function update () {
+      emit('update:modelValue', {
+        ...props.modelValue,
+        start: new Date(model.value.start),
+        end: model.value.end && !props.isAllDay
+          ? new Date(model.value.end)
+          : undefined
+      })
+    }
+
+    return { model }
   }
 })
 </script>

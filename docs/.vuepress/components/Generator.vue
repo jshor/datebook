@@ -6,15 +6,15 @@
 
     <dates
       v-model="model"
-      :allday="allday"
+      :isAllDay="isAllDay"
     />
     <input
-      v-model="allday"
+      v-model="isAllDay"
       type="checkbox"
-      id="allday"
+      id="isAllDay"
       value="true"
     />
-    <label for="allday">This is an all-day event</label>
+    <label for="isAllDay">This is an all-day event</label>
 
     <div>
       <h2>Recurrence</h2>
@@ -31,7 +31,7 @@
     <recurrence
       v-if="model.recurrence"
       v-model="model.recurrence"
-      :allday="allday"
+      :isAllDay="isAllDay"
     />
 
     <h2>Result</h2>
@@ -102,7 +102,7 @@ export default defineComponent({
       description: '',
       recurrence: {}
     })
-    const allday = ref(true)
+    const isAllDay = ref(true)
     const isRecurring = ref(true)
     const calendars = {
       'Google': GoogleCalendar,
@@ -128,7 +128,7 @@ export default defineComponent({
     }
 
     return {
-      allday,
+      isAllDay,
       isRecurring,
       model,
       serviceUrls,
