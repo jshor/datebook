@@ -1,3 +1,12 @@
+## [7.0.11](https://github.com/jshor/datebook/compare/v7.0.10...v7.0.11) (2022-11-25)
+
+
+### Bug Fixes
+
+* **ics:** corrects multi-event order [#194](https://github.com/jshor/datebook/issues/194), metadata [#201](https://github.com/jshor/datebook/issues/201) ([08f971f](https://github.com/jshor/datebook/commit/08f971f4c114f009ac5b22a21822dad1a115c67e))
+
+
+
 ## [7.0.10](https://github.com/jshor/datebook/compare/v7.0.9...v7.0.10) (2022-11-25)
 
 
