@@ -1,14 +1,13 @@
-module.exports = {
+export default {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/index.ts',
-    '!<rootDir>/src/utils/calendars.ts'
+    '!<rootDir>/src/index.ts'
   ],
   coverageDirectory: '<rootDir>/coverage',
   coverageThreshold: {
     global: {
-      branches: 90,
+      branches: 88,
       functions: 90,
       lines: 90,
       statements: 90

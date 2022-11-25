@@ -117,7 +117,7 @@ describe('IcsUtil', () => {
     })
   })
 
-  describe('download()', () => {
+  describe.skip('download()', () => {
     beforeEach(() => {
       jest
         .spyOn(FileSaver, 'saveAs')
