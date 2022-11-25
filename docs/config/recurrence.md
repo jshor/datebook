@@ -107,7 +107,7 @@ The day of the week to denote when the the week starts on.
 
 An example where the days generated makes a difference because of `weekstart`:
 
-```js
+```ts
 {
   frequency: 'WEEKLY',
   interval: 2,
@@ -121,7 +121,7 @@ This will generate a recurrence that occurs on August 5, 10, 19, and 24.
 
 However, changing `weekstart` from `MO` to `SU`:
 
-```js
+```ts
 {
   frequency: 'WEEKLY',
   interval: 2,
@@ -137,7 +137,7 @@ This will instead generate a recurrence that occurs on August 5, 10, 19, and 31.
 
 In the following example, the invalid date of February 30 will be ignored.
 
-```js
+```ts
 {
   frequency: 'MONTHLY',
   interval: 2,

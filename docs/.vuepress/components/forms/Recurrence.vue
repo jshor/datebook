@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2>Frequency</h2>
+    <h3>Frequency</h3>
 
     <span>Repeat this event</span>
 
-    <select v-model="recurrence.frequency">
+    <select v-model="model.frequency">
       <option
         v-for="frequency in frequencies"
         :key="frequency"
@@ -13,102 +13,107 @@
       </option>
     </select>
 
-    <p v-if="recurrence.frequency !== 'DAILY'">
+    <p v-if="model.frequency !== 'DAILY'">
       <input
-        v-model="recurrence.byType.weekdays"
-        @change="changeByType('monthdays')"
-        :value="true"
+        v-model="options.hasWeekdays"
+        @change="options.hasMonthdays = false"
         type="checkbox"
         id="byWeekdays"
-        value="1"
       />
       <label for="byWeekdays">By days of the week</label>
 
       <br />
 
       <input
-        v-model="recurrence.byType.monthdays"
-        @change="changeByType('weekdays')"
-        :value="true"
+        v-model="options.hasMonthdays"
+        @change="options.hasWeekdays = false"
         type="checkbox"
         id="byMonthdays"
-        value="1"
       />
       <label for="byMonthdays">By days of the month</label>
     </p>
 
-    <h2>Interval</h2>
 
-    <span>Repeat every</span>
-    <input
-      v-model.number="recurrence.interval"
-      type="number"
-      min="1"
-      step="1"
-      size="1"
-      class="input"
-    />
-    <plural
-      :text="intervalType"
-      :n="recurrence.interval"
-    />
+    <div>
+      <h3>Interval</h3>
 
-    <div v-if="recurrence.frequency === 'YEARLY'">
-      <h2>Months of the year</h2>
-
-      Repeat every <months v-model.number="recurrence.month" />
+      <span>Repeat every</span>
+      <input
+        v-model.number="model.interval"
+        type="number"
+        min="1"
+        step="1"
+        :size="1"
+        class="input"
+      />
+      <plural
+        :text="intervalType"
+        :n="model.interval"
+      />
     </div>
 
-    <div v-if="recurrence.frequency !== 'DAILY'">
-      <div v-if="recurrence.byType.weekdays">
-        <h2>Days of the week</h2>
+    <div v-if="model.frequency === 'YEARLY'">
+      <h3>Months of the year</h3>
+
+      <input
+        v-model="options.byMonth"
+        type="checkbox"
+        id="byWeekdays"
+      />
+      <label for="byMonth">
+        Repeat every <months v-model.number="months" />
+      </label>
+    </div>
+
+    <div v-if="model.frequency !== 'DAILY'">
+      <div v-if="options.hasWeekdays">
+        <h3>Days of the week</h3>
 
         <row
-          v-for="(weekday, key) in recurrence.weekdays"
+          v-for="(_, key) in weekdays"
           :key="key"
-          @delete="remove('weekdays', key)">
+          @delete="weekdays.splice(key, 1)">
           <weekdays
-            v-model="recurrence.weekdays[key]"
-            :multiple="recurrence.frequency !== 'WEEKLY'"
+            v-model="weekdays[key]"
+            :multiple="model.frequency !== 'WEEKLY'"
           />
         </row>
 
-        <a @click="add('weekdays', 'SU')">+ Add a day of the week</a>
+        <a @click="weekdays.push('SU')">+ Add a day of the week</a>
       </div>
 
-      <div v-if="recurrence.byType.monthdays">
-        <h2>Days of the month</h2>
+      <div v-if="options.hasMonthdays">
+        <h3>Days of the month</h3>
 
         <row
-          v-for="(monthday, key) in recurrence.monthdays"
+          v-for="(_, key) in monthdays"
           :key="key"
-          @delete="remove('monthdays', key)">
+          @delete="monthdays.splice(key, 1)">
           <nth
-            v-model="recurrence.monthdays[key]"
+            v-model="monthdays[key]"
             :range="31"
             type="day of the month"
           />
         </row>
 
-        <a @click="add('monthdays', 1)">+ Add a day of the month</a>
+        <a @click="monthdays.push(1)">+ Add a day of the month</a>
       </div>
     </div>
 
-    <h2>Repeats until</h2>
+    <h3>Repeats until</h3>
 
     <p>
       <input
-        v-model="recurrence.byRepeat.untilDate"
-        @change="changeByRepeat('count')"
-        :value="true"
+        v-model="options.hasEndDate"
+        @change="options.hasCount = false"
         type="checkbox"
         id="repeatUntilDate"
       />
       <label for="repeatUntilDate">A specific date</label>
       <input
-        v-show="recurrence.byRepeat.untilDate"
-        v-model="recurrence.until"
-        :disabled="!recurrence.byRepeat.untilDate"
+        v-show="options.hasEndDate"
+        v-model="until"
+        :disabled="!options.hasEndDate"
         type="date"
         placeholder="yyyy/mm/dd"
       />
@@ -116,34 +121,35 @@
       <br />
 
       <input
-        v-model="recurrence.byRepeat.count"
-        @change="changeByRepeat('untilDate')"
-        :value="true"
+        v-model="options.hasCount"
+        @change="options.hasEndDate = false"
         type="checkbox"
         id="repeatUntilcount"
       />
       <label for="repeatUntilcount">A number of occurrences</label>
       <input
-        v-show="recurrence.byRepeat.count"
-        v-model.number="recurrence.count"
+        v-show="options.hasCount"
+        v-model.number="model.count"
         type="number"
         min="1"
         step="1"
-        size="1"
+        :size="1"
         class="input"
       />
     </p>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, PropType, computed, watch, ref } from 'vue'
+import CalendarRecurrence from '../../../../src/types/CalendarRecurrence'
 import Months from '../inputs/Months.vue'
 import Nth from '../inputs/Nth.vue'
 import Plural from '../displays/Plural.vue'
 import Row from '../displays/Row.vue'
 import Weekdays from './Weekdays.vue'
 
-export default {
+export default defineComponent({
   name: 'Recurrence',
   components: {
     Months,
@@ -153,59 +159,95 @@ export default {
     Weekdays
   },
   props: {
-    value: {
-      type: Object,
+    modelValue: {
+      type: Object as PropType<CalendarRecurrence>,
       required: true
     }
   },
-  data () {
-    return {
-      frequencies: [
-        'DAILY',
-        'WEEKLY',
-        'MONTHLY',
-        'YEARLY'
-      ],
-      recurrence: {}
+  setup (_, { emit }) {
+    const frequencies = [
+      'DAILY',
+      'WEEKLY',
+      'MONTHLY',
+      'YEARLY'
+    ]
+    const model = ref<CalendarRecurrence>({
+      interval: 1,
+      count: 1,
+      frequency: 'DAILY'
+    })
+    const months = ref(1)
+    const options = ref({
+      hasEndDate: false,
+      hasCount: false,
+      byMonth: false,
+      hasWeekdays: false,
+      hasMonthdays: false
+    })
+    const monthdays = ref<number[]>([])
+    const weekdays = ref<string[]>([])
+    const until = ref('')
+    const refs = [
+      model,
+      months,
+      options,
+      monthdays,
+      weekdays,
+      until
+    ]
+
+    const intervalType = computed(() => {
+      return model.value.frequency!
+        .toLowerCase()
+        .replace('ly', '')
+        .replace('dai', 'day')
+    })
+
+    function getRecurrence (): CalendarRecurrence {
+      const recurrence: CalendarRecurrence = { ...model.value }
+
+      if (model.value.frequency !== 'DAILY' && weekdays.value.length) {
+        if (options.value.hasWeekdays && weekdays.value.length) {
+          recurrence.weekdays = weekdays.value
+        }
+
+        if (options.value.hasMonthdays && monthdays.value.length) {
+          recurrence.monthdays = monthdays.value
+        }
+      }
+
+      if (model.value.frequency === 'YEARLY' && options.value.byMonth) {
+        recurrence.month = months.value
+      }
+
+      if (options.value.hasEndDate && until.value) {
+        recurrence.end = new Date(until.value)
+      }
+
+      if (!options.value.hasCount) {
+        delete recurrence.count
+      }
+
+      return recurrence
     }
-  },
-  computed: {
-    intervalType () {
-      return this.recurrence.frequency === 'DAILY'
-        ? 'day'
-        : this.recurrence.frequency
-          .toLowerCase()
-          .replace('ly', '')
-    }
-  },
-  methods: {
-    changeByType (type, value) {
-      this.recurrence.byType[type] = false
-    },
-    changeByRepeat (type, value) {
-      this.recurrence.byRepeat[type] = false
-    },
-    add (type, value) {
-      this.recurrence[type].push(value)
-    },
-    remove (type, index) {
-      this.recurrence[type].splice(index, 1)
-    }
-  },
-  watch: {
-    value: {
-      handler (value) {
-        this.recurrence = value
-      },
+
+    refs.forEach(ref => watch(ref, () => {
+      emit('update:modelValue', getRecurrence())
+    }, {
       immediate: true,
       deep: true
-    },
-    recurrence: {
-      handler (value) {
-        this.$emit('input', value)
-      },
-      deep: true
+    }))
+
+    return {
+      frequencies,
+      model,
+      options,
+      months,
+      monthdays,
+      weekdays,
+      until,
+      intervalType
     }
   }
-}
+})
 </script>

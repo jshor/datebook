@@ -4,8 +4,10 @@
   </span>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'Plural',
   props: {
     text: {
@@ -17,5 +19,5 @@ export default {
       default: 1
     }
   }
-}
+})
 </script>

@@ -2,6 +2,7 @@ node_modules
 coverage
 .idea
 .cache
+.temp
 dist
 build
 npm-debug.log

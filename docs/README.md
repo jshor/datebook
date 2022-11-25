@@ -3,7 +3,7 @@ home: true
 heroImage: /assets/logo.svg
 actionText: Read the docs →
 actionLink: /docs/
-footer: © 2021 Datebook.
+footer: © 2023 Datebook.
 ---
 
 <div class="features">
@@ -29,7 +29,7 @@ yarn add datebook
 
 ### Example usage
 
-```js
+```ts
 import { ICalendar } from 'datebook'
 
 const icalendar = new ICalendar({

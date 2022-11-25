@@ -1,12 +1,6 @@
-# Documentation
+# Getting started
 
-Datebook supports the creation of `.ics` files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Online.
-
-## Demo
-
-Try the [online calendar generators →](/generators/)
-
-## Basic Usage
+## Basic usage
 
 ### Installation
 
@@ -14,7 +8,7 @@ Try the [online calendar generators →](/generators/)
 yarn add datebook
 ```
 
-### Example Usage
+### Example usage
 
 ```ts
 import { ICalendar } from 'datebook'
@@ -45,7 +39,7 @@ This will download `Happy Hour.ics` onto the user's device. On most mobile devic
 
 #### Google Calendar
 
-```js
+```ts
 import { GoogleCalendar } from 'datebook'
 
 const googleCalendar = new GoogleCalendar(config)

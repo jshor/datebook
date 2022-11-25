@@ -4,7 +4,7 @@
       <label for="start">Date start</label>
       <br />
       <input
-        v-model="data.start"
+        v-model="start"
         type="datetime-local"
         id="start"
         class="dates__input"
@@ -15,7 +15,7 @@
       <label for="end">Date end</label>
       <br />
       <input
-        v-model="data.end"
+        v-model="end"
         :disabled="allday"
         type="datetime-local"
         id="end"
@@ -26,12 +26,15 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, PropType, watch, ref } from 'vue'
+import CalendarOptions from '../../../../src/types/CalendarOptions'
+
+export default defineComponent({
   name: 'Dates',
   props: {
-    value: {
-      type: Object,
+    modelValue: {
+      type: Object as PropType<CalendarOptions>,
       required: true
     },
     allday: {
@@ -39,34 +42,41 @@ export default {
       default: true
     }
   },
-  data () {
-    return {
-      data: {}
-    }
-  },
-  watch: {
-    value: {
-      handler (value) {
-        this.data = value
-      },
+  setup (props, { emit }) {
+    const model = ref<CalendarOptions>()
+    const start = ref('')
+    const end = ref('')
+
+    watch(() => props.allday, () => {
+      end.value = ''
+    }, { immediate: true })
+
+    watch(props.modelValue, value => {
+      start.value = (new Date(value.start)).toISOString()
+      end.value = value.end
+        ? (new Date(value.end)).toISOString()
+        : ''
+    }, {
       immediate: true,
       deep: true
-    },
-    data: {
-      handler (value) {
-        this.$emit('input', value)
-      },
+    })
+
+    watch(model, () => {
+      emit('update:modelValue', {
+        ...props.modelValue,
+        start: new Date(start.value),
+        end: end.value
+          ? new Date(end.value)
+          : undefined
+      })
+    }, {
       immediate: true,
       deep: true
-    },
-    allday: {
-      handler () {
-        this.data.end = ''
-      },
-      immediate: true
-    }
+    })
+
+    return { start, end }
   }
-}
+})
 </script>
 
 <style>

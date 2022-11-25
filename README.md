@@ -23,7 +23,7 @@
     src="http://img.shields.io/npm/v/datebook.svg?style=for-the-badge"
     alt="npm version"
   /></a> <a href="https://bundlephobia.com/result?p=datebook"><img
-    src="https://img.shields.io/bundlephobia/min/datebook?style=for-the-badge"
+    src="https://img.shields.io/bundlephobia/minzip/datebook?style=for-the-badge"
     alt="npm package size"
   /></a>
 </p>
@@ -132,7 +132,7 @@ This will [download](https://datebook.dev/docs/icalendar.html#download) `Happy H
 
 #### Google Calendar
 
-```js
+```ts
 const googleCalendar = new GoogleCalendar(config)
 
 googleCalendar.render()
