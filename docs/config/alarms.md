@@ -1,6 +1,6 @@
 # Alarms <Badge text="6.0.0" vertical="middle" />
 
-`ICSAlarm`s are used for [iCalendar event alarms](../docs/icalendar.md#addalarmalarm-alarm-badge-text"600"-vertical"middle") and are often used for reminders before an event occurs.
+`ICSAlarm`s are used for [iCalendar event alarms](../api/icalendar.md#addalarm-alarm-alarm) and are often used for reminders before an event occurs.
 
 ### Example
 

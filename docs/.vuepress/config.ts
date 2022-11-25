@@ -64,7 +64,7 @@ export default defineUserConfig({
           },
           {
             text: 'Attendees',
-            link: '/config/axttendees.md'
+            link: '/config/attendees.md'
           },
           {
             text: 'Recurrences',

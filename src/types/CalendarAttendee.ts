@@ -1,8 +1,8 @@
 import ICSAttendeeOptions from './ICSAttendeeOptions'
+
 /**
  * Basic Attendee Object
  */
-
 type CalendarAttendee = {
     /** The attendee's email address */
     email: string

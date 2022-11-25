@@ -32,11 +32,11 @@
 
 ## Documentation
 
-[Read the docs →](https://datebook.dev/docs/)
+[Read the docs →](https://datebook.dev/start)
 
 ## Demo
 
-Try the [online calendar generators →](https://datebook.dev/generators/)
+Try the [online calendar generator →](https://datebook.dev/generator/)
 
 ## Quick Start
 
@@ -87,6 +87,7 @@ const icalendar = new ICalendar(config)
 ```ts
 icalendar
   .addAlarm({
+    action: 'DISPLAY',
     description: 'Remember this event'
     trigger: {
       minutes: 10
@@ -94,7 +95,7 @@ icalendar
   })
 ```
 
-This will add a [reminder](https://datebook.dev/docs/) that shows 10 minutes before the event.
+This will add a [reminder alarm](https://datebook.dev/config/alarms.html) that shows 10 minutes before the event.
 
 ##### With multiple events
 
@@ -112,7 +113,7 @@ const secondEvent = new ICalendar({
 icalendar.addEvent(secondEvent)
 ```
 
-This will add a [second event](https://datebook.dev/docs/icalendar.html#addevent-icalendar-icalendar) to the same `.ics` file.
+This will add a [second event](https://datebook.dev/api/icalendar.html#addevent-icalendar-icalendar) to the same `.ics` file.
 
 ##### Adding other ICS properties
 
@@ -120,7 +121,7 @@ This will add a [second event](https://datebook.dev/docs/icalendar.html#addevent
 icalendar.addProperty('CATEGORIES', 'MEETINGS,MANAGEMENT')
 ```
 
-This will [add the `CATEGORIES` ICS property](https://datebook.dev/docs/icalendar.html#addproperty-key-string-value-icspropertyvalue) to the iCalendar instance.
+This will [add the `CATEGORIES` ICS property](https://datebook.dev/api/icalendar.html#addproperty-key-string-value-icspropertyvalue) to the iCalendar instance.
 
 ##### Downloading
 
@@ -128,7 +129,7 @@ This will [add the `CATEGORIES` ICS property](https://datebook.dev/docs/icalenda
 icalendar.download()
 ```
 
-This will [download](https://datebook.dev/docs/icalendar.html#download) `Happy Hour.ics` onto the user's device. On most mobile devices, this will open the default calendar app with the event.
+This will [download](https://datebook.dev/api/icalendar.html#download) `Happy Hour.ics` onto the user's device. On most mobile devices, this will open the default calendar app with the event.
 
 #### Google Calendar
 
@@ -138,7 +139,7 @@ const googleCalendar = new GoogleCalendar(config)
 googleCalendar.render()
 ```
 
-[`googleCalendar.render()`](https://datebook.dev/docs/google.html#render) will return a URL that the user can navigate to and pre-fill event details:
+[`googleCalendar.render()`](https://datebook.dev/api/google.html#render) will return a URL that the user can navigate to and pre-fill event details:
 
 ```
 https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20220708T190000%2F20220708T230000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1
