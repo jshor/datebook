@@ -2699,7 +2699,7 @@ esbuild-windows-arm64@0.15.15:
   resolved "https://registry.yarnpkg.com/esbuild-windows-arm64/-/esbuild-windows-arm64-0.15.15.tgz#5a277ce10de999d2a6465fc92a8c2a2d207ebd31"
   integrity sha512-ttuoCYCIJAFx4UUKKWYnFdrVpoXa3+3WWkXVI6s09U+YjhnyM5h96ewTq/WgQj9LFSIlABQvadHSOQyAVjW5xQ==
 
-esbuild@^0.15.12, esbuild@^0.15.9:
+esbuild@^0.15.12, esbuild@^0.15.15, esbuild@^0.15.9:
   version "0.15.15"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.15.15.tgz#503b70bdc18d72d8fc2962ed3ab9219249e58bbe"
   integrity sha512-TEw/lwK4Zzld9x3FedV6jy8onOUHqcEX3ADFk4k+gzPUwrxn8nWV62tH0udo8jOtjFodlEfc4ypsqX3e+WWO6w==
@@ -5651,7 +5651,7 @@ vue@^3.2.37, vue@^3.2.41:
     "@vue/server-renderer" "3.2.45"
     "@vue/shared" "3.2.45"
 
-vuepress-vite@2.0.0-beta.50-pre.1:
+vuepress-vite@2.0.0-beta.53:
   version "2.0.0-beta.53"
   resolved "https://registry.yarnpkg.com/vuepress-vite/-/vuepress-vite-2.0.0-beta.53.tgz#6724d5edd99df2d494a8145206192e4cc88e9b9a"
   integrity sha512-kITVMM+LcV5mDQXQXAKgK0adAGMm7oyPls6HPTLM9gUvpSs2A19zfwf8zFoxIF9X+ANay4Tg87egtnJOcp8Wcg==
@@ -5666,7 +5666,7 @@ vuepress@^2.0.0-beta.53:
   resolved "https://registry.yarnpkg.com/vuepress/-/vuepress-2.0.0-beta.50-pre.1.tgz#26eec90444bb37590f29d10dd5923e75c476189f"
   integrity sha512-4Finc3GDscIqgRFAZFwa4SUm8tIFSVQIxnPIpQPW3kaM37rKylvUDkLrs2lMvoDPTAAE+Kf+v34tAFX+ZMGKUg==
   dependencies:
-    vuepress-vite "2.0.0-beta.50-pre.1"
+    vuepress-vite "2.0.0-beta.53"
 
 walker@^1.0.8:
   version "1.0.8"

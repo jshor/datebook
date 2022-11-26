@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "target": "es5",
+    "lib": ["es5", "es6", "dom"],
+    "outFile": "./dist/datebook.js",
+    "module": "System",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "allowJs": true,
     "declaration": true,
