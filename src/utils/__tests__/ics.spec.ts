@@ -30,29 +30,6 @@ describe('IcsUtil', () => {
     })
   })
 
-  describe('getBlob()', () => {
-    it('should set the MIME type as `application/octet-stream`', () => {
-      const icsData = 'foobar'
-      const blob: Blob = ics.getBlob(icsData)
-
-      expect(blob.type).toEqual('application/octet-stream')
-    })
-  })
-
-  describe('getFileName()', () => {
-    it('should return event.ics if no title is specified', () => {
-      expect(ics.getFileName('')).toBe('event.ics')
-    })
-
-    it('should remove all non-alphanumeric except underscore', () => {
-      const testTitle = 'abcdef_ABCDEF1234567890-.,/[])(!@*#$^%^'
-      const expectedFileName = 'abcdef_ABCDEF1234567890.ics'
-      const filename = ics.getFileName(testTitle)
-
-      expect(filename).toBe(expectedFileName)
-    })
-  })
-
   describe('getUid()', () => {
     it('should return a base-32 random UID', () => {
       jest
@@ -111,56 +88,6 @@ describe('IcsUtil', () => {
       const actualRrule = ics.getRrule(recurrence)
 
       expect(actualRrule).toBe(expectedRrule)
-    })
-  })
-
-  describe.skip('download()', () => {
-    beforeEach(() => {
-      jest
-        .spyOn(FileSaver, 'saveAs')
-        .mockImplementation(jest.fn())
-    })
-
-    afterEach(() => {
-      Object.defineProperty(window, 'navigator', {
-        value: {
-          userAgent: 'trident'
-        },
-        writable: true
-      })
-    })
-
-    it('should invoke FileSaver.saveAs() on iOS Chrome', () => {
-      Object.defineProperty(navigator, 'userAgent', {
-        value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1',
-        writable: true
-      })
-
-      ics.download('july 4.ics', 'foobar')
-
-      expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
-    })
-
-    it('should invoke FileSaver.saveAs() on iOS Firefox', () => {
-      Object.defineProperty(navigator, 'userAgent', {
-        value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/11.0b9935 Mobile/15E216 Safari/605.1.15',
-        writable: true
-      })
-
-      ics.download('july 4.ics', 'foobar')
-
-      expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
-    })
-
-    it('should invoke FileSaver.saveAs() on non-iOS browsers', () => {
-      Object.defineProperty(navigator, 'userAgent', {
-        value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.74 Safari/537.36 Edg/79.0.309.43',
-        writable: true
-      })
-
-      ics.download('july 4.ics', 'foobar')
-
-      expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
     })
   })
 })

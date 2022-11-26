@@ -204,22 +204,6 @@ export default class ICalendar extends CalendarBase {
   }
 
   /**
-   * Downloads the rendered iCalendar.
-   *
-   * @deprecated This method will be removed in the next major release. See {@link https://datebook.dev/api/icalendar.html#example-for-downloading-an-ics-file}.
-   * @remark Only works in browsers.
-   * @param {string} fileName optional explicit file name, if not provided then will be constructed from title
-   */
-  public download = (fileName?: string): void => {
-    console.warn([
-      'ICalendar.download() is deprecated and will be removed in the next major release.',
-      'See https://datebook.dev/api/icalendar.html#example-for-downloading-an-ics-file for more info on how to download ICS files.'
-    ].join(' '))
-
-    ics.download(fileName || ics.getFileName(this.title), this.render())
-  }
-
-  /**
    * Generates the iCalendar data.
    *
    * @returns {string}

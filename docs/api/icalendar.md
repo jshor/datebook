@@ -216,13 +216,3 @@ const blob = new Blob([ics], {
 
 FileSaver.saveAs(blob, 'my-calendar-event.ics')
 ```
-
-## `download(fileName?: string)` <Badge text="Deprecated" type="warning" vertical="middle" />
-
-* **`fileName: string`** - optional file name
-
-Downloads a `.ics` file on the user's browser for use in local calendars and email clients.
-
-:::warning Deprecation Notice
-This feature is deprecated and will be removed in v8.
-:::

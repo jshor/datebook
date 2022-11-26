@@ -18,33 +18,6 @@ const formatText = (str = ''): string => {
 }
 
 /**
- * The name of the file will be the event title with alphanumeric chars with the extension `.ics`.
- *
- * @deprecated
- * @param {string} icsData
- * @returns {Blob}
- */
-const getBlob = (icsData: string): Blob => {
-  return new Blob([icsData], {
-    type: 'application/octet-stream' // TODO: change to text/calendar?
-  })
-}
-
-/**
- * Transforms given string to be valid file name.
- *
- * @deprecated
- * @param {string} title
- * @returns {string}
- */
-const getFileName = (title: string): string => {
-  if (!title) {
-    return 'event.ics'
-  }
-  return `${title.replace(/[^\w ]/g, '')}.ics`
-}
-
-/**
  * Returns a random base 36 hash for iCal UID.
  *
  * @returns {string}
@@ -87,25 +60,9 @@ const getRrule = (recurrence: CalendarRecurrence): string => {
   return data.toIcsParamString(rrule)
 }
 
-/**
- * Downloads the given ics as an iCalendar file.
- *
- * @deprecated
- * @param {string} fileName - filename of the event file
- * @param {string} data - ics data
- */
-const download = (fileName: string, data: string): void => {
-  const blob = getBlob(data)
-
-  FileSaver.saveAs(blob, fileName)
-}
-
 export default {
   formatText,
-  getBlob,
-  getFileName,
   getUid,
   getProdId,
-  getRrule,
-  download
+  getRrule
 }

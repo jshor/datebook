@@ -28,23 +28,19 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "test": "jest",
     "lint": "yarn eslint ./src",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "release": "standard-version -n"
   },
-  "dependencies": {
-    "file-saver": "^2.0.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
-    "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^9.0.2",
-    "@types/file-saver": "^2.0.5",
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
