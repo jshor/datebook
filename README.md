@@ -8,7 +8,7 @@
 
 <p align="center">A library for adding events to popular calendar apps.</p>
 
-<p align="center">It provides full support for .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Web.</p>
+<p align="center">It provides full support for rendering .ics file content for iCalendar and Office Outlook, and also supports URL generation for Google Calendar, Yahoo! Calendar, and Outlook Web.</p>
 
 <br>
 
@@ -123,13 +123,13 @@ icalendar.addProperty('CATEGORIES', 'MEETINGS,MANAGEMENT')
 
 This will [add the `CATEGORIES` ICS property](https://datebook.dev/api/icalendar.html#addproperty-key-string-value-icspropertyvalue) to the iCalendar instance.
 
-##### Downloading
+##### Rendering ICS file content
 
 ```ts
-icalendar.render()
+const content = icalendar.render()
 ```
 
-This will render ICS file content that could be [downloaded for use in iCalendar apps](https://datebook.dev/downloading).
+This will render ICS file content which can be [downloaded onto the user's device](https://datebook.dev/api/icalendar.html#example-for-downloading-an-ics-file) for use in local calendar apps.
 
 #### Google Calendar
 
