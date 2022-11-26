@@ -30,7 +30,7 @@ export default defineUserConfig({
     logo: '/assets/logo.svg',
     repo: 'jshor/datebook',
     docsDir: 'docs',
-    sidebarDepth: 3,
+    sidebarDepth: 4,
     navbar: [
       {
         text: 'Getting started',

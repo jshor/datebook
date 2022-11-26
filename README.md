@@ -126,10 +126,10 @@ This will [add the `CATEGORIES` ICS property](https://datebook.dev/api/icalendar
 ##### Downloading
 
 ```ts
-icalendar.download()
+icalendar.render()
 ```
 
-This will [download](https://datebook.dev/api/icalendar.html#download) `Happy Hour.ics` onto the user's device. On most mobile devices, this will open the default calendar app with the event.
+This will render ICS file content that could be [downloaded for use in iCalendar apps](https://datebook.dev/downloading).
 
 #### Google Calendar
 
@@ -144,11 +144,3 @@ googleCalendar.render()
 ```
 https://calendar.google.com/calendar/render?action=TEMPLATE&text=Happy%20Hour&details=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&dates=20220708T190000%2F20220708T230000&recur=RRULE%3AFREQ%3DWEEKLY%3BINTERVAL%3D1
 ```
-
-## Browser Support
-
-The latest versions of all major browsers are supported.
-
-| <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png?raw=true" width="48px" height="48px" alt="Chrome logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png?raw=true" width="48px" height="48px" alt="Firefox logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_128x128.png" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_128x128.png" width="48px" height="48px" alt="Edge Browser Logo" > | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_128x128.png?raw=true" width="48px" height="48px" alt="Opera logo"> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_128x128.png?raw=true" width="48px" height="48px" alt="Safari logo">
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| Yes ✅ | 20+ ✅ | 11+ ✅ | Yes ✅ | 15+ ✅ | 10.1+ ✅
