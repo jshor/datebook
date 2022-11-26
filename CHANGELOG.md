@@ -1,3 +1,14 @@
+# [7.1.0](https://github.com/jshor/datebook/compare/v7.0.11...v7.1.0) (2022-11-26)
+
+
+### Features
+
+* **build:** exports UMD, ESM, and CJS [#181](https://github.com/jshor/datebook/issues/181) [#203](https://github.com/jshor/datebook/issues/203) ([dcb97e4](https://github.com/jshor/datebook/commit/dcb97e42e18809376be12e343636fcb69d924808))
+* **ics:** deprecates download() method [#196](https://github.com/jshor/datebook/issues/196) ([f445fa5](https://github.com/jshor/datebook/commit/f445fa56a846c4d6c8f49634619473b1c2e2d63e))
+* **module:** changes build from UMD to SystemJS [#181](https://github.com/jshor/datebook/issues/181), [#203](https://github.com/jshor/datebook/issues/203) ([b09fe2d](https://github.com/jshor/datebook/commit/b09fe2dc13317dcdd58d1efc170516cc5f31e4e0))
+
+
+
 ## [7.0.11](https://github.com/jshor/datebook/compare/v7.0.10...v7.0.11) (2022-11-25)
 
 

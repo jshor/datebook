@@ -1,6 +1,6 @@
 {
   "name": "datebook",
-  "version": "7.0.11",
+  "version": "7.1.0",
   "description": "Generates URLs and ICS file content for adding events to popular calendar apps.",
   "keywords": [
     "icalendar",
@@ -24,7 +24,9 @@
   "main": "dist/datebook.umd.min.js",
   "module": "dist/datebook.esm.min.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
