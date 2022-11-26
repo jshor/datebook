@@ -1,10 +1,7 @@
 import * as FileSaver from 'file-saver'
 import ics from '../ics'
 import time from '../time'
-import safariFileSave from '../safariFileSave'
 import { FORMAT, RECURRENCE } from '../../constants'
-
-jest.mock('../safariFileSave')
 
 const {
   FREQUENCY: { DAILY }
@@ -133,70 +130,37 @@ describe('IcsUtil', () => {
       })
     })
 
-    describe('on non-Safari browsers', () => {
-      it('should invoke FileSaver.saveAs() on iOS Chrome', () => {
-        Object.defineProperty(navigator, 'userAgent', {
-          value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1',
-          writable: true
-        })
-
-        ics.download('july 4.ics', 'foobar')
-
-        expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
-        expect(safariFileSave).not.toHaveBeenCalled()
+    it('should invoke FileSaver.saveAs() on iOS Chrome', () => {
+      Object.defineProperty(navigator, 'userAgent', {
+        value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1',
+        writable: true
       })
 
-      it('should invoke FileSaver.saveAs() on iOS Firefox', () => {
-        Object.defineProperty(navigator, 'userAgent', {
-          value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/11.0b9935 Mobile/15E216 Safari/605.1.15',
-          writable: true
-        })
+      ics.download('july 4.ics', 'foobar')
 
-        ics.download('july 4.ics', 'foobar')
-
-        expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
-        expect(safariFileSave).not.toHaveBeenCalled()
-      })
-
-      it('should invoke FileSaver.saveAs() on non-iOS browsers', () => {
-        Object.defineProperty(navigator, 'userAgent', {
-          value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.74 Safari/537.36 Edg/79.0.309.43',
-          writable: true
-        })
-
-        ics.download('july 4.ics', 'foobar')
-
-        expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
-        expect(safariFileSave).not.toHaveBeenCalled()
-      })
+      expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
     })
 
-    describe('on Safari', () => {
-      it('should invoke safariFileSave() if the user agent contains `safari`', () => {
-        Object.defineProperty(navigator, 'userAgent', {
-          value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A356 Safari/604.1',
-          writable: true
-        })
-
-        ics.download('july 4.ics', 'foobar')
-
-        expect(FileSaver.saveAs).not.toHaveBeenCalled()
-        expect(safariFileSave).toHaveBeenCalledTimes(1)
+    it('should invoke FileSaver.saveAs() on iOS Firefox', () => {
+      Object.defineProperty(navigator, 'userAgent', {
+        value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/11.0b9935 Mobile/15E216 Safari/605.1.15',
+        writable: true
       })
 
-      it('should invoke safariFileSave() if the `safari` property is present on `window`', () => {
-        Object.defineProperty(window, 'safari', {
-          value: {
-            window: true
-          },
-          writable: true
-        })
+      ics.download('july 4.ics', 'foobar')
 
-        ics.download('july 4.ics', 'foobar')
+      expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
+    })
 
-        expect(FileSaver.saveAs).not.toHaveBeenCalled()
-        expect(safariFileSave).toHaveBeenCalledTimes(1)
+    it('should invoke FileSaver.saveAs() on non-iOS browsers', () => {
+      Object.defineProperty(navigator, 'userAgent', {
+        value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.74 Safari/537.36 Edg/79.0.309.43',
+        writable: true
       })
+
+      ics.download('july 4.ics', 'foobar')
+
+      expect(FileSaver.saveAs).toHaveBeenCalledTimes(1)
     })
   })
 })

@@ -32,7 +32,7 @@ const config: CalendarOptions = {
 ```ts
 const icalendar = new ICalendar(config)
 
-icalendar.download()
+fs.writeFileSync('my-event.ics', icalendar.render())
 ```
 
 This will download `Happy Hour.ics` onto the user's device. On most mobile devices, this will open the default calendar app with the event.
@@ -44,7 +44,7 @@ import { GoogleCalendar } from 'datebook'
 
 const googleCalendar = new GoogleCalendar(config)
 
-googleCalendar.render()
+window.location.href = googleCalendar.render()
 ```
 
 `googleCalendar.render()` will return a URL that the user can navigate to and pre-fill event details:
@@ -67,7 +67,7 @@ Datebook can also be used via script import. CDNs such as [jsdelivr](https://www
   </head>
   <body>
     <script>
-      const ical = new datebook.ICalendar({
+      const googleCalendar = new datebook.GoogleCalendar({
         title: 'Happy Hour',
         location: 'The Bar, New York, NY',
         description: 'Let\'s blow off some steam with a tall cold one!',
@@ -80,7 +80,7 @@ Datebook can also be used via script import. CDNs such as [jsdelivr](https://www
         }
       })
 
-      ical.download()
+      window.location.href = googleCalendar.render()
     </script>
   </body>
 </html>

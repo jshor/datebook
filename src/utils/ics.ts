@@ -1,7 +1,6 @@
 import * as FileSaver from 'file-saver'
 import data from './data'
 import time from './time'
-import safariFileSave from './safariFileSave'
 import CalendarRecurrence from '../types/CalendarRecurrence'
 import { FORMAT } from '../constants'
 
@@ -21,6 +20,7 @@ const formatText = (str = ''): string => {
 /**
  * The name of the file will be the event title with alphanumeric chars with the extension `.ics`.
  *
+ * @deprecated
  * @param {string} icsData
  * @returns {Blob}
  */
@@ -33,6 +33,7 @@ const getBlob = (icsData: string): Blob => {
 /**
  * Transforms given string to be valid file name.
  *
+ * @deprecated
  * @param {string} title
  * @returns {string}
  */
@@ -87,34 +88,16 @@ const getRrule = (recurrence: CalendarRecurrence): string => {
 }
 
 /**
- * Returns true if the current browser is Safari.
- *
- * @returns {boolean}
- */
-const isSafari = (): boolean => {
-  return window.hasOwnProperty('safari') || (
-    // check to ensure navigator is not Chrome (which includes Safari in the user agent)
-    /^((?!chrome|android).)*safari/i.test(navigator.userAgent) &&
-    // browsers on iOS are wrappers around Safari, but include CriOS (Chrome), FxiOS (Firefox), etc.
-    !/(cr|fx)ios[^a-z]/i.test(navigator.userAgent)
-  )
-}
-
-/**
  * Downloads the given ics as an iCalendar file.
  *
+ * @deprecated
  * @param {string} fileName - filename of the event file
  * @param {string} data - ics data
  */
 const download = (fileName: string, data: string): void => {
+  const blob = getBlob(data)
 
-  if (isSafari()) {
-    safariFileSave(data, fileName)
-  } else {
-    const blob = getBlob(data)
-
-    FileSaver.saveAs(blob, fileName)
-  }
+  FileSaver.saveAs(blob, fileName)
 }
 
 export default {

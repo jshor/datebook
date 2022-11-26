@@ -57,7 +57,7 @@
 
     <div>
       <h3>iCalendar</h3>
-      <a @click="ics.download()">
+      <a @click="download">
         Download <code>.ics</code> file ↓
       </a>
       <div class="language-typescript">
@@ -75,6 +75,7 @@
 </template>
 
 <script lang="ts">
+import * as FileSaver from 'file-saver'
 import { defineComponent, computed, ref } from 'vue'
 import GoogleCalendar from '../../../src/GoogleCalendar'
 import YahooCalendar from '../../../src/YahooCalendar'
@@ -127,13 +128,22 @@ export default defineComponent({
         : undefined
     }
 
+    function download () {
+      const blob = new Blob([ics.value.render()], {
+        type: 'text/calendar'
+      })
+
+      FileSaver.saveAs(blob, 'Event.ics')
+    }
+
     return {
       isAllDay,
       isRecurring,
       model,
       serviceUrls,
       ics,
-      onRecurrenceChange
+      onRecurrenceChange,
+      download
     }
   }
 })

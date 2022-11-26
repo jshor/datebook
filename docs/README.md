@@ -13,11 +13,11 @@ footer: © 2023 Datebook.
   </div>
   <div class="feature">
     <h2>Major Apps Supported</h2>
-    <p>Fully supports .ics files for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Web.</p>
+    <p>Fully supports ICS content generation for iCalendar and Office Outlook, and also supports Google Calendar, Yahoo! Calendar and Outlook Web.</p>
   </div>
   <div class="feature">
-    <h2>No Server Needed</h2>
-    <p>Datebook will generate downloadable iCalendar files on the fly, and URLs contain event data in their query strings.</p>
+    <h2>Consistent and Versatile</h2>
+    <p>The unified API and configuration simplifies the process of rendering URLs and ICS for identical events across calendar providers.</p>
   </div>
 </div>
 
@@ -30,9 +30,9 @@ yarn add datebook
 ### Example usage
 
 ```ts
-import { ICalendar } from 'datebook'
+import { GoogleCalendar } from 'datebook'
 
-const icalendar = new ICalendar({
+const googleCalendar = new GoogleCalendar({
   title: 'Happy Hour',
   location: 'The Bar, New York, NY',
   description: 'Let\'s blow off some steam from our weekly deployments to enjoy a tall cold one!',
@@ -44,5 +44,5 @@ const icalendar = new ICalendar({
   }
 })
 
-icalendar.download()
+window.location.href = googleCalendar.render()
 ```
