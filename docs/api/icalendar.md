@@ -224,5 +224,5 @@ FileSaver.saveAs(blob, 'my-calendar-event.ics')
 Downloads a `.ics` file on the user's browser for use in local calendars and email clients.
 
 :::warning Deprecation Notice
-This feature is deprecated as of v8 and will be removed in v9.
+This feature is deprecated and will be removed in v8.
 :::
