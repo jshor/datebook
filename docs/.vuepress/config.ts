@@ -17,7 +17,7 @@ export default defineUserConfig({
   head: [
     ['link', {
       rel: 'icon',
-      href: '/assets/favicon.svg'
+      href: '/assets/logo.svg'
     }]
   ],
   plugins: [
