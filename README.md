@@ -16,8 +16,8 @@
   <a href="https://codecov.io/gh/jshor/datebook"><img
     src="https://img.shields.io/codecov/c/github/jshor/datebook.svg?style=for-the-badge"
     alt="Code coverage"
-  /></a> <a href="https://github.com/jshor/datebook/actions?query=workflow%3A%22Build+and+Publish%22"><img
-    src="https://img.shields.io/github/workflow/status/jshor/datebook/Build%20and%20Publish?style=for-the-badge"
+  /></a> <a href="https://github.com/jshor/datebook/actions/workflows/merge.yml"><img
+    src="https://img.shields.io/github/actions/workflow/status/jshor/datebook/workflows/merge.yml?branch=main&style=for-the-badge"
     alt="Build status"
   /></a> <a href="https://npmjs.com/package/datebook"><img
     src="http://img.shields.io/npm/v/datebook.svg?style=for-the-badge"
