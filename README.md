@@ -17,7 +17,7 @@
     src="https://img.shields.io/codecov/c/github/jshor/datebook.svg?style=for-the-badge"
     alt="Code coverage"
   /></a> <a href="https://github.com/jshor/datebook/actions/workflows/merge.yml"><img
-    src="https://img.shields.io/github/actions/workflow/status/jshor/datebook/workflows/merge.yml?branch=main"
+    src="https://img.shields.io/github/actions/workflow/status/jshor/datebook/workflows/merge.yml?branch=main&style=for-the-badge"
     alt="Build status"
   /></a> <a href="https://npmjs.com/package/datebook"><img
     src="http://img.shields.io/npm/v/datebook.svg?style=for-the-badge"
