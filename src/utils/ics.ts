@@ -1,4 +1,3 @@
-import * as FileSaver from 'file-saver'
 import data from './data'
 import time from './time'
 import CalendarRecurrence from '../types/CalendarRecurrence'

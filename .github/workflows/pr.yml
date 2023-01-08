@@ -3,7 +3,7 @@ name: Pull Request
 on:
   pull_request:
     branches:
-      - master
+      - main
   release:
     types: [created]
 

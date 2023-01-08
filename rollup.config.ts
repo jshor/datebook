@@ -8,11 +8,11 @@ const plugins = [
   nodeResolve()
 ]
 
-const getOutput = (format: ModuleFormat, config: OutputOptions = {}): OutputOptions => ({
+const getOutput = (format: ModuleFormat, ext: string, config: OutputOptions = {}): OutputOptions => ({
   format,
   sourcemap: true,
   exports: 'named',
-  file: `dist/datebook.${format}.min.js`,
+  file: `dist/datebook.min.${ext}`,
   ...config
 })
 
@@ -21,7 +21,7 @@ const options: RollupOptions[] = [
     // UMD
     input: 'src/index.ts',
     plugins: plugins.concat(terser()),
-    output: getOutput('umd', {
+    output: getOutput('umd', 'js', {
       name: 'datebook', // allows window.datebook to be accessible
       esModule: false
     })
@@ -31,8 +31,8 @@ const options: RollupOptions[] = [
     input: 'src/index.ts',
     plugins,
     output: [
-      getOutput('esm'),
-      getOutput('cjs')
+      getOutput('esm', 'mjs'),
+      getOutput('cjs', 'cjs')
     ]
   }
 ]
