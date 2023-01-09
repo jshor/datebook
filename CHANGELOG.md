@@ -1,3 +1,12 @@
+## [7.1.1](https://github.com/jshor/datebook/compare/v7.1.0...v7.1.1) (2023-01-09)
+
+
+### Bug Fixes
+
+* sets proper build extensions and branch refs ([10522e2](https://github.com/jshor/datebook/commit/10522e29d7c493ccb768debd56e3ca60f5abddb0))
+
+
+
 # [7.1.0](https://github.com/jshor/datebook/compare/v7.0.11...v7.1.0) (2022-11-26)
 
 
