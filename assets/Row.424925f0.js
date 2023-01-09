@@ -1,1 +1,0 @@
-import{f as s,_ as t,o as n,c as a,b as _,s as r}from"./app.26a166f6.js";const l=s({name:"Row",emits:["delete"]});const d={class:"row"};function c(e,o,i,f,p,m){return n(),a("div",d,[_("div",{class:"row__delete",onClick:o[0]||(o[0]=u=>e.$emit("delete"))}," × "),r(e.$slots,"default")])}const v=t(l,[["render",c],["__file","Row.vue"]]);export{v as default};
