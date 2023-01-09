@@ -21,8 +21,8 @@
     "url": "https://github.com/jshor/datebook/issues"
   },
   "homepage": "https://datebook.dev",
-  "main": "dist/datebook.umd.min.js",
-  "module": "dist/datebook.esm.min.js",
+  "main": "dist/datebook.min.js",
+  "module": "dist/datebook.min.mjs",
   "types": "dist/index.d.ts",
   "files": [
     "dist"

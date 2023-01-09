@@ -15,11 +15,11 @@ const plugins = [
   nodeResolve()
 ]
 
-const getOutput = (format, config) => ({
+const getOutput = (format, ext, config) => ({
   format,
   sourcemap: true,
   exports: 'named',
-  file: `dist/datebook.${format}.min.js`,
+  file: `dist/datebook.min.${ext}`,
   ...config
 })
 
@@ -28,7 +28,7 @@ export default [
     // UMD
     input: 'src/index.ts',
     plugins: plugins.concat(terser()),
-    output: getOutput('umd', {
+    output: getOutput('umd', 'js', {
       name: 'datebook', // this is the name of the global object
       esModule: false
     })
@@ -38,8 +38,8 @@ export default [
     input: 'src/index.ts',
     plugins,
     output: [
-      getOutput('esm'),
-      getOutput('cjs')
+      getOutput('esm', 'mjs'),
+      getOutput('cjs', 'cjs')
     ]
   }
 ]
