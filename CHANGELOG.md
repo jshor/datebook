@@ -1,3 +1,17 @@
+# [8.0.0](https://github.com/jshor/datebook/compare/v7.1.2...v8.0.0) (2023-01-10)
+
+
+### Features
+
+* **ics:** removes download() method ([41ae072](https://github.com/jshor/datebook/commit/41ae072ca775afb56b6eaaef429acef87311a697))
+
+
+### BREAKING CHANGES
+
+* **ics:** the download() method is now removed from ICalendar.
+
+
+
 ## [7.1.2](https://github.com/jshor/datebook/compare/v7.1.1...v7.1.2) (2023-01-10)
 
 
