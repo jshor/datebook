@@ -63,7 +63,7 @@ Datebook can also be used via script import. CDNs such as [jsdelivr](https://www
 <!doctype html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/datebook"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datebook/dist/datebook.min.js"></script>
   </head>
   <body>
     <script>
