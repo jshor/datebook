@@ -1,3 +1,12 @@
+## [7.1.2](https://github.com/jshor/datebook/compare/v7.1.1...v7.1.2) (2023-01-10)
+
+
+### Bug Fixes
+
+* exports ESM by default; clarifies UMD docs ([17ccfe6](https://github.com/jshor/datebook/commit/17ccfe6e7d27f6f65fbb97574328369860e938ba))
+
+
+
 ## [7.1.1](https://github.com/jshor/datebook/compare/v7.1.0...v7.1.1) (2023-01-09)
 
 
