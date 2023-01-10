@@ -1,4 +1,3 @@
-import * as FileSaver from 'file-saver'
 import ics from '../ics'
 import time from '../time'
 import { FORMAT, RECURRENCE } from '../../constants'
