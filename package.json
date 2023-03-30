@@ -23,7 +23,7 @@
   "homepage": "https://datebook.dev",
   "main": "dist/datebook.min.mjs",
   "module": "dist/datebook.min.mjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "files": [
     "dist"
   ],
