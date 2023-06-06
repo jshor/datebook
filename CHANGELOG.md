@@ -1,3 +1,12 @@
+## [8.0.1](https://github.com/jshor/datebook/compare/v8.0.0...v8.0.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* updates types-directory in package.json [#215](https://github.com/jshor/datebook/issues/215) ([df969e9](https://github.com/jshor/datebook/commit/df969e939efa62b5017fd35a9f63bdb3100433cf))
+
+
+
 # [8.0.0](https://github.com/jshor/datebook/compare/v7.1.2...v8.0.0) (2023-01-10)
 
 
