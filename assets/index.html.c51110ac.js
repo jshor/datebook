@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-3b61e116","path":"/generator/","title":"Try it","lang":"en-US","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1686059178000,"contributors":[{"name":"LennertJ","email":"32568318+LennertJ@users.noreply.github.com","commits":1}]},"filePathRelative":"generator/README.md"}');export{e as data};
