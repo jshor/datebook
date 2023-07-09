@@ -21,7 +21,7 @@
     "url": "https://github.com/jshor/datebook/issues"
   },
   "homepage": "https://datebook.dev",
-  "main": "dist/datebook.min.mjs",
+  "main": "dist/datebook.min.js",
   "module": "dist/datebook.min.mjs",
   "types": "dist/src/index.d.ts",
   "files": [
