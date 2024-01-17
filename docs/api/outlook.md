@@ -68,7 +68,7 @@ outlookCalendar.render()
 #### Result:
 
 ```
-https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2022-07-08T19%3A00%3A00&enddt=2022-07-08T23%3A00%3A00&subject=Happy%20Hour&body=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&isAllDay=false
+https://outlook.live.com/calendar/action/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2022-07-08T19%3A00%3A00&enddt=2022-07-08T23%3A00%3A00&subject=Happy%20Hour&body=Let's%20blow%20off%20some%20steam%20with%20a%20tall%20cold%20one!&location=The%20Bar%2C%20New%20York%2C%20NY&isAllDay=false
 ```
 
 This will open a modal in Outlook Online calendar similar to the following:
